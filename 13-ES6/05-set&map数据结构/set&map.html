@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // Set 是一个唯一的值集合，它允许你存储任何类型的值，但每个值只能出现一次
+    const numbers = new Set([1, 2, 3, 4, 5]);
+
+    /**
+     * size       返回 Set 对象中的元素数量
+     * add        添加一个元素，若已存在则不会执行任何操作
+     * delete     删除一个元素，若不存在则不会执行任何操作
+     * clear      删除 Set 对象中的所有元素，使其变为空集
+     * has        检查 Set 对象中是否包含某个元素，返回 true 或 false
+     * forEach    对 Set 对象中的每个元素执行一次回调函数
+    */
+
+
+    console.log(numbers); // Set { 1, 2, 3, 4, 5 }
+    console.log(numbers.size); // 5
+    numbers.add(11);
+    console.log(numbers); // Set { 1, 2, 3, 4, 5, 11 }
+
+    // 数组去重
+    const arr = [1, 2, 2, 3, 3, 3, 4, 4, 4, 4];
+    console.log([...new Set(arr)]);
+
+    // 字符串去重
+    const str = 'hello world';
+    console.log([...new Set(str)].join(''));
+
+
+
+
+
+    // Map 是一个键/值对集合，它允许你存储任何类型的键和值
+    const map = new Map();
+    /**
+     * size       返回 Map 对象中的键 / 值对数量。
+     * get        获取与指定键关联的值。若不存在，则返回 undefined。
+     * set        向 Map 对象中添加一个键 / 值对。若已经存在，则更新其对应的值。
+     * has        检查 Map 对象中是否包含指定的键。
+     * delete     从 Map 对象中删除指定的键 / 值对。若不存在，则不会执行任何操作。
+     * forEach    对 Map 对象中的每个键 / 值对执行一次回调函数。
+    */
+
+    map.set('key1', 'value1'); // 添加键值对
+    map.set('key2', 'value2'); // 添加键值对
+    console.log(map.get('key1'));
+
+  </script>
+</body>
+
+</html>

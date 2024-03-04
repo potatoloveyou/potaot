@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 1.localStorage 长久保存整个网站的数据，保存的数据没有过期时间，直到手动去除。
+    // F12 应用(Application)  Local Storage
+
+
+    // 存储数据到localStorage中，键值对的形式存储。
+    localStorage.setItem('key', 'value');
+    localStorage.setItem('age', '17');
+    localStorage.setItem('name', 'nike');
+
+
+    // 读取数据
+    console.log(localStorage.getItem('key'));
+    console.log(localStorage.getItem('age')); // 返回字符串类型的值，需要手动转换。
+
+
+    /**
+     * 删除数据
+     * 1.删除单个数据项   removeItem('key')
+     * 2.删除所有数据项   clear()
+    */
+    localStorage.removeItem('key');
+    localStorage.clear();
+
+
+    // 得到索引
+    console.log(localStorage.key(0));
+    console.log(localStorage.key(1));
+
+
+    // 例子：存储用户信息到localStorage中。
+    // localStorage.setItem(
+    //   "person",
+    //   // JSON转换为字符串，存储到localStorage中。
+    //   JSON.stringify({
+    //     name: "nick",
+    //     age: 17,
+    //   })
+    // );
+    // 字符串转换为JSON对象(对象)，读取数据。
+    // console.log(JSON.parse(localStorage.getItem("person")));
+
+
+
+    // 2.sessionStorage 仅在当前会话期间保存数据，关闭浏览器后数据被清除。
+    // F12 应用(Application)  Session Storage
+    // 与localStorage的用法完全相同
+
+
+
+  </script>
+</body>
+
+</html>

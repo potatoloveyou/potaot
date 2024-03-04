@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 循环嵌套  外层循环每经历一次迭代 内层循环会 走完整个循环
+
+    // for循环语句
+    // 1初始化变量 ; 2判断条件 ; 3自增改变变量
+    // 不要出现死循环 1 2判断（必须某个时候为假） 3更改变量
+    // for (let index = 0; index < array.length; index++) {
+    //   const element = array[index];
+    // }
+
+    // var nums = [1, 2, 3, 4]
+    // // debugger
+    // for (var i = 0; i < nums.length; i++) {
+    //   console.log(nums[i]);
+    // }
+
+    // var i = 0;// 初始化变量可放出来
+    // for (; i < nums.length; i++) {
+    //   console.log(i,nums[i]);
+    // }
+    // console.log(i);// 4 先执行完for循环 i最后改变为4，打印4
+
+
+
+    // while循环语句
+    // 若condition为真，则会一直执行循环
+    // while (condition) {
+    // }
+
+    // var nums = [1, 2, 3, 4]
+    // var i = 0;
+    // while (i < 5) {
+    //   console.log(i, nums[i]);
+    //   i++;
+    // }
+
+
+
+    // do...while循环语句
+    // 先 无条件 执行一次代码块，再在while括号内判断 若为真,会一直执行循环
+    // do {
+    // } while (condition);
+
+    // var nums = [1, 2, 3, 4]
+    // var i=0;
+    // do {
+    //   console.log(nums[i]);
+    //   // i+=1;
+    //   i++;
+    // } while (i<=3);
+
+
+
+    // for...in循环语句(用于对象，因为对象没有顺序)
+    // for (const key in object) {
+    //   if (Object.hasOwnProperty.call(object, key)) {
+    //     const element = object[key];
+    //   }
+    // }
+    var person = {
+      name: "nick",
+      age: 17,
+      job: "无业游民",
+    };
+    for (const key in person) {
+      console.log(key,person[key]);
+    }
+
+
+
+
+
+
+
+
+
+
+  </script>
+
+  <script>
+    // 跳出循环语句
+
+    // break 用于 跳出 循环体
+    // debugger;
+    // for (let i = 0; i < 10; i++) {
+    //   console.log(i);
+    //   if (i === 5) {
+    //     break; // 跳出循环
+    //   }
+    // }// 012345
+
+    // for (let i = 0; i < 10; i++) {
+    //   if (i === 5) {
+    //     break;
+    //   }
+    //   console.log(i);
+    // }// 01234
+
+
+
+    // continue 用于 跳过本次循环
+    // debugger;
+    // for (let i = 0; i < 10; i++) {
+    //   if (i === 5) {
+    //     continue;
+    //   } else {
+    //     console.log(i);
+    //   }
+    // }// 01234 6789
+
+    // console.log(Math.random());// 生成0-1的随机数
+    //若对象的属性值 为 函数 则叫方法
+    //若对象的属性值 不为 函数 则叫属性
+
+    // var x;
+    // var count = 1;
+    // do {
+    //   x = Math.random()
+    // } while (!(x < count));
+    // console.log(x,count);
+
+  </script>
+
+  <script>
+    // 数组所有项之和
+    // var nums = [11, 4, 34, 2, 3];
+    // var sum = 0;
+    // for (var i = 0; i < nums.length; i++) {
+    //   sum += nums[i];
+    // }
+    // console.log(sum)
+
+
+
+  </script>
+
+</body>
+
+</html>

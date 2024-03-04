@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 20px;
+      height: 20px;
+      background-color: lightblue;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box"></div>
+  <input type="text" />
+  <input type="button" value="计算" />
+  <script>
+    // web worker 功能就是将复杂运算放入到子线程中，避免阻塞主线程。
+
+    // 1.创建一个新的 web worker 实例，并指定要运行的脚本文件。
+    // const worker = new Worker("./web worker.js");
+
+    // 2.监听 worker 发送的消息。
+    // worker.onmessage = function (event) {
+    //   console.log(event);
+    // };
+
+
+
+    // 例
+    var x = 0;
+    var speed = 3;
+    setInterval(function () {
+      x += speed;
+      document.querySelector(".box").style.marginLeft = x + "px";
+    }, 100);
+
+
+    let w = new Worker("./web worker.js");
+
+    // onmessage 事件监听器
+
+    w.addEventListener('message',(event) => {
+      // 4.这里的event.data 就是子线程通过返回postMessage()的信息
+      console.log("result", event.data);
+    })
+
+
+    const button = document.querySelector("input[type=button]");
+    const textEL = document.querySelector("input[type=text]");
+
+    button.addEventListener("click", function () {
+      // 1.父向子传递信息 需要w.xxx
+      w.postMessage(Number(textEL.value))
+    })
+  </script>
+</body>
+
+</html>

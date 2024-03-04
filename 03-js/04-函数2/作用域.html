@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var a = 10;
+    // a 变量 是全局作用域 在任意地方都可以访问
+    // 控制台可以访问的是全局的变量
+    console.log(a);// 10
+
+    function xxx(params) {
+      var b = 20;
+      // b 变量是在函数内部声明的 只能在函数内部使用
+      // b 变量 作用域是 当前函数的局部作用域
+      // b 变量在函数运行开始时声明 在函数运行结束时销毁（变量的生命周期）
+      console.log(a, b);// 10 20
+    }
+    xxx();
+    // console.log(b);// b is not defined
+
+
+    var yyy = function () {
+      var c = 30;
+      // console.log(a, b, c);// 10   b is not defined   30
+      console.log(a, c);// 10 30
+    };
+    yyy();
+
+
+
+
+  </script>
+
+  <script>
+    var a = 3;
+
+    function c(a) {
+      console.log(a);// 4
+    }
+    (function () {
+      var a = 4;
+      c();
+    })();// 3
+    // js中变量的作用域链与定义时的环境有关，与执行时无关。执行环境只会改变this、传递的参数、全局变量等
+
+  </script>
+
+  <button>1</button>
+  <button>2</button>
+  <button>3</button>
+  <script>
+    var btns = document.querySelectorAll('button');
+    console.log(btns);
+    for (let i = 0; i < btns.length; i++) {
+      btns[i].onclick =function () {
+        console.log(i);
+      }
+    }
+  </script>
+
+</body>
+
+</html>

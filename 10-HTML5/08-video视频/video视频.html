@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- video
+    1.controls  浏览器视频控制组件
+    2.loop  循环播放
+    3.
+  -->
+  <video width="300" height="200" loop src="./七猪同框.mp4" controls
+    poster="https://www.runoob.com/images/compatible_firefox.gif">
+    <track default kind="captions" srclang="en" src="./en.vtt">
+    </track>
+    <track kind="captions" srclang="zh" src="./zh.vtt">
+    </track>
+  </video>
+
+  <script>
+    const video = document.querySelector('video');
+
+    // 若想获得视频信息，最好是要等页面加载完或者视频加载完后
+
+    // window.addEventListener('load', () => {
+    // })
+
+
+    // canplay  浏览器可以开始播放时
+    video.addEventListener('canplay', () => {
+      // 总时长
+      console.log(video.duration);
+      // 当前播放时间
+      console.log(video.currentTime);
+      // 视频是否已播放完
+      console.log(video.ended);
+      // 视频是否正已暂停
+      console.log(video.paused);
+      // 返回表示音频/视频已播放部分的 TimeRanges 对象。
+      console.log(video.played.length); // 0 表示未播放，1 表示播放中，2 表示播放完
+      // 设置或返回音频/视频播放的速度。
+      console.log(video.playbackRate); // 默认1，大于1表示快进，小于1表示慢放，负数表示倒放。
+      // 设置或返回音频/视频的音量
+      console.log(video.volume);
+    });
+
+    video.addEventListener('loadedmetadata', () => {
+
+    }); // 浏览器已加载视频的元数据时触发。
+
+    // 当视频播放位置已更改时触发
+    video.addEventListener('timeupdate', () => {
+      console.log(video.currentTime);
+    });
+
+    // 当目前的播放列表已结束时触发
+    video.addEventListener('ended', () => {
+    });
+
+
+
+  </script>
+</body>
+
+</html>

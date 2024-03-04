@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h3></h3>
+
+  <script>
+
+    // Object.defineProperty()  用于在对象上定义一个新属性，或者修改一个现有属性。它允许你精确地定义或修改对象的属性。
+    // get set 
+    var xxx = {
+      a: 10,
+    };
+
+    Object.defineProperty(xxx, "c", {
+      enumerable: true,
+      get: function () {
+        // 当属性被访问时，这里定义的代码会执行，并返回值。
+        console.log("读取了_c的值");
+        return this._c;
+      },
+      set: function (value) {
+        // 当属性被赋值时，这里定义的代码会执行。
+        // 可以在这里处理或验证赋值。
+        this._c = value;
+        console.log("设置了_c的值");
+      },
+    });
+
+
+
+
+    // 私有变量
+    var obj = {
+      name: "nick",
+      age: 17,
+      // 例如此处定义了变量_job，最好是不要在外部访问，而是在内部使用，这样就形成了一个私有变量。
+      _job: "xxx",
+    };
+
+
+    Object.defineProperty(obj, "job", {
+      get: function () { return this._job; }, // 访问job时，返回_job的值。
+      set: function (value) { this._job = value; }, // 设置job时，将值赋给_job。
+    })
+
+  </script>
+
+
+
+
+  <script>
+    // 实例
+
+
+    // 创建一个对象，并定义一个属性。
+    var person = {};
+    Object.defineProperty(person, "job", {
+      get: function () {
+        return this._job; // 返回私有变量_job的值。
+      },
+      set: function (value) {
+        console.log("修改了job的值");
+        this._job = value; // 将值赋给私有变量_job。
+        document.querySelector('h3').textContent = person.job; // 更新页面上的job。
+      }
+    });
+
+    setInterval(() => {
+      person.job = Date.now();
+    }, 1000);
+
+    setInterval(() => {
+      person.job = Math.random();
+    }, 2000);
+
+
+
+  </script>
+
+
+</body>
+
+</html>

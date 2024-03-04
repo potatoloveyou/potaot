@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 工厂模式 帮助生成对象 一般不用
+    // function generateObj(x, speed) {
+    //   return {
+    //     x: x,
+    //     speed: speed,
+    //     move: function () {
+
+    //     }
+    //   };
+    // }
+
+
+
+    // 构造函数模式
+    // 名字变成大驼峰(首字母大写)
+    function Car(x, speed) {
+      // this.x 这里的x代表对象的键名  =x这个x是形参
+      this.x = x;
+      this.speed = speed;
+    }
+    // 构造函数 里面的this是 这个构造函数调用之后生成的对象（实例对象）
+    // 构造函数调用 需要用 new 关键词
+    const red = new Car(0, 1);
+    const green = new Car(20, 2);
+    // console.log(red, green);
+
+    // Car 是构造函数  prototype是Car的原型对象  
+    // 若想给实例都继承通用方法 需要把方法写在构造函数的原型对象上
+    // Car有一个属性为prototype 这个属性值是一个对象
+    Car.prototype.move = function () {
+      // console.log(this);
+      this.x += this.speed;
+      return this;
+    };
+    console.log(red);
+    /**
+     * Car {x: 0, speed: 1}
+     *  speed:1
+     *  x:0
+     *  [[Prototype]]:Object
+     *    move: ƒ ()      move已挂在到原型对象上
+    */
+
+    // 构造函数原型对象上挂载的方法 每个实例对象都可以访问
+    // console.log(red.move()===green.move());// true
+
+    console.log(red.move());
+    /**
+     * Car {x: 0, speed: 1}  原本
+     * Car {x: 1, speed: 1}  调用move方法之后
+    */
+
+
+  </script>
+
+
+
+
+
+
+
+  <script>
+    function Mouse(name, age) {
+      this.name = name;
+      this.age = age;
+      this.hole = 10;
+    }
+
+    Mouse.prototype.dadong = function () {
+      this.hole += this.age;
+      return this.hole;
+    };
+
+    Mouse.prototype.xingnian = function () {
+      this.age++;
+      return this.age;
+    };
+
+    const mouse1 = new Mouse('mouse1', 3);
+    const mouse2 = new Mouse('mouse2', 5)
+
+
+    
+    
+    
+    
+    
+    
+    </script>
+
+
+
+
+
+
+</body>
+
+</html>

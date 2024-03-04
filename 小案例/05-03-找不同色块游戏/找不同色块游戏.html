@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/杂货/my-minireset.css">
+  <style>
+    .stage {
+      width: 500px;
+      height: 500px;
+      /* background-color: lightblue; */
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0 auto;
+    }
+
+    .stage li {
+      border-radius: 50%;
+    }
+  </style>
+</head>
+
+<body>
+  <ul class="stage"></ul>
+
+
+  <script>
+    // 设置关卡等级
+    // 注意 等级不能过高，不然会产生严重的    强制回流   
+    let level = 1;
+    const stage = document.querySelector('.stage');
+
+    let showDot = (level) => {
+
+      // 创建随机颜色
+      // const randomColor = (() => {
+      //   const r = Math.floor(Math.random() * 256);
+      //   const g = Math.floor(Math.random() * 256);
+      //   const b = Math.floor(Math.random() * 256);
+      //   return `rgb(${r},${g},${b})`;
+      // })();
+      // console.log(randomColor);
+
+      // Math.random() 0~1随机数   .toString(16) 将随机数转化为16进制   .slice(-6) 截取后6位
+      const random = Math.random();
+      console.log(random);
+      const color = `#${Math.random().toString(16).slice(-6)}`;
+      console.log(color);
+
+      for (let i = 0; i < Math.pow(level + 2, 2); i++) {
+
+        // 创建元素
+        const li = document.createElement('li');
+        // 设置样式
+        li.style.width = `${stage.clientWidth / (level + 2)}px`;
+        // 添加随机颜色
+        // li.style.backgroundColor = randomColor;
+        li.style.backgroundColor = `${color}`;
+
+        stage.appendChild(li);
+      }
+
+      const liEl = document.querySelectorAll('li');
+      console.log(liEl.length);
+
+      // 设置随机位置 floor()向下取整
+      const liIndex = Math.floor(random * liEl.length);
+      console.log(liIndex);
+
+      liEl.forEach((item, index) => {
+        if (liIndex == index) {
+          item.style.opacity = '0.7';
+          item.addEventListener('click', () => {
+            // 删除元素
+            liEl.forEach(item => stage.removeChild(item));
+            // 重新渲染
+            showDot(++level);
+          });
+        }
+
+      });
+
+    };
+    showDot(level);
+
+  </script>
+
+</body>
+
+</html>

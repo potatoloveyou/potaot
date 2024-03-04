@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // var 关键词声明的变量 会挂载到 window对象的属性;
+    var a = 10;
+    // console.log(window.a === a);// true
+    // console.log({} === {});// false
+    var o = { age: 17 };
+    // console.log(window.o === o);// true
+
+    // 定时器是window的方法，可以使用window. 或不用window.
+    // window.setTimeout(function () {
+    //   console.log(123);
+    // },1000)
+
+    // let id = setInterval(() => {
+    //   console.log(Math.random());
+    // }, 1000);
+
+
+  </script>
+
+  <script>
+    // let res1 = alert(123);
+    // 	显示带有一段消息和一个确认按钮的警告框。 会阻止后续代码运行
+    console.log(res1);
+    // let res2 = confirm('你起飞');
+    // 显示带有一段消息以及确认按钮和取消按钮的对话框。
+    console.log(res2);
+    // let res3=prompt('你起飞')
+    // 显示可提示用户输入的对话框。
+    console.log(res3);
+
+
+
+
+
+  </script>
+
+
+
+</body>
+
+</html>

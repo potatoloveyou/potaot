@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <style>
+    body {
+      margin: 0;
+      background-color: lightblue;
+    }
+
+
+    /* min-width 最小为400px时使用下面的样式(大于400px时) */
+    @media screen and (min-width: 400px) {
+      body {
+        background-color: lightcoral;
+      }
+    }
+
+    @media screen and (min-width: 600px) {
+      body {
+        background-color: lightgreen;
+      }
+    }
+
+    @media screen and (min-width: 800px) {
+      body {
+        background-color: lightpink;
+      }
+    }
+
+    /* max-width 最大为1200px时使用下面的样式(小于1200px时) */
+    /* @media screen and (max-width: 1200px) {
+      body {
+        background-color: rgb(27, 222, 200);
+      }
+    } */
+  </style>
+</body>
+
+</html>

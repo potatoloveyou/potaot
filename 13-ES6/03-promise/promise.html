@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    // promise 是异步编程的一种解决方案，它是一个对象，可以获取异步操作的消息。
+    // pending(进行中),fulfilled(已成功),rejected(已失败)
+    // 通常来说   resolve = fulfilled
+
+    // 基本用法
+    const promise = new Promise((resolve, reject) => {
+      // resolve函数 成功的时候调用.then的函数,
+      // reject函数 失败的时候调用.then的函数
+
+      setTimeout(() => {
+        var n = Math.random();
+        if (n > 0.5) {
+          resolve(n);
+        } else {
+          reject(n);
+        }
+      }, 3000);
+
+    });
+    console.log(promise);
+
+    // 调用promise对象的方法，.then() 方法是promise对象的主要方法,他是异步的
+    /**
+     * .then()可接受两个参数
+     * 第一个参数是resolve(成功时)的回调函数，
+     * 第二个参数是reject(失败时)的回调函数。
+    */
+    // promise.then(
+    //   (res) => {
+    //     console.log('成功', res);
+    //   },
+    //   (res) => {
+    //     console.log('失败', res);
+    //   }
+    // )
+
+    // 也可将 当reject(失败时)的回调函数写在.catch()方法中
+    // promise.then(
+    //   (res) => {
+    //     console.log('成功', res);
+    //   }
+    // ).catch(
+    //   (res) => {
+    //     console.log('失败', res);
+    //   }
+    // )
+
+    
+    // .finally() 无论成功或失败都会执行,通常用于执行一些清理工作.
+      
+    // .any() 
+
+  </script>
+
+
+  <script>
+    function delay(ms) {
+      return new Promise((resolve, reject) => {
+        console.log("promise 初始化");
+        // setTimeout第三个参数为传递给resolve的形参
+        setTimeout(resolve, ms, Math.random());
+      });
+    }
+    const p1 = delay(1000);
+    // 这里的value就是setTimeout的第三个参数传递而来的随机数
+    const pt1 = p1.then((value) => { console.log("promise 成功", value); return value; });
+    console.log('Hi!');
+    // promise 初始化 > Hi! > promise 成功 1.2345678901234567
+  </script>
+
+
+
+  <script>
+    // promise.all([p1,p2.p3])
+    // 将多个Promise实例包装成一个新的Promise实例，该实例在所有输入的Promise实例都成功后才会成功，否则失败。
+    // 当p1,p2.p3 都  成功时候，promise才算成功
+
+    const p2 = delay(1000);
+    // 这里的value就是setTimeout的第三个参数传递而来的随机数
+    const pt2 = p1.then((value) => { console.log("promise 成功", value); return value; });
+
+    // 当pt1,pt2都成功时候，promiseAll才算成功，才能执行他的.then()方法中的回调函数
+    const promiseAll = promise.all([pt1, pt2]).then(res => { console.log(res); })
+
+
+
+
+    // promise.race([p1,p2.p3]) 只要有一个promise成功，就成功，就执行.then()方法中的回调函数
+
+
+
+
+  </script>
+
+
+
+</body>
+
+</html>

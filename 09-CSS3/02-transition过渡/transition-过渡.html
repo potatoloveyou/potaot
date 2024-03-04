@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="big">
+    <div class="box"></div>
+  </div>
+  <style>
+    .box {
+      width: 100px;
+      height: 100px;
+      background-color: blueviolet;
+      
+      /* transition: property(需要变化的css，如这里变化了 背景色 margin，都需要变化就为all  若只想margin有过渡效果这里就填margin，背景色不受过渡效果瞬间变化) 
+      duration(时间) timing-function(速度曲线) delay; */
+
+      /* timing-function(速度曲线)
+      linear    相同速度开始至结束 (cubic-bezier(0,0,1,1))
+      ease    慢-快-慢 (cubic-bezier(0.25,0.1,0.25,1)
+      ease-in   慢开始 (cubic-bezier(0.42,0,1,1))
+      ease-out    慢结束 (cubic-bezier(0,0,0.58,1))
+      ease-in-out   慢(始-束) (cubic-bezier(1, 0, 0, 1))
+      */
+
+      /* transition-property: margin; */
+      /* transition-duration: .3s; */
+      /* transition-delay: 3s; */
+      transition: all .3s cubic-bezier(1, 0, 0, 1);
+
+    }
+
+    .big:hover .box {
+      background-color: red;
+      margin-left: 1000px;
+    }
+  </style>
+</body>
+
+</html>

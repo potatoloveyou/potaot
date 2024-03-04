@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <ul>
+    <li>item 1</li>
+    <li>item 2</li>
+    <li>item 3</li>
+  </ul>
+
+  <script>
+    var nums = [1, 2, 3];
+    var nums1 = [11, 22, 33];
+
+    // 拓展运算符 展开
+    console.log(...[1, 2, 3]); // 1 2 3
+    var nums2 = [...nums, ...nums1]; //深拷贝
+    console.log(nums2); // [0, 1, 2, 3]
+
+
+
+    // 使用...将类数组转化为数组
+    var nodeList = document.querySelectorAll("ul li");
+    var lis = [...nodeList];
+    console.log(lis);
+
+    // 数组中找最大值
+    // Math.max.apply(null, nums); 
+    // 可用拓展运算符代替apply方法
+    Math.max(...nums);
+
+
+
+
+    // for...of
+    // 遍历数组
+    // .keys() 索引  .values() 值  .entries() 索引和值
+    for (const iterator of nums1.keys()) {
+      console.log(iterator); // 0 1 2
+    }
+    for (const iterator of nums1.values()) {
+      console.log(iterator); // 11 22 33
+    }
+    for (const iterator of nums1.entries()) {
+      console.log(iterator); // [0, 11] [1, 22] [2, 33]
+    }
+
+    var obj = {
+      name: "nick",
+      age: 17,
+      job: null,
+    };
+    // 遍历对象
+    for (const iterator of Object.keys(obj)) {
+      console.log(iterator, obj[iterator]);
+    }
+    for (const [key, value] of Object.entries(obj)) {
+      // 返回键值对数组，键值对数组可以被解构赋值给变量，也可以使用数组的map方法遍历键值对数组。
+      console.log(key, value); // name nick age 17 job null  
+    }
+
+
+
+    // flat() 扁平化数组
+    // 默认为1，想扁平几成就写几，完全转化为一维可只用  infinity  关键字
+    var seats = [
+      [11, 12, 13, 14],
+      [21, 22, 23, null],
+      [31, 32, 33, null],
+    ];
+    console.log(seats.flat(Infinity));
+
+    // flatMap() 扁平化数组后执行map操作，相当于先flat再map，返回新数组。
+    // x就是每一项，然后每一项变为[每一项，每一项*2]的数组
+    console.log(nums1.flatMap((x) => [x, x * 2])); // [1, 2, 2, 4, 3, 6, 4, 8, 5, 10]
+
+
+
+    // at() 返回指定索引位置的元素，支持负索引，可完全代替arr.lenth-1搜索数组最后一项的写法
+    console.log(nums1[nums1.length - 1]);
+    console.log(nums1.at(-1));
+
+
+
+  </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/杂货/my-minireset.css">
+  <link rel="stylesheet" href="./less/3d卡片.css">
+</head>
+
+<body>
+  <div class="card">
+    <h3>steps</h3>
+    <h5>this week</h5>
+    <ul>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+
+    </ul>
+    <p>93,000</p>
+  </div>
+
+  <script>
+    const card = document.querySelector('.card');
+    const listItems = card.querySelectorAll('li');
+    card.addEventListener('click', (event) => {
+      // console.log(event.target);
+      event.target.classList.toggle('active');
+
+    })
+  </script>
+</body>
+
+</html>

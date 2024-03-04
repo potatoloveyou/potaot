@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // for循环打印1到10
+    // for (let i = 0; i <=10; i++) {
+    //   console.log(i);
+    // }
+
+
+    // 递归
+    /**
+     * 1.封装一个能解决单一问题的函数
+     * 2.在函数内部调用自己
+     * 3.在函数内部判断设置递归出口（结束调用判断）  如果没有出口，递归将无法结束，会产生栈溢出
+    */
+
+
+    function fun(num) {
+      console.log(num);
+      if (num == 10) {// 设置出口
+        return;
+      }
+      fun(num + 1);
+    }
+    // fun(0);// 10~1
+
+
+
+    // 计算n!
+    function count(num) {
+      if (num == 1) {
+        return 1;
+      }
+      return num * count(num - 1);
+    }
+    console.log(count(5));
+
+
+
+    // 斐波那契数列
+    // 利用递归函数求斐波那契数列(兔子序列) 0、1、1、2、3、5、8、13、21...  这个数列从第3项开始，每一项都等于前两项之和。
+    function fib(num) {
+      if (num<2) {
+        return num;
+      }
+      return fib(num - 1) + fib(num - 2);
+    }
+    console.log(fib(10));
+
+
+
+  </script>
+</body>
+
+</html>

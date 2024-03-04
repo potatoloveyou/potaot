@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var str = "哈Hello World";
+
+    // 返回指定索引的字符
+    console.log(str.charAt(0));
+
+    // 判断是否以指定的子字符串结尾的（区分大小写） 返回布尔值
+    // 要查找的子字符串  设置字符串的长度(默认str.length)
+    console.log(str.endsWith('World'));// true
+
+    // 返回指定字符串值在字符串中首次出现的位置。
+    // 需查找字符串值  规定开始查找的位置0~str.length-1(选)  注:若是无则返回-1
+    console.log(str.indexOf('a'));// 7
+
+    // 返回一个指定的字符串值最后出现的位置（区分大小写） 
+    // 注:该方法是从 后向前 查找，但返回值是从 开始位置0 计算最后出现的位置  若是无则返回-1
+    console.log(str.lastIndexOf('W'));
+
+    // 判断字符串是否包含指定的子字符串  返回布尔值
+    // 需查找字符串值  规定开始查找的位置0~str.length-1(选)
+    console.log(str.includes('llo'));
+
+    console.log(str);
+
+
+
+  </script>
+
+  返回新的字符串
+  <script>
+    // console.log(str + '555');// 哈Hello World555
+    // console.log(str);// 哈Hello World
+    // 连接两个或更多字符串
+    // var newStr = str.concat('new');
+    // console.log(newStr);// 哈Hello Worldnew
+    // console.log(str.concat(123));// 哈Hello World123
+
+    // 字符串复制指定次数
+    var newStr = str.repeat(2);
+    console.log(newStr);
+
+  </script>
+
+
+</body>
+
+</html>

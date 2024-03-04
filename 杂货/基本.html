@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" /> -->
+  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.2/css/fontawesome.min.css" />
+  <!-- 字体图标库 -->
+</head>
+
+<body>
+  <div>
+    <!-- .card>img+h6+.info -->
+    <!-- <div class="card">
+      <img src="" alt="">
+      <h6></h6>
+      <div class="info"></div>
+    </div> -->
+  </div>
+  <form action="">
+    <input type="text" placeholder="Email">
+    <!-- placeholder(虚拟提示) -->
+    <input type="text" value="Email">
+    <!-- value(实际提示 需要删除) -->
+  </form>
+
+
+  <style>
+    div {
+      /* width: calc(30%-15px); */
+      width: 1200px;
+      height: 200px;
+      font-size: 10px;
+      line-height: 3em;
+      /* 行高 em=一个字体的高度 */
+      color: aqua;
+
+      background-color: transparent;
+      /* 背景色透明 */
+      background-repeat: no-repeat;
+      /* 背景图不重复 */
+      background-size: cover;
+      /* 背景图大小 px cover(铺满) */
+      background-position: center top;
+      /* 背景图位置 居中 顶部 px */
+      box-shadow: 10px 10px 5px 0px inset red;
+      /* 盒子阴影 x轴 y轴 模糊距离 阴影大小(可选) 转换为内阴影(可选) 颜色(可选) */
+      text-shadow: 10px 10px 10px red;
+      /* 文本阴影 x轴 y轴 模糊距离 颜色(可选) */
+
+      /* 上 右 下 左 */
+      /* 上 右左 下 */
+      /* 上下 左右 */
+      margin: 0 auto;
+      /* 块元素居中 */
+      text-align: center;
+      /* 行内元素或者文本居中 父元素用 */
+      border-radius: 50%;
+      /* 圆 border-top-left-radius: 50px; */
+
+      vertical-align: middle;
+      /* 文字基线对齐(一般用于图片与行内文字垂直居中) */
+      font-size: 0px;
+      /* 父元素将字体改成0px */
+      display: block;
+      /* img改为块元素 */
+      display: inline-block;
+      /* 将行内元素改成块状元素 */
+      box-sizing: border-box;
+      /* 怪异盒模型 */
+      /* 改变盒模型计算方法，使其内容增大时往内压缩而不是往外扩 注意:必须设定好固定高度 */
+
+      text-decoration: none;
+      /* 取消a标签下划线 */
+
+      float: left;
+      /* 向左浮动(脱离文档流)本质意义是让文字环绕块，不适合用在排版上 */
+      /* (清除浮动) */
+      overflow: hidden;
+      /* 父元素超出隐藏 */
+      clear: both;
+
+      /* 左右两边不允许有浮动元素 */
+      div:befor {
+        content: "";
+        /* display: block; */
+        clear: both;
+        /* 左右两侧不允许有浮动元素。 */
+        display: block;
+        /* 若 */
+      }
+
+      /* 伪元素 ::befor(在li开始的前面) ::after(在li结束的后面) */
+
+
+      display: none;
+      /* 此元素不会被显示 */
+
+      /* top: 0; */
+      /* bottom: 0; */
+      /* left: 0; */
+      /* right: 0; */
+      position: relative;
+      /* 相对定位(脱离文档流)<占>用原来的位置  基准:相对于自己本来的位置 */
+      position: absolute;
+      /* 绝对定位(脱离文档流)<不占>用原来的位置 丢失原来宽度 基准:最近拥有定位的父元素(若无则为html) */
+      position: fixed;
+      /* 固定定位(脱离文档流)<不占>用原来的位置 丢失原来宽度 基准:相对于浏览器 */
+      z-index: 1;
+      /* z轴 默认0 必须配合定位 */
+
+
+      /* CSS3 */
+      display: flex;
+      justify-content: center;
+      /* 水平居中 */
+      justify-content: space-between;
+      /* 左右靠边 */
+      align-items: center;
+      /* 垂直居中 */
+      align-self: start;
+      /* 写在子集上 */
+
+      li:nth-child(1) {
+        background-image: url(./01-html/02-布局/16958902e3942f1f65f8aff90d38a96.png);
+      }
+
+      /* 过滤选择器 :nth-child(第几个) */
+      /* :first-child(第一个) */
+
+      /* transition: property duration timing-function delay; */
+      /* 过渡效果(谁过渡给谁加) */
+      /* transition-property: all; */
+      /* transition-duration: .3s; */
+      /* 多少秒内完成 */
+      /* transition-delay: 3s; */
+      /* 多少秒后开始 */
+      transition: all .3s 3s;
+
+      transform: scale(0);
+      transform: scale(1);
+      /* 缩放 */
+
+
+
+
+      opacity: 0.3;
+      /* 透明度0-1 */
+
+      word-wrap:break-word;
+      /* 在长单词或 URL 地址内部进行换行。 */
+
+
+
+      /* less */
+      /* 有空格代表《后代》 没有空格代表《且》 &代表《且》>代表《直接》子元素  */
+
+
+
+    }
+  </style>
+
+  <div id="box" class="box" style="color: red;">box</div>
+  <div id="box2" class="box">box2</div>
+  <style>
+    #box {
+      width: 100px;
+      height: 100px;
+      background-color: rgb(173, 178, 178);
+    }
+
+    #box2 {
+      width: 100px;
+      height: 100px;
+      background-color: lightblue;
+    }
+  </style>
+  <script>
+    // 变量声明规范
+    // 必须使用英文开头 不能出现空格 不能使用 xx-yy 常量用大写
+    // 可以使用 xx_yy a1 b2 b_123   最好不要用 特殊符号 _（lodash）或 $（jquery）
+    // js保留关键词（都是单个单词） 如 var var = 1;(不可以)
+    // 最好使用小驼峰写法（两单词拼接 第一个单词首字母小写 第二个单词首字母大写）
+
+
+    // getElementById()返回对拥有指定 ID 的第一个对象的引用
+    // var box = document.getElementById('box');
+    // console.log(box);
+    // box.style.color = 'blue';
+    // box.style.backgroundColor="blue";
+
+    // getElementsByTagName()返回带有指定 标签名 的对象的集合
+    // var box = document.getElementsByClassName('box');
+    // // console.log(box);
+    // box[0].style.backgroundColor = 'blue';
+    // box[1].style.backgroundColor = 'red';
+
+    // getElementsByClassName()返回文档中所有指定 类名(class) 的元素集合
+    // var box = document.getElementsByClassName('box');
+    // console.log(box);
+    // box[0].style.backgroundColor = 'blue';
+    // box[1].style.backgroundColor = 'red';
+
+
+    // querySelector()返回文档中匹配指定 CSS 选择器的一个元素
+    // var box = document.querySelector('#box');
+    // var box = document.querySelector('.box');
+    // console.log(box);
+    // box.style.color = 'red';
+    // box.style.backgroundColor = "blue";
+
+    // querySelectorAll()返回文档中匹配指定 CSS 选择器的所有元素
+    // var box = document.querySelectorAll('.box');
+    // box[0].style.color = 'blue';
+    // box[1].style.backgroundColor = "blue";
+
+
+    // 元素.onclick  元素点击的时候干什么
+    box.onclick = function () {
+      console.log(123);
+    }
+
+
+
+
+
+  </script>
+
+
+  <div class="a1">
+    阻止a链接鼠标拖拽事件
+
+    <a href="###" draggable="false">第一种</a>
+  </div>
+  <style>
+    .a1 {
+      a {
+        /* 第二种 */
+        user-select: none;
+      }
+    }
+  </style>
+
+
+
+
+
+
+</body>
+
+</html>

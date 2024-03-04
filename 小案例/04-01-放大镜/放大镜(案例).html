@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title></title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    /* 原图 */
+    .masterMap {
+      width: 300px;
+      height: 300px;
+      float: left;
+      margin-top: 100px;
+      margin-left: 100px;
+      position: relative;
+      cursor: move;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* 放大图 */
+    .enlargedView {
+      width: 300px;
+      height: 300px;
+      float: left;
+      margin-top: 100px;
+      display: none;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* 放大图 */
+    .enlargedView img {
+      width: 200%;
+      height: 200%;
+      position: absolute;
+    }
+
+    /* 放大镜 */
+    .magnifyingGlass {
+      width: 100px;
+      height: 100px;
+      opacity: 0.5;
+      background: red;
+      position: absolute;
+      left: 0;
+      top: 0;
+      display: none;
+    }
+
+    .m {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 原图 -->
+  <div class="masterMap">
+    <img src="https://img1.baidu.com/it/u=3892561140,1187896302&fm=253&fmt=auto&app=138&f=JPEG?w=610&h=484" />
+    <!--放大镜-->
+    <div class="magnifyingGlass"></div>
+  </div>
+
+  <!-- 放大图 -->
+  <div class="enlargedView">
+    <img src="https://img1.baidu.com/it/u=3892561140,1187896302&fm=253&fmt=auto&app=138&f=JPEG?w=610&h=484" />
+  </div>
+</body>
+<script type="text/javascript">
+
+  var masterMap = document.getElementsByClassName("masterMap")[0]; //原图
+  var enlargedView = document.getElementsByClassName("enlargedView")[0]; //放大图
+  var magnifyingGlass = document.getElementsByClassName("magnifyingGlass")[0]; //放大镜
+  var img = document.getElementsByTagName("img")[1];
+
+  /*鼠标悬停*/
+  masterMap.onmouseenter = function () {
+    magnifyingGlass.className = "magnifyingGlass m";
+    enlargedView.className = "enlargedView m";
+  };
+
+  /*鼠标离开*/
+  masterMap.onmouseleave = function () {
+    magnifyingGlass.className = "magnifyingGlass";
+    enlargedView.className = "enlargedView";
+  };
+
+  /*鼠标移动 监听鼠标位置*/
+  masterMap.onmousemove = function (event) {
+    var event = event || window.event;
+
+    x = event.pageX - masterMap.offsetLeft - magnifyingGlass.offsetWidth / 2;
+    y = event.pageY - masterMap.offsetTop - magnifyingGlass.offsetHeight / 2;
+    console.log(x,y);
+    if (x < 0) {
+      x = 0;
+    }
+    if (y < 0) {
+      y = 0;
+    }
+    if (x > this.offsetWidth - magnifyingGlass.offsetWidth) {
+      x = this.offsetWidth - magnifyingGlass.offsetWidth;
+    }
+    if (y > this.offsetHeight - magnifyingGlass.offsetHeight) {
+      y = this.offsetHeight - magnifyingGlass.offsetHeight;
+    }
+
+    magnifyingGlass.style.left = x + "px";
+    magnifyingGlass.style.top = y + "px";
+
+    // img.style.left = -x * 2 + "px";
+    // img.style.top = -y * 2 + "px";
+  };
+</script>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // https://www.runoob.com/js/js-regexp.html
+    // https://www.baidu.com/s?ie=UTF-8&wd=dd
+
+    // /正则表达式主体/修饰符(可选)
+    // 正则表达式通常用于两个字符串方法 : search() 和 replace()。
+
+    const str = "Hello, my name is John Doe. I am learning JavaScript 112 3545  546";
+    const reg = /Hello/i;
+    // i 不区分大小写
+    // g 全局查找 查找多个
+    // m 多行匹配
+
+    // match() 查找一个或者多个匹配
+    console.log(str.match(reg));
+
+    // search() 方法用于检索字符串中指定的子字符串，或检索与正则表达式相匹配的子字符串，并返回子串的起始位置。
+    console.log(str.search(reg));
+
+    // replace() 方法用于在字符串中用一些字符串替换另一些字符串，或替换一个与正则表达式匹配的子串。
+    console.log(str.replace(reg, "xxx"));
+
+
+
+    // 建议使用插件  Regex Previewer (必须在js文件中才能有效)
+
+  </script>
+
+
+
+  <script>
+    // [a-z]	查找方括号之间的任何字符。
+    // [0-9]	查找任何从 0 至 9 的数字。
+    // [^0-9] 取反
+
+    // (x|y)	查找任何以 | 分隔的选项。
+    // \d	查找数字。
+    // \s	查找空白字符。
+    // \b	匹配单词边界。
+    // \uxxxx	查找以十六进制数 xxxx 规定的 Unicode 字符。
+
+    const a = /[^0-9]/g; // 除了换行和行结束符
+
+
+
+
+
+
+
+  </script>
+
+
+
+</body>
+
+</html>

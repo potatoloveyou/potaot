@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- method: get post -->
+  <!-- GET 请求的特点是：
+    1、浏览器地址栏中的地址是：action 属性[+?+请求参数]
+    请求参数的格式是：name=value&name=value
+    2、不安全     有数据长度的限制
+
+    POST 请求的特点是：
+    1、浏览器地址栏中只有 action 属性值
+    2、相对于 GET 请求要安全      理论上没有数据长度的限制
+    -->
+
+  <form action="#" method="get">
+    <!-- label 当用户选择该标签时，浏览器就会自动将焦点转到和标签相关的表单控件上。 -->
+    <!-- for 需要配合id使用 -->
+
+
+    <!--   input属性值
+      form 若input不在form内，在闭合标签的外面，这时使用form"(form的id)"，也可将此input绑定对应的form表单中
+      max min 最大值和最小值(配合type:number date range 使用)
+      maxlength 规定最大字符数
+      pattern 正则
+      hidden 隐藏输入框
+
+      autofocus 自动获得焦点
+      checked 自动勾选
+      name 规定名称 (必须)
+      placeholder 提示信息
+      required 必填
+      src 提交的url(配合type="image")
+    -->
+
+    <!--   type:
+      text 文本
+      password 密码
+      email 邮箱
+      range 进度条
+      reset 重置
+      submit 提交
+
+      radio 单选
+      checkbox 多选
+
+      value
+      当type为  text、password、hidden   valu属性值就是  输入框中显示的初始值
+      当type为  button、reset、submit  valu属性值就是  按钮上显示的文本
+      当type为  radio、checkbox(单选 复选中必须设置value)   valu属性值就是  提交给服务器的值
+      当type为  file   不能使用 value 属性  
+
+      image 图片提交
+
+
+    -->
+
+
+    <!-- 文本输入框 -->
+    <label for="name">用户名:</label>
+    <input type="text" id="name" name="name">
+    <br>
+
+    <!-- 密码输入框 -->
+    <label for="password">密码:</label>
+    <input type="password" id="password" name="password">
+    <br>
+
+    <!-- 邮箱输入框 -->
+    <label for="email">邮箱:</label>
+    <input type="email" id="email" name="email">
+    <br>
+
+    <!-- 进度条 -->
+    <label for="progress">进度条:</label>
+    <input type="range" id="progress" name="progress" min="0" max="100">
+    <br>
+
+    <!-- 单选按钮 -->
+    <label>性别:</label>
+    <input type="radio" id="male" name="gender" value="male">
+    <label for="male">男</label>
+    <input type="radio" id="female" name="gender" value="female">
+    <label for="female">女</label>
+    <br>
+
+    <!-- 复选框 -->
+    <label>兴趣爱好:</label>
+    <input type="checkbox" id="basketball" name="motion" value="basketball">
+    <label for="basketball">篮球</label>
+    <input type="checkbox" id="football" name="motion" value="football">
+    <label for="football">足球</label>
+    <br>
+
+
+    <!-- 下拉列表 -->
+    <label for="country">国家:</label>
+    <select id="country" name="country">
+      <option value="cn">CN</option>
+      <option value="usa">USA</option>
+      <option value="uk">UK</option>
+    </select>
+    <br>
+
+    <!-- 重置按钮 -->
+    <input type="reset" value="重置">
+    <!-- 提交按钮 -->
+    <input type="submit" value="提交">
+
+
+
+
+
+  </form>
+
+</body>
+
+</html>

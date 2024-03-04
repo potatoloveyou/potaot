@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <!-- <a href="https://www.baidu.com/">123</a> -->
+  <script>
+    const arr = [11, 22, 33, 44, 55, 66, 77, -1];
+
+    // 法一 
+    let zhuan = (arr, count) => {
+      // ceil向上取整  abs绝对值
+      if (Math.ceil(Math.abs(count)) > 1) {
+        let newArr = [];
+        let tmp = [];
+        arr.forEach((item, index) => {
+          tmp.push(item);
+          if ((index + 1) % count == 0) {
+            newArr.push(tmp);
+            tmp = [];
+          }
+        });
+        if (tmp.length) {
+          newArr.push(tmp);
+        }
+        return newArr;
+      }
+    };
+    console.log(zhuan(arr, 3));
+
+
+    // 法二
+    let zhuan2 = (arr, count) => {
+      let newArr = [];
+      for (let i = 0; i < Math.ceil(arr.length / count); i++) {
+        newArr.push(arr.slice(i * count, (i + 1) * count));
+      }
+      return newArr;
+    }
+    console.log(zhuan2(arr, 2));
+
+
+
+
+
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>

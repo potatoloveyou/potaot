@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 可填写指定日期作为时间戳 注意！:月份是索引！(0~11)实际月份要索引+1
+    // let dd =new Date(2022,6,28)
+
+    let d = new Date();
+
+    // 当前本地时间戳
+    console.log(d);
+    // 返回当前年份
+    console.log(d.getFullYear());
+    // 返回当前月份的索引  注意！:这个返回的是索引！(0~11)实际月份要索引+1
+    console.log(d.getMonth());
+    // 返回当前日
+    console.log(d.getDate());
+    // 返回当前小时
+    console.log(d.getHours());
+    // 返回当前分钟
+    console.log(d.getMinutes());
+    // 返回当前秒
+    console.log(d.getSeconds());
+    // 返回当前毫秒 （1s=1000ms）
+    console.log(d.getMilliseconds());
+
+    // 返回1970 年 1 月 1 日至今的毫秒数。
+    console.log(d.getTime());
+    var n = Date.now();
+    // 获取当前时间戳 (作用与上面一样)
+    console.log(n);
+
+    console.log(d.getTimezoneOffset());
+
+
+    let time = new Date();
+    // 设置Date为指定的某一天
+    time.setDate(15);
+    console.log(time);
+    // 也可在设置成某一天后在区5天后的现在(类似于设置闹钟)
+    time.setDate(15 + 5);
+
+
+    //   判断两个时间大小 或 时间之差
+    console.log(d < time);// 隐式转换 等于下面
+    console.log(d.getTime() < time.getTime());
+
+    console.log(time.getTime() - d.getTime());
+
+
+
+  </script>
+</body>
+
+</html>

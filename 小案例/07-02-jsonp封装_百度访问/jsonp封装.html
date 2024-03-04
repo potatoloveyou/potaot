@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .baidu {
+      width: 500px;
+      height: 500px;
+      margin: 20vh auto 0 auto;
+      /* text-align: center; */
+      display: flex;
+      flex-direction: column;
+
+      div {
+        input {
+          width: 100%;
+          border: 1px solid #000000;
+          line-height: 50px;
+          font-size: 35px;
+          margin-bottom: 30px;
+        }
+      }
+
+      ul {
+        li {
+          font-size: 20px;
+        }
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <section class="baidu">
+    <div>
+      <input type="text" />
+    </div>
+    <ul></ul>
+  </section>
+
+  <script>
+    // function jsonp(url, callbackFunction) {
+    //   const script = document.createElement('script');
+    //   const callbackName = 'xxx';
+    //   script.src = url + '&cb=' + callbackName;
+
+    //   window[callbackName] = callbackFunction;
+
+    //   document.body.appendChild(script);
+
+    //   script.addEventListener('onload', () => {
+    //     document.body.removeChild(script);
+    //   });
+    // }
+    // function callbackFunction(data) {
+    //   console.log(data);
+    // }
+    // jsonp("https://www.baidu.com/sugrec?ie=utf-8&json=1&prod=pc&from=pc_web&wd=123", callbackFunction);
+
+
+    // 防抖函数
+    /**
+     * @param {Function} fun - 需要防抖的函数。
+     * @param {Number} delay - 延迟时间，单位为毫秒。
+    */
+    function debounce(fun, delay = 500) {
+      let timer = null; // 创建一个计时器变量，用于保存定时器ID
+      return function () {
+        let _this = this; // 保存函数的上下文（this）
+        let args = arguments; // arguments 事件处理函数的所有参数
+        clearTimeout(timer); // 清除之前的定时器，避免多次触发
+        timer = setTimeout(() => {
+          // 这里使用_this获取dom 不能使用this  是因为在定时器的匿名函数里面
+          fun.apply(_this, args); // 执行传入的函数，并传入参数和上下文
+          // 临时把 func借用到 _this（DOM）
+          // apply 第二个参数是一个数组 代表传递给 func的所有参数
+        }, delay); // 设置延迟时间，控制函数的执行时机
+      };
+    }
+
+    // 封装jsonp函数
+    /**
+     * @param {需要请求的URL地址} url - String。
+     * @param {请求成功后的回调函数} callbackFunction - Function。
+    */
+    function jsonpp(url, callbackFunction) {
+      var script = document.createElement('script');
+      /**
+       * 设置 script 标签的 src 属性
+       * 设置 script 标签的 type 属性
+       * 设置 script 标签的 charset 属性
+       * 设置 script 标签的 async 属性为异步
+       *
+       */
+      // script.src = url + '?callback=' + callback + '&' + Object.keys(data).map(key => key + '=' + data[key]).join('&');
+
+      const callbackName = 'xxx';
+
+      script.src = url + '&cb=' + callbackName;
+      script.type = 'text/javascript';
+      script.charset = 'utf-8';
+      script.async = true;
+      document.body.appendChild(script);
+
+
+      window[callbackName] = callbackFunction;
+
+      script.addEventListener('onload', () => {
+        // 删除 script 标签
+        document.body.removeChild(script);
+      });
+
+    }
+
+    // 获取input元素和ul元素
+    const input = document.querySelector('input');
+    const ulEl = document.querySelector('ul');
+
+
+    function callbackFunction(data) {
+      // console.log(data.g);
+
+      // 如果 ulEl.firstChild(ul的子元素li)存在，则删除所有子元素
+      while (ulEl.firstChild) {
+        ulEl.removeChild(ulEl.firstChild);
+      }
+
+      data.g.forEach((item, index) => {
+        const liEl = document.createElement('li');
+        liEl.textContent = item.q;
+        ulEl.appendChild(liEl);
+      });
+    }
+
+    input.addEventListener('input', debounce(() => {
+      // console.log(input.value);
+      jsonpp(`https://www.baidu.com/sugrec?ie=utf-8&json=1&prod=pc&from=pc_web&wd=${input.value}`,
+        callbackFunction
+      );
+    }));
+
+
+
+
+
+
+
+
+
+    // jsonp("https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&from=pc_web&&wd=123",
+    //   { name: '张三', age: 25 }, 'callback')
+
+    // function jsonpp(url, data, callback) {
+    //   // 创建 script 标签
+    //   var script = document.createElement('script');
+    //   // 设置 script 标签的 src 属性
+    //   script.src = url;
+    //   // 设置 script 标签的 type 属性
+    //   script.type = 'text/javascript';
+    //   // 设置 script 标签的 charset 属性
+    //   script.charset = 'utf-8';
+    //   // 设置 script 标签的 async 属性
+    //   script.async = true;
+
+    //   // 设置 script 标签的 onload 事件
+    //   script.onload = function () {
+    //     // 删除 script 标签
+    //     document.body.removeChild(script);
+    //     // 执行回调函数
+    //     callback(data);
+    //   };
+
+    //   // 设置 script 标签的 onerror 事件
+    //   script.onerror = function () {
+    //     // 删除 script 标签
+    //     document.body.removeChild(script);
+    //     // 执行回调函数
+    //     callback(null);
+    //   };
+    //   // 将 script 标签添加到 body 标签中
+    //   document.body.appendChild(script);
+    // }
+
+    // function callbackFunction(data) {
+    //   console.log(data);
+    // }
+
+    // jsonpp('http://example.com/data', { name: '张三', age: 25 }, callbackFunction);
+
+
+  </script>
+
+</body>
+
+</html>

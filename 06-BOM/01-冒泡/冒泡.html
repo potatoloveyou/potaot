@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .big {
+      width: 300px;
+      height: 300px;
+      background-color: lightblue;
+    }
+
+    .small {
+      width: 200px;
+      height: 200px;
+      background-color: lightcoral;
+    }
+
+    .box {
+      width: 100px;
+      height: 100px;
+      background-color: aquamarine;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="big">
+    big
+    <div class="small">
+      small
+      <div class="box">box</div>
+    </div>
+  </div>
+
+
+
+
+  <script>
+    var big = document.querySelector(".big");
+    var small = document.querySelector(".small");
+    var box = document.querySelector(".box");
+
+    //   事件从内到外逐层触发（冒泡）
+    big.onclick = function () {
+      console.log(123);
+    };
+    // 只触发这个，因为这个覆盖了上面
+    big.onclick = function () {
+      console.log(456);
+    };
+
+
+
+    // addEventListener() 能够添加多个事件处理程序
+    big.addEventListener('click', (e) => {
+      console.log("big click");
+      console.log("big click 123");
+    });
+
+    small.addEventListener('click', (e) => {
+      console.log("small click");
+      // 阻止事件冒泡
+      event.stopPropagation();
+    });
+
+    box.addEventListener('click', (e) => {
+      console.log("box click");
+    })
+
+
+
+
+
+
+  </script>
+
+
+
+
+</body>
+
+</html>

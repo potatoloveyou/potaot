@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      scroll-behavior: smooth;
+    }
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 50px;
+      background-color: #f1f1f1;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      box-shadow: 0 -2px 2px rgba(0, 0, 0, 0.1);
+      a {
+        width: calc(100% / 4);
+        line-height: 50px;
+        text-align: center;
+
+        &:nth-child(1) {
+          background-color: aqua;
+        }
+
+        &:nth-child(2) {
+          background-color: blueviolet;
+        }
+
+        &:nth-child(3) {
+          background-color: yellow;
+        }
+
+        &:nth-child(4) {
+          background-color: yellowgreen;
+        }
+      }
+    }
+
+    div {
+      width: 100%;
+      height: 100vh;
+
+      &:nth-child(2) {
+        background-color: aqua;
+      }
+
+      &:nth-child(3) {
+        background-color: blueviolet;
+      }
+
+      &:nth-child(4) {
+        background-color: yellow;
+      }
+
+      &:nth-child(5) {
+        background-color: yellowgreen;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <a href="#aqua">aqua</a>
+    <a href="#blueviolet">blueviolet</a>
+    <a href="#yellow">yellow</a>
+    <a href="#yellowgreen">yellowgreen</a>
+  </nav>
+  <div class="aqua" id="aqua"></div>
+  <div class="blueviolet" id="blueviolet"></div>
+  <div class="yellow" id="yellow"></div>
+  <div class="yellowgreen" id="yellowgreen"></div>
+
+</body>
+
+</html>

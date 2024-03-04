@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 函数是可重复使用的代码块
+    // function name(params) {
+    // }
+
+    // 普通函数(有函数名)
+    // function first() {
+    //   console.log("first  Func");
+    // } first();
+
+    // 或者
+    // function first() {
+    //   console.log("first  Func");
+    // }
+    // var f=first()
+
+
+
+    // 匿名函数(无函数名) 需要一个变量接收
+    // var a = function () {
+    //   console.log("first  Func");
+    // };
+    // a();
+    
+
+
+
+    // 函数参数
+    // a为形参 'sb'为实参
+    // 数据传递只能由 实参——>形参 单向传递
+    // function hello(a) {
+    //   console.log('hello', a);
+    // }
+    // hello('sb');
+
+    // function sum(n) {
+    //   var total = 0;
+    //   for (var i = 0; i <= n; i++) {
+    //     //   console.log(i);
+    //     total += i;
+    //   }
+    //   console.log(total);
+    // }
+    // sum(5);
+
+
+    // 函数的多个参数
+    // 两个数之和
+    // function sum(a, b, c) {
+    //   a + b;
+    //   console.log(a, b);
+
+    //   // a + b + c;
+    //   // console.log(a, b, c);
+    // }
+    // sum(5, 10);
+
+    // sum(1, 3, 5);
+    // 如果需函数要参数 执行的时候没有携带参数  那么参数的值是 undefined;
+
+  </script>
+
+  <script>
+    // 函数的返回值
+    // return 会提前结束函数 后面的代码不会运行
+    // 若没有写 return  函数默认返回 undefined
+    // 若写了 return 函数运行会返回一个结果 把结果赋值给变量 res
+
+    // var res = function (n) {
+    //   var x = n * 2;
+    //   // console.log(n * 2);// 20
+    //   return x;
+    //   // console.log(123);// (不执行)
+    // }
+    // // console.log(res(10));
+    // console.log(res(10));
+
+    // 或者
+    // function double(n,b) {
+    //   var x = n * b;
+    //   // console.log(n * 2);// 20
+    //   return x;
+    //   // console.log(123);// (不执行)
+    // }
+    // var res = double(10,2);
+    // console.log(res);
+
+    function circleArea(r) {
+      return Math.PI * (r * r);
+    }
+
+    function calcC(a, b) {
+      return Math.sqrt(a * a + b * b);
+      // Math.sqrt(计算平方根)
+    }
+
+    function yyy() {
+      console.log(arguments);
+      // arguments 所有的参数
+      // arguments 是一个对象 有长度有下标中括号 （类数组）
+      console.log(arguments[0]);
+    }
+    yyy(10)
+
+
+    // 自调用函数
+    (function () {
+      console.log(123);
+    })();
+
+  </script>
+
+
+
+
+
+
+</body>
+
+</html>

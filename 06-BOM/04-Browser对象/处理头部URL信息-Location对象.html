@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <form action="#" method="get">
+    <label for="name">用户名:</label>
+    <input type="text" name="username" id="username" value="">
+    <br>
+    <label for="password">密码:</label>
+    <input type="password" name="password" id="password" autocomplete="on" value="">
+    <br>
+    <input type="submit" value="提交">
+  </form>
+
+
+  <script>
+    // Navigator 对象包含有关浏览器的信息
+    // console.log(navigator);
+    // 返回由客户机发送服务器的user-agent 头部的值
+    // console.log(navigator.userAgent);
+  </script>
+
+
+  <script>
+    // Location 对象包含有关当前 URL 的信息。
+    // console.log(location);
+    // console.log(location.href);// 返回完整的URL
+    // console.log(location.host);// 返回域名和端口
+    console.log(location.search);// 返回URL的查询字符串(？右边的)
+
+    console.log(location.hash);// 返回URL的哈希值hash(#右边的)
+    // 锚点滑动(电梯效果)使用的就是hash
+
+
+    // console.log(location.hostname);// 返回域名
+    // console.log(location.port);// 返回端口
+    // console.log(location.protocol);// 返回协议
+    // console.log(location.pathname);// 返回路径
+
+
+    // 处理URL的查询字符串(右边)
+
+
+    // // 法一 使用原生js
+    // const url = 'https://gitbook.cn/gitchat/geekbooks?tag=JavaScript&name=pwwu&age=24';
+    // let temp1 = url.split('?');
+    // let pram = temp1[1];
+    // let keyValue = pram.split('&');
+    // let obj = {};
+    // for (let i = 0; i < keyValue.length; i++) {
+    //   let item = keyValue[i].split('=');
+    //   let key = item[0];
+    //   let value = item[1];
+    //   obj[key] = value;
+    // }
+    // console.log(temp1);    //  ['https://gitbook.cn/gitchat/geekbooks','tag=JavaScript&name=pwwu&age=24']
+    // console.log(pram);     //  tag=JavaScript&name=pwwu&age=24
+    // console.log(keyValue); //  ['tag=JavaScript','name=pwwu','age=24']
+    // console.log(obj);      //  {tag:'JavaScript',name:'pwwu',age:'24'}
+
+
+    // 法二 使用 new URLSearchParams(location.search)   node.js 和 react 都可以使用  vue有其他方法 
+    /**
+     * 另一种写法
+     * const url = new URL("https://stackabuse.com/search?q=devpoint&page=1");
+     * const searchParams = url.searchParams;
+    */
+    const url = new URLSearchParams(location.search);
+    console.log(url.get('username'));
+    console.log(url.get('password'));
+
+
+    // 法三
+    // var url = location.search;//获取当前浏览器url路径（“?”以及“?”之后的字符串）
+    // //?name=wpw&id=123&age=26
+    // var theRequest = new Object();
+    // var str = url.substr(1);//name=wpw&id=123&age=26
+    // var listData = [];
+    // strs = str.split("&");
+    // for (var z = 0; z < strs.length; z++) {
+    //   theRequest[strs[z].split("=")[0]] = (strs[z].split("=")[1]);
+    // }
+    // console.dir(theRequest);//["name=wpw", "id=123", "age=26"]
+    // //最后url里面所有的参数都被theRequest对象以键值对的形式呈现出来
+
+
+
+
+    // location对象方法
+    // location.reload() 方法用于重新加载当前文档。
+
+    // location.assign() 方法加载新的文档。
+    // location.replace() 方法加载新的文档。但是它不会生成浏览记录。
+    // 差别：使用replace后不能用回浏览器左上角退回按钮返回到上一个页面。
+
+
+  </script>
+
+
+
+</body>
+
+</html>

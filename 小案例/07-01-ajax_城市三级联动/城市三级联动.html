@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/杂货/my-minireset.css">
+  <style>
+    ul {
+      margin: 20px 0;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+  </style>
+</head>
+
+<body>
+  <ul>
+    <!-- 动态生成的列表项 -->
+    <li class="province"></li>
+    <li class="city"></li>
+    <li class="county"></li>
+
+  </ul>
+
+  <script>
+    /**
+     * @param {请求的URL地址} url - string。
+     * @param {请求成功后的回调函数} callback - function。
+    */
+    function ajax(url, callback) {
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', url, true);
+      xhr.send();
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          // xhr.responseText 服务器返回的数据  JSON.parse() 将返回的数据转换为JSON格式(字符串对象)
+          callback(JSON.parse(xhr.responseText));
+          // console.log(JSON.parse(xhr.responseText));
+        }
+      };
+    }
+
+    ajax('./prov-county.json',
+      (res) => {
+        // 
+        let cityNumber = res.map((value) => {
+          return value.split(":");
+        });
+        // console.log(cityNumber); // 输出省市区编号数组。
+
+        let province = [];
+        let city = [];
+        let county = [];
+
+        cityNumber.map((value) => {
+          // 筛选出value[0]为相同长度的数组，并添加到新数组中
+          switch (value[0].length) {
+            case 2:
+              // province.push(value);
+              province.push({ code: value[0], name: value[1] });
+              break;
+            case 4:
+              city.push({ code: value[0], name: value[1] });
+              break;
+            case 6:
+              county.push({ code: value[0], name: value[1] });
+              break;
+            default:
+              break;
+          }
+        });
+
+        // 排序
+        let sort = (a, b) => a.code - b.code;
+        province.sort(sort); // 省份排序。
+        city.sort(sort); // 市份排序。
+        county.sort(sort); // 县份排序。
+        
+
+        let ulEl = document.querySelector('ul');
+        let provinceLi = document.querySelector('.province');
+        let cityLi = document.querySelector('.city');
+        let countyLi = document.querySelector('.county');
+
+        // 创建省份列表(初始化)
+        province.forEach((value, index) => {
+          provinceLi.innerHTML += `<div class="${value.code}">${value.name}</div>`;
+        });
+
+        function eventCallbackFunctions(event, scale, liEl) {
+          // 对应编号
+          console.log(event.target.className);
+          // 返回以对应城市编号开头的市份数组
+          let arr = scale.filter((value) => {
+            return value.code.startsWith(event.target.className);
+          });
+          console.log(arr);
+
+          // 如果点击的是省份，则清除市份列表
+          if (scale == city) {
+            // 清除市份列表。
+            while (cityLi.firstChild) {
+              cityLi.removeChild(cityLi.firstChild);
+            }
+          }
+          // 清除县份列表。
+          while (countyLi.firstChild) {
+            countyLi.removeChild(countyLi.firstChild);
+          }
+
+          arr.forEach((value, index) => {
+            liEl.innerHTML += `<div class="${value.code}">${value.name}</div>`;
+          });
+        }
+
+        // 点击省份事件
+        provinceLi.addEventListener('click', (event) => {
+          eventCallbackFunctions(event, city, cityLi);
+        });
+
+        // 点击市份事件。
+        cityLi.addEventListener('click', (event) => {
+          eventCallbackFunctions(event, county, countyLi);
+        });
+
+
+
+
+
+      })
+
+
+
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let arr = [
+      [11, 12, 13],
+      [21, 22, 23],
+      [31, 32, 33],
+    ];
+
+    // 法一
+    let zhuan = (arr) => {
+      let newArr = [];
+      arr.forEach((element) => {
+        element.forEach(item => {
+          newArr.push(item);
+        });
+      });
+      return newArr;
+    };
+    console.log(zhuan(arr));
+
+    // 法二
+    let zhuan2 = (arr) => {
+      let newArr = [];
+      arr.forEach((element) => {
+        // concat拼接字符串
+        newArr = newArr.concat(element);
+      });
+      return newArr;
+    };
+    console.log(zhuan2(arr));
+
+
+
+
+
+  </script>
+</body>
+
+</html>

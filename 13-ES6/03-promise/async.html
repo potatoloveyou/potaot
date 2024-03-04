@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function delay(ms, n) {
+      return new Promise((resolve, reject) => {
+        setTimeout(resolve, ms, Math.random());
+      });
+    }
+
+    // 在普通函数前加上"async"关键字，使其成为一个异步函数。
+    // async 一般需要配合 await使用
+    // async函数返回一个 Promise 对象，可以使用then方法添加回调函数。
+    // await 作用是必须等上一个 promise 完成 才会继续执行下面的代码
+    // 通过await获得的值，就是promise完成后的返回值，在使用.then()时，then()的第一个参数就是promise的返回值。
+    async function xxx() {
+      console.log("xxx start");
+
+      let p2 = await delay(3000, 2);
+      console.log(p2);
+      let p1 = await delay(5000, 1);
+      console.log(p1);
+
+      console.log("xxx end");
+
+      return p1;
+    }
+    // xxx(); // xxx start    随机数    xxx end
+
+    // 因为async返回的是 Promise 对象，所以可以使用.then()来处理异步操作的结果。
+    xxx().then((res) => {
+      console.log(res);
+    });
+
+    // 或者     (await 必须放在 async函数内部)
+    (async () => {
+      let p = await xxx(); // 等待xxx()执行完毕，并返回结果。
+      console.log(p); // 输出xxx()的结果。
+    })();
+  </script>
+</body>
+
+</html>

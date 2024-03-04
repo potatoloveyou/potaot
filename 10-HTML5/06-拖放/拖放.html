@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width= , initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 100px;
+      height: 100px;
+      border: 1px solid red;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box"></div>
+  <div class="box"></div>
+  <img id="thumb1" draggable="true" src="https://www.runoob.com/images/compatible_firefox.gif" alt="" />
+  <img id="thumb2" draggable="true" src="https://www.runoob.com/images/compatible_chrome.gif" alt="" />
+  <!-- 1.img元素 draggable属性设置为 true  -->
+
+  <script>
+    var imgs = document.querySelectorAll("img");
+    var boxs = document.querySelectorAll(".box");
+
+
+    imgs.forEach((value) => {
+      // 2.dragstart 拖拽的时候触发
+      value.addEventListener("dragstart", (event) => {
+        console.log("开始拖拽", event);
+
+        // 3.dataTransfer.setData() 方法设置被拖数据的数据类型和值
+        event.dataTransfer.setData("Text", event.target.id);
+      });
+    });
+
+    boxs.forEach((value) => {
+      // 4.dragover 拖拽到目标元素上触发
+      value.addEventListener('dragover', (event) => {
+        // 5.preventDefault()  阻止默认行为，使得元素可以放置在目标元素上。
+        event.preventDefault();
+      });
+
+      // 6.drop 放置到目标元素上触发，这里可以进行放置操作。
+      value.addEventListener('drop', (event) => {
+        var data = event.dataTransfer.getData("Text"); // 获取拖拽的数据。
+        // 通过id获取拖拽的元素
+        var img = document.getElementById(data); // 获取拖拽的元素。
+        value.appendChild(img); // 将拖拽的元素放置到目标元素上。
+      });
+    })
+
+
+  </script>
+
+
+
+
+</body>
+
+</html>

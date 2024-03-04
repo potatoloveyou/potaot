@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/杂货/my-minireset.css">
+  <style>
+    .content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .list {
+      width: 300px;
+      position: relative;
+      /* background-color: aqua; */
+    }
+
+    .list img:nth-child(1) {
+      position: relative;
+    }
+
+    .list img {
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      transition: all .3s;
+    }
+
+    .option {
+      position: absolute;
+      bottom: 0;
+      display: flex;
+    }
+
+    .option li {
+      width: 20px;
+      height: 20px;
+      background-color: aqua;
+      border-radius: 50%;
+      margin: 0 10px;
+    }
+
+    /* ul.control {
+      list-style: none;
+      position: absolute;
+      background-color: aqua;
+      display: flex;
+    } */
+  </style>
+</head>
+
+<body>
+  <section class="content">
+
+    <div class="list">
+      <img src="./imgs/normal1.jpg" alt="">
+      <img src="./imgs/normal2.jpg" alt="">
+      <img src="./imgs/normal3.jpg" alt="">
+      <img src="./imgs/normal4.jpg" alt="">
+    </div>
+    <!-- <ul class="control">
+      <li><</li>
+      <li>></li>
+    </ul> -->
+    <ul class="option">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  </section>
+
+  <script>
+    var swiper = document.querySelector('.list');
+    var imgs = swiper.querySelectorAll('img');
+    var options = document.querySelector('.option').querySelectorAll('li');
+    // console.log(swiper);
+    // console.log(imgs);
+    // array.forEach(element => {
+    // });
+
+    var current = 0;
+
+    // 使所有的图片一开始变为不可见
+    for (var i = 0; i < imgs.length; i++) {
+      // console.log(imgs[i]);
+      if (i === current) {
+        imgs[i].style.opacity = 1;
+      } else {
+        imgs[i].style.opacity = 0;
+      }
+    }
+
+    // for (var i = 0; i < options.length; i++) {
+    //   options[i].onclick = function () {
+    //     console.log(123, i);
+    //     // 这里无论点击哪个原点，i都已经变成了4，并不是我们想要的0123
+    //     // 原因是点击没有遍历快，遍历为同步代码，而点击事件为异步代码
+    //   };
+    // }
+
+    for (var i = 0; i < options.length; i++) {
+      options[i].title = i;
+      // 给每一个option都添加一个title属性用于顺序标识
+
+      options[i].onclick = function () {
+        console.log(this.title, typeof this.title);// string
+        // 这里的this 指向的是 事件函数绑定的元素
+        // 1 事件处理函数内部的 this (对象) 指向事件绑定的元素
+        // 2this 指向函数运行时 这个函数挂载的 对象 (this是动态指向)
+
+        
+        for (var i = 0; i < imgs.length; i++) {
+          if (i == this.title) {
+            imgs[i].style.opacity = 1;
+          } else {
+            imgs[i].style.opacity = 0;
+          }
+        }
+      };
+    }
+
+
+
+  </script>
+
+
+
+</body>
+
+</html>

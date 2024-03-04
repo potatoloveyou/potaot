@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 法一 -->
+  <script>
+    // 需求 从一串字符串中  "fdfsdjksduiwsgubsjkadweuiyejdsfjdsghjtywqmzxhb"
+    // 1统计出现的最多的字母是哪个   2出现了多少次
+    // 统计出现次数最多的前三个 *
+    const str = "fdfsdjksduiwsgubsjkadweuiyejdsfjdsghjtywqmzffxhbd";
+    var arr1 = [];// 存放首次出现的字母
+    var arr2 = [];// 存放次数
+    var arr3 = [];// 存放从多到少
+    var arr4;// 存放前三个的次数
+
+
+    for (let i = 0; i < str.length; i++) {
+      let index = arr1.indexOf(str[i]);// 获得字符串每个首次出现的字符在数组arr1中的索引，若没有则返回-1
+      if (index == -1) {
+        arr1.push(str[i]);// 将没有出现过的字符push到arr1中
+        arr2.push(1);// 同时arr2添加1，此时添加的1的索引与刚刚向arr1中添加的字符的索引相同
+      } else {
+        arr2[index]++;// 将存在于arr1的字符的索引对应arr2索引中的数+1
+      }
+    }
+    console.log(arr1);
+    console.log(arr2);
+
+    let max = 0;
+    // 找出arr3中最大的那个数
+    // 法一
+    arr2.forEach((item, i) => {
+      if (max < item) {
+        max = item;
+      }
+    });
+    console.log(max);
+
+    // // 法二 
+    // arr3.map((item) => {
+    //   if (max < item) {
+    //     max = item;
+    //   }
+    // });
+
+    // 判断此时的max与arr2中的哪一项相等，若相等将对应项的索引i与arr1和arr2push到arr3中
+    // 此函数的主要作用是从大到小排序
+    let most = max;
+    function seek() {
+      arr2.forEach((item, i) => {
+        if (item == most) {
+          arr3.push(arr1[i] + ':' + arr2[i]);
+        }
+      });
+    }
+
+    // 使用for循环每次都调用函数，并将max减一
+    for (let i = most; i > 0; i--) {
+      seek();
+      most--;
+    }
+    console.log(max);
+    console.log(most);
+    console.log(arr3);
+
+    // 使用splice从0开始截取3个,返回一个新数组
+    arr4 = arr3.splice(0, 3);
+    console.log(arr4);
+
+    // arr2.forEach((item, i) => {
+    //   // if (item == max) {
+    //     arr3.push(arr1[i] + ':' + arr2[i]);
+    //   // }
+    // });
+    // arr3.sort()
+    // console.log(arr3);
+
+
+
+
+    console.log('==================================================================================');
+  </script>
+
+  <!-- 法二 -->
+  <script>
+    const str22 = "fdfsdjksduiwsgubsjkadweuiyejdsfjdsghjtywqmzffxhbd";
+    let arr11;// 接收str22使用split后返回的数组
+    let arr22;
+    // 返回一个数组，不使用东西隔开
+    arr11 = str22.split('');
+    // arr11.sort();
+    let tmp = {};
+    arr11.forEach((item, i) => {
+      if (tmp[item]) {
+        tmp[item]++;
+      } else {
+        tmp[item] = 1;
+      }
+    });
+    // console.log(tmp);
+
+    let max11 = 0;
+    for (const key in tmp) {
+      // console.log(tmp[key]);
+      if (max11 < tmp[key]) {
+        max11 = tmp[key];
+      }
+    }
+    console.log(max11);
+
+
+    console.log('==================================================================================');
+  </script>
+
+  <!-- 法三 -->
+  <script>
+    const str333 = "fdfsdjksduiwsgubsjkadweuiyejdsfjdsghjtywqmzffxhbd";
+    // 将字符串分割成数组
+    let arr111 = str333.split('');
+
+    let tmp111 = [];
+
+
+    // 遍历数组，查找字符
+    arr111.forEach((item) => {
+      let res = tmp111.find((e) => {
+        return e.letter == item;
+      });
+      if (res) {
+        // 如果找到，次数加1
+        res.cound++;
+      } else {
+        // 如果没有找到，添加到数组
+        tmp111.push({
+          letter: item,
+          cound: 1
+        });
+      }
+    });
+    console.log(tmp111);
+
+    // 排序
+    tmp111.sort((a, b) => {
+      return b.cound - a.cound;
+    })
+
+    // 取出前三个
+    let tmp222 = tmp111.splice(0, 3);
+    console.log(tmp222);
+
+    // console.log(tmp111[tmp111.length-1]);
+  </script>
+</body>
+
+</html>

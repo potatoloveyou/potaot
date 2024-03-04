@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    section {
+      display: flex;
+      width: 100vw;
+      justify-content: space-evenly;
+
+      .box:nth-child(1) {
+        width: 300px;
+        height: 300px;
+        background-color: lightblue;
+      }
+
+      .box:nth-child(2) {
+        width: 300px;
+        height: 300px;
+        background-color: lightpink;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <section>
+    <div class="box">防抖</div>
+    <div class="box">节流</div>
+  </section>
+
+  <script>
+    // 防抖  只看最后一次事件触发，只执行最后一次事件触发后的操作。中间触发的都是有效的
+    const box1 = document.querySelector(".box:nth-child(1)");
+    /**
+     * @param {Function} fun - 需要防抖的函数。
+     * @param {Number} delay - 延迟时间，单位为毫秒。
+    */
+    function debounce(fun, delay) {
+      let timer = null; // 创建一个计时器变量，用于保存定时器ID
+      return function (...rest) {
+        let _this = this; // 保存函数的上下文（this）
+
+        // let args = arguments; // arguments 事件处理函数的所有参数
+        let args = rest; // 使用...rest代替arguments获得所有参数
+
+        clearTimeout(timer); // 清除之前的定时器，避免多次触发
+        timer = setTimeout(() => {
+          // 这里使用_this获取dom 不能使用this  是因为在定时器的匿名函数里面
+          fun.apply(_this, args); // 执行传入的函数，并传入参数和上下文
+          // 临时把 func借用到 _this（DOM）
+          // apply 第二个参数是一个数组 代表传递给 func的所有参数
+        }, delay); // 设置延迟时间，控制函数的执行时机
+      };
+    }
+
+    // let debounce = (fun, delay = 100) => {
+    //   let timer = null; // 创建一个计时器变量，用于保存定时器ID
+    //   // 法一
+    //   return function () {
+    //     clearTimeout(timer); // 清除之前的定时器，避免多次触发
+    //     timer = setTimeout(() => fun.apply(this, arguments), delay); // 设置延迟时间，控制函数的执行时机
+    //   };
+    //   // 法二
+    //   // return function () {
+    //   //   clearTimeout(timer); // 清除之前的定时器，避免多次触发
+    //   //   timer = setTimeout(() => fun.apply(this), delay, ...arguments);
+    //   // };
+    // };
+
+
+    // 使用示例
+    box1.addEventListener('mousemove', debounce(() => {
+      console.log(123);
+    }, 1000));
+
+
+
+
+
+
+
+
+    // 节流  一次事件触发后，必须等待一段时间后才能触发下一次事件。中间触发的都是无效的
+    const box2 = document.querySelector(".box:nth-child(2)");
+    /**
+     * @param {Function} fun - 需要节流的函数。
+     * @param {Number} delay - 延迟时间，单位为毫秒。
+    */
+    function throttle(fun, delay) {
+      let timer = null; // 创建一个计时器变量，用于保存定时器ID
+      return function (...args) {
+        const context = this; // 保存函数的上下文（this）
+        // 如果定时器不存在，则设置定时器
+        if (!timer) {
+          // 设置定时器，当定时器执行时，执行函数，并将定时器设置为null
+          timer = setTimeout(() => {
+            fun.apply(context, args);
+            timer = null;
+          }, delay);
+        }
+      };
+    }
+    box2.addEventListener('mousemove', throttle(() => {
+      console.log(456);
+    }, 1000))
+
+
+
+  </script>
+</body>
+
+</html>

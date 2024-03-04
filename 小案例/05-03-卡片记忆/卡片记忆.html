@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- <link rel="stylesheet" href="/杂货/my-minireset.css"> -->
+  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <style>
+    ul {
+      width: 500px;
+      height: 500px;
+      background-color: lightcoral;
+      margin: 0 auto;
+      padding: 20px;
+      display: grid;
+      /* grid-template: 1fr 1fr 1fr 1fr / 1fr 1fr 1fr 1fr; */
+      grid-template: repeat(4, 1fr) / repeat(4, 1fr);
+      grid-gap: 10px 10px;
+    }
+
+    ul li {
+      background-color: lightblue;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 3em;
+      color: lightblue;
+      transition: all .3s;
+    }
+
+    ul li.open {
+      color: #fff;
+    }
+
+    ul li.equal {
+      color: white;
+      background-color: aquamarine;
+    }
+  </style>
+</head>
+
+<body>
+  <ul class="stage"></ul>
+
+  <script>
+    const stage = document.querySelector('.stage');
+    const icons = [
+      "fa-bath",
+      "fa-telegram",
+      "fa-anchor",
+      "fa-battery-quarter",
+      "fa-bank",
+      "fa-bug",
+      "fa-bus",
+      "fa-child",
+    ];
+
+
+
+    // 复制成两份
+    let doubleArr = (arr) => {
+      let tmp = [];
+      arr.forEach((value) => {
+        tmp.push(value);
+        tmp.push(value);
+      });
+      return tmp;
+    };
+    // console.log(doubleArr(icons));
+    let clone = doubleArr(icons);
+
+    // 随机打乱数组
+    // clone = clone.sort(() => Math.random() - 0.5);
+    let shuffle = (arr) => {
+      arr.sort(() => Math.random() - 0.5);
+      return arr;// 返回打乱后的数组
+    };
+    // 双重打乱
+    clone = shuffle(shuffle(clone));
+
+
+    // 创建卡牌 li i 并添加类名
+    clone.forEach((icon) => {
+      const li = document.createElement('li');
+      const i = document.createElement('i');
+      i.classList.add('fa', icon);
+      li.appendChild(i);
+      stage.appendChild(li);
+
+      // 给每一个li添加点击事件
+      li.addEventListener('click', () => {
+        const liall = document.querySelectorAll('li');
+        // console.log(li);
+        // 添加open类名
+        li.classList.add('open');
+
+        /**
+         * 1.查找拥有open类名的li
+         * 2.将liall类数组转化为数组使用  filter返回符合要求的数据  contains判断指定的类名是否存在
+        */
+        // console.log([...liall]);
+        var openLi = [...liall].filter(item => item.classList.contains('open'));
+        console.log(openLi);
+
+        // 当点开了有两个li时进行判断
+        if (openLi.length == 2) {
+          setTimeout(() => {
+            // 检查两个元素是否相等
+            if (openLi[0].isEqualNode(openLi[1])) {
+              // 如果相等，去掉open，添加equal
+              openLi.forEach((item) => {
+                item.classList.remove('open');
+                item.classList.add('equal');
+              });
+            } else {
+              // 如果不相等，去掉open
+              openLi.forEach(item => item.classList.remove('open'));
+            }
+          }, 500);
+
+        }
+
+      });
+
+    });
+
+
+  </script>
+
+
+
+
+</body>
+
+</html>

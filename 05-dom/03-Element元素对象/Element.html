@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button title="123">xxx</button>
+  <div class="box active xxx yyy" id="test" title="xxx">
+    <i>box</i>
+    <!-- <em>xxx</em> -->
+  </div>
+
+
+  <script>
+    // js创建元素 
+    const newbtn = document.querySelector('button');
+    newbtn.addEventListener('click', () => {
+      // 创建元素节点
+      let divEl = document.createElement('DIV');
+      // 创建文本节点
+      var textnode = document.createTextNode("Water");
+      // 将文本节点添加到元素节点上
+      divEl.appendChild(textnode);
+      // 找到想要添加的位置，添加创建好的元素节点
+      document.querySelector('.box').appendChild(divEl);
+
+      // 删除节点
+      // document.querySelector('.box').removeChild(divEl)
+    })
+  </script>
+
+
+  <script>
+    const boxDom = document.querySelector('#test');
+
+    // classList
+    // 添加类名
+    boxDom.classList.add('zzz');
+    console.log(boxDom.classList.contains('zzz'));// true
+    // 删除类名
+    boxDom.classList.remove('xxx');
+    console.log(boxDom.classList.contains('xxx'));// false
+    // 在元素中切换类名
+    console.log(boxDom.classList.toggle('xxx'));// true
+    /**
+     * 第一个参数为要在元素中移除的类名，并返回 false。
+     * 如果该类名不存在则会在元素中添加类名，并返回 true。
+     * 第二个是可选参数，是个布尔值用于设置元素是否强制添加或移除类，不管该类名是否存在。例如：
+     * 移除一个 class: element.classList.toggle("classToRemove", false);
+     * 添加一个 class: element.classList.toggle("classToAdd", true);
+    */
+
+    const btn = document.querySelector("button");
+    // 复制节点
+    const btn1 = btn.cloneNode(true);
+    // 插入复制好的btn1节点 会复制title
+    boxDom.appendChild(btn1);
+
+    // 元素的一个子节点的数组
+    console.log(boxDom.childNodes); // 节点
+    // 元素的子元素的数组
+    console.log(boxDom.children); // 元素
+
+    // 元素的第一个子节点
+    console.log(boxDom.firstChild); // 节点
+    // 元素的第一个子元素
+    console.log(boxDom.firstElementChild); // 元素
+
+    // 元素的最后一个子节点
+    console.log(boxDom.lastChild); // 节点
+    // 元素的最后一个子元素
+    console.log(boxDom.lastElementChild); // 元素
+
+    // 返回指定元素的属性值
+    console.log(boxDom.getAttribute('title'));
+    // 返回一个元素的属性数组
+    console.log(boxDom.attributes);
+    // 设置指定元素的属性值
+    boxDom.setAttribute('title', '我是新属性');
+    // 移除指定元素的属性
+    boxDom.removeAttribute('title');
+    // 返回指定元素的指定属性值
+    console.log(boxDom.getAttribute('title'));
+
+
+
+
+
+
+
+
+
+
+
+
+  </script>
+
+
+</body>
+
+</html>

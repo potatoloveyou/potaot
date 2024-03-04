@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 有如下数组
+    var citys = [
+      { id: 1, nm: "北京", py: "beijing" },
+      { id: 45, nm: "重庆", py: "chongqing" },
+      { id: 59, nm: "成都", py: "chengdu" },
+      { id: 70, nm: "长沙", py: "changsha" },
+      { id: 84, nm: "保定", py: "baoding" },
+      { id: 88, nm: "蚌埠", py: "bengbu" },
+      { id: 89, nm: "常州", py: "changzhou" },
+      { id: 150, nm: "阿拉善盟", py: "alashanmeng" },
+      { id: 151, nm: "鞍山", py: "anshan" },
+      { id: 197, nm: "安庆", py: "anqing" },
+      { id: 238, nm: "安阳", py: "anyang" },
+      { id: 700, nm: "承德县", py: "chengdexian" },
+    ];
+
+    //   parseCity(citys)
+    //   变成如下结构
+    // var parsedCitys = [
+    //   {
+    //     letter: "A",
+    //     citys: [
+    //       { id: 150, nm: "阿拉善盟", py: "alashanmeng" },
+    //       { id: 151, nm: "鞍山", py: "anshan" },
+    //       { id: 197, nm: "安庆", py: "anqing" },
+    //       { id: 238, nm: "安阳", py: "anyang" },
+    //     ],
+    //   },
+    //   {
+    //     letter: "B",
+    //     citys: [
+    //       { id: 1, nm: "北京", py: "beijing" },
+    //       { id: 84, nm: "保定", py: "baoding" },
+    //       { id: 88, nm: "蚌埠", py: "bengbu" },
+    //     ],
+    //   },
+    //   {
+    //     letter: "C",
+    //     citys: [
+    //       { id: 45, nm: "重庆", py: "chongqing" },
+    //       { id: 59, nm: "成都", py: "chengdu" },
+    //       { id: 70, nm: "长沙", py: "changsha" },
+    //       { id: 89, nm: "常州", py: "changzhou" },
+    //       { id: 700, nm: "承德县", py: "chengdexian" },
+    //     ],
+    //   },
+    // ];
+  </script>
+
+
+
+
+  <script>
+    // 存放第一次出现的字母
+    let tmp = [];
+    citys.forEach((item, index) => {
+      // 获取每个城市的拼音首字母并转换为大写
+      // console.log(item.py.charAt(0).toUpperCase()); 
+
+      // find() 返回数组中满足条件的第一个元素的值。如果没有找到，则返回 undefined。(第一个出现的字母一定返回undefined)
+      let res = tmp.find(item2 => item2.letter === item.py.charAt(0).toUpperCase());
+      // 如果存在，则将该城市添加到对应字母的citys数组中
+      if (res) {
+        res.citys.push(item);
+      } else {
+        // 如果不存在，则创建一个新的对象，并将该城市添加到citys数组中，然后将该对象添加到tmp数组中
+        tmp.push({ letter: item.py.charAt(0).toUpperCase(), citys: [item] });
+      }
+      tmp.sort((a, b) => a.letter.charCodeAt(0) - b.letter.charCodeAt(0));
+
+
+    });
+    console.log(tmp);
+
+
+
+
+
+
+
+
+
+  </script>
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function foo({ x, y = 5 } = {}) {
+      console.log(x, y);
+    }
+    foo({ x: 10, y: 0 }); // 10 0
+    foo({ x: 10, y: null }); // 10 null
+    foo({ x: 10, y: false }); // 10 false
+    foo({ x: 10, y: undefined }); // 10 5
+    foo({}); // undefined 5
+    foo(); // undefined 5
+  </script>
+
+
+
+  <!-- ...rest(变量名)代替arguments -->
+  <script>
+    function sum(...rest) {
+      console.log(arguments, rest);
+    }
+    sum(1, 2, 3); // [1, 2, 3]
+
+    function sum1(a, ...rest) {
+      console.log(arguments, rest);
+    }
+    sum1(1, 2, 3); // [2, 3]
+  </script>
+
+
+
+  <!-- 箭头函数 -->
+  <script>
+    /**     箭头函数与普通函数的区别：  
+     * 箭头函数没有自己的this，箭头函数的this是捕获其所在上下文的this值。
+     * 不能对箭头函数使用 new 命令
+     * 不能使用 arguments 对象，应使用 ...rest参数代替
+     * 箭头函数没有prototype属性
+    */
+
+    // 箭头函数自动返回值，不需要写return
+    function xxx() {
+      return 123;
+    }
+    const yyy = () => 123;
+    const zzz = n => n;
+
+
+    // 对象简写
+    const x = (x, y = 10) => ({ x, y });
+    // 若不需要返回值
+    const xx = (x, y = 10) => void { x, y };
+    [1, 2, 3].map((n) => n * n);
+
+    // 函数柯里化
+    // function sum(a) {
+    //   return function (b) {
+    //     return function (c) {
+    //       return a + b + c;
+    //     };
+    //   };
+    // }
+    const add = (a) => (b) => (c) => a + b + c; // add1(1)(2)(3) === 6
+    add(1)(2)(3);
+
+
+
+
+    // this指向问题
+    function foo() {
+      // console.log("outer id:", this.id);
+      setTimeout(() => {
+        console.log("inner id:", this.id);
+      }, 100);
+    }
+    var id = 21;
+    foo.call({ id: 42 }); // 42
+
+    // 2.
+    function Timer() {
+      this.s1 = 0;
+      this.s2 = 0;
+      // 箭头函数
+      setInterval(() => this.s1++, 1000); // s1=1
+      // 普通函数
+      setInterval(function () {
+        this.s2++;
+      }, 1000); // s2=0(window下s2为undefined,++后变为NaN)
+    }
+    var timer = new Timer();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </script>
+
+
+
+
+</body>
+
+</html>

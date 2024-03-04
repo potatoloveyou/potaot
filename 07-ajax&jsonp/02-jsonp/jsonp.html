@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 概念 -->
+  <script>
+    /**
+     * 1.引用资源没有跨域的概念  比如引入jq、bs
+     * 2.服务器提前写好一个函数(如&cd=)，前端通过url传递给后端(xxx),后端的那个写好的函数就自动叫xxx,
+     * 3.服务器返回数据时，会返回一个包含数据的xxx(json对象)函数，前端通过xxx(json对象)来接收数据
+    */
+
+    // console.log(obj);
+
+    function xxx(params) {
+      console.log(params);
+    }
+  </script>
+  <script src="./data.js"></script>
+
+
+  <!-- 尝试 -->
+  <script src="https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&from=pc_web&&wd=123&cb=xxx"></script>
+
+  <script>
+    // // 客户端
+    // function myCallbackFunction(data) {
+    //   console.log(data);
+    // }
+    // // 服务器
+    // function getData(callback) {
+    //   // 模拟异步请求
+    //   setTimeout(function () {
+    //     callback({ "name": "张三", "age": 25 });
+    //   }, 1000);
+    // }
+    // getData(myCallbackFunction);
+  </script>
+
+</body>
+
+</html>

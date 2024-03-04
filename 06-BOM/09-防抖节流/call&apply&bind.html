@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+
+    function f(a, b) {
+      console.log(this, a, b);
+    }
+
+    var obj = {
+      name: "nick",
+      age: 17,
+    };
+
+    var obj2 = {
+      a: "b",
+    };
+
+    // call() 含义为将f函数临时借用到 obj 上，并执行f函数，this指向obj，参数1和2传递给f函数的参数a和b
+    // f函数 临时借用到 obj 上
+    f.call(obj, 1, 2); // this指向obj，参数1和2传递给f函数的参数a和b
+
+    // apply() 含义为将f函数临时借用到 obj 上，并执行f函数，this指向obj，参数1为obj，参数2为数组，数组中的元素依次传递给f函数的参数a和b
+    // apply() 只有两个参数 若要传递f函数的参数a和b，则需要将它们放在一个数组中传递给 apply() 函数的第二个参数。
+    f.apply(obj, [1, 2]); // this指向obj，参数1为obj，参数2为数组，数组中的元素依次传递给f函数的参数a和b
+
+    // call()和apply()作用基本完全相同  只是apply()只接受两个参数，一个是this指向 另一个是包含this的形参的数组。
+    // 在类数组转化为数组时，可用  call()  或  apply()  
+
+
+    var arr = [11, 22, 1, 55, 88, 45, 64];
+    // console.log(Math.max.apply(null, arr));
+
+
+    obj.xxx = function () {
+      console.log("wai", this);// {name: 'nick', age: 17, xxx: ƒ}
+      var _this = this;
+      arr.forEach(function () {
+        console.log("foreach nei", this, _this);// 匿名函数的this指向window  _this指向obj  {name: 'nick', age: 17, xxx: ƒ}
+      });
+    };
+    // obj.xxx()
+
+
+    // 箭头函数的this指向其定义时所在的对象，而不是执行时所在的对象。
+    obj.yyy = function () {
+      console.log("wai", this);// {name: 'nick', age: 17, xxx: ƒ}
+      var _this = this;// {name: 'nick', age: 17, xxx: ƒ}
+      arr.forEach(() => {
+        console.log("foreach nei", this, _this);// 匿名函数的this指向obj  _this指向obj  {name: 'nick', age: 17, xxx: ƒ}
+      });
+    };
+    // obj.yyy()
+
+
+    // forecth函数有第二个可省略的参数，该参数为回调函数中的this的指向。
+    obj.zzz = function () {
+      arr.forEach(function () {
+        console.log("foreach nei", this);
+      }, this);
+    };
+    // obj.zzz();
+
+
+
+    obj.aaa = f.bind(obj2);
+    let ggg = obj.aaa;// ggg 是一个f() 函数拷贝
+    let d = f.bind(obj2);// f 是一个f() 函数拷贝，this固定指向obj2，形参为obj2的属性值。
+
+    obj.aaa()// {a: 'b'} undefined undefined
+    ggg()// {a: 'b'} undefined undefined
+    d()// {a: 'b'} undefined undefined
+
+    // 
+    /**
+     * 总结 call&apply&bind 的作用基本上完全相同
+     * 区别在于：call&apply 立即执行，bind 返回一个函数拷贝，需要手动执行。
+     * bind会固定this的指向，而call和apply不会。
+     * 
+     * call()有多个参数，第二个参数开始为参数列表。
+     * apply()只有两个参数，第二个参数为数组，
+     * bind()有多个参数，第二个参数开始为参数列表。
+    */
+
+  </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+  <script>
+    // has been blocked by CORS policy: No 'Access-Control-Allow-Origin'  表示跨域
+    // 协议 域名 端口 三个有一个不同就是跨域
+
+    // CORS policy 同源策略
+    /**
+     * 若想跨域
+     * 1.必须在服务器的响应头上添加   access-control-allow-origin: http://127.0.0.1:5501
+     * 2.使用代理服务器，将请求转发到服务器，服务器响应后，代理服务器再响应给前端，这样就实现了跨域，但是此方法需要服务器支持代理，并且需要配置代理服务器，比较麻烦，不推荐使用
+     * 3.本机浏览器装插件 EASY CORS ，此插件会自动在响应头添加 access-control-allow-origin: http://127.0.0.1:5501
+     * 但是此插件仅用于开发环境，生产环境不允许使用，因为服务器响应头是服务器控制的，插件无法控制服务器响应头，所以生产环境不允许使用此插件
+    */
+
+
+    /**
+     * @param {string} url - 请求的URL地址。
+     * @param {function} callback - 请求成功后的回调函数。
+    */
+    function ajax(url, callback) {
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', url, true);
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          // xhr.responseText 服务器返回的数据  JSON.parse() 将返回的数据转换为JSON格式(字符串对象)
+          callback(JSON.parse(xhr.responseText));
+          console.log(JSON.parse(xhr.responseText));
+        }
+      };
+      xhr.send();
+    }
+
+    // 这个箭头函数getJson()的第二个参数callback  ,是个回调函数 用于得到数据后想要干什么事情
+    ajax('./test.json', (res) => {
+      console.log(res); // 打印出服务器返回的数据  JSON.parse() 解析后的数据
+    })
+
+
+
+
+  </script>
+
+</body>
+
+</html>

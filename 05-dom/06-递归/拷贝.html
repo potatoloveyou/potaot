@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const arr1 = [1, 2, 3, 4, 5];
+    const arr2 = arr1;
+
+    console.log(arr1, arr2);
+
+    arr1[0] = 'a';
+    console.log(arr1, arr2);
+    arr2[1] = 'b';
+    console.log(arr1, arr2);
+
+    console.log('===================================');
+
+    const obj3 = {
+      name: '老王',
+      age: 23,
+      arr3: [1, 2, 3, 4, 5]
+    };
+    const obj4 = {};
+
+    for (const i in obj3) {
+      console.log(i);
+      console.log(obj3[i]);
+      obj4[i] = obj3[i];
+    }
+
+
+    console.log('改变前');
+    console.log(obj3, obj4);
+
+
+    console.log('改变后');
+    obj3.age = '50';
+    obj3.arr3[0] = '9999';
+
+    obj4.name = '老张';
+    obj4.arr3[1] = '8888';
+
+
+    console.log(obj3, obj4);// obj3{name: '老王', age: '50', arr3: Array(5)}  obj4{name: '老张', age: 23, arr3: Array(5)}
+    console.log(obj3.arr3, obj4.arr3);// ['9999', '8888', 3, 4, 5]  两个都是，没有发生改变
+
+
+
+  </script>
+</body>
+
+</html>

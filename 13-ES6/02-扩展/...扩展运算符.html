@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+  <script>
+    // 深拷贝
+    let arr = [1, 2, 3];
+    let [...newarr] = arr; // 创建一个新的数组，并将原数组的值复制到新数组中
+    console.log(newarr == arr); // false，因为它们是两个不同的数组对象，即使它们的值相同。
+
+
+    let obj = { a: 1, b: 2 };
+    let newobj = { ...obj }; // 创建一个新的对象，并将原对象的属性复制到新对象中。
+    obj.a = 3;
+    console.log(obj); // { a: 3, b: 2 }
+    console.log(newobj); // { a: 1, b: 2 }
+
+
+
+
+
+
+
+
+
+  </script>
+
+
+
+</body>
+
+</html>

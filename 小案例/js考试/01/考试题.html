@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    // 第一题 计算a^2+b^2+c^2=1000的所有a,b,c的值
+
+
+    // 法1
+    // for (let a = 0; a**2 < 1000; a++) {
+    //   for (let b = 0; b**2 < 1000; b++) {
+    //     for (let c = 0; c**2 < 1000; c++) {
+    //       if (a**2 + b**2 + c**2 == 1000) {
+    //         console.log(a, b, c);
+    //       }
+    //     }
+    //   }
+    // }
+
+    // 法2  Math.pow(x,y) 返回 x 的 y 次幂。
+    // for (let a = 0; Math.pow(a, 2) < 1000; a++) {
+    //   for (let b = 0; Math.pow(b, 2) < 1000; b++) {
+    //     for (let c = 0; Math.pow(c, 2) < 1000; c++) {
+    //       if (Math.pow(a, 2) + Math.pow(b, 2) + Math.pow(c, 2) == 1000) {
+    //         console.log(a, b, c);
+    //       }
+    //     }
+    //   }
+    // }
+
+    // 法3 两层for循环
+    // for (let a = 0; Math.pow(a, 2) < 1000; a++) {
+    //   for (let b = 0; Math.pow(b, 2) < 1000; b++) {
+    //     // 1.
+    //     // let c = Math.pow(1000 - Math.pow(a, 2) - Math.pow(b, 2), 0.5);
+    //     // if (c == Math.floor(c)) {
+    //     //   console.log(a, b, c);
+    //     // }
+
+    //     // 2.
+    //     // let c = 1000 - Math.pow(a, 2) - Math.pow(b, 2);
+    //     // if (Math.sqrt(c) == Math.floor(Math.sqrt(c))) {
+    //     //   console.log(a, b, c);
+    //     // }
+
+    //     // 3.
+    //     let c = 1000 - Math.pow(a, 2) - Math.pow(b, 2);
+    //     if (c % 1 == 0) {
+    //       console.log(a, b, c);
+    //     }
+    //   }
+    // }
+
+
+
+
+
+
+
+    // 第二题
+    // 根据start, end获得n个随机数，数组不能有重复的数
+    // 法1
+    // function getRandom(start, end, n) {
+    //   let arr = [];
+    //   for (let i = start; i <= end; i++) {
+    //     arr.push(i);
+    //   }
+    //   let result = [];
+    //   for (let i = 0; i < n; i++) {
+    //     let index = Math.floor(Math.random() * arr.length);
+    //     result.push(arr[index]);
+    //     arr.splice(index, 1);
+    //   }
+    //   return result;
+    // }
+    // console.log(getRandom(1, 10, 5));
+
+    // 法2
+    // function getRandom(start, end, n) {
+    //   let arr = [];
+    //   do {
+    //     let num = Math.round(Math.random() * (end - start) + start);
+    //     if (!arr.includes(num)) {
+    //       arr.push(num);
+    //     }
+    //   } while (arr.length !== n);
+    //   return arr;
+    // }
+    // console.log(getRandom(0, 10, 5));
+
+    // 法3
+    // function getRandom(start, end, n) {
+    //   // fill()使用固定值填充数组 
+    //   let nums = new Array(end - start + 1).fill(void 0).map((e, i) => start + i);
+    //   let tmp = [];
+    //   for (let i = 0; i < n; i++) {
+    //     tmp.push(nums.splice(Math.floor(Math.random() * nums.length), 1)[0]);
+    //   }
+    //   return tmp;
+    // }
+    // console.log(getRandom(1, 10, 5));
+
+    // 法4 使用对象
+    // function getRandom(start, end, n) {
+    //   let nums = new Set();
+    //   while (nums.size < n) {
+    //     nums.add(Math.floor(Math.random() * (end - start + 1)) + start);
+    //   }
+    //   return Array.from(nums);
+    // }
+    // console.log(getRandom(1, 10, 5));
+
+
+
+
+
+
+
+    // 第三题
+    function howOld(index) {
+      if (index == 1) {
+        return 10;
+      }
+      return howOld(index - 1) + 2;
+    }
+    console.log(howOld(5));
+
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>

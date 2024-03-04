@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function ajax(options) {
+      return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open(options.method, options.url, true);
+        xhr.onreadystatechange = () => {
+          if (xhr.readyState === 4 && xhr.status >= 200 && xhr.status < 400) {
+            // 成功时，向resolve()传递响应数据
+            resolve(JSON.parse(xhr.responseText));
+          } else {
+            // 若失败，返回状态码和状态文本
+            reject(xhr.statusText);
+          }
+        };
+        xhr.send(options.data);
+      });
+    }
+
+    // 使用示例
+    const p1 = ajax({
+      method: "GET",
+      url: "https://api.example.com/data",
+      data: {
+        key: "value",
+      },
+    }).then((data) => {
+      console.log("成功获得数据", data);
+    }).catch((error) => {
+      console.log("请求失败,状态码为", error);
+    });
+
+    const p2 = ajax({
+      method: "GET",
+      url: "https://api.example.com/data",
+      data: {
+        key: "value",
+      },
+    }).then((data) => {
+      console.log("成功获得数据", data);
+    }).catch((error) => {
+      console.log("请求失败,状态码为", error);
+    });
+
+    let promiseAll = Promise.all([p1, p2]); //等待所有请求完成
+  </script>
+</body>
+
+</html>

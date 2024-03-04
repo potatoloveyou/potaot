@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+
+
+  <script>
+    const liall = document.querySelectorAll('li');
+
+    /* 扩展运算符 */
+    // [...liall]
+    console.log([...liall]);
+
+    // Array.from(liall)
+    console.log(Array.from(liall));
+
+    // Array.apply(null, liall)
+    console.log(Array.apply(null, liall));
+
+    /**
+     * ①Array.prototype.slice，这段是执行slice，slice不传参数其实就是克隆数组。
+     * ②让slice方法的this指向类数组（arrayLike或arguments）
+     * 实现：其实就是用call改变this指向，this变成谁，就会循环谁，把它里面每一项赋给新数组。
+     */
+    // Array.prototype.slice.call(liall);
+    console.log(Array.prototype.slice.call(liall));
+
+    /**
+     * 原理同call，与空数组合并，克隆数组后改变this指向。
+     */
+    // Array.prototype.concat.apply([], liall);
+    console.log(Array.prototype.concat.apply([], liall));
+
+  </script>
+</body>
+
+</html>

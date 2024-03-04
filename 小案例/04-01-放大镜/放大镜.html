@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+
+    }
+
+    .box {
+      width: 300px;
+      height: 300px;
+      position: relative;
+    }
+
+    .box img {
+      width: 100%;
+      display: block;
+      /* 清除文字基线 */
+    }
+
+    .box .map {
+      width: 100px;
+      height: 100px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: blue;
+      opacity: .5;
+    }
+
+    .big {
+      width: 300px;
+      height: 300px;
+      background-color: aqua;
+      overflow: hidden;
+      position: relative;
+      margin-left: 50px;
+      background-image: url(./1.jpg);
+      background-size: 300%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <img src="./1.jpg" alt="">
+    <div class="map"></div>
+  </div>
+  <div class="big">
+  </div>
+
+
+
+
+  <script>
+    const box = document.querySelector('.box');
+    const map = box.querySelector('.map');
+    const big = document.querySelector('.big');
+
+
+
+    // 获得缩略图在屏幕的位置
+    let boxLeft = box.offsetLeft;
+    let boxTop = box.offsetTop;
+
+    // 获得缩略图的宽高
+    let boxWidth = box.offsetWidth;
+    let boxHeight = box.offsetHeight;
+
+    // 获得放大镜的宽高
+    let mapWidth = map.offsetWidth;
+    let mapHeight = map.offsetHeight;
+
+    // 获得放大图的宽高
+    let bigWidth = big.offsetWidth;
+    let bigHeight = big.offsetHeight;
+
+
+    box.onmousemove = () => {
+      // console.log(event.offsetX, event.offsetY);
+
+      // 放大镜在缩略图左上角的坐标 /2是让鼠标在放大镜中间
+      let mapX = event.pageX - boxLeft - mapWidth / 2;
+      let mapY = event.pageY - boxTop - mapHeight / 2;
+      console.log(mapX, mapY);
+
+      // 限定放大镜的移动范围
+      if (mapX < 0) {
+        mapX = 0;
+      }
+      if (mapY < 0) {
+        mapY = 0;
+      }
+      if (mapX > boxWidth - mapWidth) {
+        mapX = boxWidth - mapWidth;
+      }
+
+
+
+
+
+      map.style.left = mapX + 'px';
+      map.style.top = mapY + 'px';
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </script>
+
+
+
+</body>
+
+</html>

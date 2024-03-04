@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 简写
+    let age = 17;
+    let obj = {
+      name: "nick",
+      age,
+      // speak: function () {
+      // }
+      speak() {
+        console.log(this.name);
+      },
+      // 这种写法可将变量值作为属性名，但需要确保变量值是字符串或Symbol类型。
+      [Math.random() + 1]: 123,
+    };
+    console.log(obj);
+    // 注意：当属性名表达式为对象时，默认情况下会自动将对象转化为字符串[object Object]。
+
+    function getPoint() {
+      const x = 1;
+      const y = 2;
+      return { x, y };
+    }
+    console.log(getPoint()); // {x: 1, y: 2}
+
+
+
+    // 对象的可枚举性
+    var person = {
+      name: "nick",
+      age: 17,
+    };
+    // Object.getOwnPropertyDescriptor() 用于获取一个对象自身的属性描述符。它会返回一个对象，该对象包含了属性值、可写性、可读性、可枚举性和可配置性等信息。
+    Object.getOwnPropertyDescriptor(person, "age");
+
+
+    // Object.defineProperty()  用于在对象上定义一个新属性，或者修改一个现有属性。它允许你精确地定义或修改对象的属性。
+    /**
+     * configurable: true   //是否可配置，即是否可以删除属性或修改属性的特性
+     * enumerable: true     //是否可枚举
+     * value: 17            //属性值
+     * writable: true       //是否可写，即是否可以修改属性的值
+     */
+    // defineProperty(对象,'属性名',描述对象)
+    Object.defineProperty(person, "gender", { value: "male", enumerable: false });
+
+
+    // Object.assign() 拼接两个对象
+    var xxx = {
+      a: 10,
+      b: 20,
+    };
+    Object.assign(person, xxx);
+    // 把xxx的属性 拼接到 person对象上 ，会改变 person
+
+
+
+    // Object.create()  根据原型创造一个继承他所有属性的新对象
+    var zzz = Object.create(xxx);
+    // __proto__  查看对象的原型
+    console.log(zzz.__proto__ == xxx); // true  zzz的原型是xxx
+    // 或者使用__proto__设置对象
+    zzz.__proto__ = xxx; // zzz的原型是xxx  zzz继承了xxx的所有属性
+
+    // Object.setPrototypeOf();   用法与__proto__相同
+    Object.setPrototypeOf(zzz, xxx); // zzz的原型是xxx  zzz继承了xxx的所有属性
+
+
+    // Object.getPrototypeOf(zzz);    查看对象的原型
+    Object.getPrototypeOf(zzz);
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // undefined 已定义未赋值(较为特殊，虽然为关键字但能被修改值或定义 如：var undefined 不报错)  
+    // null 已定义值为空值 
+    var a;
+    var b = null;
+
+    // js常量不区分浮点或整形
+    var x = 10;
+    var y = 3.14;
+
+
+
+    // 字符串(string) 单引('')号或双引号("")
+    var msg = "hello world";
+
+
+
+    // 布尔值(boolean) true/fales
+    var determine = true;
+
+
+
+    // 数组(arr):
+    // 数组是特殊类型的对象
+    // 多个同类数据 强调顺序
+    var friends = ["1", "2", "3"];
+    // 数组有一个 (length) 长度属性
+    console.log(friends.length); // 3
+
+    // 数组访问某一项 index下标(索引) 从0开始
+    console.log(friends[2]); // 3
+    console.log(friends[3]); // 数组不存在的项 值为undefined
+    console.log(friends[friends.length - 1]); // 访问数组的最后一项
+
+
+
+    // 对象(object):
+    // 一个物体所有的属性 不关心顺序
+    // name是key(键名)  'nick'是value(键值)
+    // key尽可能遵照变量命名规则
+    var person = {
+      name: "nick",
+      age: 17,
+      gender: "男",
+      score: 70,
+      isMarried: false,
+      "home address": "999号",// (特殊)，key(键名)命名不规则
+    };
+    // 对象访问某一键 用. 
+    console.log(person);//
+    console.log(person.age);// 17
+    console.log(person["home address"]);
+    // 若对象key不规则，则需要使用方括号 ['键名']才能访问
+
+    console.log(document);
+    console.log({ document });
+
+
+
+    // typeof(查看变量类型)
+    console.log(typeof 10);// number
+    console.log(typeof NaN);// number
+    console.log(typeof '10');// string
+    console.log(typeof true);// boolean
+    console.log(typeof undefined);// undefined
+
+    console.log(typeof null);// object对象(特殊)
+    console.log(typeof [1, 2, 3]);// object对象(特殊)
+    console.log(typeof { name: "nick" });// object
+
+
+
+
+
+
+
+
+  </script>
+
+  <!-- <script>
+    var data = {
+      image: "ZS0PISOIOB4XTT0S_hd.mp4",
+      published_at: 1658135468,
+      tag: "video",
+      high_url: "https://qiubai-video.yitxf.net/ZS0PISOIOB4XTT0S_hd.mp4",
+      pic_url: "https://qiubai-video.yitxf.net/ZS0PISOIOB4XTT0S_hd.jpg",
+      votes: {
+        down: 0,
+        up: 42,
+      },
+      user_id: 33712263,
+      pic_size: [720, 1280, 120],
+      share_url: "https://qiubai-video.yitxf.net/ZS0PISOIOB4XTT0S_hd_share.jpg",
+      id: 125512686,
+      content: "一场90后和00后的旅行体验",
+      state: "publish",
+      share_count: 0,
+      format: "video",
+      is_promote: null,
+      user: {
+        medium: "http://pic.qiushibaike.com/system/avtnew/3371/33712263/medium/20220615194620.webp",
+        thumb: "http://pic.qiushibaike.com/system/avtnew/3371/33712263/thumb/20220615194620.webp",
+        desc: "我就是我，不一样的猥琐",
+        gender: "F",
+        age: 17,
+        talents: [
+          {
+            cmd_desc: "优秀UP主",
+            remark: "",
+            cmd: 20,
+          },
+          {
+            cmd_desc: "御用神评师",
+            remark: "",
+            cmd: 30,
+          },
+        ],
+        state: "active",
+        titles: [
+          {
+            cmd_desc: "糗百我最红",
+            remark: "",
+            cmd: 10,
+            deeplink: "mqsbk://web/https://nearby.qiushibaike.com/user/v2/weekExcellent?userId=33712263",
+            icon: "http://pic.qiushibaike.com/week_title.png",
+          },
+          {
+            cmd_desc: "沙雕糗友快乐源泉",
+            remark: "",
+            cmd: 20,
+            deeplink: "mqsbk://web/https://nearby.qiushibaike.com/user/v2/weekExcellent?userId=33712263",
+            icon: "http://pic.qiushibaike.com/week_title.png",
+          },
+          {
+            cmd_desc: "糗百我最长",
+            remark: "",
+            cmd: 71,
+            deeplink: "mqsbk://web/https://nearby.qiushibaike.com/user/v2/weekExcellent?userId=33712263",
+            icon: "http://pic.qiushibaike.com/week_title.png",
+          },
+        ],
+        role: "n",
+        rel: "no_rel",
+        astrology: "双鱼座",
+        login: "一枕清霜",
+        icon: "20220615194620.jpg",
+        id: 33712263,
+        uid: 33712263,
+      },
+      anonymous: 0,
+      image_size: {
+        s: [720, 1280, 120],
+        m: [720, 1280, 120],
+      },
+      src: 0,
+      is_prefer: null,
+      created_at: 1658135214,
+      comments_count: 0,
+      low_url: "https://qiubai-video.yitxf.net/ZS0PISOIOB4XTT0S_hd_3g.mp4",
+      allow_comment: true,
+      origin_url: "https://qiubai-video.yitxf.net/ZS0PISOIOB4XTT0S_org.mp4",
+      loop: 252,
+    };
+  </script> -->
+
+
+</body>
+
+</html>

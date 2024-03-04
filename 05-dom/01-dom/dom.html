@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <meta name="referrer" content="never" />
+  <!-- 不发送来源 -->
+
+</head>
+
+<body>
+  <!-- cross-origin  跨域 -->
+  <!-- http://127.0.0.1:5500/ 协议 域名 端口 -->
+  <!-- 这三个只要有一个不一样就会形成跨域 -->
+
+  <!-- 
+        querySelectorAll返回的是静态结果,不会随文档变化而变化。
+        getElementsByClassName返回的是动态结果,会及时更新文档的变化。
+    -->
+
+  <script>
+    document.write("Hello World!");
+
+    window.onload = function () {
+      //  window.onload 等到页面资源都加载完成或者确定失败
+      // uninitialized - 还未开始载入
+      // loading - 载入中
+      // interactive - 已加载，文档与用户可以开始交互
+      // complete - 载入完成
+
+      console.log(document.readyState);
+      console.log("完成");
+    };
+
+  </script>
+
+
+  <button title="123">xxx</button>
+  <div class="box" id="test" title="xxx">
+    <i>box</i>
+    <!-- <em>xxx</em> -->
+  </div>
+
+
+
+</body>
+
+</html>

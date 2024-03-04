@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /**
+     * 原生ajax请求示例
+     * 1. 创建XMLHttpRequest对象
+     * 2. 设置请求方法和URL  .open
+     * 3. 发送请求 .send
+     * 
+     * 4. 设置请求完成后的
+     * (1)回调函数 .onreadystatechange
+     * (2)回调函数中检查请求状态 .readyState 有5个状态
+     * 
+     * 
+     * 0: 请求未初始化
+     * 1: 服务器连接已建立
+     * 2: 请求已接收
+     * 3: 请求处理中
+     * 4: 请求已完成，且响应已就绪
+     * 
+     * (3)检查响应状态码 .status 200表示成功，404表示未找到，500表示服务器错误等
+     * 
+     * 
+     * 5. 在回调函数中获得响应数据 .responseText
+     * JSON.parse(.responseText)  把字符串转换为json
+     * JSON.stringify(.responseText)  把json转为字符串
+      
+    */
+
+
+    // 1.创建XMLHttpRequest对象，兼容性处理
+    var xhr = new XMLHttpRequest() || new ActiveXObject("Microsoft.XMLHTTP"); // 兼容IE6及以下版本
+
+    // 2.设置请求方法和URL，以及是否异步处理请求结果（true表示异步）
+    //  open(method,url,async)  GET POST 方法  请求地址  是否异步
+    xhr.open('GET', './test.json', true);
+
+    // 2.1 (仅用于post请求)设置请求头，如果需要的话，例如设置Content-Type等。
+    // xhr.setRequestHeader('Content-Type', 'application/json'); // 设置请求头，例如设置Content-Type等。
+
+    // 3.发送请求，如果请求的是POST，需要在这里设置请求体，即xhr.send('请求体');，GET请求不需要设置请求体，直接写在这里即可。
+    xhr.send();
+
+    // 4.设置请求完成后的回调函数，当请求状态发生变化时，会调用这个函数。
+    xhr.onreadystatechange = function () {
+      // 检查请求状态，当请求完成时，检查响应状态码。
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          // xhr.readyState === 4 只能代表 结束（完成）
+          // xhr.status === 200 代表本次http请求 正常
+
+          // JSON.parse() 解析JSON字符串为对象
+          var response = JSON.parse(xhr.responseText);
+          // 输出响应数据，这里以控制台输出为例。
+          console.log(response);
+
+
+          console.log("状态码", xhr.status);
+          console.log("状态描述", xhr.statusText); // 状态描述，如"OK"表示成功， "Not Found"表示未找到等。
+          console.log("响应头", xhr.getAllResponseHeaders()); // 获取所有响应头信息。
+          console.log("响应体", xhr.responseText); // 获取响应体，即服务器返回的数据。
+
+
+        } else {
+          // 如果响应状态码不是200，表示请求失败。
+          // 输出错误信息。
+          console.error('请求失败，状态码：' + xhr.status);
+        }
+      }
+    };
+
+
+
+  </script>
+</body>
+
+</html>

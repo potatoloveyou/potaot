@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+  <style>
+    section {
+      display: flex;
+      width: 100vw;
+      justify-content: space-evenly;
+
+      .box:nth-child(1) {
+        width: 300px;
+        height: 300px;
+        background-color: lightblue;
+      }
+
+      .box:nth-child(2) {
+        width: 300px;
+        height: 300px;
+        background-color: lightpink;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <section>
+    <div class="box">防抖</div>
+    <div class="box">节流</div>
+  </section>
+
+
+
+
+  <!-- lodash就是别人封装好的函数  使用_最为前缀 -->
+  <!-- https://www.lodashjs.com/ -->
+  <script>
+    const box1 = document.querySelectorAll('.box')[0];
+    // 一维数组隔两个分成另一个数组
+    // console.log(_.chunk(["a", "b", "c", "d"], 2));
+
+    // 防抖函数
+    let debounce = _.debounce(() => {
+      console.log(123);
+    }, 1000); // 1000ms内多次调用，只有最后一次有效。
+    box1.addEventListener('mousemove', debounce);
+
+
+    const box2 = document.querySelectorAll('.box')[1];
+    // 节流函数
+    let throttle = _.throttle(() => {
+      console.log(456);
+    }, 1000); // 1000ms内多次调用，只有第一次有效。
+    box2.addEventListener('mousemove', throttle);
+
+
+
+
+
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>

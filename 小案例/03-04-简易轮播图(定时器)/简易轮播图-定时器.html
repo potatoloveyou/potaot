@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/杂货/my-minireset.css">
+  
+  <style>
+    .content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .list {
+      width: 300px;
+      position: relative;
+      background-color: aqua;
+    }
+
+    .list img:nth-child(1) {
+      position: relative;
+    }
+
+    .list img {
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      transition: all .3s;
+    }
+
+    .option {
+      position: absolute;
+      bottom: 0;
+      display: flex;
+    }
+
+    .option li {
+      width: 20px;
+      height: 20px;
+      background-color: aqua;
+      border-radius: 50%;
+      margin: 0 10px;
+    }
+
+    .control {
+      position: absolute;
+      top: 50%;
+    }
+
+    .control button:first-of-type {
+      margin-right: 245px;
+    }
+  </style>
+</head>
+
+<body>
+  <section class="content">
+
+    <div class="list">
+      <img src="./imgs/normal1.jpg" alt="">
+      <img src="./imgs/normal2.jpg" alt="">
+      <img src="./imgs/normal3.jpg" alt="">
+      <img src="./imgs/normal4.jpg" alt="">
+    </div>
+    <!-- <ul class="control">
+      <li><</li>
+      <li>></li>
+    </ul> -->
+    <ul class="option">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    <div class="control">
+      <button>prev</button>
+      <button>next</button>
+    </div>
+
+  </section>
+  
+  
+
+  <script src="./简易轮播图.js"></script>
+    
+</body>
+
+</html>

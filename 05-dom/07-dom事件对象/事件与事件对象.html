@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      /* display: flex;
+      justify-content: space-around; */
+      padding: 0;
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    const boxE2 = document.querySelector('.box');
+    // console.log(boxE2, document.querySelector('.box'));// null null
+    // js代码在html之前 是获取不到html元素的
+    // 事件都是异步，即使定时器为0也是 异步
+
+    // onload 作用是在页面或图像加载完成后立即执行代码块
+    window.onload = function () {
+      var boxEl = document.getElementsByClassName("box")[0];
+      // console.log(boxEl);
+    };
+  </script>
+  <!-- 绝大多数js代码是在 /body结束之前 -->
+
+
+  <!-- <div class="box"></div> -->
+  <!-- <div class="box" onclick="clickHandler()"></div> -->
+  <!-- <div class="box0">0</div> -->
+  <style>
+    .box0 {
+      width: 100px;
+      height: 100px;
+      background-color: blueviolet;
+    }
+  </style>
+
+
+
+  <script>
+    const boxEl = document.querySelector('.box');
+
+    // boxEl.onclick= () => {
+    //   console.log(123);
+    // }
+
+    function clickHandler() {
+      console.log(123);
+    }
+
+    // onclick 事件   clickHandler 事件处理函数
+
+
+
+    const box0 = document.querySelector('.box0');
+    // onmousedown 鼠标按钮被按下。
+    box0.onmousedown = () => {
+      console.log('我点击了');
+    };
+    // onmouseup 鼠标按键被松开。
+    box0.onmouseup = () => {
+      console.log('我松开了');
+    };
+    // onclick 鼠标点击时
+    box0.onclick = () => {
+      console.log('起飞');
+    };
+    // ondblclick 鼠标双击时
+    box0.ondblclick = () => {
+      console.log('我双击了');
+    };
+
+    // onmousemove	鼠标被移动。
+    box0.onmousemove = () => {
+      box0.style.width = "200px";
+      box0.style.height = "200px";
+    };
+
+    // onmouseenter 鼠标指针移动到元素上时触发。
+    box0.onmouseenter = () => {
+      box0.style.width = "200px";
+      box0.style.height = "200px";
+    };
+
+    // onmouseleave 当鼠标指针移出元素时触发
+    box0.onmouseleave = () => {
+      box0.style.width = "100px";
+      box0.style.height = "100px";
+    };
+
+
+
+  </script>
+
+
+
+
+
+  <!--  onmouseenter         onmouseleave
+        onmouseover          onmouseout 
+        当鼠标移入元素时      当鼠标移出元素时
+        两两配对()
+        对比区别（用多个盒子嵌套） -->
+  <!-- <div class="box1">
+    1
+    <div class="box2">
+      2
+    </div>
+  </div> -->
+  <style>
+    div {
+      color: rgb(255, 0, 0);
+    }
+
+    .box1 {
+      width: 300px;
+      height: 300px;
+      background-color: aquamarine;
+      display: flex;
+      /* justify-content: flex-end;
+      align-items: flex-end; */
+      justify-content: center;
+      align-items: center;
+    }
+
+    .box2 {
+      width: 200px;
+      height: 200px;
+      background-color: rgb(33, 13, 160);
+      display: flex;
+      /* justify-content: flex-end;
+      align-items: flex-end; */
+      /* justify-content: center;
+      align-items: center; */
+    }
+  </style>
+
+
+
+  <script>
+    var boxs = document.querySelectorAll("div");
+
+
+    for (let i = 1; i <= 2; i++) {
+      boxs[i].title = i;
+
+      // 
+
+      // 1（入）.不产生 冒泡 与 捕获
+      // boxs[i].onmouseenter = () => {
+      //   console.log(boxs[i].title,boxs[i]);// 1 2
+      // };
+
+      // 2（入）.冒泡
+      boxs[i].onmouseover = () => {
+        console.log(boxs[i].title, boxs[i]);
+        // 1 (2 1) 只开这个的情况下
+        // 1 (1(125行) 2 1)  
+        // 好比光的投射，先投射1，在进入2时 马上短暂的离开了1再照射了2，又因为冒泡原因第二次投射1
+      };
+
+      // 1（出）.不产生 冒泡 与 捕获
+      // boxs[i].onmouseleave = () => {
+      //   console.log(boxs[i].title, boxs[i]);
+      // };
+
+      // 2（出）.冒泡
+      boxs[i].onmouseout = () => {
+        console.log(boxs[i].title, boxs[i]);
+      };
+
+    }
+
+
+  </script>
+
+
+
+
+
+
+  <div class="box3">3</div>
+  <style>
+    .box3 {
+      width: 300px;
+      height: 300px;
+      background-color: green;
+    }
+  </style>
+
+  <script>
+    const box3 = document.querySelector('.box3');
+    box3.onclick = () => {
+      // event 就叫事件对象
+      console.log(event);
+
+      /*  
+      type: "click"
+      // 发生事件的类型
+
+      
+      clientX: 105
+      clientY: 105
+      // 在 窗口客户区域 鼠标的位置
+
+      offsetX: 298
+      offsetY: 299
+      // 在 触发事件的对象 鼠标的位置
+
+      screenX: 970
+      screenY: 185  
+      // 在 用户屏幕 鼠标的位置
+
+      x:602;
+      y:247;
+      pageX: 105
+      pageY: 105
+      layerX: 105
+      layerY: 105
+      // 触发事件时，触发位置 在 所处文档 的位置
+      
+      */
+
+    };
+
+
+
+
+    box3.onmousemove = () => {
+      console.log(event.offsetX, event.offset);
+    }
+
+
+
+
+
+
+
+
+  </script>
+
+
+
+
+
+
+
+</body>
+
+</html>

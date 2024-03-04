@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="box1">box1</div>
+    <div class="box2">box2</div>
+    <div class="box3">box3</div>
+    <style>
+        .box1 {
+            display: none;
+            /* 直接不渲染这个元素，不占位置，但在html中仍然存在 */
+        }
+
+        .box2 {
+            visibility: hidden;
+            /* 隐藏元素(看不见),但依然渲染元素,占位置 */
+        }
+
+        .box3 {
+            opacity: 0;
+            /* 元素透明度(看不见),但依然渲染元素,占位置*/
+        }
+
+        .box2:hover {
+            visibility: visible;
+        }
+
+        .box3:hover {
+            opacity: 0.8;
+        }
+
+        /* 使用了visibility，元素将无法被鼠标选中(无发使用点击事件) */
+        /* 使用了opacity，元素仍然能被鼠标选中(可以使用点击事件) */
+    </style>
+
+    <script>
+        // js里面变量和引用数据类型都有哪些：基本数据类型 数值字符串布尔值 undefined null引用数据类型 数组对象
+
+
+    </script>
+
+    <span>重绘和回流：
+        重绘：当前也面元素不脱离文档流，只是改变元素的颜色，背景，字体大小等属性，浏览器会重新绘制元素
+        回流：当前页面元素脱离文档流，浏览器会重新计算元素位置和大小，重新渲染页面
+    </span>
+
+
+
+
+
+</body>
+
+</html>

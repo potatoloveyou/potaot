@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 算数运算符
+    // y++是先用后自增1 ++y是先自增1再用
+
+    // js为弱类型 声明的时候不需要设定类型 且可任意改变类型
+    console.log(5 == "5");// true 隐式转化
+    console.log(5 != "5");// false
+    console.log(5 != "");// true
+    // 3个= 需要值和类型都相等
+    console.log(5 === "5");// false 
+
+
+    // 使用比较运算符  0 false   1 true
+    console.log(0 == false);// true
+    console.log(0 === false);// false
+    console.log(1 == true);// true
+    console.log(1 === true);// false
+    console.log(-1 == true);// false
+    console.log(-1 === true);// false
+
+    console.log("true" == true);// false
+    console.log("" == false);// true
+    console.log("" === false);// false
+
+    console.log(undefined == false);// false
+    console.log(undefined === false);// false
+    console.log(null == false);// false
+
+    console.log(undefined === undefined);// true
+    console.log(null === null);// true
+    console.log(NaN == NaN);// false
+
+    // 逻辑运算符 ||(或者) &&(和) !(不等于)
+
+    // 三目运算符 条件 ？ 为真事返回值 : 为假时返回值
+    console.log(8 > 5 ? "真" : "假");// 真
+
+    // 字符串拼接
+    var x = 5;
+    console.log(x + 5);// 10
+    console.log(x + "5");// 55
+
+    var y = "hello";
+    console.log(y + "xxx");// helloxxx
+    console.log(y + 10);// hello10
+
+    console.log(y - 10);// NaN   not a number非数也是数值
+
+
+  </script>
+
+</body>
+
+</html>

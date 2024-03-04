@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/杂货/my-minireset.css">
+  <style>
+    .swiper {
+      width: 300px;
+      background-color: red;
+      /* overflow: hidden; */
+      position: relative;
+      overflow: hidden;
+    }
+
+    .swiper .list {
+      width: 100%;
+      display: flex;
+      /* transform: translateX(-900px); */
+      /* transition: none; */
+      transition: all .3s;
+    }
+
+    .swiper .list img {
+      width: 100%;
+      vertical-align: middle;
+    }
+
+    ul.dots {
+      display: flex;
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%);
+      bottom: 10px;
+      z-index: 9;
+    }
+
+    ul.dots li {
+      width: 20px;
+      height: 20px;
+      background-color: orange;
+      margin: 0 10px;
+      border-radius: 50%;
+    }
+
+    .control {
+      width: 100%;
+      padding: 5px;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: space-between;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+
+    }
+  </style>
+</head>
+
+<body>
+  <div id="swiper" class="swiper">
+    <div class="list">
+      <img src="./imgs/normal1.jpg" alt="" />
+      <img src="./imgs/normal2.jpg" alt="" />
+      <img src="./imgs/normal3.jpg" alt="" />
+      <img src="./imgs/normal4.jpg" alt="" />
+    </div>
+
+    <ul class="dots">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+
+    <div class="control">
+      <button>prev</button>
+      <button>next</button>
+    </div>
+
+  </div>
+  <script>
+    const listEl = document.querySelector('.list');
+    const imgs = listEl.querySelectorAll('img');
+
+    const dost = document.querySelectorAll('.dots li');
+
+    const leftBtn = document.querySelectorAll('.control button')[0];
+    const rightBtn = document.querySelectorAll('.control button')[1];
+
+
+
+
+    let current = 0;
+    let showImg = (index) => {
+      listEl.style.transform = 'translateX(' + -index * 300 + 'px)';
+      current = index;
+    };
+
+
+    leftBtn.addEventListener('click', () => {
+      var index = current >= imgs.length - 1 ? 0 : ++current;
+      showImg(index);
+    });
+
+
+    rightBtn.addEventListener('click', () => {
+      var index = current <= 0 ? imgs.length - 1 : --current;
+      showImg(index);
+    });
+
+
+    dost.forEach((value, i) => {
+      value.addEventListener('click', () => {
+        showImg(i);
+      });
+    });
+
+    setInterval(() => {
+      var index = current >= imgs.length - 1 ? 0 : ++current;
+      showImg(index);
+    }, 1000)
+
+
+
+  </script>
+</body>
+
+</html>

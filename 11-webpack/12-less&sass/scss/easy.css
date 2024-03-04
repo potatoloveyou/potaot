@@ -1,0 +1,16 @@
+body {
+  background-color: #fff;
+}
+
+body i {
+  color: red;
+}
+
+body span {
+  line-height: 50px;
+}
+
+body div {
+  background-color: #fff;
+  line-height: 50px;
+}

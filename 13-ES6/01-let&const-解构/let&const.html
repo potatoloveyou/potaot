@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+  <!-- <script>
+    // let 只在他所在的块级作用域内有效，而 var 则在其所在的函数作用域内有效。
+    // -let声明的变量不会挂载到 widnow对象  node.js 没有window
+
+    {
+      var a = 10;
+      let b = 20;
+    }
+    console.log(a); // 10
+    console.log(b); //  b is not defined.
+
+
+
+    // 暂时性死区
+    if (1) {
+      tmp = '123';
+      console.log(tmp);
+
+      let tmp;
+      console.log(tmp);
+
+      tmp = 'abc';
+      console.log(tmp);
+    }
+  </script> -->
+
+
+
+
+
+
+
+  <script>
+    // const 声明一个只读的常量，一旦声明，常量的值就不能改变。且必须声明的同时赋值
+    const a = 10;
+    console.log(a); // 10
+
+    a = 20;
+    console.log(a); // TypeError: Assignment to constant variable.
+
+
+    // 注意:const常量只保证栈内存地址不变，不保证堆内存地址不变。也就是说，const声明的变量可以指向一个对象，这个对象的内容是可以改变的。
+    const b = { a: 1 };
+    b.a = 2; // 对象的内容可以改变。
+    console.log(b); // { a: 2 }
+
+
+
+
+
+  </script>
+
+
+
+</body>
+
+</html>

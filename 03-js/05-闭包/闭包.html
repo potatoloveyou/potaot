@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // (function xxx() {
+    //   var a = 10;
+    //   (function yyy() {
+    //     console.log(a);
+    //   })();
+    // })();
+
+  </script>
+
+  <script>
+    /**   闭包就是 
+     * 1.内层函数可以访问外层函数的局部变量
+     * 2.内层函数整体返回给外层函数
+     * 3.运行外层函数的结果就是内层函数 
+    */
+    // 优点：1.函数执行时形成私有的作用域，
+    //       2.保护里面的私有变量不受外界干扰。直观的说就是形成一个不销毁的栈环境
+    // 缺点: 1.导致变化不会被垃圾回收，造成内存消耗
+    //       2.不恰当的使用闭包会造成内存泄漏(内存浪费)的问题
+
+
+
+    function xxx() {
+      var a = 10;
+      function yyy() {
+        ++a;
+      } yyy();
+      console.log(a);
+    } xxx()// 11
+
+    function xxx() {
+      var a = 10;
+      function yyy() {
+        return ++a;
+      }
+      return yyy;// 返回yyy这个函数
+    } xxx();
+    console.log(xxx());// ƒ yyy(){return ++a;}
+    var x = xxx();
+    console.log(x);// ƒ yyy(){return ++a;}
+    console.log(x());// 11(调用一次函数a+1)
+
+    // 简写
+    function xxx1() {
+      var b = 20;
+      return function () {
+        return ++b;
+      };
+    }
+    var x1 = xxx1();
+    console.log(x1);
+    console.log(x1());// 11(调用一次函数a+1)
+
+    // 再简写
+    var x2 = (() => {
+      var c = 30;
+      return () => {
+        return ++c;
+      };
+    })();
+    console.log(x2());// 11(调用一次函数a+1)
+
+
+
+
+  </script>
+
+
+
+
+</body>
+
+</html>

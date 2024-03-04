@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 对象内部的键值若是函数，则叫方法
+    // this 指向函数运行时所挂在的对象
+    const move = function () {
+      this.x += this.speed;
+      return this;
+    };
+    const red = {
+      x: 0,
+      speed: 5,
+      // move: function () {
+      //   this.x += this.speed;
+      //   return this;
+      // }
+      move: move,
+    };
+    console.log(red.move());
+
+
+  </script>
+</body>
+
+</html>

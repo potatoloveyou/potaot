@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 深拷贝含义：拷贝出来的对象或数组与原对象或数组互不影响(不再是浅拷贝那种同生共死)
+    // 深拷贝的实现方法：递归
+    const obj3 = {
+      name: '老王',
+      age: 23,
+      arr3: [1, 2, 3, 4, 5]
+    };
+
+    // 深拷贝函数
+    function deepCopy(obj) {
+      // 1. typeof 查看变量类型是否为引用数据类型(对象或数组)
+      // 若不是则返回该变量   return能中断方法继续往下走
+      if (typeof obj != 'object') {
+        return obj;
+      }
+
+      // 2.判断obj是数组还是对象 若是返回空数组，若不是返回空对象
+      console.log(Array.isArray(obj));
+      const newObj = Array.isArray(obj) ? [] : {};
+      console.log(newObj);
+
+      // 3.遍历obj
+      for (const i in obj) {
+        // 4.判断obj的第i项是否为引用数据类型(对象或数组)
+        // 对象动态添加键值对只需要在forin中使用newObj[i]=xxx即可
+        if (typeof obj[i] == 'object') {
+          // 5.若是 将这一项递归调用deepCopy()
+          newObj[i] = deepCopy(obj[i]);
+        } else {
+          newObj[i] = obj[i];
+        }
+      }
+      return newObj;
+    }
+    deepCopy(obj3);
+
+    const obj4 = deepCopy(obj3);
+    console.log('改变之前');
+    console.log(obj3);
+    console.log(obj4);
+    console.log('==================');
+    console.log('改变之后');
+    obj3.age = '50';
+    obj3.arr3[0] = '9999';
+
+    obj4.name = '老张';
+    obj4.arr3[1] = '8888';
+    console.log(obj3);
+    console.log(obj3.arr3);
+    console.log(obj4);
+    console.log(obj4.arr3);
+
+
+    // structuredClone()  函数实现深拷贝
+    const xxx = [
+      1,
+      {
+        a: 1,
+        b: 2,
+        c: {
+          x: 1,
+          y: 2,
+        },
+      },
+    ];
+
+    const yyy = structuredClone(xxx);
+
+
+
+
+  </script>
+</body>
+
+</html>

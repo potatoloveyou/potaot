@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .bigbox {
+      width: 100%;
+      height: 400vh;
+      background-color: cadetblue;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .above {
+        width: 100%;
+        height: 100vh;
+        background-color: bisque;
+      }
+
+      .middle {
+        width: 100%;
+        height: 70vh;
+        background-color: blueviolet;
+        transform: translateX(-100%);
+        transition: all 1s;
+      }
+
+      .middle.reach {
+        transform: translateX(0%);
+      }
+
+      .below {
+        width: 100%;
+        height: 100vh;
+        background-color: aquamarine;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <section class="bigbox">
+    <div class="above"></div>
+    <div class="middle"></div>
+    <div class="below"></div>
+  </section>
+
+  <script>
+
+  </script>
+
+
+
+  <script>
+    const middle = document.querySelector('.middle');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY + window.innerHeight >= middle.offsetTop + middle.offsetHeight * 0.8) {
+        middle.classList.add('reach');
+      } else {
+        middle.classList.remove('reach');
+      }
+    });
+
+    // console.log(middle.offsetHeight);
+
+
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div id="box" class="box" style="color: red;">box</div>
+  <div id="box2" class="box">box2</div>
+  <style>
+    #box {
+      width: 100px;
+      height: 100px;
+      background-color: rgb(173, 178, 178);
+    }
+
+    #box2 {
+      width: 100px;
+      height: 100px;
+      background-color: lightblue;
+    }
+  </style>
+  <script>
+    // 变量声明规范
+    // 必须使用英文开头 不能出现空格 不能使用 xx-yy 常量用大写
+    // 可以使用 xx_yy a1 b2 b_123   最好不要用 特殊符号 _（lodash）或 $（jquery）
+    // js保留关键词（都是单个单词） 如 var var = 1;(不可以)
+    // 最好使用小驼峰写法（两单词拼接 第一个单词首字母小写 第二个单词首字母大写）
+  </script>
+
+  <script>
+    // getElementById()返回对拥有指定 ID 的第一个对象的引用
+    // var box = document.getElementById('box');
+    // console.log(box);
+    // box.style.color = 'blue';
+    // box.style.backgroundColor="blue";
+
+    // getElementsByTagName()返回带有指定 标签名 的对象的集合
+    // var box = document.getElementsByClassName('box');
+    // // console.log(box);
+    // box[0].style.backgroundColor = 'blue';
+    // box[1].style.backgroundColor = 'red';
+
+    // getElementsByClassName()返回文档中所有指定 类名(class) 的元素集合
+    // var box = document.getElementsByClassName('box');
+    // console.log(box);
+    // box[0].style.backgroundColor = 'blue';
+    // box[1].style.backgroundColor = 'red';
+
+
+    // querySelector()返回文档中匹配指定 CSS 选择器的一个元素
+    // var box = document.querySelector('#box');
+    var box = document.querySelector('.box');
+    console.log(box);
+    box.style.color = 'red';
+    box.style.backgroundColor = "blue";
+
+    //querySelectorAll()返回文档中匹配指定 CSS 选择器的所有元素
+    // var box = document.querySelectorAll('.box');
+    // box[0].style.color = 'blue';
+    // box[1].style.backgroundColor = "blue";
+
+
+    // 元素.style.xxx(访问的是某个元素[行间样式]的xxx属性)
+    // console.log(box.style.color);
+
+    // box.style.color = 'blue';
+    // box.style.backgroundColor="blue";
+
+  </script>
+
+</body>
+
+</html>

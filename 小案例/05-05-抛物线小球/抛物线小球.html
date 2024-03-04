@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .stage {
+      margin: 100px auto;
+      width: 500px;
+      height: 500px;
+      background-color: lightblue;
+      position: relative;
+    }
+
+    .stage i {
+      display: block;
+      position: absolute;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="stage"></div>
+
+
+  <script>
+    const stage = document.querySelector('.stage');
+
+    function Dot(color, size, x, y, xspan, yspan) {
+      this.color = color;
+      this.size = size;
+      this.x = x;
+      this.y = y;
+      this.xspan = xspan;
+      this.yspan = yspan;
+    }
+
+    // create 创建
+    Dot.prototype.create = function () {
+      this.node = document.createElement('i');
+      stage.appendChild(this.node);
+    };
+
+    // position 位置  
+    Dot.prototype.position = function () {
+      this.node.style.left = this.x + 'px';
+      this.node.style.top = this.y + 'px';
+    };
+
+    // draw 绘制
+    Dot.prototype.draw = function () {
+      this.create();
+      this.position();
+      this.node.style.width = this.size + 'px';
+      this.node.style.height = this.size + 'px';
+      this.node.style.backgroundColor = this.color;
+    };
+
+    // moderate 减速 小球每次碰撞都会减速
+    Dot.prototype.moderate = function () {
+      this.yspan *= 0.9;
+    };
+
+    // check 检查
+    Dot.prototype.determine = function () {
+      const left = this.x < 0;
+      const right = this.x + this.size > stage.clientWidth;
+      const top = this.y < 0;
+      const bottom = this.y + this.size > stage.clientHeight;
+      
+      if (left || right) {
+        this.xspan *= -1;
+      }
+      if (top || bottom) {
+        // 如果碰边就减速
+        this.moderate();
+        this.yspan *= -1;
+      }
+    };
+
+    // move 移动
+    Dot.prototype.move = function () {
+      this.yspan += 0.1;
+      this.determine();
+      this.x += this.xspan;
+      this.y += this.yspan;
+      this.position();
+
+    };
+
+    // 创建小球
+    // color, size, x, y, xspan, yspan
+    var dots = [
+      new Dot("red", 20, 10, 10, 1, 0),
+    ];
+
+    // 绘制小球
+    dots.forEach(dot => dot.draw());
+
+    // 让小球动
+    setInterval(() => {
+      dots.forEach(dot => dot.move());
+    }, 30)
+
+
+
+
+
+  </script>
+
+
+
+</body>
+
+</html>

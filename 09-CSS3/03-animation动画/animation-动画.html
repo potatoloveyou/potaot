@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="box">box</div>
+
+  <style>
+    .box {
+      width: 100px;
+      height: 100px;
+      background-color: lightblue;
+      position: absolute;
+      top: 0%;
+      left: 0%;
+      /* animation: aaa 5s linear infinite; */
+      /* animation: bbb 20s linear infinite; */
+      /* animation: name(由keyframes定义的动画名) duration(时间) 
+      timing-function(速度曲线) delay(启动前延迟(允许负值:如-2的意思为第一次动画跳过前面的两秒，从第三秒开始呈现)) 
+      iteration-count(播放次数  infinite无限) direction(是否反向) fill-mode(规定当动画不播放时（当动画完成时，或当动画有一个延迟未开始播放时），要应用到元素的样式) play-state(暂停或运行); */
+
+      /* timing-function(速度曲线)
+      linear    匀速
+      ease    慢-快-慢
+      ease-in   慢开始
+      ease-out    慢结束
+      ease-in-out   慢(始-束)
+      steps(int,start|end)    分步执行，第一个参数为步数，第二个参数  start 开头连续(跳过第一帧)，end 末尾连续
+      */
+
+      /* direction(是否反向)
+      reverse   反向
+      alternate           奇数正向，偶数反向(1,3,5...为正向，2,4,6...为反向)
+      alternate-reverse   奇数反向，偶数正向(1,3,5...为反向，2,4,6...为正向)
+      */
+
+      /* play-state(暂停或运行)
+      paused    暂停
+      running    运行
+      js:object.style.animationPlayState="paused"
+      */
+
+
+    }
+
+    /* @keyframes aaa {
+      from {
+        top: 0%;
+        left: 0%;
+      }
+      to{
+        top: 0%;
+        left: 90%;
+      }
+    } */
+
+    @keyframes bbb {
+      0% {
+        top: 0%;
+        left: 0%;
+      }
+
+      25% {
+        top: 0%;
+        left: 90%;
+      }
+
+      50% {
+        top: 70%;
+        left: 90%;
+      }
+
+      75% {
+        top: 70%;
+        left: 0%;
+      }
+
+      100% {
+        top: 0%;
+        left: 0%;
+      }
+    }
+  </style>
+
+
+
+  <div class="box2"></div>
+  <style>
+    .box2 {
+      width: calc(1000px/7);
+      height: 177px;
+      position: absolute;
+      top: 100px;
+      left: 0;
+      background-image: url(./imgs/space-to-top.png);
+      /* animation: y 10s infinite steps(7, start); */
+      animation: y 10s infinite steps(7, end);
+
+    }
+
+
+    @keyframes y {
+      from {
+        background-position-x: 0;
+      }
+
+      to {
+        background-position-x: -1000px;
+      }
+    }
+  </style>
+
+
+
+
+
+</body>
+
+</html>

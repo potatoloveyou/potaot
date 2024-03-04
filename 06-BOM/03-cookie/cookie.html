@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // document.cookie = 'xxx=yyy';
+    // document.cookie = "name=nike";
+    // F12 应用(Application) cookie
+    /**
+     * 1.键值对
+     * 2.域名domain 默认是当前域名
+     * 3.路径path 默认是当前文件所在路径
+     * 4.过期时间expires 默认是Session当前会话结束就过期
+    */
+
+    // 设置路径 过期时间
+    // document.cookie = "name=nicholas; path=/ ;expires=Thu, 18 Dec 2043 12:00:00 GMT";
+
+
+    // 封装函数创建cookie
+    function setCookie(key, value, expires, path) {
+      let cookieText = `${key}=${value}`;
+      // 如何当key和value都不存在时是无法设置cookie的
+      if (!(key || value)) {
+        console.log('请输入key或者value');
+      }
+      if (path) {
+        cookieText += `; path=${path}`;
+      }
+      const day = new Date();
+      // setDate()设置一个月的某一天  getDate()返回当前的天 
+      day.setDate(day.getDate() + expires);
+      if (expires) {
+        cookieText += `; expires=${day}`;
+      }
+
+      document.cookie = cookieText;
+      // console.log(type expires);
+
+    }
+    setCookie("xxx", "123", 3, '');
+    setCookie("yyy", "456", 3, '');
+    setCookie("", "456", 3, '');
+
+    // 修改 重新设置
+    // setCookie("name", "000", "", 3);
+
+
+    // 删除cookie  只需要设置过期时间设置为过去的时间
+    // setCookie("name", "000", "", -1);
+
+
+    // 查找对应cookie
+    const getCookie = (key) => {
+      // split() 把一个字符串分割成字符串数组 map()返回函数处理后的数组
+      const cookieArr = document.cookie.split(';').map((value) => {
+        // trim() 去除字符串两端的空格
+        return value.trim().split('=');
+      });
+
+      const tmp = cookieArr.find((value) => {
+        return value[0] === key;
+      }
+      );
+      return tmp ? tmp[1] : null;
+    };
+    console.log(getCookie('mode'));
+  </script>
+</body>
+
+</html>

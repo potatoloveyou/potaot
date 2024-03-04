@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .message {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <a href="https://www.baidu.com">百度</a>
+  <form action="https://www.baidu.com" method="get">
+    <input type="text" class="username"> <span class="message"></span>
+    <br />
+    <input type="submit" value="提交" name="sub">
+  </form>
+
+  <script>
+    // 默认行为就是HTML标签自带的行为，比如a标签的跳转,from的提交
+    const a = document.querySelector('a');
+    a.addEventListener('click', function (e) {
+      e.preventDefault(); // 阻止默认行为
+      console.log('点击了百度');
+    });
+
+    const submit = document.querySelector("input[name=sub]");
+    const username = document.querySelector(".username");
+    const message = document.querySelector(".message");
+    submit.addEventListener('click', function (e) {
+      // 获取输入框的值
+      // console.log(username.value);
+      // alert(231312)
+      if (username.value != "admin") {
+        // 
+        message.innerHTML = '错误';
+        // 阻止默认行为
+        e.preventDefault();
+      }
+    })
+
+
+
+
+
+  </script>
+
+
+
+
+
+
+</body>
+
+</html>

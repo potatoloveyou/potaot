@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var x = 10;
+    console.log(x);// 10
+
+    var y;
+    console.log(y);// undefined
+    y = 10;
+
+    console.log(z);// undefined
+    var z;
+    z = 10;
+
+
+    // 若先使用变量 没有定义 会undefined
+    // 若定义了变量 先使用变量 但没有赋值 会undefined
+    // js代码运行前 会把当前作用域的var变量 全部提升到当前作用域最顶端
+
+  </script>
+
+  <script>
+
+    //   函数的提升 不会变为undefined
+    xxx();
+    function xxx() {
+      console.log(123);
+    }
+
+    var yyy;
+    console.log(yyy);// undefined
+    // yyy();// yyy is not a function
+    var yyy = function () {
+      console.log('yyy');
+    };
+
+
+    var a = 10;
+    console.log(a);// 10
+    var a = 20;
+    console.log(a);// 20
+
+
+  </script>
+
+  <script>
+    function zzz() {
+      var m = 5;
+      console.log(m);// 5
+      function zzzChild() {
+        var n = 15;
+        var m = 100;
+        console.log(m, n);// 100 15
+      }
+      // 局部作用内部访问变量  优先访问自己的作用域的变量 如果没有 再访问上一级的
+      // zzzChild();
+    }
+    zzz();
+
+  </script>
+
+  <script>
+    console.log("==============================================");
+    var a1 = 10;
+
+    function f1() {
+      console.log(a1);// undefined
+      // var a1 = 20;// 提升到了f1这个函数的顶端,log的时候先访问自己作用域有个被提升上来的a1(值没有被提升上来)
+      console.log(a1);// 20
+
+      function f2(a1) {
+        console.log(a1);// 33
+        var a1 = 44;
+        console.log(a1);// 44
+      }
+      f2(33);
+    }
+    f1()
+
+  </script>
+
+  <script>
+    var a = 3;
+
+    function c(a) {
+      console.log(a);// 4
+    }
+    (function () {
+      var a = 4;
+      c();
+    })();// 3
+    // js中变量的作用域链与定义时的环境有关，与执行时无关。执行环境只会改变this、传递的参数、全局变量等
+
+  </script>
+</body>
+
+</html>

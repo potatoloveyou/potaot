@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    // function DDD(x = 0, y = 0) {
+    //   this.x = x;
+    //   this.y = y;
+    // }
+    // var d1 = new DDD(10, 10);
+    // console.log(d1);
+
+    // // constructor 构造函数
+    // console.log(d1.constructor === DDD);
+    // // 实例对象的__proto__ 就是 构造函数的原型对象
+    // console.log(d1.__proto__ === DDD.prototype);
+
+  </script>
+
+
+
+  <script>
+    // 语法糖  简化代码的语法规则(本质不变，换了种写法)
+    class Dot {
+      // constructor 定义自己的属性 或方法 ,塑造this
+      constructor(x = 0, y = 0) {
+        this.x = x; // 实例属性
+        this.y = y; // 实例属性
+      }
+      // 法一:添加实例方法
+      xxx() {
+        console.log('xxx'); // 实例方法
+      }
+    }
+
+    // 法二:添加实例方法
+    // prototype  继承的属性或方法
+    Dot.prototype.yyy = function () {
+      console.log('yyy');
+    };
+
+    const a1 = new Dot(10, 10)
+
+
+  </script>
+
+
+</body>
+
+</html>

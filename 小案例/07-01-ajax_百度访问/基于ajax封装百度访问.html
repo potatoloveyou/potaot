@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/杂货/my-minireset.css">
+  <style>
+    .baidu {
+      width: 500px;
+      height: 500px;
+      margin: 20vh auto 0 auto;
+      /* text-align: center; */
+      display: flex;
+      flex-direction: column;
+
+      div {
+        input {
+          width: 100%;
+          border: 1px solid #000000;
+          line-height: 50px;
+          font-size: 35px;
+          margin-bottom: 30px;
+        }
+      }
+
+      ul {
+        li {
+          font-size: 20px;
+        }
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <section class="baidu">
+    <div>
+      <input type="text" />
+    </div>
+    <ul></ul>
+  </section>
+
+
+
+  <script>
+
+
+
+    /**
+     * @param {string} url - 请求的URL地址。
+     * @param {function} callback - 请求成功后的回调函数。
+    */
+    function getJson(url, callback) {
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', url, true);
+      xhr.send();
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          callback(JSON.parse(xhr.responseText));
+        }
+      };
+    }
+
+    const input = document.querySelector('input');
+    const ulEl = document.querySelector('ul');
+
+    // 防抖函数
+    /**
+     * @param {Function} fun - 需要防抖的函数。
+     * @param {Number} delay - 延迟时间，单位为毫秒。
+    */
+    function debounce(fun, delay = 500) {
+      let timer = null; // 创建一个计时器变量，用于保存定时器ID
+      return function () {
+        let _this = this; // 保存函数的上下文（this）
+        let args = arguments; // arguments 事件处理函数的所有参数
+        clearTimeout(timer); // 清除之前的定时器，避免多次触发
+        timer = setTimeout(() => {
+          // 这里使用_this获取dom 不能使用this  是因为在定时器的匿名函数里面
+          fun.apply(_this, args); // 执行传入的函数，并传入参数和上下文
+          // 临时把 func借用到 _this（DOM）
+          // apply 第二个参数是一个数组 代表传递给 func的所有参数
+        }, delay); // 设置延迟时间，控制函数的执行时机
+      };
+    }
+
+
+    input.addEventListener('input', debounce(() => {
+      // console.log(input.value);
+      getJson("https://www.baidu.com/sugrec?ie=utf-8&json=1&prod=pc&wd=" + input.value,
+        // 这里就是getJson第二个参数callback  是个回调函数
+        (res) => {// 此处res即可获取到百度搜索的json数据
+          // console.log(res);
+          while (ulEl.firstChild) {
+            ulEl.removeChild(ulEl.firstChild);
+          }
+          if (res.g) {
+            res.g.forEach(value => {
+              console.log(value.q);
+              // const liEl=document.createElement('li');// 创建li元素
+              // liEl.textContent = value.q;// 设置li元素的内容为value.q的值
+              // ulEl.appendChild(liEl);// 将li元素添加到ul元素中
+
+              // 或者直接使用innerHTML 一次性添加所有li元素 避免多次DOM操作
+              ulEl.innerHTML += `<li>${value.q}</li>`;
+            });
+          }
+        });
+    }));
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // function ajax(options) {
+    //   this.url = options.url;
+    //   this.method = options.method || 'GET';
+    //   this.dataType = options.dataType || 'json';
+    //   this.data = options.data || null;
+    //   this.success = options.success || null;
+    //   this.error = options.error || null;
+    //   this.send();
+    // }
+    // ajax.prototype.send = function () {
+    //   var xhr = new XMLHttpRequest();
+    //   xhr.onreadystatechange = function () {
+    //     if (xhr.readyState === 4) {
+    //       if (xhr.status >= 200 && xhr.status < 400) {
+    //         if (this.success) {
+    //           if (this.dataType === 'json') {
+    //             this.success(JSON.parse(xhr.responseText));
+    //           } else {
+    //             this.success(xhr.responseText);
+    //           }
+    //         }
+    //       } else {
+    //         if (this.error) {
+    //           this.error(xhr.status, xhr.statusText);
+    //         }
+    //       }
+    //     }
+    //   };
+    //   xhr.open(this.method, this.url, true);
+    //   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    //   xhr.send(this.data);
+    // };
+    // // 使用示例
+    // var option = {
+    //   url: 'https://api.example.com/users',
+    //   method: 'GET',
+    //   dataType: 'json',
+    //   success: function (data) {
+    //     console.log(data);
+    //   },
+    //   error: function (status, statusText) {
+    //     console.log('请求失败，状态码：' + status + '，状态文本：' + statusText);
+    //   }
+    // };
+    // new ajax(option);
+
+
+  </script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-left: 50px;
+    }
+  </style>
+</head>
+
+<body>
+  <input type="text" name="name" id="name" />
+  <input type="text" name="url" id="url" />
+  <input type="button" value="新增" id="submit" />
+
+  <ul></ul>
+
+  <script>
+    const button = document.querySelector('#submit');
+    button.addEventListener('click', (params) => {
+      // console.log(123);
+      const name = document.querySelector('#name').value; // 获取输入框的值，并赋给name变量。
+      const url = document.querySelector('#url').value; // 获取输入框的值，并赋给url变量。
+      if (name && url) {
+        localStorage.setItem(name, url); // 存储键值对到localStorage中。键是name的值，值是url的值。
+
+        showLocalStorage(); // 调用showLocalStorage函数，显示localStorage中的键值对。
+
+      } else {
+        alert('请输入完整信息'); // 如果输入框为空，弹出提示框。
+      }
+    });
+
+    const ulEl = document.querySelector('ul');
+
+    // 获取localStorage中的键值对，并显示在页面上。
+    function showLocalStorage(params) {
+      // console.log(localStorage);
+
+      // 清除残留
+      while (ulEl.firstChild) {
+        ulEl.removeChild(ulEl.firstChild);
+      }
+
+      for (let key in localStorage) {
+        if (localStorage.hasOwnProperty(key)) {
+
+          // console.log(key + ": " + localStorage[key]);
+
+          const li = document.createElement('li'); // 创建li元素。
+          li.textContent = `${key}: ${localStorage[key]}`; // 设置li元素的文本内容。
+          ulEl.appendChild(li); // 将li元素添加到ul元素中。
+        }
+      }
+    }
+    // 初始化调用
+    showLocalStorage();
+
+
+
+
+
+
+
+
+
+
+
+  </script>
+
+
+
+</body>
+
+</html>

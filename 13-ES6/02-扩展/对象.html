@@ -14,11 +14,13 @@
     let obj = {
       name: "nick",
       age,
+
       // speak: function () {
       // }
       speak() {
         console.log(this.name);
       },
+      
       // 这种写法可将变量值作为属性名，但需要确保变量值是字符串或Symbol类型。
       [Math.random() + 1]: 123,
     };

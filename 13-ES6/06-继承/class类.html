@@ -45,8 +45,59 @@
     Dot.prototype.yyy = function () {
       console.log('yyy');
     };
+    const a1 = new Dot(10, 10);
 
-    const a1 = new Dot(10, 10)
+
+
+    // ES2022
+    // _count可不定义在constructor内，而是直接定义在类的最顶层
+    class IncreasingCounter {
+      _count = 0;
+      get value() {
+        console.log('Getting the current value!');
+        return this._count;
+      }
+      increment() {
+        this._count++;
+      }
+    }
+
+
+
+    // static 静态方法    加上static关键字，表示该方法不会被实例继承，而是直接通过类调用。
+    class AAA {
+      _z = 123;
+      static _z1 = 456;
+      #z2 = 789;
+
+      constructor(x = 0, y = 0) {
+        this.x = x;
+        this.y = y;
+      }
+
+      xxx() {
+        console.log("xxx", this, this.#z2);
+      }
+
+
+      get job() {
+        return this._z;
+      }
+      set job(value) {
+        this._z = value;
+        console.log("job 设置");
+      }
+    }
+
+    const a = new AAA(1, 2);
+    console.log(a._z, a.xxx());
+    console.log("AAA._z1", AAA._z1);
+
+    
+
+
+
+
 
 
   </script>

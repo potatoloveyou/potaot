@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h3 id="h3">{{a}}</h3>
+      <h3 v-if="b">{{b}}</h3>
+    </div>
+
+    <script>
+      // 在 Vue 实例的生命周期  阶段  被调用。这些钩子函数可在不同的生命周期阶段执行相应的操作
+      var vm = new Vue({
+        // 根元素
+        el: '#app',
+
+        // 状态
+        data: {
+          a: 10,
+          // 即使b没有东西，也应该要加入在响应式系统中，否则无法进行响应式操作。
+          b: null,
+        },
+
+        // 实例生命周期钩子函数，在实例创建完成后被调用。
+        created() {
+          console.log(this, this.a);
+          console.log(
+            '只执行了new Vue创建了实例，还没将状态渲染',
+            document.querySelector('#h3').innerHTML,
+          ); // {{a}}
+        },
+      });
+    </script>
+  </body>
+</html>

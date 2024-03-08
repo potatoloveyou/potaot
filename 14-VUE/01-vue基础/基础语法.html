@@ -26,9 +26,10 @@
       <hr />
       <input type="button" value="add" v-on:click="add" />
       <hr />
+      <!-- v-on: 可简写为 @ -->
       <button v-on:click="double">双倍</button>
       <hr />
-      <button v-on:click="reverse">翻转</button>
+      <button @click="reverse">翻转</button>
       <hr />
       <h3>{{msg}}</h3>
       <h3>{{zzz(msg)}}</h3>

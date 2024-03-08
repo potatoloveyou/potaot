@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <p>Message: {{ msg }}</p>
+
+      <!-- v-once 锁定内容不会改变 -->
+      <p v-once>once: {{ msg }}</p>
+
+      <!-- v-html 将组件传来的状态表达式替换为 HTML 代码 -->
+      <!-- 尽量不使用，因为可能会导致 xss攻击，绝不要对用户提供的内容使用插值 -->
+      <p v-html="html"></p>
+
+      <p>{{msg.split('').reverse().join('')}}</p>
+      <!-- 可以是表达式例如字符串拼接 -->
+      <p :id="'yyy'+id">{{id}}</p>
+
+      <!-- .prevent 阻止默认事件修饰符 -->
+      <a :href="baidu" @click.prevent="jumpBaidu">百度</a>
+    </div>
+
+    <script>
+      // 创建、挂载、更新、销毁   (每一个都有一个之前和之后，所以一共是8个)
+      var vm = new Vue({
+        // 根元素
+        el: '#app',
+
+        // 状态
+        data() {
+          return {
+            msg: 'Hello World',
+            html: '<span style="color: red" onclick="console.log(123)">This should be red.</span>',
+            id: 'xxx',
+            baidu: 'http://www.baidu.com',
+          };
+        },
+
+        // 方法
+        methods: {
+          jumpBaidu() {
+            console.log(123);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -15,25 +15,50 @@
     </div>
 
     <script>
+      // 创建、挂载、更新、销毁   (每一个都有一个之前和之后，所以一共是8个)
       // 在 Vue 实例的生命周期  阶段  被调用。这些钩子函数可在不同的生命周期阶段执行相应的操作
       var vm = new Vue({
         // 根元素
         el: '#app',
 
         // 状态
-        data: {
-          a: 10,
-          // 即使b没有东西，也应该要加入在响应式系统中，否则无法进行响应式操作。
-          b: null,
+        data() {
+          return {
+            a: 10,
+            // 即使b没有东西，也应该要加入在响应式系统中，否则无法进行响应式操作。
+            b: null,
+          };
         },
 
-        // 实例生命周期钩子函数，在实例创建完成后被调用。
+        // 方法
+        methods: {},
+
+        // 创建 beforeCreate 和 created
+
+        // beforeCreate 实例被创建后，数据观测和事件配置前被调用
+        // 能访问到   this(即Vue实例)，但是不能访问到data中的数据和方法
+        beforeCreate() {
+          console.log('创建之前', this, this.a); // Vue{}  undefined
+        },
+
+        // created  实例被创建之后，数据观测和事件配置之后被调用
+        // 能访问到   data中的数据和方法，但是不能访问到DOM元素。
+        // 适合在实例创建完成后，立即操作数据，例如AjAx(异步，需要更新状态，即此时需要访问到a是啥)。
         created() {
-          console.log(this, this.a);
+          console.log(this, this.a); // Vue{}  10
           console.log(
             '只执行了new Vue创建了实例，还没将状态渲染',
             document.querySelector('#h3').innerHTML,
           ); // {{a}}
+        },
+
+        // 挂载 beforeMount 和 mounted 实例挂载到DOM之前和之后被调用。
+        // 能访问到DOM元素。
+        mounted() {
+          console.log(
+            '执行了new Vue创建了实例，并且将状态渲染到了DOM中',
+            document.querySelector('#h3').innerHTML,
+          );
         },
       });
     </script>

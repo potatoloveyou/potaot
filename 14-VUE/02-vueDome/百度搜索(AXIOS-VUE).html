@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <!-- AXIOS -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- lodash -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" v-model="inputValue" />
+      <ul>
+        <li v-for="item in items">{{ item.q }}</li>
+      </ul>
+    </div>
+
+    <!-- axios尝试 -->
+    <!-- <script>
+      console.log(axios);
+      // axios.get('https://www.baidu.com/sugrec?ie=utf-8&prod=wise&wd=huawei');
+      axios
+        .get('https://www.baidu.com/sugrec', {
+          // 请求配置，例如：设置请求头、超时时间等
+          params: {
+            ie: 'utf-8',
+            prod: 'wise',
+            wd: 'huawei',
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+        });
+    </script> -->
+
+    <script>
+      var vm = new Vue({
+        el: '#app',
+
+        data() {
+          return {
+            inputValue: '', // 输入框的值
+            items: [], // 用于存储搜索结果的数组
+          };
+        },
+
+        // 方法
+        methods: {
+          // 处理输入框值变化的方法，可以在这里发送请求获取搜索结果
+          getAxios(newvalue) {
+            // console.log(newvalue);
+            axios
+              .get('https://www.baidu.com/sugrec', {
+                // 请求配置，例如：设置请求头、超时时间等
+                params: {
+                  ie: 'utf-8',
+                  prod: 'wise',
+                  wd: newvalue,
+                },
+              })
+              // 发送成功后处理响应
+              .then((res) => {
+                // console.log(res.data.g);
+                this.items = res.data.g;
+              });
+          },
+        },
+
+        // 这里是最早能访问到data中inputValue的地方
+        // 所以可以在这里调用getAxios方法
+        created() {
+          //  _.debounce()会返回一个新的函数
+          this.debounceGetAxios = _.debounce(this.getAxios, 500);
+          console.log(this.debounceGetAxios);
+        },
+
+        watch: {
+          // 监听inputValue的变化，
+          inputValue(newvalue) {
+            if (newvalue) {
+              // 当输入框内存在值时，调用getAxios方法获取搜索结果，并将值以实参传递给getAxios方法
+              this.debounceGetAxios(newvalue);
+            } else {
+              // 清空
+              this.suggests = [];
+            }
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <!-- AXIOS -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- lodash -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" v-model="inputValue" />
+      <ul>
+        <li v-for="(item, index) in items" :key="index">{{item.q}}</li>
+      </ul>
+    </div>
+
+    <script>
+      const app = new Vue({
+        el: '#app',
+
+        data() {
+          return {
+            inputValue: '', // 输入框的值
+            items: [], // 用于存储搜索结果的数组
+          };
+        },
+
+        // 计算属性
+        computed: {
+          parameter() {
+            return {
+              ie: 'utf-8',
+              prod: 'wise',
+              wd: this.inputValue,
+            };
+          },
+        },
+
+        // 方法
+        methods: {
+          getAxios(parameter) {
+            axios
+              .get('https://www.baidu.com/sugrec', {
+                params: this.parameter,
+              })
+              .then((res) => {
+                console.log(res.data.g);
+                this.items = res.data.g;
+              });
+          },
+        },
+
+        // 这里是最早能访问到data中inputValue的地方
+        // 所以可以在这里调用getAxios方法
+        created() {
+          // console.log(this.getAxios);
+          // this.getAxios(newvalue);
+          this.debounceGetAxios = _.debounce(this.getAxios, 500);
+          // console.log(this.parameter);
+        },
+
+        watch: {
+          // 监听输入框的值的变化发送ajax
+          inputValue(newvalue) {
+            // console.log(newvalue);
+            if (newvalue) {
+              this.debounceGetAxios(newvalue);
+            } else {
+              this.items = [];
+            }
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

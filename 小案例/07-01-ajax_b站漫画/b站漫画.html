@@ -1,11 +1,263 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  
-</body>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="never" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./my-minireset.css" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="all">
+      <ul class="theme"></ul>
+      <ul class="region"></ul>
+      <ul class="progress"></ul>
+      <ul class="charge"></ul>
+      <ul class="sort"></ul>
+    </div>
+    <div id="imgs"></div>
+
+    <style>
+      .all ul {
+        display: flex;
+      }
+      .all ul li {
+        margin: 10px;
+      }
+      .imgs .imass li {
+        width: 180px;
+        height: 240px;
+      }
+      #imgs {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      #imgs img {
+        width: 160px;
+        height: 240;
+        margin: 0 14px;
+      }
+    </style>
+
+    <script>
+      var themes = [
+        '全部',
+        '热血',
+        '古风',
+        '玄幻',
+        '奇幻',
+        '悬疑',
+        '都市',
+        '历史',
+        '武侠仙侠',
+        '游戏竞技',
+        '悬疑灵异',
+        '架空',
+        '青春',
+        '西幻',
+        '现代',
+        '正能量',
+        '科幻',
+      ];
+
+      var themess = [-1, 999, 997, 1016, 998, 1023, 1002, 1096, 1092, 1088, 1081, 1063, 1060, 1054, 1048, 1028, 1015];
+
+      var regions = ['全部', '大陆', '日本', '韩国', '其他'];
+
+      var regionss = [-1, 1, 2, 6, 5];
+
+      var progress = ['全部', '连载', '完结'];
+
+      var progresss = [-1, 0, 1];
+
+      var charges = ['全部', '免费', '付费', '等就免费'];
+
+      var chargess = [-1, 1, 2, 3];
+
+      var sorts = ['人气推荐', '更新时间', '追漫人数', '商家时间'];
+
+      var sortss = [0, 1, 2, 3];
+
+      var themeEl = document.querySelector('.theme');
+      var regionEl = document.querySelector('.region');
+      var progressEl = document.querySelector('.progress');
+      var chargeEl = document.querySelector('.charge');
+      var sortEl = document.querySelector('.sort');
+
+      themes.forEach(function (e) {
+        var node = document.createElement('li');
+        node.innerHTML = e;
+        themeEl.appendChild(node);
+      });
+
+      regions.forEach(function (e) {
+        var node = document.createElement('li');
+        node.innerHTML = e;
+        regionEl.appendChild(node);
+      });
+
+      progress.forEach(function (e) {
+        var node = document.createElement('li');
+        node.innerHTML = e;
+        progressEl.appendChild(node);
+      });
+
+      charges.forEach(function (e) {
+        var node = document.createElement('li');
+        node.innerHTML = e;
+        chargeEl.appendChild(node);
+      });
+
+      sorts.forEach(function (e) {
+        var node = document.createElement('li');
+        node.innerHTML = e;
+        sortEl.appendChild(node);
+      });
+    </script>
+
+    <script>
+      function getJSON(url, callback) {
+        var potato = new XMLHttpRequest();
+        potato.onreadystatechange = function () {
+          if (potato.readyState === 4) {
+            if (potato.status === 200) {
+              callback(JSON.parse(potato.response));
+              console.log('完成了 成功了', potato.status);
+            } else {
+              console.log('完成了 但是失败了', potato.status);
+            }
+          }
+        };
+        potato.open('GET', url, true);
+        potato.send();
+      }
+
+      var themeEll = themeEl.querySelectorAll('li');
+      var styleIdnull = [999];
+      themeEll.forEach(function (i) {
+        i.onclick = function () {
+          var styleId = themes.indexOf(i.innerText);
+          var themessA = themess[styleId];
+          styleIdnull.shift();
+          styleIdnull.push(themessA);
+          getJSON(
+            'https://apis.netstart.cn/bcomic/ClassPage?styleId=' +
+              styleIdnull[0] +
+              '&areaId=' +
+              areaIdnull[0] +
+              '&isFinish=' +
+              isFinishnull[0] +
+              '&order=0&pageNum=1&pageSize=39&isFree=-1',
+            function (res) {
+              document.querySelector('#imgs').innerHTML = '';
+              if (res.data) {
+                res.data.forEach(function (e) {
+                  var img = document.createElement('img');
+                  img.src = e.vertical_cover;
+                  document.querySelector('#imgs').appendChild(img);
+                });
+              }
+            },
+          );
+        };
+      });
+
+      var regionEll = regionEl.querySelectorAll('li');
+      var areaIdnull = [-1];
+      regionEll.forEach(function (i) {
+        i.onclick = function () {
+          var areaId = regions.indexOf(i.innerText);
+          // console.log(regions.indexOf(i.innerText));
+          var regionssA = regionss[areaId];
+          areaIdnull.shift();
+          areaIdnull.push(regionssA);
+          getJSON(
+            'https://apis.netstart.cn/bcomic/ClassPage?styleId=' +
+              styleIdnull[0] +
+              '&areaId=' +
+              areaIdnull[0] +
+              '&isFinish=' +
+              isFinishnull[0] +
+              '&order=0&pageNum=1&pageSize=39&isFree=-1',
+            function (res) {
+              document.querySelector('#imgs').innerHTML = '';
+              if (res.data) {
+                res.data.forEach(function (e) {
+                  var img = document.createElement('img');
+                  img.src = e.vertical_cover;
+                  document.querySelector('#imgs').appendChild(img);
+                });
+              }
+            },
+          );
+        };
+      });
+
+      var progressEll = progressEl.querySelectorAll('li');
+      var isFinishnull = [-1];
+      progressEll.forEach(function (i) {
+        i.onclick = function () {
+          var isFinish = progress.indexOf(i.innerText);
+          // console.log(progress.indexOf(i.innerText));
+          var progresssA = progresss[isFinish];
+          isFinishnull.shift();
+          isFinishnull.push(progresssA);
+          // getJSON("https://apis.netstart.cn/bcomic/ClassPage?styleId=" + styleIdnull[0] + "&areaId="+ areaIdnull[0] +"&isFinish="+ isFinishnull[0] +"&order=0&pageNum=1&pageSize=39&isFree=-1", function (res) {
+          //     document.querySelector('#imgs').innerHTML='';
+          //     if (res.data) {
+          //         res.data.forEach(function (e) {
+          //             var img = document.createElement('img')
+          //             img.src = e.vertical_cover;
+          //             document.querySelector('#imgs').appendChild(img)
+          //         });
+          //     }
+          // });
+        };
+      });
+      console.log(isFinishnull);
+
+      var chargeEll = chargeEl.querySelectorAll('li');
+      var isFreenull = [-1];
+      chargeEll.forEach(function (i) {
+        i.onclick = function () {
+          var isFree = charges.indexOf(i.innerText);
+          // console.log(charges.indexOf(i.innerText));
+          var chargessA = chargess[isFree];
+          isFreenull.shift();
+          isFreenull.push(chargessA);
+        };
+      });
+      // console.log(isFreenull);
+
+      var sortEll = sortEl.querySelectorAll('li');
+      sortEll.forEach(function (i) {
+        i.onclick = function () {
+          sorts.indexOf(i.innerText);
+          console.log(sorts.indexOf(i.innerText));
+        };
+      });
+
+      getJSON(
+        'https://apis.netstart.cn/bcomic/ClassPage?styleId=' +
+          styleIdnull[0] +
+          '&areaId=' +
+          areaIdnull[0] +
+          '&isFinish=' +
+          isFinishnull[0] +
+          '&order=0&pageNum=1&pageSize=39&isFree=-1',
+        function (res) {
+          document.querySelector('#imgs').innerHTML = '';
+          if (res.data) {
+            res.data.forEach(function (e) {
+              var img = document.createElement('img');
+              img.src = e.vertical_cover;
+              document.querySelector('#imgs').appendChild(img);
+            });
+          }
+        },
+      );
+    </script>
+  </body>
 </html>

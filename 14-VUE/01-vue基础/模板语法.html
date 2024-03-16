@@ -25,6 +25,10 @@
 
       <!-- .prevent 阻止默认事件修饰符 -->
       <a :href="baidu" @click.prevent="jumpBaidu">百度</a>
+
+      <hr />
+      <!-- 键值 键名 索引 -->
+      <div v-for="(value, name, index) in object">{{ name }}-{{ value }}-{{ index }}</div>
     </div>
 
     <script>
@@ -40,6 +44,12 @@
             html: '<span style="color: red" onclick="console.log(123)">This should be red.</span>',
             id: 'xxx',
             baidu: 'http://www.baidu.com',
+
+            object:{
+              name: '菜鸟教程',
+              url: 'www.runoob.com',
+              slogan: '学的不仅是技术，更是梦想！'
+            }
           };
         },
 

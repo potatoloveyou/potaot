@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="never" />
+    <title>b站漫画</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <!-- AXIOS -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- lodash -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+    <link rel="stylesheet" href="/杂货/my-minireset.css" />
+    <style>
+      .label {
+        padding: 20px 0;
+        ul {
+          display: flex;
+          padding: 15px 0;
+        }
+        li {
+          margin: 0 10px;
+        }
+      }
+      .manhua {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        div {
+          margin: 20px 0;
+          width: 200px;
+          h3 {
+            width: 100%;
+            /* 文本溢出时显示省略号 需要配合  white-space: nowrap;   overflow: hidden; */
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+          }
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <section class="label">
+        <ul v-for="(label, labelName) in labels" :title="labelName">
+          <li :class="labelName" :id="all" @click="getId(labelName,all)">全部</li>
+          <li v-for="labelValue in label" :class="labelName" :id="labelValue.id" @click="getId(labelName,labelValue.id)">{{labelValue.name}}</li>
+        </ul>
+      </section>
+
+      <section class="manhua">
+        <div v-for="information in informations">
+          <img :src="information.vertical_cover" alt="" />
+          <h3>{{information.title}}</h3>
+        </div>
+      </section>
+
+      <!-- <section>
+        <label-item v-for="label in labels" :label="label">
+          <label-value v-for="value in label" :value="value">
+
+          </label-value>
+        </label-item>
+      </section> -->
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

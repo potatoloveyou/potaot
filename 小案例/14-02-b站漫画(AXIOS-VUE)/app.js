@@ -20,9 +20,10 @@ var app = new Vue({
   data() {
     return {
       all: -1,
-      labels: {}, //所有标签
+      // 不确认活动的是什么时，最好默认为null
+      labels: null, //所有标签
 
-      informations: {},
+      informations: null, //所有漫画信息
     };
   },
 
@@ -49,25 +50,26 @@ var app = new Vue({
       axios.get('https://apis.netstart.cn/bcomic/AllLabel').then((res) => {
         // console.log(res.data.data);
         this.labels = res.data.data; // 获取所有标签数据并存储到label中
-        console.log(this.labels);
+        // console.log(this.labels);
       });
     },
-    getAllImg() {
+    getAllImg(parameter) {
       axios
         .get('https://apis.netstart.cn/bcomic/ClassPage?', {
-          params: this.parameter,
+          params: parameter,
         })
         .then((res) => {
           // console.log(res.data.data);
           this.informations = res.data.data; // 获取所有图片数据并存储到informations中
         });
+      // console.log(parameter);
     },
     getId(labelName, labelValueId) {
       console.log(labelName, labelValueId);
       // 判断传进来的是哪个label和id
       switch (labelName) {
         case 'styles':
-          this.parameter.styleId = labelValueId; 
+          this.parameter.styleId = labelValueId;
           break;
         case 'areas':
           this.parameter.areaId = labelValueId;
@@ -85,14 +87,20 @@ var app = new Vue({
           break;
       }
       // 重新发送ajax
-      this.getAllImg();
+      this.getAllImg(this.parameter);
     },
   },
 
   created() {
     // 组件创建时获取所有标签数据
-    this.getAllLabel(); 
+    this.getAllLabel();
     // 组件创建时获取所有图片数据
-    this.getAllImg(); 
+    this.getAllImg(this.parameter);
   },
+
+  // watch: {
+  //   parameter(newParameter, old) {
+  //     console.log(123);
+  //   },
+  // },
 });

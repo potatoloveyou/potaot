@@ -21,6 +21,10 @@
         }
         li {
           margin: 0 10px;
+          cursor: pointer;
+          &:hover {
+            color: red;
+          }
         }
       }
       .manhua {
@@ -46,7 +50,14 @@
       <section class="label">
         <ul v-for="(label, labelName) in labels" :title="labelName">
           <li :class="labelName" :id="all" @click="getId(labelName,all)">全部</li>
-          <li v-for="labelValue in label" :class="labelName" :id="labelValue.id" @click="getId(labelName,labelValue.id)">{{labelValue.name}}</li>
+          <li
+            v-for="labelValue in label"
+            :class="labelName"
+            :id="labelValue.id"
+            @click="getId(labelName,labelValue.id)"
+          >
+            {{labelValue.name}}
+          </li>
         </ul>
       </section>
 

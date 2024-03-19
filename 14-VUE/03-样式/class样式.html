@@ -9,15 +9,23 @@
   </head>
   <body>
     <div id="app">
-      <button @click=""></button>
+      <div class="static" :class="{test: bool, 'text-danger': isError}">hello</div>
+      <div :class="(bool ? 'test' : '') +  ' ' + (isError ? 'text-danger': '') ">hello</div>
+      <div :style="{color: 'red', fontSize: '50px'}">dddd</div>
     </div>
     <script>
       var vm = new Vue({
         el: '#app',
 
         data() {
-          return {};
+          return {
+            a: 'test',
+            bool: true,
+            isError: false,
+          };
         },
+
+
       });
     </script>
   </body>

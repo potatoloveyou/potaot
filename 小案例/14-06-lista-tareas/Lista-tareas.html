@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <header>
+        <input type="checkbox" name="" id="" :checked="allCheck" @change="taskAllAlter" />
+        <input type="text" name="" id="" placeholder="Agregar tarea" v-model="newTask" @keyup.enter="addTask" />
+      </header>
+
+      <ul class="tasks-list">
+        <li class="task" v-for="(task, index) in tasks" :key="task.id">
+          <!-- <input type="checkbox" v-model="task.completed" /> -->
+          <!-- change当表单元素发生改变时 -->
+          <input type="checkbox" :checked="task.completed" @change="alterTask(task)" />
+          <span class="task-name">{{task.name}}</span>
+          <input type="button" value="x" @click="deleteTodo(task.id)" />
+        </li>
+      </ul>
+    </div>
+
+    <script>
+      var vm = new Vue({
+        el: '#app',
+
+        data() {
+          return {
+            // 存储新任务的输入值
+            newTask: '',
+            // 初始化任务列表，从localStorage中获取，若不存在则使用空数组
+            tasks: JSON.parse(localStorage.getItem('tasks')) || [],
+          };
+        },
+
+        computed: {
+          // 检查所有的是否都已完成
+          allCheck() {
+            // 返回布尔值，true表示所有任务都已完成，false表示至少有一个任务未完成。
+            return this.tasks.every((task) => task.completed);
+          },
+        },
+
+        methods: {
+          // 全选完成/取消完成所有任务
+          taskAllAlter() {
+            // 遍历任务列表，根据allCheck的值，将所有任务的completed属性设置为true或false。
+            // this.tasks.forEach((task) => (task.completed = !this.allCheck));
+            this.tasks=this.tasks.map((t) => ({ ...t, completed: !this.allCheck }));
+          },
+          // 添加新任务
+          addTask() {
+            // trim() 删除字符串首尾空白字符,确保输入值不为空或仅包含空格字符
+            if (this.newTask.trim() !== '') {
+              this.tasks.push({
+                // 确保每个任务的id都是唯一的，且若任务列表不为空，则使用最大id加1，否则使用1
+                id: this.tasks.length ? Math.max(...this.tasks.map((t) => t.id)) + 1 : 1,
+                name: this.newTask.trim(),
+                completed: false,
+              });
+              // 重置输入值，避免有残留
+              this.newTask = '';
+            }
+          },
+          // 点击删除任务   传过来的id是唯一的
+          deleteTodo(id) {
+            console.log(id);
+            // filter() 返回一个全新的数组，包含其id不等于点击的id    确保this.tasks是新的而不是旧的直接改值
+            this.tasks = this.tasks.filter((t) => t.id !== id);
+          },
+          // 修改任务状态
+          alterTask(task) {
+            this.tasks = this.tasks.map((t) => (t.id === task.id ? { ...task, completed: !task.completed } : t));
+          },
+        },
+
+        watch: {
+          tasks(newTasks) {
+            console.log('任务列表已更新', newTasks);
+            localStorage.setItem('tasks', JSON.stringify(newTasks));
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

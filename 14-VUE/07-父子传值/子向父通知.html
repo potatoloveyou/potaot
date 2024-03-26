@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 子向父   通知 -->
+      <!-- @cipher 自定义事件(最好两个单词) -->
+      <!-- 2.子组件设置好自定义事件，并绑定父组件的方法(可以直接写表达式) -->
+      <my-component :abc="n" :a="obj" @cipher="zzz"></my-component>
+
+    </div>
+
+    <script>
+      Vue.component('my-component', {
+        // 这个abc就是由父组件传下来的n，一般来说跟传递过来的属性同名
+        props: ['abc', 'a'],
+        template: "<button @click='clickAlter'>{{abc}}</button>",
+        // 3.当子组件@click时触发自己的方法clickAlter
+
+        methods: {
+          clickAlter() {
+            console.log(123);
+            // 子组件通过自定义事件触发父组件的方法，并传递参数。
+            // 4.clickAlter通过$emit()调用自定义事件，并传递参数。
+            // 运行时原理则反过来4~1，子通过自定义事件触发(通知)父的方法，父通过方法修改子组件的值。
+            this.$emit('cipher');
+          },
+        },
+      });
+
+      var vm = new Vue({
+        el: '#app',
+
+        data() {
+          return {
+            n: 10,
+            obj: {
+              name: '张三',
+              xxx: {
+                age: 20,
+              },
+            },
+          };
+        },
+
+        methods: {
+          // // 1.父组件定义方法
+          zzz() {
+            console.log(456);
+            // this.obj = { ...this.obj, xxx: { ...this.obj.xxx, age: 100} };
+            this.n--;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

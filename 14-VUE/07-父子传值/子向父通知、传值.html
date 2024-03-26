@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 子向父   通知  传值 -->
+      <!-- 2.子组件设置好自定义事件，并绑定父组件的方法(可以直接写表达式) -->
+      <my-component :abc="n" :a="obj" @custom-event="decremetn"></my-component>
+    </div>
+
+    <script>
+      Vue.component('my-component', {
+        // 这个abc就是由父组件传下来的n，一般来说跟传递过来的属性同名
+        props: ['abc', 'a'],
+
+        template: "<button @click='clickAlter'>{{abc}}</button>",
+        // 3.当子组件@click时触发自己的方法clickAlter
+
+        methods: {
+          clickAlter() {
+            console.log(123);
+
+            // 子组件通过自定义事件触发父组件的方法，并传递参数。
+            // 4.clickAlter通过$emit()调用自定义事件，并传递参数。
+            // 这个 3  就是父组件的方法decremetn的参数params。
+            this.$emit('custom-event', 3);
+          },
+        },
+      });
+
+      var vm = new Vue({
+        el: '#app',
+
+        data() {
+          return {
+            n: 10,
+            obj: {
+              name: '张三',
+              xxx: {
+                age: 20,
+              },
+            },
+          };
+        },
+
+        methods: {
+          // 1.父组件定义方法
+          decremetn(params) {
+            // this.n--;
+            console.log(params); // 输出3，即子组件传递的参数。
+            this.n -= params;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

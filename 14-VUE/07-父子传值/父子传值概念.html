@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <my-component :abc="n"></my-component>
+      <my-component :a="obj"></my-component>
+    </div>
+
+    <script>
+      // 父传子就只在子组件上使用props属性，并指定属性名和类型即可，父组件中使用v-bind绑定属性值即可传递给子组件。
+      // 子传父就只在子组件中使用$emit方法，并指定事件名和传递的值，父组件中使用v-on监听事件名即可获取子组件传递的值。
+      Vue.component('my-component', {
+        // 这个abc就是由父组件传下来的n，一般来说跟传递过来的属性同名
+        props: ['abc', 'a'],
+        // template: '<button>{{abc}}</button>',
+        // // 子组件不能直接修改由父组件传递过来基本类型的值
+
+        template: "<button @click='a.xxx.age=10'>{{a.xxx.age}}</button>",
+        // // 子组件可以修改由父组件传递过来复杂的值(但也要杜绝使用)
+      });
+
+      var vm = new Vue({
+        el: '#app',
+
+        data() {
+          return {
+            n: 10,
+            obj: {
+              name: '张三',
+              xxx: {
+                age: 20,
+              },
+            },
+          };
+        },
+      });
+    </script>
+  </body>
+</html>

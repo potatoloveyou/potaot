@@ -4,5 +4,6 @@
   "Codegeex.SidebarUI.LanguagePreference": "中文",
   "Codegeex.CompletionDelay": 0.5,
   "Codegeex.GenerationPreference": "automatic",
-  "Codegeex.CompletionModel": "CodeGeeX Pro[Beta]"
+  "Codegeex.CompletionModel": "CodeGeeX Pro[Beta]",
+  "git.ignoreLimitWarning": true
 }

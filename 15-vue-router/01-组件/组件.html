@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <button-counter :n="n"></button-counter>
+      <button-counter :n="n"></button-counter>
+      <button-counter :n="n"></button-counter>
+
+      <hr />
+      <a-1>hello world</a-1>
+      <a-1>
+        hello world
+        <button-counter :n="n"></button-counter>
+      </a-1>
+    </div>
+
+    <script>
+      // 当每个按钮点击时，他可维护自己的count
+      Vue.component('button-counter', {
+        props: {
+          n: Number,
+        },
+        // 面试题:data为什么是一个函数，原因：避免组件复用时，数据互相污染。每个实例可维护一份被返回对象的独立的拷贝
+        data() {
+          return {
+            count: 20,
+          };
+        },
+        template: '<button >You clicked me {{ count }} times.props{{ n }}</button>',
+      });
+
+      // 插槽 <slot></slot>
+      Vue.component('a-1', {
+        template: '<div>Component A-1 <slot></slot></div>',
+      });
+      Vue.component('a-2', { template: '<div>Component A-2</div>' });
+
+      var app = new Vue({
+        // 根元素
+        el: '#app',
+        // 状态
+        data() {
+          return {
+            n: 10,
+          };
+        },
+      });
+    </script>
+  </body>
+</html>

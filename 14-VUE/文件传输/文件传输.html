@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      img {
+        width: 1200px;
+      }
+    </style>
+  </head>
+  <body>
+    <img src="./image.png" alt="" />
+    <script>
+      /**
+       * 文件传给后端有两种方式
+       * 1.formData上传，二进制blob传输，   后端通过request.files获取文件流，然后保存到本地或者数据库中。
+       * 2.base64上传，前端将文件转换为base64格式，   然后通过ajax上传，后端通过request.body获取base64字符串，然后进行处理。
+       */
+      /**
+       * files 通过input标签读取，包含文件对象的数组
+       * blob 文件对象，包含文件信息，可以通过FileReader读取文件内容，也可以直接上传到后端。
+       * (files其实是blob的一个子类，包含一些额外的信息，比如文件名，文件类型等)
+       *
+       * formData 用于和后端传递的对象
+       * fileReader 用于读取文件内容的对象，可以通过readAsDataURL方法将文件转换为base64格式。
+       */
+    </script>
+  </body>
+</html>

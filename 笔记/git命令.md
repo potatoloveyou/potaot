@@ -1,5 +1,5 @@
 ~~~tex
-(1)查看版本号
+(1)命令行查看版本号
 git --version
 
 (2)初始化git仓库（当前目录）（此时当前文件夹下会多出一个隐藏目录 .git）
@@ -25,10 +25,17 @@ git commit -m "第一次提交"
 (6)查看提交日志
 git log
 
-(7)
+(7)提交到gitHub
+(若是第一次)
 git remote add potato(可自己命名) git@github.com:potatoloveyou/potaot.git(github仓库地址)		关联远程仓库
 git branch -M main(分支名字)		重命名分支
 git push -u potato(需要跟上面命名一样) main(分支名字)
+
+(若不是第一次)
+(报错时)
+git pull --rebase potato(可自己命名) main(分支名字)
+(不报错)
+git puss (推送一切更新)
 
 
 (7)撤销修改

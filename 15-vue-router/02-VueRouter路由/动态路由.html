@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3.6.5/dist/vue-router.js"></script>
+    <style>
+      .router-link-exact-active {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 路由原理，通过某个地址访问不同的资源 -->
+    <!-- VueRouter有些许类似于a标签的电梯效果 -->
+    <div id="app">
+      <p>
+        <!-- 使用 router-link 组件来导航. -->
+        <!-- 通过传入 `to` 属性指定链接. -->
+        <!-- <router-link> 默认会被渲染成一个 `<a>` 标签 -->
+        <router-link to="/">Home</router-link>
+        <router-link to="/about">About</router-link>
+        <router-link to="/users/123">Users 123</router-link>
+        <router-link to="/users/456">Users 456</router-link>
+
+        <router-link to="/article?id=123">article?id=123</router-link>
+        <router-link to="/article?id=456">article?id=456</router-link>
+      </p>
+      <!-- 路由出口 -->
+      <!-- 路由匹配到的组件将渲染在这里 -->
+      <router-view></router-view>
+    </div>
+
+    <script>
+      // 定义组件
+      const Home = { template: '<div>Home 页面</div>' };
+      const About = { template: '<div>About 页面</div>' };
+      const Users = {
+        template: '<div>某个用户的 Users 页面</div>',
+
+        // created() {
+        //   console.log('创建');
+        //   // $router包含路由信息， $route 是当前路由信息
+        //   console.log('当前路由参数:', this.$route.params.id);
+        // },
+        // 从122跳到456 都是使用user组件 这个user组件会被复用不会销毁重建，
+        // 即不会重新创建created方法，所以created方法不会执行两次，created方法只会在第一次创建时执行一次，而不会在每次跳转时都执行一次。
+
+        watch: {
+          $route(newroute) {
+            // 监听路由变化，当路由参数发生变化时，执行相应的操作。
+            console.log('当前路由参数:', newroute.params.id);
+          },
+        },
+      };
+      const Article = {
+        template: '<div>Article {{$route.query.id}} 页面</div>',
+        created() {
+          console.log('Article创建');
+        },
+        updated() {
+          // 更新时会执行，created不会执行，因为created只会在创建时执行一次，而不会在每次更新时都执行。
+          console.log('Article更新');
+        },
+      };
+
+      // 定义路由 routes 配置(数组)
+      const routes = [
+        { path: '/', component: Home }, // 默认路由，即根路径 '/' 对应 Home 组件
+        { path: '/about', component: About }, // '/about' 对应 About 组件
+        { path: '/users/:id', component: Users }, // '/users' 对应 Users 组件
+        { path: '/article', component: Article }, // '/article' 对应 Article 组件，没有动态路由参数，即没有:id
+      ];
+
+      // 创建 router 实例，然后传 `routes` 配置
+      // const router = new VueRouter({ routes: rou tes });
+      const router = new VueRouter({
+        routes, // (缩写) 相当于 routes: routes
+      });
+
+      const app = new Vue({
+        // // 根元素
+        // el: '#app',
+
+        // // 状态
+        // data() {
+        //   return {}；
+        // },
+
+        // 路由实例
+        router,
+      }).$mount('#app');
+      // 挂载到根元素上，.$mount()可代替el选项
+    </script>
+  </body>
+</html>

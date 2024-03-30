@@ -15,11 +15,18 @@
       <button-counter :n="n"></button-counter>
 
       <hr />
+      <!-- 插槽 -->
       <a-1>hello world</a-1>
       <a-1>
         hello world
         <button-counter :n="n"></button-counter>
       </a-1>
+
+      <hr />
+      <!-- 动态组件 -->
+      <button @click="currentTabComponent = 'home-page'">home</button>
+      <button @click="currentTabComponent = 'about-page'">about</button>
+      <component :is="currentTabComponent"></component>
     </div>
 
     <script>
@@ -43,6 +50,10 @@
       });
       Vue.component('a-2', { template: '<div>Component A-2</div>' });
 
+      // 动态组件
+      Vue.component('home-page', { template: '<div>Home Page 页面</div>' });
+      Vue.component('about-page', { template: '<div>About Page 页面</div>' });
+
       var app = new Vue({
         // 根元素
         el: '#app',
@@ -50,6 +61,7 @@
         data() {
           return {
             n: 10,
+            currentTabComponent: 'home-page',
           };
         },
       });

@@ -10,14 +10,6 @@
   </head>
 
   <body>
-    <div>
-      <!-- .card>img+h6+.info -->
-      <!-- <div class="card">
-      <img src="" alt="">
-      <h6></h6>
-      <div class="info"></div>
-    </div> -->
-    </div>
     <form action="">
       <input type="text" placeholder="Email" />
       <!-- placeholder(虚拟提示) -->
@@ -149,12 +141,14 @@
         /* 鼠标变成小手 */
 
         /* 文本溢出时显示省略号 需要配合  white-space: nowrap;   overflow: hidden; */
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
+        text-overflow: ellipsis; /* 当文本内容超出其容器时，显示省略号（...） */
+        white-space: nowrap; /* 防止文本换行 */
+        overflow: hidden; /* 隐藏超出容器的内容 */
 
-        /* less */
-        /* 有空格代表《后代》 没有空格代表《且》 &代表《且》>代表《直接》子元素  */
+        /* 设置展示 特定行数后  文本再溢出时显示省略号 (注意,不能加上white-space: nowrap;) */
+        display: -webkit-box; /* 必须，将对象作为弹性伸缩盒子模型显示 */
+        -webkit-line-clamp: 2; /* 必须，设置最大行数(不规范的属性,没有出现在 CSS 规范草案中) */
+        -webkit-box-orient: vertical; /* 必须，设置或检索伸缩盒对象的子元素的排列方式 */
       }
     </style>
 

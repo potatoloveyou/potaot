@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3.6.5/dist/vue-router.js"></script>
+  </head>
+  <body>
+    <!-- ref作用:用于父组件访问子组件实例或子元素上的元素、方法 -->
+    <div id="app">
+      <h3>{{msg}}</h3>
+      <!-- 1.在子组件上写上ref= -->
+      <input ref="xxx" type="text" />
+      <button @click="clickHandler">点击</button>
+      <hr />
+      <child ref="child"></child>
+      <button @click="clickChild">点击 child</button>
+    </div>
+
+    <script>
+      Vue.component('child', {
+        template: '<input type="text" ref="child-input" placeholder="holder" />',
+      });
+
+      const app = new Vue({
+        data() {
+          return {
+            msg: 'hello world',
+          };
+        },
+
+        methods: {
+          clickHandler() {
+            console.log(this.$refs.xxx);
+            // 2.父组件即可访问其自身下的$refs中有什么
+            this.$refs.xxx.focus(); // 获取焦点
+            this.$refs.xxx.value = '123'; // 修改值
+            // 如若需要调用 DOM元素的属性或者方法，则需要使用 ref 属性来获取 DOM元素
+          },
+          clickChild() {
+            this.$refs.child.$refs['child-input'].focus(); // 获取焦点
+          },
+        },
+      }).$mount('#app');
+    </script>
+  </body>
+</html>

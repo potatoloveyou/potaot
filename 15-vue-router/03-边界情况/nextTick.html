@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3.6.5/dist/vue-router.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <p @click="clickHandler" ref="xxx" style="width: 100px; background: red">{{msg}}</p>
+      <h3>{{msg}}</h3>
+
+      <ul @click="changeNums">
+        <li v-for="n in nums">{{n}}</li>
+      </ul>
+    </div>
+
+    <script>
+      const app = new Vue({
+        data() {
+          return {
+            msg: 'hello world',
+            nums: [11, 22, 33],
+          };
+        },
+        methods: {
+          async clickHandler() {
+            this.msg = 1;
+            this.msg = '法死千是回血到之，啊孔勇，是五看恶之发，';
+            this.msg = 3;
+            this.msg =
+              '法死千是回血到之，啊孔勇，是五看恶之发，是人联六德极郭更自连秦的言三死重了下，首在心量为，外服宋的气爻落两与本人不，诗弄不有人到病秦不，成掸台仑司负互令反诗娇生，水向快我要病他畴竟土韩事我掉小幕无，至前嗣长上苦即是融上时，与种之羊耐锐，张他愿，姑愿落，于。';
+            // console.log(this.$refs.xxx.offsetHeight);
+
+            //  this.$nextTick()  DOM 更新后延迟执行一段代码
+            // 例如，在更新 DOM 之后，获取元素的尺寸或位置信息。
+            // this.$nextTick(function () {
+            //   console.log("nextTick", this.$refs.xxx.offsetHeight);
+            // });
+
+            await this.$nextTick();
+            console.log(this.$refs.xxx.offsetHeight);
+          },
+
+          changeNums: function () {
+            this.nums[1] = 22222;
+            // 不能响应的
+
+            // 强制更新视图，重新渲染组件，并触发相应的生命周期钩子函数。(救命用的)
+            this.$forceUpdate(); 
+
+            // Vue.set 返回全新的数组
+          },
+        },
+        watch: {
+          msg: function (n) {
+            console.log(n);
+          },
+        },
+      }).$mount('#app');
+    </script>
+  </body>
+</html>

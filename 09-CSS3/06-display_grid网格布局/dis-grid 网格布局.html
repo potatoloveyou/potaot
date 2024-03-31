@@ -21,14 +21,14 @@
       /* 设置网格容器的块级元素 */
       display: grid;
 
-      /* 定义网格布局中的  列  数量 有几个就几列 也可指定某一列的宽度 */
+      /* 定义网格布局中的  columns列  数量 有几个就几列 也可指定某一列的宽度 */
       /* 有几个auto就平分成几列 */
       /* grid-template-columns: auto auto auto auto; */
       /* fr代表可用空间的一等份(类似flex:1) */
       /* grid-template-columns: 1fr 1fr 1fr 1fr; */
       /* grid-template-columns: 80px 200px auto 100px; */
 
-      /* 定义网格布局中的  行  数量 有几行就几行 也可指定某一行的宽度 */
+      /* 定义网格布局中的  rows行  数量 有几行就几行 也可指定某一行的宽度 */
       /* grid-template-rows: auto auto auto auto; */
       /* grid-template-rows: 1fr 1fr 1fr; */
       /* grid-template-rows: 100px 100px 100px 100px; */
@@ -38,7 +38,7 @@
       /* grid-template: 1fr 1fr 1fr 1fr / 1fr 1fr 1fr 1fr; */
       grid-template: repeat(4, 1fr) / repeat(4, 1fr);
 
-      /* 定义网格布局中的列和行的  间隙   */
+      /* 定义网格布局中的 column列  和  row行 的  gap间隙   */
       /* grid-column-gap: 10px; */
       /* grid-row-gap: 10px; */
       /* 上面的缩写 但是先  行row  后  列column   */

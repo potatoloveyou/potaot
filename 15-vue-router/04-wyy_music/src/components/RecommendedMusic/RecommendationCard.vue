@@ -1,5 +1,5 @@
 <template>
-  <li class="recommendation-list-card">
+  <li class="recommendationListCard">
     <img :src="`${personalized.picUrl}?imageView=1&type=webp&thumbnail=370x0`" alt="song.name" />
     <h5>{{ personalized.name }}</h5>
     <div class="earImg">
@@ -32,19 +32,6 @@ export default {
 
   computed: {
     numberFormat() {
-      // if (this.playCount.length > 4) {
-      //   return `${this.playCount.slice(0, this.playCount.length - 4)}.${this.playCount.slice(
-      //     3,
-      //     this.playCount.length - 4,
-      //   )}万`;
-      // } else if (this.playCount.length > 7) {
-      //   return `${this.playCount.slice(0, this.playCount.length - 7)}.${this.playCount.slice(
-      //     6,
-      //     this.playCount.length - 7,
-      //   )}亿`;
-      // } else {
-      //   return this.playCount;
-      // }
       return this.playCount.length > 4
         ? `${this.playCount.slice(0, this.playCount.length - 4)}.${this.playCount.slice(
             3,
@@ -62,7 +49,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.recommendation-list-card {
+.recommendationListCard {
   display: grid;
   position: relative;
   margin-bottom: 16rem;

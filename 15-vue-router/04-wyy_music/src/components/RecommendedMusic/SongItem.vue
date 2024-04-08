@@ -1,5 +1,5 @@
 <template>
-  <li class="song-item">
+  <li class="songItem">
     <a>
       <!-- introduce介绍(左边歌手信息) -->
       <div class="introduce">
@@ -19,20 +19,17 @@ export default {
   props: {
     newsong: Object,
   },
-  data() {
-    return {};
-  },
 };
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 .materialImg {
   background-image: url('https://s3.music.126.net/mobile-new/img/index_icon_2x.png?5207a28c3767992ca4bb6d4887c74880=');
   background-repeat: no-repeat;
   background-size: 166px 97px;
 }
 
-.song-item {
+.songItem {
   border-bottom: 1rem solid rgb(208, 208, 208);
   padding: 5rem 10rem;
   a {
@@ -42,8 +39,12 @@ export default {
     .introduce {
       .song-artist {
         display: flex;
-        justify-content: center;
         align-items: center;
+        font-size: 12px;
+        color: #888;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
         .toneQualityImg {
           width: 12rem;
           height: 8rem;

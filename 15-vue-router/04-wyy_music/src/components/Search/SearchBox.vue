@@ -1,6 +1,7 @@
 <template>
-  <div class="search">
-    <form action="#">
+  <div class="searchBox">
+    <form class="form" action="#" @submit.stop.prevent>
+      <!-- <div class="form"> -->
       <div class="searchImg">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26">
           <path
@@ -9,15 +10,21 @@
             d="M25.181 23.535l-1.414 1.414-7.315-7.314A9.966 9.966 0 0 1 10 20C4.477 20 0 15.523 0 10S4.477 0 10 0s10 4.477 10 10c0 2.342-.811 4.49-2.16 6.195l7.341 7.34zM10 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16z" />
         </svg>
       </div>
+
       <input
         type="text"
         class="searchInput"
         placeholder="搜索歌曲、歌手、专辑"
-        @input="$emit('modify-value', $event.target.value)" />
+        :value="value"
+        @input="$emit('modify-value', $event.target.value)"
+        @focus="$emit('input-focus')"
+        @keyup.enter.stop.prevent="$emit('search-enter')" />
       <div class="searchDelete">
-        <button v-show="isInputPresent">X</button>
+        <button v-show="isInputPresent" @click="$emit('delete-input')">X</button>
       </div>
+      <!-- </div> -->
     </form>
+    <!-- BUG:不能阻止form和input的默认事件，input回车时会刷新value值会消失 -->
   </div>
 </template>
 
@@ -39,11 +46,12 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.search {
+.searchBox {
   // padding: 0 20rem 10rem 20rem;
   padding: 15px 10px;
   box-shadow: 0 0 2rem 0px rgb(208, 208, 208);
-  form {
+  .form {
+    // .xxx {
     width: 100%;
     height: 30rem;
     display: flex;
@@ -67,6 +75,7 @@ export default {
       height: 30rem;
       border: 0;
       background-color: transparent;
+      outline: none;
     }
     .searchDelete {
       width: 30rem;

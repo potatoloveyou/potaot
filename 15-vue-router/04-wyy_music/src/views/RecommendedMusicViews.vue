@@ -1,7 +1,7 @@
 <!-- 3.设置好RecommendedMusicViews文件名 -->
 <template>
   <!-- <div class="RecommendedMusic"> -->
-  <div class="RecommendedMusicViews">
+  <div class="recommendedMusicViews">
     <h3>编辑推荐</h3>
     <ul class="recommendation-list">
       <RecommendationCard
@@ -10,6 +10,7 @@
         :key="personalized.id"></RecommendationCard>
     </ul>
     <h3>最新音乐</h3>
+    
     <ul class="latestSong-list">
       <SongItem v-for="newsong in newsongs" :newsong="newsong" :key="newsong.id"></SongItem>
     </ul>
@@ -30,9 +31,10 @@
 </template>
 
 <script>
-import axios from 'axios';
-import RecommendationCard from '../components/RecommendationCard.vue';
-import SongItem from '../components/SongItem.vue';
+// import axios from 'axios';
+import RecommendationCard from '../components/RecommendedMusic/RecommendationCard.vue';
+import SongItem from '../components/RecommendedMusic/SongItem.vue';
+import { getPersonalizeds, getNewsongs } from '@/apis/api.js';
 
 export default {
   // name: 'RecommendedMusic',
@@ -54,41 +56,8 @@ export default {
 
   created() {
     // 获取编辑推荐歌单
-    // console.log(axios);
-    // axios
-    //   .get('https://apis.netstart.cn/music/personalized', {
-    //     params: {
-    //       limit: 6,
-    //     },
-    //   })
-    //   .then((res) => {
-    //     console.log(res.data.result);
-    //     this.personalizeds = res.data.result;
-    //   });
-    // axios
-    //   .get('https://apis.netstart.cn/music/personalized/newsong', {
-    //     params: {
-    //       limit: 6,
-    //     },
-    //   })
-    //   .then((res) => {
-    //     console.log(res.data.result);
-    //     this.personalizeds = res.data.result;
-    //   });
-
     // Promise.all([])  Promise.all()第一个参数为数组，当实例在所有Promise实例都成功后才会成功，否则失败。
-    Promise.all([
-      axios.get('https://apis.netstart.cn/music/personalized', {
-        params: {
-          limit: 6,
-        },
-      }),
-      axios.get('https://apis.netstart.cn/music/personalized/newsong', {
-        params: {
-          limit: 10,
-        },
-      }),
-    ]).then(([personalized, newsong]) => {
+    Promise.all([getPersonalizeds(), getNewsongs()]).then(([personalized, newsong]) => {
       this.personalizeds = personalized.data.result;
       this.newsongs = newsong.data.result;
     });
@@ -99,7 +68,7 @@ export default {
 <!-- scoped用于限制css样式的作用范围 -->
 <style lang="less" scoped>
 // .RecommendedMusic {
-.RecommendedMusicViews {
+.recommendedMusicViews {
   margin-top: 125rem;
 
   h3 {

@@ -1,7 +1,6 @@
 <template>
   <div class="searchBox">
     <form class="form" action="#" @submit.stop.prevent>
-      <!-- <div class="form"> -->
       <div class="searchImg">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26">
           <path
@@ -18,13 +17,11 @@
         :value="value"
         @input="$emit('modify-value', $event.target.value)"
         @focus="$emit('input-focus')"
-        @keyup.enter.stop.prevent="$emit('search-enter')" />
+        @keydown.enter.prevent="$emit('search-enter')" />
       <div class="searchDelete">
         <button v-show="isInputPresent" @click="$emit('delete-input')">X</button>
       </div>
-      <!-- </div> -->
     </form>
-    <!-- BUG:不能阻止form和input的默认事件，input回车时会刷新value值会消失 -->
   </div>
 </template>
 
@@ -47,11 +44,9 @@ export default {
 
 <style lang="less" scoped>
 .searchBox {
-  // padding: 0 20rem 10rem 20rem;
   padding: 15px 10px;
   box-shadow: 0 0 2rem 0px rgb(208, 208, 208);
   .form {
-    // .xxx {
     width: 100%;
     height: 30rem;
     display: flex;
@@ -64,7 +59,6 @@ export default {
       justify-content: center;
       align-items: center;
       svg {
-        // font-size: 12rem;
         width: 60%;
         height: 70%;
         transform: translateX(10%);

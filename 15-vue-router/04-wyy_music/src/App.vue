@@ -70,11 +70,9 @@ nav {
   background-color: #fff;
   a {
     color: #2c3e50;
-    // font-size: 15rem;
     text-decoration: none;
     line-height: 40rem;
     padding: 0 5rem;
-    border-bottom: 2rem solid #dd001b;
 
     &.router-link-exact-active {
       color: #dd001b;

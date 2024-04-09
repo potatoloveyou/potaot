@@ -26,7 +26,7 @@ import SearchSongItem from '@/components/Search/SearchSongItem.vue';
 import { getSearchHots, getSearchSuggestions, getSelectResult } from '@/apis/api.js';
 
 // npm uninstall lodash     删除lodash
-const debounce = require('lodash/debounce');
+const debounce = require('lodash/debounce')
 
 export default {
   name: 'SearchViews',
@@ -111,11 +111,11 @@ export default {
             this.keywords = res.data.result.allMatch;
           }
         });
-      } else {
-        // 清空搜索结果列表，以便重新触发watch事件处理函数
+      } else if (newValue == '' && this.isConfirm === false) {
+        this.selectedResults = null;
         this.keywords = [];
       }
-    }, 300),
+    }, 500),
   },
 };
 </script>

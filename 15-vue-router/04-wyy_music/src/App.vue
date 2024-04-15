@@ -20,7 +20,6 @@
     <router-view />
   </div>
 </template>
-
 <style lang="less">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -34,7 +33,6 @@
 .top {
   position: fixed;
   top: 0;
-  left: 0;
   width: 100%;
   z-index: 100;
 }

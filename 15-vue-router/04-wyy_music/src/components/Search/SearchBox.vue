@@ -2,14 +2,8 @@
   <div class="searchBox">
     <form class="form" action="#" @submit.stop.prevent>
       <div class="searchImg">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26">
-          <path
-            fill-rule="evenodd"
-            fill="#c9c9ca"
-            d="M25.181 23.535l-1.414 1.414-7.315-7.314A9.966 9.966 0 0 1 10 20C4.477 20 0 15.523 0 10S4.477 0 10 0s10 4.477 10 10c0 2.342-.811 4.49-2.16 6.195l7.341 7.34zM10 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16z" />
-        </svg>
+        <img src="@/assets/searchImg.svg" alt="" />
       </div>
-
       <input
         type="text"
         class="searchInput"
@@ -17,7 +11,7 @@
         :value="value"
         @input="$emit('modify-value', $event.target.value)"
         @focus="$emit('input-focus')"
-        @keydown.enter.prevent="$emit('search-enter')" />
+        @keydown.enter.prevent="$emit('search-enter', $event.target)" />
       <div class="searchDelete">
         <button v-show="isInputPresent" @click="$emit('delete-input')">X</button>
       </div>
@@ -58,7 +52,7 @@ export default {
       display: flex;
       justify-content: center;
       align-items: center;
-      svg {
+      img{
         width: 60%;
         height: 70%;
         transform: translateX(10%);

@@ -1,7 +1,7 @@
 <template>
   <div class="searchHotlist">
     <ul class="searchHotList-item">
-      <li v-for="(searchHot, index) in searchHots" :key="index">{{ searchHot.first }}</li>
+      <li v-for="(searchHot, index) in searchHots" :key="index" @click="$emit('search-hotresult', searchHot.first)">{{ searchHot.first }}</li>
     </ul>
   </div>
 </template>

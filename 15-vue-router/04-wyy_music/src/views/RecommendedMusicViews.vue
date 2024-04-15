@@ -10,7 +10,7 @@
         :key="personalized.id"></RecommendationCard>
     </ul>
     <h3>最新音乐</h3>
-    
+
     <ul class="latestSong-list">
       <SongItem v-for="newsong in newsongs" :newsong="newsong" :key="newsong.id"></SongItem>
     </ul>

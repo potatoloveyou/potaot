@@ -6,7 +6,7 @@
         <div class="song-name">{{ newsong.name }}</div>
         <div class="song-artist">
           <div class="toneQualityImg materialImg"></div>
-          {{ newsong.song.artists[0].name }}-{{ newsong.song.album.name }}
+          <span>{{ newsong.song.artists[0].name }}-{{ newsong.song.album.name }}</span>
         </div>
       </div>
       <div class="play-icon materialImg"></div>
@@ -32,23 +32,35 @@ export default {
 .songItem {
   border-bottom: 1rem solid rgb(208, 208, 208);
   padding: 5rem 10rem;
+
   a {
+    width: 100%;
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
+
     .introduce {
+      width: calc(100% - 22px);
+      .song-name {
+        text-overflow: ellipsis; /* 当文本内容超出其容器时，显示省略号（...） */
+        white-space: nowrap; /* 防止文本换行 */
+        overflow: hidden; /* 隐藏超出容器的内容 */
+      }
       .song-artist {
+        width: 100%;
         display: flex;
         align-items: center;
         font-size: 12px;
         color: #888;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
         .toneQualityImg {
           width: 12rem;
           height: 8rem;
           margin-right: 5rem;
+        }
+        span {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
       }
     }

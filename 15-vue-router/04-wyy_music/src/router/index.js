@@ -12,6 +12,10 @@ const routes = [
     path: '/',
     name: 'RecommendedMusicViews',
     component: RecommendedMusicViews,
+
+    // 路由元信息
+    // requiresAuth   true表示该路由需要登录才可访问
+    meta: { title: 'RecommendedMusicViews', isShowApp: true },
   },
   {
     // 这里设置path路径，就是在app.vue中<router-link>标签的to属性中设置的路径
@@ -22,16 +26,31 @@ const routes = [
     // this generates a separate chunk (HotSongChartViews.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "HotSongChartViews" */ '../views/HotSongChartViews.vue'),
+    meta: { title: 'HotSongChartViews', isShowApp: true },
   },
   {
     path: '/SearchViews',
     name: 'SearchViews',
     component: () => import(/* webpackChunkName: "SearchViews" */ '../views/SearchViews.vue'),
+    meta: { title: 'SearchViews', isShowApp: true },
+  },
+  {
+    path: '/PlayListViews',
+    name: 'PlayListViews',
+    component: () => import(/* webpackChunkName: "SearchViews" */ '@/views/PlayListViews.vue'),
   },
 ];
 
 const router = new VueRouter({
   routes,
 });
+
+// 全局前置路由守卫
+// router.beforeEach((to, from, next) => {
+//   console.log('全局 router.beforeEach');
+//   console.log("从",to);
+//   console.log("到",from);
+//   next(); // 必须调用next()才能继续执行
+// });
 
 export default router;

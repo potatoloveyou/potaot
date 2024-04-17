@@ -1,23 +1,26 @@
 <template>
-  <li class="songItem">
-    <a>
-      <!-- introduce介绍(左边歌手信息) -->
-      <div class="introduce">
-        <div class="song-name">{{ newsong.name }}</div>
-        <div class="song-artist">
-          <div class="toneQualityImg materialImg"></div>
-          <span>{{ newsong.song.artists[0].name }}-{{ newsong.song.album.name }}</span>
+  <ul class="newSongList">
+    <li class="songItem" v-for="newsong in newsongs" :newsong="newsong" :key="newsong.id">
+      <a>
+        <!-- introduce介绍(左边歌手信息) -->
+        <div class="introduce">
+          <div class="song-name">{{ newsong.name }}</div>
+          <div class="song-artist">
+            <div class="toneQualityImg materialImg"></div>
+            <span>{{ newsong.song.artists[0].name }}-{{ newsong.song.album.name }}</span>
+          </div>
         </div>
-      </div>
-      <div class="play-icon materialImg"></div>
-    </a>
-  </li>
+        <div class="play-icon materialImg"></div>
+      </a>
+    </li>
+  </ul>
 </template>
 
 <script>
 export default {
+  name: 'NewSongList',
   props: {
-    newsong: Object,
+    newsongs: Array,
   },
 };
 </script>

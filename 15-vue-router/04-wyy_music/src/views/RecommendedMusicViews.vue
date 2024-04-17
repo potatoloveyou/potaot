@@ -1,20 +1,10 @@
 <!-- 3.设置好RecommendedMusicViews文件名 -->
 <template>
-  <!-- <div class="RecommendedMusic"> -->
   <div class="recommendedMusicViews">
     <h3>编辑推荐</h3>
-    <ul class="recommendation-list">
-      <RecommendationCard
-        v-for="personalized in personalizeds"
-        :personalized="personalized"
-        :key="personalized.id"></RecommendationCard>
-    </ul>
+    <RecommendationList :personalizeds="personalizeds"></RecommendationList>
     <h3>最新音乐</h3>
-
-    <ul class="latestSong-list">
-      <SongItem v-for="newsong in newsongs" :newsong="newsong" :key="newsong.id"></SongItem>
-    </ul>
-
+    <NewSongList :newsongs="newsongs"></NewSongList>
     <footer>
       <div class="footer-content">
         <div class="logo">
@@ -32,8 +22,8 @@
 
 <script>
 // import axios from 'axios';
-import RecommendationCard from '../components/RecommendedMusic/RecommendationCard.vue';
-import SongItem from '../components/RecommendedMusic/SongItem.vue';
+import RecommendationList from '../components/RecommendedMusic/RecommendationList.vue';
+import NewSongList from '../components/RecommendedMusic/NewSongList.vue';
 import { getPersonalizeds, getNewsongs } from '@/apis/api.js';
 
 export default {
@@ -42,9 +32,8 @@ export default {
   name: 'RecommendedMusicViews',
 
   components: {
-    // HelloWorld,
-    RecommendationCard,
-    SongItem,
+    RecommendationList,
+    NewSongList,
   },
 
   data() {
@@ -67,7 +56,6 @@ export default {
 
 <!-- scoped用于限制css样式的作用范围 -->
 <style lang="less" scoped>
-// .RecommendedMusic {
 .recommendedMusicViews {
   margin-top: 125rem;
 
@@ -86,13 +74,6 @@ export default {
       height: 16px;
       background-color: #d33a31;
     }
-  }
-  ul.recommendation-list {
-    display: grid;
-    // columns列  repeat(3, 1fr) 3列 每列1fr
-    // gap 列与列之间的间距
-    grid-template-columns: repeat(3, 1fr);
-    grid-column-gap: 2rem;
   }
 
   footer {

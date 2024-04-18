@@ -1,6 +1,6 @@
 <template>
   <div class="searchViews">
-    <img class="loading" src="@/assets/doubleRing.gif" alt="" v-show="loading" />
+    <img class="loading" src="@/assets/imgs/doubleRingLoading.gif" alt="" v-show="loading" />
     <SearchBox
       :value="value"
       @modify-value="modifyValue"
@@ -8,30 +8,33 @@
       @delete-input="deleteInput"
       @search-enter="selectResult(value, $event)"
       ref="myInput"></SearchBox>
-    <SearchHotList
+    <SearchList
       :searchHots="searchHots"
       v-show="!keywords.length && !selectedResults.length"
-      @search-hotresult="selectResult"></SearchHotList>
-    <SearchResult
+      @search-hotresult="selectResult"
+      :historys="historys"
+      @search-history="selectResult($event)"
+      @delete-history="deleteHistory"></SearchList>
+    <SearchSuggestions
       :keywords="keywords"
       :value="value"
       @select-result="selectResult"
-      v-show="!selectedResults.length"></SearchResult>
-    <SearchSongItem
+      v-show="!selectedResults.length"></SearchSuggestions>
+    <SearchSongList
       :selectedResults="selectedResults"
       :value="value"
       v-show="selectedResults.length"
-      :axiosGetSelectResult="axiosGetSelectResult"></SearchSongItem>
+      :axiosGetSelectResult="axiosGetSelectResult"></SearchSongList>
   </div>
 </template>
 
 <script>
 import SearchBox from '@/components/Search/SearchBox.vue';
-import SearchHotList from '@/components/Search/SearchHotList.vue';
-import SearchResult from '@/components/Search/SearchResult.vue';
-import SearchSongItem from '@/components/Search/SearchSongItem.vue';
+import SearchList from '@/components/Search/SearchList.vue';
+import SearchSuggestions from '@/components/Search/SearchSuggestions.vue';
+import SearchSongList from '@/components/Search/SearchSongList.vue';
 
-import { getSearchHots, getSearchSuggestions, getSelectResult } from '@/apis/api.js';
+import { getSearchHotList, getSearchSuggestions, getSelectResult } from '@/apis/api';
 
 // npm uninstall lodash     删除lodash
 const debounce = require('lodash/debounce');
@@ -41,9 +44,9 @@ export default {
 
   components: {
     SearchBox,
-    SearchHotList,
-    SearchResult,
-    SearchSongItem,
+    SearchList,
+    SearchSuggestions,
+    SearchSongList,
   },
 
   data() {
@@ -57,10 +60,11 @@ export default {
       // 是否确认搜索结果，用于处理点击搜索结果时的事件处理逻辑
       isConfirm: false,
       // 选中的搜索结果
-      // selectedResults: null,
       selectedResults: [],
-
+      // 等待加载图标
       loading: false,
+      // 搜索历史记录
+      historys: JSON.parse(localStorage.getItem('searchHistory')) || [],
     };
   },
 
@@ -101,7 +105,7 @@ export default {
       });
     },
 
-    // 选择(回车)搜索结果
+    // 选择 或 回车 搜索结果
     // 只有input回车时才会传递event，其他情况不传递event
     async selectResult(keyword, event) {
       // 当event存在时(input回车)，取消input的聚焦事件
@@ -117,12 +121,21 @@ export default {
         await this.axiosGetSelectResult();
         this.loading = false;
       }
+
+      // 存储每次搜索的内容(新内容需要在上面，所以需要先添加keyword 在展开数组)
+      this.historys = [...new Set([keyword, ...this.historys])];
+    },
+
+    // 删除历史记录
+    deleteHistory(history) {
+      console.log(history);
+      this.historys = this.historys.filter((item) => item !== history);
     },
   },
 
   created() {
     this.loading = true;
-    Promise.all([getSearchHots()]).then(([searchHots]) => {
+    Promise.all([getSearchHotList()]).then(([searchHots]) => {
       this.loading = false;
       this.searchHots = searchHots.data.result.hots;
     });
@@ -144,6 +157,10 @@ export default {
         this.selectedResults = [];
       }
     }, 500),
+
+    historys(newHistory) {
+      localStorage.setItem('searchHistory', JSON.stringify(newHistory));
+    },
   },
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="searchSongItem" ref="searchSongItem" @scroll="handleScroll">
+  <div class="searchSongList" ref="SearchSongList" @scroll="handleScroll">
     <ul>
       <li class="songItem" v-for="selectedResult in selectedResults" :key="selectedResult.id">
         <a>
@@ -14,13 +14,13 @@
         </a>
       </li>
     </ul>
-    <img class="bottomLoading" src="@/assets/bottomLoading.svg" alt="" v-show="isBottom" />
+    <img class="bottomLoading" src="@/assets/imgs/svg/bottomLoading.svg" alt="" v-show="isBottom" />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'SearchSongItem',
+  name: 'SearchSongList',
   props: {
     value: String,
     selectedResults: Array,
@@ -31,21 +31,21 @@ export default {
       // 是否滚动到底部
       isBottom: false,
 
-      // 用于存储searchSongItem的DOM元素
-      searchSongItem: null,
+      // 用于存储SearchSongList的DOM元素
+      SearchSongList: null,
     };
   },
 
   // 能拿到DOM
   mounted() {
-    this.searchSongItem = this.$refs.searchSongItem;
+    this.SearchSongList = this.$refs.SearchSongList;
   },
 
   methods: {
     async handleScroll() {
       if (
         !this.isBottom &&
-        this.searchSongItem.scrollTop + this.searchSongItem.clientHeight + 50 >= this.searchSongItem.scrollHeight
+        this.SearchSongList.scrollTop + this.SearchSongList.clientHeight + 50 >= this.SearchSongList.scrollHeight
       ) {
         this.isBottom = true;
         // console.log('到底了');
@@ -58,16 +58,14 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.searchSongItem {
+.searchSongList {
   width: 100%;
-  // background-color: rgba(255, 0, 0, 0.3);
   height: calc(100vh - 130rem - 60rem);
   overflow: auto;
   position: absolute;
   top: 60rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   .bottomLoading {
     height: 50rem;
   }

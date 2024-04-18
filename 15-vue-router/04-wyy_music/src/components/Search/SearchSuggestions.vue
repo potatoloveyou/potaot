@@ -4,9 +4,9 @@
     <ul>
       <li class="value" v-show="keywords.length">搜索"{{ value }}"</li>
       <li v-for="(keyword, index) in keywords" :key="index" @click="$emit('select-result', keyword.keyword)">
-        <div class="searchImg">
-          <img src="@/assets/searchImg.svg" alt="" />
-        </div>
+        <figure class="figure-svg searchImg">
+          <i class="i-svg"></i>
+        </figure>
         {{ keyword.keyword }}
       </li>
     </ul>
@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  name: 'searchResult',
+  name: 'SearchResult',
   props: {
     keywords: Array,
     value: String,
@@ -37,17 +37,13 @@ export default {
       line-height: 48rem;
       box-shadow: 0 0 2rem 0px rgba(208, 208, 208, 0.5);
 
-      .searchImg {
+      figure.searchImg {
         width: 30rem;
         height: 30rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        svg {
-          // font-size: 12rem;
-          width: 60%;
-          height: 70%;
-          transform: translateX(10%);
+        i {
+          width: 15px;
+          height: 15px;
+          background-image: url(@/assets/imgs/svg/search.svg);
         }
       }
     }

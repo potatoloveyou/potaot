@@ -24,7 +24,7 @@
 // import axios from 'axios';
 import RecommendationList from '../components/RecommendedMusic/RecommendationList.vue';
 import NewSongList from '../components/RecommendedMusic/NewSongList.vue';
-import { getPersonalizeds, getNewsongs } from '@/apis/api.js';
+import { getRecommendationList, getNewSongList } from '@/apis/api';
 
 export default {
   // name: 'RecommendedMusic',
@@ -46,7 +46,7 @@ export default {
   created() {
     // 获取编辑推荐歌单
     // Promise.all([])  Promise.all()第一个参数为数组，当实例在所有Promise实例都成功后才会成功，否则失败。
-    Promise.all([getPersonalizeds(), getNewsongs()]).then(([personalized, newsong]) => {
+    Promise.all([getRecommendationList(), getNewSongList()]).then(([personalized, newsong]) => {
       this.personalizeds = personalized.data.result;
       this.newsongs = newsong.data.result;
     });

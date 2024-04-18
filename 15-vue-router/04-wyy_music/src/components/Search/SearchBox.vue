@@ -1,9 +1,9 @@
 <template>
   <div class="searchBox">
     <form class="form" action="#" @submit.stop.prevent>
-      <div class="searchImg">
-        <img src="@/assets/searchImg.svg" alt="" />
-      </div>
+      <figure class="figure-svg searchImg">
+        <i class="i-svg"></i>
+      </figure>
       <input
         type="text"
         class="searchInput"
@@ -12,16 +12,16 @@
         @input="$emit('modify-value', $event.target.value)"
         @focus="$emit('input-focus')"
         @keydown.enter.prevent="$emit('search-enter', $event.target)" />
-      <div class="searchDelete">
-        <button v-show="isInputPresent" @click="$emit('delete-input')">X</button>
-      </div>
+      <figure class="figure-svg searchDeleteImg" v-show="isInputPresent" @click="$emit('delete-input')">
+        <i class="i-svg"></i>
+      </figure>
     </form>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'searchBox',
+  name: 'SearchBox',
   props: {
     value: String,
   },
@@ -46,42 +46,39 @@ export default {
     display: flex;
     background-color: #ebecec;
     border-radius: 50rem;
-    .searchImg {
+    figure.searchImg {
       width: 30rem;
       height: 30rem;
       display: flex;
       justify-content: center;
       align-items: center;
-      img{
-        width: 60%;
-        height: 70%;
-        transform: translateX(10%);
+      i {
+        display: block;
+        width: 13rem;
+        height: 13rem;
+        background-image: url(@/assets/imgs/svg/search.svg);
+        transform: translateX(20%);
       }
     }
     .searchInput {
-      width: 100%;
+      flex: 1;
       height: 30rem;
       border: 0;
       background-color: transparent;
       outline: none;
+      padding: 0;
     }
-    .searchDelete {
+    figure.searchDeleteImg {
       width: 30rem;
       height: 30rem;
       display: flex;
       justify-content: center;
       align-items: center;
-      button {
-        padding: 0;
-        border: 0;
-        width: 16rem;
-        height: 16rem;
-        font-size: 10rem;
-        font-weight: bolder;
-        transform: translateX(-10%);
-        background-color: rgba(169, 169, 169, 0.6);
-        border-radius: 50%;
-        color: #fff;
+      i {
+        display: block;
+        width: 14px;
+        height: 14px;
+        background-image: url(@/assets/imgs/svg/searchDelete.svg);
       }
     }
   }

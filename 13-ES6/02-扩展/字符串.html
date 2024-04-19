@@ -1,36 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
+  <body>
+    <script>
+      // 模版字符串示例
+      var name = 'nick';
+      var obj = { name: 'nick', age: 17 };
 
-<body>
+      var s3 = `hello world ${name} - ${obj.age}`;
+      console.log(s3); // 输出：hello world nick - 17
+      var s4 = `hello \` world ${obj.age > 18 ? '成年' : '小崽子'}`;
+      console.log(s4); // 输出：hello ` world 小崽子
 
-  <script>
-    // 模版字符串示例
-    var name = "nick";
-    var obj = { name: "nick", age: 17 };
+      // 字符串补全
+      '1'.padStart(3, '0'); // "001"
+      '1'.padEnd(3, '0'); // "100"
 
-    var s3 = `hello world ${name} - ${obj.age}`;
-    console.log(s3); // 输出：hello world nick - 17
-    var s4 = `hello \` world ${obj.age > 18 ? "成年" : "小崽子"}`;
-    console.log(s4); // 输出：hello ` world 小崽子
-
-
-
-    // 字符串补全
-    '1'.padStart(3, '0'); // "001"
-    '1'.padEnd(3, '0'); // "100"
-
-
-  </script>
-
-
-
-
-</body>
-
+      //表达式
+      const s5 = `${obj?.age}`;
+      const s6 = `${obj?.xxx}`;
+      console.log(s5);// 17
+      console.log(s6);// undefined
+    </script>
+  </body>
 </html>

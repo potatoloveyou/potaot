@@ -16,14 +16,56 @@
         <router-link to="/SearchViews">搜索</router-link>
       </nav>
     </section>
+    <router-view @play-Song="playSong" />
 
-    <router-view />
+    <SimpleSongPlay :song="song" :isPlaying="isPlaying" v-if="song" @switch-Play="switchPlay"></SimpleSongPlay>
   </div>
 </template>
 
 <script>
+import SimpleSongPlay from '@/components/SongPlay/SimpleSongPlay.vue';
 export default {
   name: 'App',
+
+  components: {
+    SimpleSongPlay,
+  },
+
+  data() {
+    return {
+      // 由NewSongList组件传递过来的数据
+      song: null,
+
+      // 是否正在播放歌曲的标志位
+      isPlaying: false,
+    };
+  },
+
+  methods: {
+    // 接收NewSongList组件传递过来的数据
+    playSong(song) {
+      this.song = song;
+    },
+    switchPlay() {
+      this.isPlaying = !this.isPlaying;
+    },
+  },
+
+  computed: {
+    // 计算属性，用于获取当前路由的名称
+    currentRouteName() {
+      return this.$route.name;
+    },
+  },
+
+  watch: {
+    song(newSong) {
+      console.log('newSong', newSong);
+    },
+    isPlaying(newisPlaying){
+      console.log(newisPlaying);
+    }
+  },
 
   // 组件内路由守卫
   // 路由进入时
@@ -125,6 +167,10 @@ export default {
         }
       }
     }
+  }
+  audio {
+    position: fixed;
+    bottom: 0;
   }
 }
 </style>

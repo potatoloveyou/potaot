@@ -8,6 +8,7 @@
       @delete-input="deleteInput"
       @search-enter="selectResult(value, $event)"
       ref="myInput"></SearchBox>
+
     <SearchList
       :searchHots="searchHots"
       v-show="!keywords.length && !selectedResults.length"
@@ -15,11 +16,13 @@
       :historys="historys"
       @search-history="selectResult($event)"
       @delete-history="deleteHistory"></SearchList>
+
     <SearchSuggestions
       :keywords="keywords"
       :value="value"
       @select-result="selectResult"
       v-show="!selectedResults.length"></SearchSuggestions>
+
     <SearchSongList
       :selectedResults="selectedResults"
       :value="value"

@@ -6,11 +6,10 @@
         v-for="personalized in personalizeds"
         :key="personalized.id"
         @click="jumpPlaylistDetail(personalized.id)">
-        <img :src="`${personalized.picUrl}?imageView=1&type=webp&thumbnail=370x0`" alt="song.name" />
+        <div class="img">
+          <img :src="`${personalized.picUrl}?imageView=1&type=webp&thumbnail=370x0`" />
+        </div>
         <h5>{{ personalized.name }}</h5>
-        <!-- <div class="earImg">
-          <img src="@/assets/earImg.svg" alt="" />
-        </div> -->
         <figure class="figure-svg earImg">
           <i class="i-svg"></i>
           {{ numberFormat(personalized.playCount.toString()) }}
@@ -64,9 +63,21 @@ export default {
     grid-template-columns: repeat(3, 1fr);
     grid-column-gap: 2rem;
     .recommendationListCard {
-      display: grid;
       margin-bottom: 16rem;
       position: relative;
+      .img {
+        width: 100%;
+        padding-top: 100%;
+        position: relative;
+        box-shadow: 0 0 10px 5px #888888 inset;
+        img {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+        }
+      }
       h5 {
         display: -webkit-box;
         -webkit-line-clamp: 2;
@@ -74,6 +85,9 @@ export default {
         text-overflow: ellipsis;
         // white-space: nowrap; // 防止文字换行
         overflow: hidden; // 隐藏超出部分
+        font-size: 13px;
+        line-height: 1.2;
+        padding: 6px 4px 0;
       }
       figure.earImg {
         position: absolute;

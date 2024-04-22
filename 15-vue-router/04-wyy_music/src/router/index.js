@@ -39,6 +39,11 @@ const routes = [
     name: 'PlayListViews',
     component: () => import(/* webpackChunkName: "SearchViews" */ '@/views/PlayListViews.vue'),
   },
+  {
+    path: '/SongPlayViews',
+    name: 'SongPlayViews',
+    component: () => import(/* webpackChunkName: "SearchViews" */ '@/views/SongPlayViews.vue'),
+  },
 ];
 
 const router = new VueRouter({

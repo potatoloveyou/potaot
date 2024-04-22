@@ -1,6 +1,6 @@
 <template>
   <ul class="newSongList">
-    <li class="songItem" v-for="newsong in newsongs" :newsong="newsong" :key="newsong.id">
+    <li class="songItem" v-for="newsong in newsongs" :key="newsong.id" @click="$emit('play-Song', newsong)">
       <a>
         <!-- introduce介绍(左边歌手信息) -->
         <div class="introduce">
@@ -10,6 +10,7 @@
             <span>{{ newsong.song.artists[0].name }}-{{ newsong.song.album.name }}</span>
           </div>
         </div>
+
         <div class="play-icon materialImg"></div>
       </a>
     </li>
@@ -30,6 +31,11 @@ export default {
   background-image: url('https://s3.music.126.net/mobile-new/img/index_icon_2x.png?5207a28c3767992ca4bb6d4887c74880=');
   background-repeat: no-repeat;
   background-size: 166px 97px;
+}
+.play-icon {
+  width: 22px;
+  height: 22px;
+  background-position: -24px 0;
 }
 
 .songItem {
@@ -66,11 +72,6 @@ export default {
           text-overflow: ellipsis;
         }
       }
-    }
-    .play-icon {
-      width: 22px;
-      height: 22px;
-      background-position: -24px 0;
     }
   }
 }

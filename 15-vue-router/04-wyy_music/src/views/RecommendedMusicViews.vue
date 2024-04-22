@@ -4,7 +4,7 @@
     <h3>编辑推荐</h3>
     <RecommendationList :personalizeds="personalizeds"></RecommendationList>
     <h3>最新音乐</h3>
-    <NewSongList :newsongs="newsongs"></NewSongList>
+    <NewSongList :newsongs="newsongs" @play-Song="$emit('play-Song', $event)"></NewSongList>
     <footer>
       <div class="footer-content">
         <div class="logo">

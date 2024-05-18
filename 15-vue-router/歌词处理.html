@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .box {
+        width: 150px;
+        height: 300px;
+        background-color: lightblue;
+        /* overflow: hidden; */
+      }
+      ul {
+        margin: 0;
+        transform: translateY(150px);
+      }
+    </style>
+  </head>
+  <body>
+    <audio src="https://music.163.com/song/media/outer/url?id=1983220702.mp3" controls></audio>
+    <div class="box">
+      <ul></ul>
+    </div>
+
+    <script>
+      var lyric =
+        '[00:00.000] 作词 : 王磊\n[00:01.000] 作曲 : 胡小环\n[00:02.000] 编曲 : 龙伟华\n[00:32.60]\n[00:34.530]这一刻 我不愿走开\n[00:41.570]是温暖让我留下来\n[00:49.090]这一生 我不能忘怀\n[00:56.070]是温暖永远与我同在\n[01:03.520]像烛火点亮那光明\n[01:10.590]像阳光洒满沧海\n[01:17.870]温暖中有真情和关怀\n[01:25.090]我想诉说心底的感慨\n[01:33.370]伸出双手握住温暖\n[01:40.560]敞开真心读懂信赖\n[01:47.790]每个感恩的人\n[01:51.150]啊 都感激这时代\n[01:55.590]愿这无限温暖温暖\n[02:03.180]成为世间最美好的爱\n[02:43.440]像烛火点亮那光明\n[02:50.570]像阳光洒满沧海\n[02:57.860]温暖中有真情和关怀\n[03:05.080]我想诉说心底的感慨\n[03:13.280]伸出双手握住温暖\n[03:21.110]敞开真心读懂信赖\n[03:27.770]每个感恩的人\n[03:31.120]啊 都感激这时代\n[03:35.630]愿这无限温暖温暖\n[03:43.190]成为世间最美好的爱\n[04:08.520]每个感恩的人\n[04:11.280]啊 都感激这时代\n[04:15.770]愿这无限温暖温暖\n[04:23.230]成为世间最美好的爱\n[04:47.320] 发行 : 杭州回声文化艺术策划有限公司\n';
+
+      // 处理歌词，提取时间和歌词内容，并将其存储在一个对象数组中，每个对象包含时间戳和歌词文本。
+      var lyricArr = lyric.split('\n'); // 将歌词按行分割成数组
+      console.log(lyricArr);
+
+      // filter作用是过滤出数组中的空对象
+      var parsed = lyricArr
+        .filter((item) => item)
+        .map((item) => {
+          // var match = item.match(/\[(?<mm>\d{2}):(?<ss>\d{2}\.\d{2,3})\](?<text>.*)/);
+          var { groups } = item.match(/\[(?<mm>\d{2}):(?<ss>\d{2}\.\d{2,3})\](?<text>.*)/);
+          return {
+            time: groups.mm * 60 + groups.ss * 1,
+            text: groups.text.trim(),
+          };
+        });
+
+      console.log(parsed);
+
+      parsed.forEach((o) => {
+        var node = document.createElement('li');
+        node.innerText = o.text;
+        document.querySelector('ul').appendChild(node);
+      });
+
+      // 寻找当前时段播放的歌词
+      function findCurrentLyric(parsed, currentTime) {
+        var copy = [...parsed].reverse();
+        var index = copy.findIndex((o) => o.time < currentTime);
+        return {
+          index: copy.length - 1 - index,
+          text: copy[index].text,
+        };
+      }
+
+      document.querySelector('audio').ontimeupdate = function () {
+        var o = findCurrentLyric(parsed, this.currentTime);
+        // console.log(o);
+
+        document.querySelectorAll('ul li').forEach((element, index) => {
+          if (index === o.index) {
+            element.style.color = 'red';
+          } else {
+            element.style.color = '';
+          }
+        });
+
+        // 分思路 两种
+        // 1，简单版本 不考虑换行
+        document.querySelector('ul').style.transform = `translateY(${o.index * -21 + 150}px)`;
+      };
+
+      // 测试
+      var str = '[01:17.870]温暖中有真情和关怀';
+      str.match(/\[(?<mm>\d{2}):(?<ss>\d{2}\.\d{2,3})\](?<text>.*)/);
+    </script>
+  </body>
+</html>

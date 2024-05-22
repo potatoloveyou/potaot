@@ -21,6 +21,7 @@ git add . 所有文件
 
 (5)提交到 版本库
 git commit -m "第一次提交"
+git commit --amend -m "第一次提交"		(已提交，但未push，可用这个命令修改上次提交信息)
 
 (6)查看提交日志
 git log
@@ -38,18 +39,32 @@ git pull --rebase potato(可自己命名) main(分支名字)
 git puss (推送一切更新)
 
 
-(7)撤销修改
+(8)撤销修改
 git restore (file)  撤销工作区的修改
 git restore --staged (file)  撤销暂存区的修改
 
-(8)版本库倒退
+(9)版本库倒退
 git reset --hard HEAD  回到上一个版本
 git reset --hard HEAD^ 回到上上一个版本
 git reset --hard (版本号,可不复制全)  回到指定版本
 
-(9)查看操作 命令历史
+(10)查看操作 命令历史
 查看到历史后，可使用版本号回退
 git reflog
+
+(11)查看分支
+git branch
+
+(12)创建分支
+git checkout -b (potato)
+(git branch name 也可以创建分支)
+
+(13)切换分支
+git checkout (main)		切换main分支
+
+(14)合并分支
+需要处在需要合并到的主分支上(例如已经在main分支上才执行下面这个)
+git merge (potato)	在(master分支上)合并potato分支
 
 
 

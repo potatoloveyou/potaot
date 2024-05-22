@@ -84,7 +84,7 @@ cmd输入 ssh-keygen -t (想创建的秘钥名) -C "(自己邮箱)"
 
 (12)
 
-<img src="./assets/image-20240225163046727.png" alt="image-20240225163046727" style="zoom: 80%;" />
+<img src="./assets/image-20240225163046727.png" alt="image-20240225163046727" style="zoom:50%;" />
 
 
 

@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunk_04_wyy_music"]=self["webpackChunk_04_wyy_music"]||[]).push([[933],{5307:function(n,t,u){u.r(t),u.d(t,{default:function(){return l}});var s=function(){var n=this;n._self._c;return n._m(0)},e=[function(){var n=this,t=n._self._c;return t("div",{staticClass:"HotSongChartViews"},[t("h1",[n._v("热歌榜")])])}],r=u(1656),c={},i=(0,r.A)(c,s,e,!1,null,null,null),l=i.exports}}]);
+//# sourceMappingURL=HotSongChartViews.35919e35.js.map

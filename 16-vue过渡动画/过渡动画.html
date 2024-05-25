@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+		<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+		<style>
+			.yyy-enter-active {
+				animation: yyy 3s;
+			}
+			.yyy-leave-active {
+				animation: yyy 3s reverse;
+			}
+			@keyframes yyy {
+				from {
+					transform: translateX(100px);
+				}
+				to {
+					transform: translateX(0);
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<button @click="show = !show">Toggle</button>
+
+			<transition name="yyy">
+				<div class="box" v-if="show">show</div>
+			</transition>
+		</div>
+
+		<script>
+			var app = new Vue({
+				el: '#app',
+
+				data() {
+					return {
+						show: false,
+					};
+				},
+			});
+		</script>
+	</body>
+</html>

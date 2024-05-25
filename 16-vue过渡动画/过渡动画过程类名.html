@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+		<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+		<style>
+			/* .box {
+				transition: all 0.3s;
+				transform: translateX(0);
+			}
+			.active {
+				transform: translateX(100px);
+			} */
+
+			/* vue自动添加的class,fade是自定义的，需要与transition组件的name相同 */
+			/* 演示 */
+			/* .fade-enter-active,
+			.fade-leave-active {
+				transition: opacity 3s;
+			}
+			.fade-enter,
+			.fade-leave-to {
+				opacity: 0;
+			} */
+
+			/* 过渡 */
+			/* v-enter	元素被插入前生效，插入后移除 */
+			.xxx-enter {
+				transform: translateX(100px);
+				opacity: 0;
+			}
+			/* v-enter-active 元素被插入前、时生效，过渡/动画完成后移除 */
+			.xxx-enter-active {
+				transition: all 1s;
+			}
+			/* v-enter-to 元素插入后生效，过渡/动画完成后后移除 */
+			.xxx-enter-to {
+				transform: translateX(0px); 
+				opacity: 1;
+			}
+
+			/* v-leave 过渡离开触发时立刻生效，下一帧被移除 */
+			.xxx-leave {
+				transform: translateY(0px);
+				opacity: 1;
+			}
+			/* v-leave-active 离开过渡时生效，过渡/动画完成之后移除 */
+			.xxx-leave-active {
+				transition: all 1s;
+			}
+			/* v-leave-to 离开过渡完成时生效，下一帧被移除 */
+			.xxx-leave-to {
+				transform: translateY(100px);
+				opacity: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<button @click="show = !show">Toggle</button>
+			<!-- <div class="box" v-if="show">show</div> -->
+
+			<!-- class动态绑定,但是还是不能加上v-if和v-show -->
+			<!-- <div class="box" :class="{ active: show }" >show</div> -->
+
+			<!-- 演示 -->
+			<!-- <transition name="fade">
+				<div class="box" v-if="show">show</div>
+			</transition> -->
+
+			<!-- 过渡 -->
+			<transition name="xxx">
+				<div class="box" v-if="show">show</div>
+			</transition>
+		</div>
+
+		<script>
+			var app = new Vue({
+				el: '#app',
+
+				data() {
+					return {
+						show: false,
+					};
+				},
+			});
+		</script>
+	</body>
+</html>

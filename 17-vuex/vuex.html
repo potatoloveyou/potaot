@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+		<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+		<script src="https://unpkg.com/vuex@3.6.2/dist/vuex.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<!-- 5.原始方法使用vuex内的state状态 -->
+			<h1>{{$store.state.count}}</h1>
+			<h1>{{$store.state.msg}}</h1>
+			<hr />
+
+			<!-- 5.1使用	手写计算属性	或	mapState方法 -->
+			<h1>{{count}}</h1>
+			<h1>{{msg}}</h1>
+			<button @click="increment">count++</button>
+			<button @click="decrement">count--</button>
+		</div>
+		<script>
+			// mapState, mapMutationsd都是vuex提供的辅助函数，用于简化代码。
+			const { mapState, mapMutations } = Vuex;
+
+			const store = new Vuex.Store({
+				// 1.
+				// 定义状态（state）
+				state: {
+					count: 0,
+					msg: 'hello world',
+				},
+
+				// 2.
+				// 定义状态（state）的改变方式（mutations）
+				mutations: {
+					// 形参state 代表当前所处的store里面的state
+					increment(state) {
+						state.count++;
+					},
+					decrement(state) {
+						state.count--;
+					},
+				},
+			});
+			// 3.
+			// 提交状态（state）的改变（commit）
+			// store.commit('increment');
+			// console.log(store.state.count);
+			// 错误做法，绝对不允许直接修改state，必须通过commit提交状态的改变
+			// store.state.count = 100;
+
+			new Vue({
+				el: '#app',
+
+				// 定义自己组件的状态（state）
+				data() {
+					return {
+						n: 100,
+					};
+				},
+
+				// 4.与router一样，需将store添加到Vue实例中，让整个应用程序(所有子组件)拥有状态（state）
+				store,
+
+				// 5.1 使用手写计算属性方法
+				// computed: {
+				// 	count() {
+				// 		return this.$store.state.count;
+				// 	},
+				// 	msg() {
+				// 		return this.$store.state.msg;
+				// 	},
+				// },
+
+				// 5.2 使用vuex提供的mapState方法(可改变名字)，将state映射到组件的计算属性中。
+				// computed: mapState({
+				// 	count: (state) => state.count,
+				// 	msg: (state) => state.msg,
+
+				// 	// 可改变名字
+				// 	// cccc: (state) => state.count,
+				// }),
+
+				// 5.3 (推荐)
+				computed: {
+					...mapState(['count', 'msg']),
+					...mapState({
+						// 改名
+						mmmm: (state) => state.msg,
+					}),
+
+					// 可使用自己的计算属性，与vuex的state无关。
+					n2: () => this.n * 2,
+				},
+
+				// 6.1 原始方法使用vuex内的mutations方法，通过commit提交状态的改变。
+				methods: {
+					increment() {
+						this.$store.commit('increment');
+					},
+					decrement() {
+						this.$store.commit('decrement');
+					},
+				},
+
+				// 6.2 使用vuex提供的mapMutations方法，将mutations映射到组件的方法中。
+				methods: {
+					...mapMutations(['increment', 'decrement']),
+
+					// 可使用自己的方法，与vuex的mutations无关。
+					xxx() {
+						console.log('xxx');
+					},
+				},
+			});
+		</script>
+	</body>
+</html>

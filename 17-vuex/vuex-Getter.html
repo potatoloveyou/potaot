@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+		<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+		<script src="https://unpkg.com/vuex@3.6.2/dist/vuex.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<!-- 5.原始方法使用vuex内的state状态 -->
+			<h1>{{$store.state.count}}</h1>
+			<h1>{{$store.state.msg}}</h1>
+			<hr />
+
+			<!-- 5.1使用	手写计算属性	或	mapState方法 -->
+			<h1>{{count}}</h1>
+			<h1>{{msg}}</h1>
+			<button @click="increment">count++</button>
+			<button @click="decrement">count--</button>
+			<button @click="add(3)">+3</button>
+			<button @click="add(5)">+5</button>
+		</div>
+		<script>
+			// mapState, mapMutationsd都是vuex提供的辅助函数，用于简化代码。
+			const { mapState, mapMutations, mapGetters } = Vuex;
+
+			const store = new Vuex.Store({
+				// 1.
+				// 定义状态（state）
+				state: {
+					count: 1,
+					msg: 'hello world',
+				},
+
+				// 2.
+				// 定义状态（state）的改变方式（mutations）
+				mutations: {
+					// 形参state 代表当前所处的store里面的state
+					increment(state) {
+						state.count++;
+					},
+					decrement(state) {
+						state.count--;
+					},
+					add(state, n) {
+						state.count += n;
+					},
+				},
+
+				getters: {
+					const2: (state) => state.count * 2,
+				},
+			});
+			// 3.
+			// 提交状态（state）的改变（commit）
+			// store.commit('increment');
+
+			new Vue({
+				el: '#app',
+
+				// 定义自己组件的状态（state）
+				data() {
+					return {
+						n: 100,
+					};
+				},
+
+				// 4.与router一样，需将store添加到Vue实例中，让整个应用程序(所有子组件)拥有状态（state）
+				store,
+
+				created() {
+					console.log(this.$store.getters.const2);
+				},
+
+				// 5.3 (推荐)
+				computed: {
+					...mapState(['count', 'msg']),
+					...mapState({
+						// 改名
+						mmmm: (state) => state.msg,
+					}),
+
+					// 可使用自己的计算属性，与vuex的state无关。
+					n2: () => this.n * 2,
+
+					// 获取getters的值，与state无关。
+					...mapGetters(['const2']),
+				},
+
+				// 6.2 使用vuex提供的mapMutations方法，将mutations映射到组件的方法中。
+				methods: {
+					...mapMutations(['increment', 'decrement', 'add']),
+
+					// 可使用自己的方法，与vuex的mutations无关。
+					xxx() {
+						console.log('xxx');
+					},
+
+					// 自己组件的add方法commit提交到vuex的mutations的add方法。
+					// add(n) {
+					// 	console.log(n);
+					// 	this.$store.commit('add', n); // 提交状态（state）的改变（commit）
+					// },
+				},
+			});
+		</script>
+	</body>
+</html>

@@ -10,12 +10,12 @@
 </template>
 
 <script>
-import { getMangaList, getMangaDetail } from '@/apis/api.js';
+// import { getMangaList, getMangaDetail } from '@/apis/api.js';
 export default {
 	name: 'App',
 	created() {
-		getMangaList();
-		getMangaDetail(27915);
+		// getMangaList();
+		// getMangaDetail(27915);
 	},
 };
 </script>

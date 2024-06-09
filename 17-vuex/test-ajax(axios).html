@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+		<meta name="referrer" content="never" />
+	</head>
+	<body>
+		<script>
+			// axios的get方法若要携带参数，只能使用params选项，并且参数需要使用对象形式传递。
+			// axios.get('https://localhost1', {
+			// 	params: {
+			// 		name: 'nick',
+			// 		age: 17,
+			// 	},
+			// });
+
+			// axios post方式默认是以 json的格式向服务器发送内容
+			// 且请求头中content-type: application/json;charset=UTF-8
+			// axios.post('https://localhost2', {
+			// 	name: 'nick',
+			// 	age: 17,
+			// });
+
+			// post方式也可以使用data选项，以formdata的格式向服务器发送内容。
+			// 请求头中content-type: application/x-www-form-urlencoded;charset=UTF-8
+			// 与get方式类似，参数需要使用对象形式传递。
+			let obj = {
+				name: 'nick',
+				age: 17,
+			};
+			const params = new URLSearchParams();
+			for (key in obj) {
+				params.append(key, obj[key]);
+			}
+			axios.post('https://localhost3', params);
+
+			// 若是不想用这种方式，也可以使用qs库来转换成formdata格式。
+			// 需要先安装qs库，使用npm install qs命令。
+			// 然后使用qs.stringify()方法来转换。
+			// const qs = require('qs'); // 假设已经安装了qs库，并且引入了qs库。
+			// const params = qs.stringify({ name: 'nick', age: 17 });
+			// axios.post('https://localhost4', params);
+			// 注意：axios的post方法默认是使用json格式的，如果需要使用formdata格式，需要手动设置请求头。
+		</script>
+	</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <p>原始的msg: {{msg}}</p>
+      <p>表达式内部处理msg: {{msg.split('').reverse().join('')}}</p>
+      <p>方法返回处理过后的msg: {{reverseMsg()}}</p>
+      <hr />
+      <p>计算属性: {{rMsg}}</p>
+      <hr />
+      <!-- 
+        计算属性与方法的区别：
+        计算属性只要其依赖不变，他就不会变计算求值
+        方法每次调用都会重新计算求值（浪费性能）
+      -->
+      <p>{{now1}}</p>
+      <p>{{now2()}}</p>
+    </div>
+
+    <script>
+      var vm = new Vue({
+        // 根元素
+        el: '#app',
+
+        // 状态
+        data: {
+          msg: 'hello',
+          arr: [1, 2, 3],
+          arr2:[]
+        },
+
+        // 计算属性       计算属性不能修改！！！
+        computed: {
+          rMsg() {
+            return this.msg.split('').reverse().join('');
+            // rMsg 的值始终取决于 msg 的值
+            // rMsg依赖 msg  msg变化=> rMsg变化 => 使用rMsg的元素更新
+            // 凡是可通过一个或多个依赖进行计算(派生)的属性，都可以使用计算属性。
+          },
+          now1() {
+            return [...this.arr.filter((item) => item % 2 == 0), Date.now()];
+            // 计算属性默认只有getter，不能有setter，因为计算属性是派生属性，其值应该由依赖计算得出，不应该被外部直接修改。
+          },
+        },
+
+        // 方法
+        methods: {
+          reverseMsg() {
+            return this.msg.split('').reverse().join('');
+          },
+          now2() {
+            return [...this.arr.filter((item) => item % 2 == 0), Date.now()];
+            // 方法可以有setter和getter
+          },
+        },
+
+        // 监听器   不能监听数组的变化，只能监听数组索引的变化，数组索引变化不会触发监听器。
+        watch: {
+          msg(newValue, oldValue) {
+            console.log('数组变化了', newValue, oldValue);
+          },
+        },
+
+        // 创建
+        created() {
+          this.arr2=this.arr.filter((item) => item % 2 == 0); // 数组变化了 [2]
+        },
+      });
+      console.log(vm.now1);
+      console.log(vm.now2());
+    </script>
+  </body>
+</html>

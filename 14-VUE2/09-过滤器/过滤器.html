@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+		<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<h1>{{msg}}</h1>
+			<img :src="src | imgCompress(100)" alt="" />
+		</div>
+		<script>
+			// 可以给一个全局的过滤器，比如给一个压缩图片
+			Vue.filter('imgCompress', (value, size = 247) => {
+				if (!value) return '';
+				return `${value}?imageView=1&type=webp&thumbnail=${size}x0`;
+			});
+
+			new Vue({
+				el: '#app',
+				data() {
+					return {
+						msg: 'Hello world!',
+						src: 'https://p2.music.126.net/mqTKX_-Llqif4oFJkfWpRw==/109951164206445553.jpg',
+					};
+				},
+
+				//  组件内使用filters
+				// filters: {
+				// 	uppercase(value) {
+				// 		return value.toUpperCase();
+				// 	},
+				// },
+			});
+		</script>
+	</body>
+</html>

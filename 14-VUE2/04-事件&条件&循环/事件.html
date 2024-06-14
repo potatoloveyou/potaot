@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <style>
+      .bigbox {
+        width: 300px;
+        height: 300px;
+        background-color: lightblue;
+      }
+      .box {
+        width: 200px;
+        height: 200px;
+        background-color: rgb(173, 61, 169);
+      }
+      .smallbox {
+        width: 100px;
+        height: 100px;
+        background-color: rgb(54, 100, 14);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <h3>{{counter}}</h3>
+      <button @click="counter++">add1</button>
+      <button @click="add">add2</button>
+      <hr />
+      <button @click="addn(5)">+5</button>
+      <button @click="addn(10, $event)">+10</button>
+      <!-- 有时也需要在内联语句处理器中访问原始的 DOM 事件。可以用特殊变量 $event 把它传入方法 -->
+
+      <hr />
+      <!-- 
+        事件修饰符
+        .stop 
+        .prevent 
+        .capture 
+        .self 
+        .once 
+        .passive (移动端提升性能)
+      -->
+      <!-- 阻止单击事件继续传播 -->
+      <a href="http://www.baidu.com" @click.stop="add">百度</a>
+
+      <!-- prevent 阻止表单默认提交事件 -->
+      <form v-on:submit.prevent="onSubmit"></form>
+
+      <!-- 修饰符可以串联 -->
+      <a v-on:click.stop.prevent="doThat"></a>
+
+      <!-- 只有修饰符 -->
+      <form v-on:submit.prevent></form>
+
+      <!-- 捕获模式 -->
+      <!-- 即内部元素触发的事件 先在此  处理，然后才交由内部元素进行处理 -->
+      <div v-on:click.capture="doThis">...</div>
+
+      <!-- 只当在 event.target 是当前元素自身时触发处理函数 -->
+      <!-- 即事件不能从内部元素触发的，只能通过其本身 -->
+      <div v-on:click.self="doThat">...</div>
+
+      <hr />
+      <!-- <div class="bigbox" @click.self="bigbox"> -->
+      <!-- <div class="bigbox" @click.capture="bigbox"> -->
+      <!-- 打印 bigbox(捕) smallbox(冒2) box(冒1) ，
+          原因点击事件是先捕获在冒泡，在bigbox上有.capture，所以正好先触发bigbox，
+          然后到box 没写.capture，所以box并不在捕获阶段触发，
+          最后到smallbox，依旧没写.capture，依旧不触发，至此捕获阶段结束，到冒泡阶段
+          smallbox冒泡先触发，在冒到box触发，最后由于bigbox在捕获阶段触发过，至此打印结束
+        -->
+      <div class="bigbox" @click="bigbox">
+        bigbox
+        <div class="box" @click.stop="box">
+          <!-- <div class="box" @click="box"> -->
+          box
+          <div class="smallbox" @click="smallbox">smallbox</div>
+        </div>
+      </div>
+
+      <hr />
+      <!-- 
+        按键修饰符
+        .enter 
+        .tab 
+        .delete (捕获“删除”和“退格”键) 
+        .esc 
+        .space 
+        .up 
+        .down 
+        .left 
+        .right 
+      -->
+
+      <!-- 
+        系统修饰键
+        .ctrl
+        .alt
+        .shift
+        .meta
+      -->
+
+      <!-- 
+        鼠标按钮修饰符 
+        .left
+        .right
+        .middle
+      -->
+    </div>
+    <script>
+      var vm = new Vue({
+        el: '#app',
+
+        data() {
+          return {
+            counter: 0,
+          };
+        },
+
+        methods: {
+          add(event) {
+            console.log(event);
+            this.counter++;
+          },
+          // 默认不带参数 第一个就是event
+
+          addn: function (n, event) {
+            console.log(n, event);
+            this.counter += n;
+          },
+          // 如果携带参数 第一个就是参数
+
+          bigbox: function () {
+            console.log('bigbox');
+          },
+          box: function () {
+            console.log('box');
+          },
+          smallbox: function () {
+            console.log('smallbox');
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

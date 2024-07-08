@@ -11,7 +11,7 @@ const _axios = axios.create(config);
 
 _axios.interceptors.request.use(
   function (config) {
-    console.log("发送请求");
+    // console.log("发送请求");
     // Do something before request is sent
     // config.headers = { token: localStorage.getItem("token") };
 

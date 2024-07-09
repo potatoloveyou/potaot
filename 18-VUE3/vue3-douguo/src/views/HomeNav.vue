@@ -1,22 +1,30 @@
 <template>
-	<div>
-		<nav>
-			<RouterLink to="/attention">关注</RouterLink>
-			<RouterLink to="/">推荐</RouterLink>
-			<RouterLink to="/note">笔记</RouterLink>
-			<RouterLink to="/video">视频</RouterLink>
-			<RouterLink to="/activity">活动</RouterLink>
-		</nav>
-	</div>
+	<van-tabs v-model:active="active">
+		<van-tab title="关注" to="/attention"></van-tab>
+		<van-tab title="推荐" to="/"></van-tab>
+		<van-tab title="笔记" to="/note"></van-tab>
+		<van-tab title="视频" to="/video"></van-tab>
+		<van-tab title="活动" to="/activity"></van-tab>
+	</van-tabs>
 	<RouterView />
 </template>
 
-<script>
-import { RouterLink, RouterView } from 'vue-router';
-
-export default {
-	name: 'Homenav',
-};
+<script setup>
+import { ref } from 'vue';
+// 默认显示推荐页索引
+const active = ref(1);
 </script>
 
-<style lang="sass" scoped></style>
+<style lang="sass" scoped>
+nav
+	display: flex
+	padding: 1.25rem
+	a
+		// padding: 0 .625rem
+		height: 3.125rem
+		line-height: 3.125rem
+		text-align: center
+		flex: 1
+		&.router-link-exact-active
+			color: red
+</style>

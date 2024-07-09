@@ -4,6 +4,7 @@ const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
 	routes: [
 		{
+			// 首页根目录进来是bottomNav
 			path: '/',
 			name: 'bottomNav',
 			component: () => import('@/views/BottomNav.vue'),

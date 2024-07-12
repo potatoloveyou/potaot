@@ -1,15 +1,12 @@
 <template>
-  <div>
-    收藏夹
-  </div>
+	<div>收藏夹</div>
 </template>
 
-<script>
-  export default {
-    name: 'FavoritesView'
-  }
+<script setup>
+import { ref } from 'vue';
+import { useFavoritesStore } from '@/stores/favorites';
+const favoritesStore = useFavoritesStore();
+
 </script>
 
-<style lang="sass" scoped>
-
-</style>
+<style lang="scss" scoped></style>

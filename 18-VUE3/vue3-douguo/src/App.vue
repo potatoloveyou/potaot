@@ -1,15 +1,10 @@
 <template>
 	<header>
-		<div class="wrapper">
-
-		</div>
+		<div class="wrapper"></div>
 	</header>
-  <RouterView />
-
+	<RouterView />
 </template>
 
-<script setup>
-
-</script>
+<script setup></script>
 
 <style scoped></style>

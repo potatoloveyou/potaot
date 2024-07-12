@@ -8,8 +8,9 @@
 	<van-list v-model:loading="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
 		<div class="list-card">
 			<div class="item-card" v-for="item in homeRecommend" :key="item.id">
-				<RecipeCard v-if="item.type === 1" :r="item.r" />
-				<Advertisement v-if="item.type === 300" :dsp="item.dsp" />
+				<RecipeCard v-if="item.type === 1" :r="item" />
+				<NoteCard v-if="item.type === 3" :note="item" />
+				<AdvertisementCard v-if="item.type === 300" :dsp="item" />
 			</div>
 		</div>
 	</van-list>
@@ -19,7 +20,8 @@
 import { ref, onMounted, nextTick } from 'vue';
 import { getHomeRecommend } from '@/apis/api';
 import RecipeCard from '@/components/RecipeCard.vue';
-import Advertisement from '@/components/Advertisement.vue';
+import NoteCard from '@/components/NoteCard.vue';
+import AdvertisementCard from '@/components/AdvertisementCard.vue';
 
 // 初始化获取数据
 // banner推荐轮播图列表
@@ -69,15 +71,21 @@ const onLoad = () => {
 
 <style lang="scss" scoped>
 .list-card {
-	background-color: #9e9e9e1f;
+	background-color: #9e9e9e40;
 	padding: 0 0.8rem;
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	column-gap: 0.8rem;
 	justify-content: space-evenly;
 	.item-card {
+		width: 100%;
+		aspect-ratio: 1/2;
 		display: flex;
 		flex-direction: column;
+		// 四角变圆滑
+		border-radius: 0.8rem;
+		background-color: #fff;
+		margin: 2rem 0;
 	}
 }
 </style>

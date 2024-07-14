@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { useLoginStore } from '@/stores/login';
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
@@ -62,6 +63,10 @@ const router = createRouter({
 					name: 'purchaseList',
 					// component: PurchaseListView,
 					component: () => import('@/views/BottomNav/PurchaseListView.vue'),
+					// meta: {
+					// 	// 是否需要登录
+					// 	needLogin: true,
+					// },
 				},
 
 				{
@@ -70,6 +75,10 @@ const router = createRouter({
 					name: 'favorites',
 					// component: FavoritesView,
 					component: () => import('@/views/BottomNav/FavoritesView.vue'),
+					meta: {
+						// 是否需要登录
+						needLogin: true,
+					},
 				},
 
 				{
@@ -78,6 +87,10 @@ const router = createRouter({
 					name: 'me',
 					// component: MeView,
 					component: () => import('@/views/BottomNav/MeView.vue'),
+					meta: {
+						// 是否需要登录
+						needLogin: true,
+					},
 				},
 			],
 		},
@@ -86,7 +99,6 @@ const router = createRouter({
 			// search 搜索
 			path: '/search',
 			name: 'search',
-			// component: SearchView,
 			component: () => import('@/views/SearchView.vue'),
 		},
 
@@ -94,10 +106,22 @@ const router = createRouter({
 			// recipe 菜谱
 			path: '/recipe',
 			name: 'recipe',
-			// component: RecipeView,
 			component: () => import('@/views/RecipeView.vue'),
 		},
+
+		{
+			// login 登录
+			path: '/login',
+			name: 'login',
+			component: () => import('@/views/LoginView.vue'),
+		},
 	],
+});
+
+// 全局前置守卫
+router.beforeEach((to, from) => {
+	const loginStore = useLoginStore();
+	to.meta.needLogin && !loginStore.isUserLogin ? router.push('/login?from=' + to.fullPath) : '';
 });
 
 export default router;

@@ -1,16 +1,27 @@
 <template>
 	<van-tabbar v-model="active" active-color="#000">
-		<van-tabbar-item to="/" class="typeface">首页</van-tabbar-item>
-		<van-tabbar-item to="/classify" class="typeface">分类</van-tabbar-item>
-		<van-tabbar-item to="/favorites" class="typeface">收藏夹</van-tabbar-item>
-		<van-tabbar-item to="/me" class="typeface">我的</van-tabbar-item>
+		<van-tabbar-item name="recommend" to="/" class="typeface">首页</van-tabbar-item>
+		<van-tabbar-item name="classify" to="/classify" class="typeface">分类</van-tabbar-item>
+		<van-tabbar-item name="favorites" to="/favorites" class="typeface">收藏夹</van-tabbar-item>
+		<van-tabbar-item name="me" to="/me" class="typeface">我的</van-tabbar-item>
 	</van-tabbar>
 	<RouterView />
 </template>
 
 <script setup>
-import { ref } from 'vue';
-const active = ref(0);
+import { ref, watch } from 'vue';
+const active = ref('');
+import { useRoute } from 'vue-router';
+const route = useRoute();
+import { useRouter } from 'vue-router';
+const router = useRouter();
+
+// 初始化active.value值为当前路由的值
+active.value = route.name;
+
+router.beforeEach((to) => {
+	active.value = to.name;
+});
 </script>
 
 <style lang="scss" scoped>

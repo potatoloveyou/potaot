@@ -15,16 +15,19 @@ import { ref } from 'vue';
 const active = ref(1);
 </script>
 
-<style lang="sass" scoped>
-nav
-	display: flex
-	padding: 1.25rem
-	a
+<style lang="scss" scoped>
+nav {
+	display: flex;
+	padding: 1.25rem;
+	a {
 		// padding: 0 .625rem
-		height: 3.125rem
-		line-height: 3.125rem
-		text-align: center
-		flex: 1
-		&.router-link-exact-active
-			color: red
+		height: 3.125rem;
+		line-height: 3.125rem;
+		text-align: center;
+		flex: 1;
+		&.router-link-exact-active {
+			color: red;
+		}
+	}
+}
 </style>

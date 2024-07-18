@@ -53,19 +53,24 @@ git reset --hard (版本号,可不复制全)  回到指定版本
 git reflog
 
 (11)查看分支
-git branch
+git branch		查看本地分支
+git branch -r		查看远程仓库分支
 
 (12)创建分支
-git checkout -b (potato)
-(git branch name 也可以创建分支)
+git checkout -b (potato)		创建potato分支
+git branch (potato)		创建potato分支
 
 (13)切换分支
 git checkout (main)		切换main分支
+git switch (main)		切换main分支
 
 (14)合并分支
-需要处在需要合并到的主分支上(例如已经在main分支上才执行下面这个)
+！！！需要在 需要合并 到的 主分支 上(例如已经在main分支上才执行下面这个)
 git merge (potato)	在(master分支上)合并potato分支
 
+(15)删除分支
+git branch -d (potato)		
+git branch -r -d (potato)		删除远程仓库分支
 
 
 

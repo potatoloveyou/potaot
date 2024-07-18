@@ -8,8 +8,11 @@
 	<van-list v-model:loading="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
 		<div class="list-card">
 			<div class="item-card" v-for="item in homeRecommend" :key="item.id">
+				<!-- 1	菜谱 -->
 				<RecipeCard v-if="item.type === 1" :r="item" />
+				<!-- 3	笔记 -->
 				<NoteCard v-if="item.type === 3" :note="item" />
+				<!-- 300	广告 -->
 				<AdvertisementCard v-if="item.type === 300" :dsp="item" />
 			</div>
 		</div>

@@ -15,6 +15,11 @@ export const useFavoritesStore = defineStore('favorites', () => {
 
 	// 菜谱
 	const recipeFav = ref(JSON.parse(window.localStorage.getItem('recipeFav')) || []);
+	// const recipeFav = ref<string[]>(JSON.parse(window.localStorage.getItem('recipeFav')!) || []);
+	// const rawValue = window.localStorage.getItem('recipeFav');
+	// const parsedValue = rawValue ? JSON.parse(rawValue) : null;
+	// const recipeFav = ref<string[]>(parsedValue || []);
+
 	// 笔记
 	const noteFav = ref(JSON.parse(window.localStorage.getItem('noteFav')) || []);
 	// 广告
@@ -60,7 +65,6 @@ export const useFavoritesStore = defineStore('favorites', () => {
 				return advertisementFav.value.some((item) => item.id === id);
 		}
 	};
-
 
 	// 暂存到本地
 	watch(recipeFav, (newRecipeFav) => window.localStorage.setItem('recipeFav', JSON.stringify(newRecipeFav)));

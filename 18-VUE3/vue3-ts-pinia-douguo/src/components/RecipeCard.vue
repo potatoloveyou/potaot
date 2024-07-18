@@ -26,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, computed } from 'vue';
+import { defineProps } from 'vue';
 import { useFavoritesStore } from '@/stores/favorites';
 const favoritesStore = useFavoritesStore();
 
@@ -37,12 +37,10 @@ const favoritesStore = useFavoritesStore();
 // 	position: 'top',
 // });
 
-// defineProps({
-// 	r: Object,
-// });
-defineProps<{
-	r: Object;
-}>();
+defineProps({
+	r: Object,
+});
+
 
 // 添加收藏
 const addFav = ({ type, recipe }) => favoritesStore.addFav({ type, recipe });

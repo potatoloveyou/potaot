@@ -2,10 +2,8 @@
 	<div>视频</div>
 </template>
 
-<script>
-export default {
-	name: 'HomeVideo',
-};
+<script setup>
+
 </script>
 
 <style lang="sass" scoped></style>

@@ -4,63 +4,62 @@ import { useLoginStore } from '@/stores/login';
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
 	routes: [
+		// 首页根目录进来是bottomNav
 		{
-			// 首页根目录进来是bottomNav
 			path: '/',
 			name: 'bottomNav',
-			// component: () => import('@/views/BottomNav.vue'),
 			component: () => import('@/views/BottomNav.vue'),
 
-
 			children: [
+				// home 首页
 				{
 					path: '',
 					name: 'homeNav',
-					component: () => import('@/views/HomeNav.vue'),
+					component: () => import('@/views/BottomNav/HomeNav.vue'),
 					children: [
+						// attention 关注
 						{
-							// attention 关注
 							path: 'attention',
-							name: 'attention',
-							component: () => import('@/views/BottomNav/HomeNav/HomeAttention.vue'),
+							name: 'home.attention',
+							component: () => import('@/views/BottomNav/Home/HomeAttention.vue'),
 						},
+						// recommend 推荐
 						{
-							// recommend 推荐
 							path: '',
-							name: 'recommend',
-							component: () => import('@/views/BottomNav/HomeNav/HomeRecommend.vue'),
+							name: 'home.recommend',
+							component: () => import('@/views/BottomNav/Home/HomeRecommend.vue'),
 						},
+						// note 笔记
 						{
-							// note 笔记
 							path: 'note',
-							name: 'note',
-							component: () => import('@/views/BottomNav/HomeNav/HomeNote.vue'),
+							name: 'home.note',
+							component: () => import('@/views/BottomNav/Home/HomeNote.vue'),
 						},
+						// video 视频
 						{
-							// video 视频
 							path: 'video',
-							name: 'video',
-							component: () => import('@/views/BottomNav/HomeNav/HomeVideo.vue'),
+							name: 'home.video',
+							component: () => import('@/views/BottomNav/Home/HomeVideo.vue'),
 						},
+						// activity 活动
 						{
-							// activity 活动
 							path: 'activity',
-							name: 'activity',
-							component: () => import('@/views/BottomNav/HomeNav/HomeActivity.vue'),
+							name: 'home.activity',
+							component: () => import('@/views/BottomNav/Home/HomeActivity.vue'),
 						},
 					],
 				},
 
+				// classify 分类
 				{
-					// classify 分类
 					path: '/classify',
 					name: 'classify',
 					// component: classifyView,
 					component: () => import('@/views/BottomNav/classifyView.vue'),
 				},
 
+				// purchaseList 购物车
 				{
-					// purchaseList 购物车
 					path: '/purchaseList',
 					name: 'purchaseList',
 					// component: PurchaseListView,
@@ -71,12 +70,43 @@ const router = createRouter({
 					// },
 				},
 
+				// Favorites 收藏夹
 				{
-					// Favorites 收藏夹
 					path: '/favorites',
 					name: 'favorites',
-					// component: FavoritesView,
-					component: () => import('@/views/BottomNav/FavoritesView.vue'),
+					// component: FavoritesNav,
+					component: () => import('@/views/BottomNav/FavoritesNav.vue'),
+
+					children: [
+						// grouping 分组
+						{
+							path: 'grouping',
+							name: 'favorites.grouping',
+							// component: () => import('@/views/BottomNav/Favorites/FavoritesGrouping.vue'),
+							component: () => import('@/views/BottomNav/Favorites/FavoritesGrouping.vue'),
+						},
+
+						// recipe 菜谱
+						{
+							path:'',
+							name: 'favorites.recipe',
+							component: () => import('@/views/BottomNav/Favorites/FavoritesRecipe.vue'),
+						},
+
+						// note 笔记
+						{
+							path: 'note',
+							name: 'favorites.note',
+							component: () => import('@/views/BottomNav/Favorites/FavoritesNote.vue'),
+						},
+						// course 课程
+						{
+							path: 'course',
+							name: 'favorites.course',
+							component: () => import('@/views/BottomNav/Favorites/FavoritesCourse.vue'),
+						},
+					],
+
 					meta: {
 						// 是否需要登录
 						needLogin: true,
@@ -97,22 +127,22 @@ const router = createRouter({
 			],
 		},
 
+		// search 搜索
 		{
-			// search 搜索
 			path: '/search',
 			name: 'search',
 			component: () => import('@/views/SearchView.vue'),
 		},
 
+		// recipe 菜谱
 		{
-			// recipe 菜谱
 			path: '/recipe',
 			name: 'recipe',
 			component: () => import('@/views/RecipeView.vue'),
 		},
 
+		// login 登录
 		{
-			// login 登录
 			path: '/login',
 			name: 'login',
 			component: () => import('@/views/LoginView.vue'),

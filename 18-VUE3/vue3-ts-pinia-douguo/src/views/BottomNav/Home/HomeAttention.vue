@@ -2,10 +2,6 @@
 	<div>关注</div>
 </template>
 
-<script>
-export default {
-	name: 'HomeAttention',
-};
-</script>
+<script setup></script>
 
 <style lang="sass" scoped></style>

@@ -1,5 +1,5 @@
 <template>
-	<van-tabs v-model:active="active">
+	<van-tabs :active="active">
 		<van-tab title="关注" to="/attention"></van-tab>
 		<van-tab title="推荐" to="/"></van-tab>
 		<van-tab title="笔记" to="/note"></van-tab>

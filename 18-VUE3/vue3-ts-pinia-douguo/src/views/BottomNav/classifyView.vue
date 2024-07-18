@@ -1,16 +1,9 @@
 <template>
-  <div>
-    分类
-  </div>
+	<div>分类</div>
 </template>
 
-<script>
-  export default {
-    
-    name: 'classifyView'
-  }
+<script setup>
+
 </script>
 
-<style lang="sass" scoped>
-
-</style>
+<style lang="sass" scoped></style>

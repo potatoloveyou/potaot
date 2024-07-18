@@ -1,5 +1,5 @@
 <template>
-	<div>购物车</div>
+	<div>活动</div>
 </template>
 
 <script setup></script>

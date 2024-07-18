@@ -1,4 +1,5 @@
 <template>
+	<!-- 推荐 -->
 	<van-swipe :autoplay="3000" lazy-render>
 		<van-swipe-item v-for="image in homeBanner" class="aaa">
 			<van-image width="100%" :src="image.i" />

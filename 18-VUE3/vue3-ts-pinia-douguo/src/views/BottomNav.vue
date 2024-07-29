@@ -1,9 +1,5 @@
 <template>
 	<van-tabbar v-model="active" active-color="#000">
-		<!-- <van-tabbar-item name="home.recommend" to="/" class="typeface">首页</van-tabbar-item>
-		<van-tabbar-item name="classify" to="/classify" class="typeface">分类</van-tabbar-item>
-		<van-tabbar-item name="favorites.recipe" to="/favorites" class="typeface">收藏夹</van-tabbar-item>
-		<van-tabbar-item name="me" to="/me" class="typeface">我的</van-tabbar-item> -->
 		<van-tabbar-item name="home.recommend" to="/" class="typeface">首页</van-tabbar-item>
 		<van-tabbar-item name="classify" to="/classify" class="typeface">分类</van-tabbar-item>
 		<van-tabbar-item name="favorites.recipe" to="/favorites" class="typeface">收藏夹</van-tabbar-item>
@@ -29,7 +25,6 @@ active.value = route.name;
 router.beforeEach((to) => {
 	active.value = to.name;
 });
-
 </script>
 
 <style lang="scss" scoped>

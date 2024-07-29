@@ -1,35 +1,47 @@
 <template>
-	<!-- 推荐 -->
-	<van-swipe :autoplay="3000" lazy-render>
-		<van-swipe-item v-for="image in homeBanner" class="aaa">
-			<van-image width="100%" :src="image.i" />
-		</van-swipe-item>
-	</van-swipe>
+	<!-- 首页推荐 -->
+	<van-pull-refresh v-model="isLoading" :head-height="60" @refresh="onRefresh">
+		<template #pulling="props">
+			<img src="@/assets/loading/1.svg" class="loading" alt="" />
+		</template>
+		<template #loosing>
+			<img src="@/assets/loading/1.svg" class="loading" alt="" />
+		</template>
+		<template #loading>
+			<img src="@/assets/loading/1.svg" class="loading" alt="" />
+		</template>
 
-	<van-list v-model:loading="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-		<div class="list-card">
-			<div class="item-card" v-for="item in homeRecommend" :key="item.id">
-				<!-- 1	菜谱 -->
-				<RecipeCard v-if="item.type === 1" :r="item" />
-				<!-- 3	笔记 -->
-				<NoteCard v-if="item.type === 3" :note="item" />
-				<!-- 300	广告 -->
-				<AdvertisementCard v-if="item.type === 300" :dsp="item" />
+		<van-swipe :autoplay="3000" lazy-render>
+			<van-swipe-item v-for="image in homeBanners">
+				<van-image width="100%" :src="image.i" />
+			</van-swipe-item>
+		</van-swipe>
+
+		<van-list v-model:loading="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+			<div class="list-card">
+				<div class="item-card" v-for="item in homeRecommend" :key="item.id">
+					<!-- 1	菜谱 -->
+					<RecipeCard v-if="item.type === 1" :r="item" />
+					<!-- 3	笔记 -->
+					<NoteCard v-if="item.type === 3" :note="item" />
+					<!-- 300	广告 -->
+					<AdvertisementCard v-if="item.type === 300" :dsp="item" />
+				</div>
 			</div>
-		</div>
-	</van-list>
+		</van-list>
+	</van-pull-refresh>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, nextTick } from 'vue';
 import { getHomeRecommend } from '@/apis/api';
-import RecipeCard from '@/components/RecipeCard.vue';
-import NoteCard from '@/components/NoteCard.vue';
-import AdvertisementCard from '@/components/AdvertisementCard.vue';
+import RecipeCard from '@/components/HomeRecommend/RecipeCard.vue';
+import NoteCard from '@/components/HomeRecommend/NoteCard.vue';
+import AdvertisementCard from '@/components/HomeRecommend/AdvertisementCard.vue';
 
 // 初始化获取数据
-// banner推荐轮播图列表
-const homeBanner = ref([]);
+// banner推荐轮播图列表S
+const homeBanners = ref([]);
 // 推荐列表
 let homeRecommend = ref([]);
 // 更新偏移量
@@ -42,7 +54,7 @@ const finished = ref(false);
 const recommendList = async () =>
 	await getHomeRecommend({ offset: offset.value * 10 })
 		.then((res) => {
-			homeBanner.value = res.data.result.banner;
+			homeBanners.value = res.data.result.banner;
 			homeRecommend.value = [...homeRecommend.value, ...res.data.result.list];
 
 			//
@@ -71,11 +83,27 @@ const onLoad = () => {
 	console.log('触底了', offset.value);
 	recommendList();
 };
+
+const isLoading = ref(false);
+
+// 下拉刷新
+const onRefresh = async () => {
+	// 生成一个随机整数，范围从0~20
+	let random_integer = Math.floor(Math.random() * 15);
+	console.log(random_integer);
+	offset.value = random_integer;
+
+	await getHomeRecommend({ offset: offset.value * 10 }).then((res) => {
+		homeRecommend.value = res.data.result.list;
+	});
+
+	isLoading.value = false;
+};
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .list-card {
-	background-color: #9e9e9e40;
+	background-color: #9e9e9e15;
 	padding: 0 0.8rem;
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
@@ -89,7 +117,12 @@ const onLoad = () => {
 		// 四角变圆滑
 		border-radius: 0.8rem;
 		background-color: #fff;
-		margin: 2rem 0;
+		margin: 0.5rem 0;
 	}
+}
+
+.loading {
+	width: 4rem;
+	height: 4rem;
 }
 </style>

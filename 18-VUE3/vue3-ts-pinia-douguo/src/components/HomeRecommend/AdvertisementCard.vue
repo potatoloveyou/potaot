@@ -7,7 +7,7 @@
 		<div class="information">
 			<!-- author 作者 -->
 			<div class="author">
-				<van-image round width="1rem" height="1rem" :src="dsp.commercial.dsp.logo" />
+				<van-image round width="1rem" height="1rem" :src="dsp.commercial.dsp.logo" :lazy-load="true" />
 				<van-text-ellipsis :content="dsp.commercial.dsp.name" rows="1" />
 			</div>
 			<!-- collect 收藏 -->

@@ -7,7 +7,7 @@
 		<div class="information">
 			<!-- author 作者 -->
 			<div class="author">
-				<van-image round width="1rem" height="1rem" :src="r.r.a.p" />
+				<van-image round width="1rem" height="1rem" :src="r.r.a.p" :lazy-load="true" />
 				<van-text-ellipsis :content="r.r.a.n" rows="1" />
 			</div>
 			<!-- collect 收藏 -->
@@ -25,7 +25,7 @@
 	</div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { defineProps } from 'vue';
 import { useFavoritesStore } from '@/stores/favorites';
 const favoritesStore = useFavoritesStore();
@@ -40,7 +40,6 @@ const favoritesStore = useFavoritesStore();
 defineProps({
 	r: Object,
 });
-
 
 // 添加收藏
 const addFav = ({ type, recipe }) => favoritesStore.addFav({ type, recipe });

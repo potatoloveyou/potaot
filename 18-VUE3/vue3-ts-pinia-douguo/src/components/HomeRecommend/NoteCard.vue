@@ -6,7 +6,7 @@
 		<div class="information">
 			<!-- author 作者 -->
 			<div class="author">
-				<van-image round width="1rem" height="1rem" :src="note.note.author.p" />
+				<van-image round width="1rem" height="1rem" :src="note.note.author.p" :lazy-load="true" />
 				<van-text-ellipsis :content="note.note.author.n" rows="1" />
 			</div>
 			<!-- collect 收藏 -->

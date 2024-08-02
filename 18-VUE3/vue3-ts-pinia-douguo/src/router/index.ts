@@ -88,7 +88,7 @@ const router = createRouter({
 
 						// recipe 菜谱
 						{
-							path:'',
+							path: '',
 							name: 'favorites.recipe',
 							component: () => import('@/views/BottomNav/Favorites/FavoritesRecipe.vue'),
 						},
@@ -139,6 +139,14 @@ const router = createRouter({
 			path: '/recipe',
 			name: 'recipe',
 			component: () => import('@/views/RecipeView.vue'),
+			children: [
+				// // attention 关注
+				// {
+				// 	path: 'attention',
+				// 	name: 'home.attention',
+				// 	component: () => import('@/views/BottomNav/Home/HomeAttention.vue'),
+				// },
+			],
 		},
 
 		// login 登录

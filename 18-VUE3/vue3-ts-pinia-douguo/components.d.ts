@@ -18,6 +18,7 @@ declare module 'vue' {
     RecipeClassifyCard: typeof import('./src/components/Recipe/RecipeClassifyCard.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SearchHomepage: typeof import('./src/components/Search/SearchHomepage.vue')['default']
     VanButton: typeof import('vant/es')['Button']
     VanCard: typeof import('vant/es')['Card']
     VanCell: typeof import('vant/es')['Cell']

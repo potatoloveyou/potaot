@@ -14,7 +14,7 @@ export const useLoginStore = defineStore('login', () => {
 
 	// 登录
 	// const login = ({ userInfo = {}, token }) => {
-	const login = ({ token }) => {
+	const login = ({ token }: any) => {
 		isLogin.value = true;
 		// 	userInfo.value = data;
 		userToken.value = token;

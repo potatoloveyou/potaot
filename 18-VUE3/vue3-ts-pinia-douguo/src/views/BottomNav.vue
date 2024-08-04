@@ -19,11 +19,13 @@ const router = useRouter();
 const active = ref('');
 
 // 初始化active.value值为当前路由的值
-active.value = route.name;
+if (route.name) {
+	active.value = route.name as string;
+}
 
 // 路由进入前
 router.beforeEach((to) => {
-	active.value = to.name;
+	active.value = to.name as string;
 });
 </script>
 

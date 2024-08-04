@@ -134,7 +134,6 @@ const redirectSearch = () => {
 					display: flex;
 					flex-wrap: wrap;
 					justify-content: space-around;
-					justify-content: space-evenly;
 					li {
 						min-width: 4rem;
 						border: 1px solid #cecece;

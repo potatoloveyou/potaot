@@ -21,31 +21,31 @@ const router = createRouter({
 						{
 							path: 'attention',
 							name: 'home.attention',
-							component: () => import('@/views/BottomNav/Home/HomeAttention.vue'),
+							component: () => import('@/views/BottomNav/HomeNav/HomeAttention.vue'),
 						},
 						// recommend 推荐
 						{
 							path: '',
 							name: 'home.recommend',
-							component: () => import('@/views/BottomNav/Home/HomeRecommend.vue'),
+							component: () => import('@/views/BottomNav/HomeNav/HomeRecommend.vue'),
 						},
 						// note 笔记
 						{
 							path: 'note',
 							name: 'home.note',
-							component: () => import('@/views/BottomNav/Home/HomeNote.vue'),
+							component: () => import('@/views/BottomNav/HomeNav/HomeNote.vue'),
 						},
 						// video 视频
 						{
 							path: 'video',
 							name: 'home.video',
-							component: () => import('@/views/BottomNav/Home/HomeVideo.vue'),
+							component: () => import('@/views/BottomNav/HomeNav/HomeVideo.vue'),
 						},
 						// activity 活动
 						{
 							path: 'activity',
 							name: 'home.activity',
-							component: () => import('@/views/BottomNav/Home/HomeActivity.vue'),
+							component: () => import('@/views/BottomNav/HomeNav/HomeActivity.vue'),
 						},
 					],
 				},
@@ -83,27 +83,27 @@ const router = createRouter({
 							path: 'grouping',
 							name: 'favorites.grouping',
 							// component: () => import('@/views/BottomNav/Favorites/FavoritesGrouping.vue'),
-							component: () => import('@/views/BottomNav/Favorites/FavoritesGrouping.vue'),
+							component: () => import('@/views/BottomNav/FavoritesNav/FavoritesGrouping.vue'),
 						},
 
 						// recipe 菜谱
 						{
 							path: '',
 							name: 'favorites.recipe',
-							component: () => import('@/views/BottomNav/Favorites/FavoritesRecipe.vue'),
+							component: () => import('@/views/BottomNav/FavoritesNav/FavoritesRecipe.vue'),
 						},
 
 						// note 笔记
 						{
 							path: 'note',
 							name: 'favorites.note',
-							component: () => import('@/views/BottomNav/Favorites/FavoritesNote.vue'),
+							component: () => import('@/views/BottomNav/FavoritesNav/FavoritesNote.vue'),
 						},
 						// course 课程
 						{
 							path: 'course',
 							name: 'favorites.course',
-							component: () => import('@/views/BottomNav/Favorites/FavoritesCourse.vue'),
+							component: () => import('@/views/BottomNav/FavoritesNav/FavoritesCourse.vue'),
 						},
 					],
 
@@ -132,6 +132,52 @@ const router = createRouter({
 			path: '/search',
 			name: 'search',
 			component: () => import('@/views/SearchView.vue'),
+			children: [
+				// homepage 主页
+				{
+					path: '',
+					name: 'search.homepage',
+					component: () => import('@/views/Search/SearchHomepage.vue'),
+				},
+				//
+				{
+					path: 'searchNav',
+					name: 'searchNav',
+					component: () => import('@/views/Search/SearchNav.vue'),
+					children: [
+						// recipe 菜谱
+						{
+							path: '',
+							name: 'search.recipe',
+							component: () => import('@/views/Search/SearchNav/SearchRecipe.vue'),
+						},
+						// 笔记
+						{
+							path: 'note',
+							name: 'search.note',
+							component: () => import('@/views/Search/SearchNav/SearchNote.vue'),
+						},
+						// 用户
+						{
+							path: 'user',
+							name: 'search.user',
+							component: () => import('@/views/Search/SearchNav/SearchUser.vue'),
+						},
+						// 商品
+						{
+							path: 'product',
+							name: 'search.product',
+							component: () => import('@/views/Search/SearchNav/SearchProduct.vue'),
+						},
+						// 课堂
+						{
+							path: 'course',
+							name: 'search.course',
+							component: () => import('@/views/Search/SearchNav/SearchCourse.vue'),
+						},
+					],
+				},
+			],
 		},
 
 		// recipe 菜谱
@@ -158,7 +204,7 @@ const router = createRouter({
 	],
 });
 
-// // 全局前置守卫
+// 全局前置守卫
 router.beforeEach((to, from) => {
 	const loginStore = useLoginStore();
 	to.meta.needLogin && !loginStore.isUserLogin ? router.push('/login?from=' + to.fullPath) : '';

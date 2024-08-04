@@ -7,17 +7,19 @@
 				<LeftPopup />
 			</van-popup>
 
-			<van-search class="top-input" placeholder="请输入搜索关键词" @click.prevent="redirectSearch" />
+			<van-search class="top-input" placeholder="请输入搜索关键词" readonly @click.prevent="redirectSearch" />
 
 			<van-icon name="comment-o" class="top-icon" @click="redirectRecipe" />
 			<van-icon name="volume-o" class="top-icon" />
 		</section>
-		<van-tabs :active="active" class="home-nav-top">
-			<van-tab name="home.attention" title="关注" to="/attention"></van-tab>
-			<van-tab name="home.recommend" title="推荐" to="/"></van-tab>
-			<van-tab name="home.note" title="笔记" to="/note"></van-tab>
-			<van-tab name="home.video" title="视频" to="/video"></van-tab>
-			<van-tab name="home.activity" title="活动" to="/activity"></van-tab>
+
+		<van-tabs :active="active" class="home-nav-top" line-width="1.2rem" line-height="0.2rem">
+			<van-tab
+				v-for="view in router_view"
+				:name="view.name"
+				:key="view.name"
+				:title="view.title"
+				:to="view.path"></van-tab>
 		</van-tabs>
 	</van-sticky>
 	<div class="padding-top"></div>
@@ -39,6 +41,34 @@ import LeftPopup from '@/components/HomeNav/LeftPopup.vue';
 const route = useRoute();
 const router = useRouter();
 
+const router_view = ref([
+	{
+		name: 'home.attention',
+		path: '/attention',
+		title: '关注',
+	},
+	{
+		name: 'home.recommend',
+		path: '/',
+		title: '推荐',
+	},
+	{
+		name: 'home.note',
+		path: '/note',
+		title: '笔记',
+	},
+	{
+		name: 'home.video',
+		path: '/video',
+		title: '视频',
+	},
+	{
+		name: 'home.activity',
+		path: '/activity',
+		title: '活动',
+	},
+]);
+
 // 默认显示推荐页索引
 const active = ref('');
 
@@ -54,7 +84,7 @@ router.beforeEach((to, from) => {
 
 // 输入框
 // 跳转到搜索
-const redirectSearch = () => {
+const redirectSearch = (event) => {
 	router.push('/search');
 };
 
@@ -71,6 +101,10 @@ const redirectRecipe = () => {
 </script>
 
 <style lang="scss">
+.van-tabs__line {
+	background-color: #ffc533;
+}
+
 .home-top {
 	display: flex;
 	align-items: center;

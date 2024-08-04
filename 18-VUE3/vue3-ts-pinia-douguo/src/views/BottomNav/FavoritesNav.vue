@@ -11,9 +11,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { useRoute } from 'vue-router';
-import { useRouter } from 'vue-router';
-
+import { useRoute, useRouter } from 'vue-router';
 const route = useRoute();
 const router = useRouter();
 
@@ -24,11 +22,10 @@ active.value = route.name;
 router.beforeEach((to) => {
 	active.value = to.name;
 });
-
 </script>
 
 <style lang="scss" scoped>
-.favorites-p{
+.favorites-p {
 	padding: 0 1.2rem;
 }
 </style>

@@ -48,7 +48,7 @@
 import { ref, onMounted, nextTick } from 'vue';
 
 import { getActivities } from '@/apis/api';
-import ActivityCard from '@/components/HomeActivity/ActivityCard.vue';
+import ActivityCard from '@/components/Home/HomeActivity/ActivityCard.vue';
 
 // banner推荐轮播图列表
 const homeBanners = ref([]);

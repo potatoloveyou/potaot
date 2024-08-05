@@ -180,11 +180,11 @@ const router = createRouter({
 			],
 		},
 
-		// recipe 菜谱
+		// recipeClassify 菜谱分类
 		{
-			path: '/recipe',
-			name: 'recipe',
-			component: () => import('@/views/RecipeView.vue'),
+			path: '/recipeClassify',
+			name: 'recipeClassify',
+			component: () => import('@/views/RecipeClassifyView.vue'),
 			children: [
 				// // attention 关注
 				// {

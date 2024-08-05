@@ -42,7 +42,7 @@ favoritesStore.recipeFav.map((item) => {
 		margin: 1rem 0;
 		.recipe-img {
 			.van-image__img {
-				border-radius: 16px;
+				border-radius: 1rem;
 			}
 		}
 		.introduce {

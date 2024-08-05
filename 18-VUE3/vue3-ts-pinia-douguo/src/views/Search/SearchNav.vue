@@ -1,13 +1,13 @@
 <template>
 	<!-- SearchNav -->
 	<van-tabs :active="active" class="SearchNav-top" line-width="1.2rem" line-height="0.2rem">
-		<van-tab name="search.recipe" title="菜谱" to="/search/searchNav"></van-tab>
-		<van-tab name="search.note" title="笔记" to="/search/searchNav/note"></van-tab>
-		<van-tab name="search.user" title="用户" to="/search/searchNav/user"></van-tab>
-		<van-tab name="search.product" title="商品" to="/search/searchNav/product"></van-tab>
-		<van-tab name="search.course" title="课堂" to="/search/searchNav/course"></van-tab>
+		<van-tab
+			v-for="item in searchNav_view"
+			:key="item.name"
+			:name="item.name"
+			:title="item.title"
+			:to="item.path"></van-tab>
 	</van-tabs>
-
 	<RouterView />
 </template>
 
@@ -16,6 +16,34 @@ import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 const route = useRoute();
 const router = useRouter();
+
+const searchNav_view = ref([
+	{
+		name: 'search.recipe',
+		title: '菜谱',
+		path: '/search/searchNav',
+	},
+	{
+		name: 'search.note',
+		title: '笔记',
+		path: '/search/searchNav/note',
+	},
+	{
+		name: 'search.user',
+		title: '用户',
+		path: '/search/searchNav/user',
+	},
+	{
+		name: 'search.product',
+		title: '商品',
+		path: '/search/searchNav/product',
+	},
+	{
+		name: 'search.course',
+		title: '课堂',
+		path: '/search/searchNav/course',
+	},
+]);
 
 const active = ref('');
 

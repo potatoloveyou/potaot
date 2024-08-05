@@ -29,7 +29,7 @@
 <script setup>
 import { ref, onMounted, nextTick } from 'vue';
 import { getAttention } from '@/apis/api';
-import AttentionCard from '@/components/HomeAttention/AttentionCard.vue';
+import AttentionCard from '@/components/Home/HomeAttention/AttentionCard.vue';
 
 // attention关注列表
 const attention = ref([]);

@@ -33,18 +33,16 @@ export const getSearchSuggest = async (keyword: string): Promise<any> =>
 	await axios.get(`/recipe/search/suggests?kw=${keyword}`);
 
 // 搜索结果
-export const getSearch = async ({
-	keyword,
-	order = 0,
-	type = 0,
-	offset = 0,
-	limit = 20,
-}: {
+interface SearchParams {
 	keyword: string;
 	order?: number;
 	type?: number;
 	offset?: number;
 	limit?: number;
-}): Promise<any> =>
-	// await axios.get(`/recipe/search/recipes?kw=${keyword}`);
-	await axios.get(`/recipe/search?keyword=${keyword}&order=${order}&type=${type}&offset=${offset}&limit=${limit}`);
+}
+export const getSearch = async (params: SearchParams): Promise<any> => {
+	const { keyword, order = 0, type = 0, offset = 0, limit = 20 } = params;
+	return await axios.get(
+		`/recipe/search?keyword=${keyword}&order=${order}&type=${type}&offset=${offset}&limit=${limit}`,
+	);
+};

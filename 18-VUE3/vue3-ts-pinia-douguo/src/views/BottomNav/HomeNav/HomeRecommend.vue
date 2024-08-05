@@ -35,9 +35,9 @@
 <script setup lang="ts">
 import { ref, onMounted, nextTick } from 'vue';
 import { getHomeRecommend } from '@/apis/api';
-import RecipeCard from '@/components/HomeRecommend/RecipeCard.vue';
-import NoteCard from '@/components/HomeRecommend/NoteCard.vue';
-import AdvertisementCard from '@/components/HomeRecommend/AdvertisementCard.vue';
+import RecipeCard from '@/components/Home/HomeRecommend/RecipeCard.vue';
+import NoteCard from '@/components/Home/HomeRecommend/NoteCard.vue';
+import AdvertisementCard from '@/components/Home/HomeRecommend/AdvertisementCard.vue';
 
 // 初始化获取数据
 // banner推荐轮播图列表S

@@ -33,7 +33,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { getNotes } from '@/apis/api';
-import NotesCard from '@/components/HomeNotes/NotesCard.vue';
+import NotesCard from '@/components/Home/HomeNotes/NotesCard.vue';
 
 const noteList = ref([]);
 const noteTopics = ref([]);

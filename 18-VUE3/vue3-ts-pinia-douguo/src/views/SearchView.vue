@@ -8,7 +8,8 @@
 					show-action
 					placeholder="请输入搜索关键词"
 					@update:model-value="updateValue"
-					@search="onSearch">
+					@search="onSearch"
+					@focus="focus">
 					<template #action>
 						<div class="cancel" @click="onCancel">取消</div>
 					</template>
@@ -21,33 +22,16 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
+import { ref, watch, onMounted } from 'vue';
 // import SearchHomepage from '@/views/Search/SearchHomepage.vue';
 import { useSearchStore } from '@/stores/search';
 const searchStore = useSearchStore();
-import { useRouter } from 'vue-router';
+
+import { useRoute, useRouter } from 'vue-router';
+const route = useRoute();
 const router = useRouter();
 
 import { debounce } from 'lodash';
-// console.log(debounce);
-
-/**
- * search	搜索框逻辑
- */
-
-// 确定搜索时触发
-const onSearch = (searchValue) => {
-	// searchStore.searchValue = searchValue;
-	searchStore.addNewHistory(searchValue);
-};
-
-// 输入框 输入时 内容变化时 触发
-const updateValue = debounce((searchValue) => {
-	searchStore.suggestList = [];
-	if (searchValue) {
-		searchStore.searchSuggest(searchValue);
-	}
-}, 300);
 
 // 点击取消按钮时触发
 // 返回上一级
@@ -57,6 +41,41 @@ const onCancel = () => {
 		searchStore.searchValue = '';
 	} else {
 		history.back();
+	}
+};
+
+/**
+ * search	搜索框逻辑
+ */
+
+//  搜索标志位
+const searchTriggered = ref(false);
+
+// 确定搜索时触发
+const onSearch = (searchValue) => {
+	// searchStore.searchValue = searchValue;
+	searchTriggered.value = true; // 标记已经触发了搜索
+	searchStore.addNewHistory(searchValue);
+	router.push('/search/searchNav');
+};
+
+// 输入框 输入时 内容变化时 触发
+const updateValue = debounce((searchValue) => {
+	if (searchTriggered.value) {
+		searchTriggered.value = false; // 重置标志位
+		return; // 如果已经触发了搜索，不再发送AJAX请求
+	}
+	searchStore.suggestList = [];
+	if (searchValue) {
+		searchStore.searchSuggest(searchValue);
+	}
+}, 500);
+
+// 输入框聚焦时触发
+const focus = () => {
+	const path = route.path.split('/')[2];
+	if (path == 'searchNav') {
+		router.push('/search');
 	}
 };
 </script>

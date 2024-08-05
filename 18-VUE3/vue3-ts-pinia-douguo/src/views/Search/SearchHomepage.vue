@@ -1,7 +1,7 @@
 <template>
 	<section class="search-homepage">
 		<!-- history 历史搜索 -->
-		<div class="history" v-if="!searchStore.searchValue">
+		<div class="history" v-show="!searchStore.searchValue">
 			<div class="top-text">
 				历史搜索
 				<van-icon name="delete-o" size="1.2rem" @click="searchStore.deleteHistory" />
@@ -14,7 +14,7 @@
 		</div>
 
 		<!-- 当季热门 -->
-		<div class="popular" v-if="!searchStore.searchValue">
+		<div class="popular" v-show="!searchStore.searchValue">
 			<div class="top-text">当季热门</div>
 
 			<ul class="list">
@@ -25,7 +25,7 @@
 		</div>
 
 		<!-- 分类 -->
-		<div class="classification" v-if="!searchStore.searchValue">
+		<div class="classification" v-show="!searchStore.searchValue">
 			<div class="top-text">
 				<div class="text-left">分类</div>
 				<div class="text-right" @click="redirectRecipe">全部分类</div>
@@ -38,7 +38,7 @@
 	</section>
 
 	<!-- 搜索建议 -->
-	<div class="suggest" v-if="searchStore.searchValue">
+	<div class="suggest" v-show="searchStore.searchValue">
 		<ul class="suggest-list">
 			<li class="suggest-item" v-for="sugges in searchStore.suggestList">
 				<div class="sugges-name">{{ sugges.name }}</div>
@@ -149,6 +149,7 @@ li.item {
 }
 
 .suggest {
+	padding: 0 0.8rem;
 	ul.suggest-list {
 		li.suggest-item {
 			display: flex;

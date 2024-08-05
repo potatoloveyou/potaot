@@ -15,11 +15,11 @@
 
 		<van-tabs :active="active" class="home-nav-top" line-width="1.2rem" line-height="0.2rem">
 			<van-tab
-				v-for="view in router_view"
-				:name="view.name"
-				:key="view.name"
-				:title="view.title"
-				:to="view.path"></van-tab>
+				v-for="item in homeNav_view"
+				:name="item.name"
+				:key="item.name"
+				:title="item.title"
+				:to="item.path"></van-tab>
 		</van-tabs>
 	</van-sticky>
 	<div class="padding-top"></div>
@@ -36,36 +36,36 @@
 <script setup>
 import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import LeftPopup from '@/components/HomeNav/LeftPopup.vue';
+import LeftPopup from '@/components/Home/HomePopupNav/LeftPopup.vue';
 
 const route = useRoute();
 const router = useRouter();
 
-const router_view = ref([
+const homeNav_view = ref([
 	{
 		name: 'home.attention',
-		path: '/attention',
 		title: '关注',
+		path: '/attention',
 	},
 	{
 		name: 'home.recommend',
-		path: '/',
 		title: '推荐',
+		path: '/',
 	},
 	{
 		name: 'home.note',
-		path: '/note',
 		title: '笔记',
+		path: '/note',
 	},
 	{
 		name: 'home.video',
-		path: '/video',
 		title: '视频',
+		path: '/video',
 	},
 	{
 		name: 'home.activity',
-		path: '/activity',
 		title: '活动',
+		path: '/activity',
 	},
 ]);
 
@@ -96,7 +96,7 @@ const showPopup = () => {
 
 // 跳转到食谱
 const redirectRecipe = () => {
-	router.push('/recipe');
+	router.push('/recipeClassify');
 };
 </script>
 

@@ -133,7 +133,7 @@ const router = createRouter({
 			name: 'search',
 			component: () => import('@/views/SearchView.vue'),
 			children: [
-				// homepage 主页
+				// search.homepage 搜索主页
 				{
 					path: '',
 					name: 'search.homepage',
@@ -194,6 +194,53 @@ const router = createRouter({
 				// },
 			],
 		},
+
+		// messageCenter 消息中心
+		{
+			path: '/messageCenter',
+			name: 'messageCenter',
+			component: () => import('@/views/MessageCenterVIew.vue'),
+			children: [
+				{
+					// messageCenter.homepage 消息中心主页
+					path: '',
+					name: 'messageCenter.homepage',
+					component: () => import('@/views/MessageCenter/MessageHomepage.vue'),
+				},
+				{
+					// commentRemind 评论和@
+					path: 'commentRemind',
+					name: 'messageCenter.commentRemind',
+					component: () => import('@/views/MessageCenter/MessageCommentRemind.vue'),
+				},
+				{
+					// collectLike 收藏点赞
+					path: 'collectLike',
+					name: 'messageCenter.collectLike',
+					component: () => import('@/views/MessageCenter/MessageCollectLike.vue'),
+				},
+				{
+					// newFans 新的粉丝
+					path: 'newFans',
+					name: 'messageCenter.newFans',
+					component: () => import('@/views/MessageCenter/MessageNewFans.vue'),
+				},
+
+				{
+					// hotActivity 热门活动
+					path: 'hotActivity',
+					name: 'messageCenter.hotActivity',
+					component: () => import('@/views/MessageCenter/HotActivity.vue'),
+				},
+			],
+		},
+
+		// recipeDetail 菜谱详情
+		// {
+		// 	path: '/recipeDetail',
+		// 	name: 'recipeDetail',
+		// 	component: () => import('@/views/RecipeDetailView.vue'),
+		// },
 
 		// login 登录
 		{

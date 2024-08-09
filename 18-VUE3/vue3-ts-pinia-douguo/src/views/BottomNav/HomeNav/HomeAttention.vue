@@ -1,5 +1,5 @@
 <template>
-	<!-- 关注 -->
+	<!-- home关注 -->
 	<!-- notice	公告 -->
 	<van-pull-refresh v-model="isLoading" :head-height="60" @refresh="onRefresh">
 		<template #pulling="props">
@@ -19,7 +19,7 @@
 		</div>
 
 		<van-list v-model:loading="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-			<div class="item-card" v-for="item in attention" >
+			<div class="item-card" v-for="item in attention">
 				<AttentionCard :item="item" />
 			</div>
 		</van-list>
@@ -31,21 +31,24 @@ import { ref, onMounted, nextTick } from 'vue';
 import { getAttention } from '@/apis/api';
 import AttentionCard from '@/components/Home/HomeAttention/AttentionCard.vue';
 
-// attention关注列表
-const attention = ref([]);
+// vant列表组件加载更多
+const loading = ref(false);
+const finished = ref(false);
+
 // 更新偏移量
 let offset = ref(0);
-
-// vant列表组件加载更多
-const loading = ref(true);
-const finished = ref(false);
+// attention关注列表
+const attention = ref([]);
+// 是否无数据
+const isData = ref(false);
 
 const attentionList = async () => {
 	await getAttention({ offset: offset.value * 10 })
 		.then((res) => {
 			attention.value = [...attention.value, ...res.data.result.rfs];
-			// console.log(res.data.result.rfs);
-
+			if (res.data.result.end == 1) {
+				isData.value = true;
+			}
 			nextTick(() => {
 				offset.value++;
 			});
@@ -62,15 +65,18 @@ const attentionList = async () => {
 		});
 };
 
-// 组件创建的时候调用
-onMounted(() => {
-	attentionList();
-});
+// // 组件创建的时候调用
+// onMounted(() => {
+// 	attentionList();
+// });
 
 const onLoad = () => {
 	// 异步更新数据
 	console.log('触底了', offset.value);
-	attentionList();
+	// attentionList();
+	if (!isData.value) {
+		attentionList();
+	}
 };
 
 const isLoading = ref(false);

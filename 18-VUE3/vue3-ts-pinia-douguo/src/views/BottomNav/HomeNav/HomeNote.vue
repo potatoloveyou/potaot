@@ -35,6 +35,10 @@ import { ref, onMounted } from 'vue';
 import { getNotes } from '@/apis/api';
 import NotesCard from '@/components/Home/HomeNotes/NotesCard.vue';
 
+// vant列表组件加载更多
+const loading = ref(true);
+const finished = ref(false);
+
 const noteList = ref([]);
 const noteTopics = ref([]);
 // 更新偏移量
@@ -51,10 +55,6 @@ const notesList = async () => {
 onMounted(() => {
 	notesList();
 });
-
-// vant列表组件加载更多
-const loading = ref(true);
-const finished = ref(false);
 
 const onLoad = () => {
 	// 异步更新数据

@@ -7,13 +7,16 @@
 				<LeftPopup />
 			</van-popup>
 
+			<!-- 搜索框 -->
 			<van-search class="top-input" placeholder="请输入搜索关键词" readonly @click.prevent="redirectSearch" />
-
+			<!-- 菜谱分类 -->
 			<van-icon name="comment-o" class="top-icon" @click="redirectRecipe" />
-			<van-icon name="volume-o" class="top-icon" />
+			<!-- 消息中心 -->
+			<van-icon name="volume-o" class="top-icon" @click="redirectMessageCenter" />
 		</section>
 
-		<van-tabs :active="active" class="home-nav-top" line-width="1.2rem" line-height="0.2rem">
+		<van-tabs :active="active" class="home-nav-top" line-width="1.2rem" line-height="0.2rem" swipeable>
+			<!-- swipeable 开启滑动 -->
 			<van-tab
 				v-for="item in homeNav_view"
 				:name="item.name"
@@ -24,6 +27,7 @@
 	</van-sticky>
 	<div class="padding-top"></div>
 	<RouterView />
+
 	<!-- <router-view v-slot="{ Component }">
 		<transition name="fade">
 			<keep-alive>
@@ -97,6 +101,11 @@ const showPopup = () => {
 // 跳转到食谱
 const redirectRecipe = () => {
 	router.push('/recipeClassify');
+};
+
+// 跳转到消息中心
+const redirectMessageCenter = () => {
+	router.push('/messageCenter');
 };
 </script>
 

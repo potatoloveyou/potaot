@@ -1,5 +1,5 @@
 <template>
-	<!-- 首页推荐 -->
+	<!-- home推荐 -->
 	<van-pull-refresh v-model="isLoading" :head-height="60" @refresh="onRefresh">
 		<template #pulling="props">
 			<img src="@/assets/loading/1.svg" class="loading" alt="" />
@@ -39,6 +39,10 @@ import RecipeCard from '@/components/Home/HomeRecommend/RecipeCard.vue';
 import NoteCard from '@/components/Home/HomeRecommend/NoteCard.vue';
 import AdvertisementCard from '@/components/Home/HomeRecommend/AdvertisementCard.vue';
 
+// vant列表组件加载更多
+const loading = ref(false);
+const finished = ref(false);
+
 // 初始化获取数据
 // banner推荐轮播图列表S
 const homeBanners = ref([]);
@@ -46,18 +50,18 @@ const homeBanners = ref([]);
 let homeRecommend = ref([]);
 // 更新偏移量
 let offset = ref(0);
-
-// vant列表组件加载更多
-const loading = ref(true);
-const finished = ref(false);
+// 是否无数据
+const isData = ref(false);
 
 const recommendList = async () =>
 	await getHomeRecommend({ offset: offset.value * 10 })
 		.then((res) => {
 			homeBanners.value = res.data.result.banner;
 			homeRecommend.value = [...homeRecommend.value, ...res.data.result.list];
+			if (res.data.result.end == 1) {
+				isData.value = true;
+			}
 
-			//
 			nextTick(() => {
 				offset.value++;
 			});
@@ -74,14 +78,17 @@ const recommendList = async () =>
 		});
 
 // 组件创建的时候调用
-onMounted(() => {
-	recommendList();
-});
+// onMounted(() => {
+// 	recommendList();
+// });
 
 const onLoad = () => {
 	// 异步更新数据
 	console.log('触底了', offset.value);
-	recommendList();
+	// recommendList();
+	if (!isData.value) {
+		recommendList();
+	}
 };
 
 const isLoading = ref(false);
@@ -108,9 +115,7 @@ const onRefresh = async () => {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	column-gap: 0.8rem;
-	justify-content: space-evenly;
 	.item-card {
-		width: 100%;
 		aspect-ratio: 1/2;
 		display: flex;
 		flex-direction: column;

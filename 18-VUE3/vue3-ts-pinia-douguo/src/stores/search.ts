@@ -1,6 +1,7 @@
 import { ref, watch, computed } from 'vue';
 import { defineStore } from 'pinia';
 import { getSearchSuggest } from '@/apis/api';
+import { useRouter } from 'vue-router';
 
 export const useSearchStore = defineStore('search', () => {
 	const searchValue = ref<string>('');
@@ -30,7 +31,7 @@ export const useSearchStore = defineStore('search', () => {
 	const searchSuggest = async (keyword: string) => {
 		await getSearchSuggest(keyword).then((res) => {
 			suggestList.value = res.data.result.suggests;
-			console.log(suggestList.value);
+			// console.log(suggestList.value);
 		});
 	};
 

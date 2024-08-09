@@ -39,8 +39,9 @@ import { debounce } from 'lodash';
 const onCancel = () => {
 	if (searchStore.searchValue != '') {
 		searchStore.searchValue = '';
-	} else {
 		history.back();
+	} else if (route.path == '/search') {
+		router.push('/');
 	}
 };
 
@@ -71,11 +72,14 @@ const updateValue = debounce((searchValue) => {
 	}
 }, 500);
 
-// 输入框聚焦时触发
+// 输入框聚焦时触发,只要聚焦就判断是否是在搜索页面，如果不在则跳转到搜索页面
 const focus = () => {
 	const path = route.path.split('/')[2];
-	if (path == 'searchNav') {
+	if (path != 'search' && searchStore.searchValue != '') {
 		router.push('/search');
+		// 重新根据搜索框的值发送一次axios
+		searchStore.searchSuggest(searchStore.searchValue);
+		console.log('focus');
 	}
 };
 </script>

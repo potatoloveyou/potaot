@@ -29,23 +29,28 @@ import { getSearch } from '@/apis/api';
 import { useSearchStore } from '@/stores/search';
 const searchStore = useSearchStore();
 
-// 更新偏移量
-let offset = ref(0);
 // vant列表组件加载更多
-const loading = ref(true);
+const loading = ref(false);
 const finished = ref(false);
 
 // 搜索列表
 const searchs = ref([]);
+// 更新偏移量
+let offset = ref(0);
+// 是否无数据
+const isData = ref(false);
 
 const searchList = async () => {
 	await getSearch({ keyword: searchStore.searchValue, offset: offset.value * 20 })
 		.then((res) => {
 			searchs.value = [...searchs.value, ...res.data.result.list];
+			if (res.data.result.end == 1) {
+				isData.value = true;
+			}
+			console.log(searchs.value);
 
 			nextTick(() => {
 				offset.value++;
-				// console.log(123);
 			});
 		})
 		.catch(() => {
@@ -60,15 +65,17 @@ const searchList = async () => {
 		});
 };
 
-// 组件创建的时候调用
-onMounted(() => {
-	searchList();
-});
+// // 组件创建的时候调用
+// onMounted(() => {
+// 	searchList();
+// });
 
 const onLoad = () => {
 	// 异步更新数据
 	console.log('触底了', offset.value);
-	searchList();
+	if (!isData.value) {
+		searchList();
+	}
 };
 </script>
 

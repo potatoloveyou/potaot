@@ -1,11 +1,12 @@
 <template>
+	<!-- 菜谱分类 -->
 	<div class="recipeList">
 		<van-nav-bar title="菜谱分类" placeholder z-index="999" class="recipe-top" @click-left="onClickLeft">
 			<template #left>
-				<van-icon name="arrow-left" size="1.5rem" />
+				<van-icon name="arrow-left" size="1.5rem" color="#000" />
 			</template>
 			<template #right>
-				<van-icon name="search" size="1.5rem" @click="redirectSearch" />
+				<van-icon name="search" size="1.5rem" color="#000" @click="redirectSearch" />
 			</template>
 		</van-nav-bar>
 
@@ -18,7 +19,7 @@
 					:class="index == active ? 'bgc-w' : ''"
 					@click="active = index">
 					{{ item.name }}
-					<i class="active" v-if="index === active"></i>
+					<i class="active" v-show="index === active"></i>
 				</li>
 			</ul>
 
@@ -27,7 +28,7 @@
 					<div class="recipe-type" v-if="recipeList[active]" v-for="list in recipeList[active].cs">
 						<van-image width="100%" height="100%" :src="list.image_url" v-if="list.image_url" />
 						<ul class="type-details">
-							<li v-for="item in list.cs">{{ item.name }}</li>
+							<li v-for="item in list.cs" @click="redirectSearchNav(item.name)">{{ item.name }}</li>
 						</ul>
 					</div>
 				</div>
@@ -42,7 +43,11 @@ import { getRecipe } from '@/apis/api';
 import { useRoute, useRouter } from 'vue-router';
 const router = useRouter();
 
+import { useSearchStore } from '@/stores/search';
+const searchStore = useSearchStore();
+
 const recipeList = ref([]);
+// 左边导航栏的索引
 const active = ref(0);
 
 const recipe = async () => {
@@ -62,6 +67,12 @@ const onClickLeft = () => history.back();
 // 跳转到搜索
 const redirectSearch = () => {
 	router.push('/search');
+};
+
+const redirectSearchNav = (value) => {
+	searchStore.searchValue = value;
+	router.push('/search/searchNav');
+	console.log(value);
 };
 </script>
 

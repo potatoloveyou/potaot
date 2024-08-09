@@ -7,6 +7,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    Activity: typeof import('./src/components/Home/HomeActivity/Activity.vue')['default']
     ActivityCard: typeof import('./src/components/Home/HomeActivity/ActivityCard.vue')['default']
     AdvertisementCard: typeof import('./src/components/Home/HomeRecommend/AdvertisementCard.vue')['default']
     AttentionCard: typeof import('./src/components/Home/HomeAttention/AttentionCard.vue')['default']

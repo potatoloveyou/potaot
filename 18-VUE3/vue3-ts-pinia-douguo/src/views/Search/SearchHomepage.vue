@@ -40,7 +40,7 @@
 	<!-- 搜索建议 -->
 	<div class="suggest" v-show="searchStore.searchValue">
 		<ul class="suggest-list">
-			<li class="suggest-item" v-for="sugges in searchStore.suggestList">
+			<li class="suggest-item" v-for="sugges in searchStore.suggestList" @click="amendValue(sugges.name)">
 				<div class="sugges-name">{{ sugges.name }}</div>
 				<div class="sugges-from" v-if="sugges.tag">{{ sugges.tag.name }}</div>
 			</li>
@@ -94,7 +94,7 @@ const amendValue = (value) => {
 
 // 组件创建的时候调用
 onMounted(() => {
-	hotSearch();
+	searchStore.searchValue ? '' : hotSearch();
 });
 
 // 跳转到食谱
@@ -110,7 +110,7 @@ const showHistory = () => {
 </script>
 
 <style lang="scss" scoped>
-.search-homepage{
+.search-homepage {
 	padding: 0 0.8rem;
 }
 .history {

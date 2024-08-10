@@ -1,6 +1,6 @@
 <template>
 	<!-- SearchRecipeCard-->
-	<div class="search-recipe-card">
+	<div class="search-recipe-card" @click="redirectRecipeDetail(search.r.id)">
 		<van-image
 			class="recipe-img"
 			width="45%"
@@ -29,10 +29,23 @@
 </template>
 
 <script setup>
-import { ref, defineProps } from 'vue';
+
+import { useRoute, useRouter } from 'vue-router';
+const route = useRoute();
+const router = useRouter();
+
+import { useRecipeDetailStore } from '@/stores/recipeDetail';
+const recipeDetailStore = useRecipeDetailStore();
+
 defineProps({
 	search: Object,
 });
+
+// 跳转到菜谱详情页
+const redirectRecipeDetail = (recipeId) => {
+	recipeDetailStore.recipeId = recipeId;
+	router.push({ path: '/recipeDetail', query: { recipeId: recipeId } });
+};
 </script>
 
 <style lang="scss">

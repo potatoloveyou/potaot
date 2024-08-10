@@ -49,7 +49,7 @@
 </template>
 
 <script setup>
-import { ref, defineProps, onMounted } from 'vue';
+import { ref, onMounted } from 'vue';
 import { getHotSearch } from '@/apis/api';
 import { useSearchStore } from '@/stores/search';
 const searchStore = useSearchStore();

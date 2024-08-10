@@ -65,11 +65,6 @@ const searchList = async () => {
 		});
 };
 
-// // 组件创建的时候调用
-// onMounted(() => {
-// 	searchList();
-// });
-
 const onLoad = () => {
 	// 异步更新数据
 	console.log('触底了', offset.value);

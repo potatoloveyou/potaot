@@ -7,19 +7,19 @@ export const getConfig = () => axios.get('/config.json');
 export const getInit = () => axios.get('/init.json');
 
 // 关注列表
-export const getAttention = async ({ offset = 0, limit = 20 } = {}): Promise<any> =>
+export const getAttention = async ({ offset = 0, limit = 20 }: { offset?: number; limit?: number }): Promise<any> =>
 	await axios.get(`/home/ffeeds/${offset}/${limit}`);
 
 // 推荐列表
-export const getHomeRecommend = async ({ offset = 0, limit = 10 } = {}): Promise<any> =>
+export const getHomeRecommend = async ({ offset = 0, limit = 10 }: { offset?: number; limit?: number }): Promise<any> =>
 	await axios.get(`/home/recommended/${offset}/${limit}`);
 
 // 笔记列表
-export const getNotes = async ({ offset = 0, limit = 20 } = {}): Promise<any> =>
+export const getNotes = async ({ offset = 0, limit = 20 }: { offset?: number; limit?: number }): Promise<any> =>
 	await axios.get(`/home/notes/${offset}/${limit}`);
 
 // 活动列表
-export const getActivities = async ({ offset = 0, limit = 20 } = {}): Promise<any> =>
+export const getActivities = async ({ offset = 0, limit = 20 }: { offset?: number; limit?: number }): Promise<any> =>
 	await axios.get(`/home/events/getlists?${offset}/${limit}`);
 
 // 菜谱
@@ -29,7 +29,7 @@ export const getRecipe = async (): Promise<any> => await axios.get('/recipe/flat
 export const getHotSearch = async (): Promise<any> => await axios.get('/recipe/search/hot');
 
 // 搜索建议
-export const getSearchSuggest = async (keyword: string): Promise<any> =>
+export const getSearchSuggest = async (keyword?: string): Promise<any> =>
 	await axios.get(`/recipe/search/suggests?kw=${keyword}`);
 
 // 搜索结果
@@ -46,3 +46,6 @@ export const getSearch = async (params: SearchParams): Promise<any> => {
 		`/recipe/search?keyword=${keyword}&order=${order}&type=${type}&offset=${offset}&limit=${limit}`,
 	);
 };
+
+// 菜谱详情
+export const getRecipeDetail = async (recipeId?: string): Promise<any> => await axios.get(`/recipe/detail/${recipeId}`);

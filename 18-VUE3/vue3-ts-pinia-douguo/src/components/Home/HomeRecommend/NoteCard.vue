@@ -25,7 +25,7 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
+
 import { useFavoritesStore } from '@/stores/favorites';
 const favoritesStore = useFavoritesStore();
 

@@ -19,7 +19,7 @@
 
 		<van-list v-model:loading="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
 			<div class="list-card">
-				<div class="item-card" v-for="item in homeRecommend" :key="item.id">
+				<div class="item-card" v-for="item in homeRecommend" @click="redirectRecipeDetail(item)">
 					<!-- 1	菜谱 -->
 					<RecipeCard v-if="item.type === 1" :r="item" />
 					<!-- 3	笔记 -->
@@ -39,13 +39,20 @@ import RecipeCard from '@/components/Home/HomeRecommend/RecipeCard.vue';
 import NoteCard from '@/components/Home/HomeRecommend/NoteCard.vue';
 import AdvertisementCard from '@/components/Home/HomeRecommend/AdvertisementCard.vue';
 
+import { useRoute, useRouter } from 'vue-router';
+const route = useRoute();
+const router = useRouter();
+
+import { useRecipeDetailStore } from '@/stores/recipeDetail';
+const recipeDetailStore = useRecipeDetailStore();
+
 // vant列表组件加载更多
 const loading = ref(false);
 const finished = ref(false);
 
 // 初始化获取数据
 // banner推荐轮播图列表S
-const homeBanners = ref([]);
+const homeBanners= ref([]);
 // 推荐列表
 let homeRecommend = ref([]);
 // 更新偏移量
@@ -77,11 +84,6 @@ const recommendList = async () =>
 			});
 		});
 
-// 组件创建的时候调用
-// onMounted(() => {
-// 	recommendList();
-// });
-
 const onLoad = () => {
 	// 异步更新数据
 	console.log('触底了', offset.value);
@@ -92,7 +94,6 @@ const onLoad = () => {
 };
 
 const isLoading = ref(false);
-
 // 下拉刷新
 const onRefresh = async () => {
 	// 生成一个随机整数，范围从0~20
@@ -105,6 +106,26 @@ const onRefresh = async () => {
 	});
 
 	isLoading.value = false;
+};
+
+// 跳转到菜谱详情页
+const redirectRecipeDetail = (item: any) => {
+	switch (item.type) {
+		case 1:
+			recipeDetailStore.recipeId = item.r.id;
+			router.push({ path: '/recipeDetail', query: { recipeId: item.r.id } });
+			break;
+		case 3:
+			recipeDetailStore.recipeId = item.note.id;
+			router.push({ path: '/recipeDetail', query: { recipeId: item.note.id } });
+			break;
+		case 300:
+			recipeDetailStore.recipeId = item.dsp.id;
+			router.push({ path: '/recipeDetail', query: { recipeId: item.dsp.id } });
+			break;
+		default:
+			break;
+	}
 };
 </script>
 

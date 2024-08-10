@@ -21,7 +21,6 @@
 </template>
 
 <script setup>
-import { defineProps, ref } from 'vue';
 defineProps({
 	events: Object,
 });

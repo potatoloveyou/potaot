@@ -2,7 +2,7 @@
 	<van-sticky>
 		<section class="home-top">
 			<!-- 左侧弹出框 -->
-			<van-icon name="wap-nav" class="top-wap-nav" is-link @click="showPopup" />
+			<van-icon name="wap-nav" class="top-wap-nav" @click="showPopup" />
 			<van-popup v-model:show="showLeft" position="left" :style="{ width: '50%', height: '100%' }">
 				<LeftPopup />
 			</van-popup>

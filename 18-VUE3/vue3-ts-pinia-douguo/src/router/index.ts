@@ -236,11 +236,11 @@ const router = createRouter({
 		},
 
 		// recipeDetail 菜谱详情
-		// {
-		// 	path: '/recipeDetail',
-		// 	name: 'recipeDetail',
-		// 	component: () => import('@/views/RecipeDetailView.vue'),
-		// },
+		{
+			path: '/recipeDetail',
+			name: 'recipeDetail',
+			component: () => import('@/views/RecipeDetailView.vue'),
+		},
 
 		// login 登录
 		{

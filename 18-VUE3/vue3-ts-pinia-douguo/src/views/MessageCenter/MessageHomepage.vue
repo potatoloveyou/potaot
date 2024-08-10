@@ -65,11 +65,6 @@ import { getActivities } from '@/apis/api';
 // 返回上一级
 const onClickLeft = () => history.back();
 
-// 跳转到搜索
-const redirectSearch = () => {
-	router.push('/search');
-};
-
 const ongoings = ref([]);
 const recommendList = async () =>
 	await getActivities().then((res) => {

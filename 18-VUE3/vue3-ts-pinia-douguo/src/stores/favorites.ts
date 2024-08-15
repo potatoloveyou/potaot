@@ -28,9 +28,9 @@ export const useFavoritesStore = defineStore('favorites', () => {
 		advertisement,
 	}: {
 		type: number;
-		recipe?: number;
-		note?: number;
-		advertisement?: number;
+		recipe?: object;
+		note?: object;
+		advertisement?: object;
 	}) => {
 		switch (type) {
 			case 1:

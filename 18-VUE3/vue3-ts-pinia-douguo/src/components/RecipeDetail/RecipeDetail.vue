@@ -1,4 +1,4 @@
-<template>
+0<template>
 	<van-image fit="cover" :src="recipeData.original_photo_path" />
 	<div class="recipedetail">
 		<!-- 标题 -->

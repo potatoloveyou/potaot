@@ -25,7 +25,7 @@
 			<van-icon name="chat-o" size="1.4rem" />
 			{{ flatcomments.cc }}
 		</div>
-		<div class="collect">
+		<div class="collect" @click="addFav({ recipe: recipeData })">
 			<van-icon name="star-o" size="1.4rem" />
 			收藏
 		</div>
@@ -34,7 +34,7 @@
 			已收藏
 		</div> -->
 		<div class="imitate">
-			<van-icon name="photograph" size="1.4rem" />
+			<van-icon name="photograph" size="1.4rem" color="#ffce2d" />
 			传学做
 		</div>
 	</div>
@@ -43,8 +43,9 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { getRecipeDetail, getFlatcomments } from '@/apis/api';
-import { useRecipeDetailStore } from '@/stores/recipeDetail';
-const recipeDetailStore = useRecipeDetailStore();
+
+import { useFavoritesStore } from '@/stores/favorites';
+const favoritesStore = useFavoritesStore();
 
 import { useRoute, useRouter } from 'vue-router';
 const route = useRoute();
@@ -55,7 +56,6 @@ import RecipeDetail from '@/components/RecipeDetail/RecipeDetail.vue';
 // 菜谱资料
 const recipeData = ref({});
 const recipeDetail = async () => {
-	// await getRecipeDetail(recipeDetailStore.recipeId).then((res) => {
 	await getRecipeDetail(route.query.recipeId).then((res) => {
 		recipeData.value = res.data.result.recipe;
 		console.log(recipeData.value);
@@ -67,7 +67,6 @@ const flatcomments = ref([]);
 const flatcommentsShow = async () => {
 	await getFlatcomments({ recipeid: route.query.recipeId }).then((res) => {
 		flatcomments.value = res.data.result;
-		console.log(flatcomments.value);
 	});
 };
 
@@ -85,6 +84,15 @@ const showBottom = ref(false);
 const showPopup = () => {
 	showBottom.value = true;
 };
+
+// 添加收藏
+const addFav = ({ type = 1, recipe }) => favoritesStore.addFav({ type, recipe });
+
+// 移除收藏
+const removeFav = ({ type, id }) => favoritesStore.removeFav({ type, id });
+
+// 是否在收藏中
+const isInFav = ({ type, id }) => favoritesStore.isInFav({ type, id });
 </script>
 
 <style lang="scss" scoped>
@@ -146,6 +154,5 @@ const showPopup = () => {
 	.imitate {
 		flex: 2;
 	}
-
 }
 </style>

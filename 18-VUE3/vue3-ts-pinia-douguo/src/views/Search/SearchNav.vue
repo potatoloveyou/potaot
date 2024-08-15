@@ -60,7 +60,7 @@ router.beforeEach((to) => {
 
 <style lang="scss">
 .SearchNav-top {
-	border-bottom: 1px solid #000;
+	border-bottom: 1px solid #b4b4b4;
 	padding: 0 0.8rem;
 
 	.van-tabs__line {

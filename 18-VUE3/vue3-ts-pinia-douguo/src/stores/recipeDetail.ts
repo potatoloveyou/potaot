@@ -9,6 +9,7 @@ export const useRecipeDetailStore = defineStore('recipeDetail', () => {
 
 	const route = useRoute();
 	const router = useRouter();
+
 	// 跳转到菜谱详情页
 	const redirectRecipeDetail = (item: any) => {
 		switch (item.type) {

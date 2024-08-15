@@ -19,7 +19,7 @@
 
 		<van-list v-model:loading="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
 			<div class="list-card">
-				<div class="item-card" v-for="item in homeRecommend" >
+				<div class="item-card" v-for="item in homeRecommend">
 					<!-- 1	菜谱 -->
 					<RecipeCard v-if="item.type === 1" :r="item" />
 					<!-- 3	笔记 -->
@@ -42,8 +42,6 @@ import AdvertisementCard from '@/components/Home/HomeRecommend/AdvertisementCard
 import { useRoute, useRouter } from 'vue-router';
 const route = useRoute();
 const router = useRouter();
-
-
 
 // vant列表组件加载更多
 const loading = ref(false);
@@ -106,8 +104,6 @@ const onRefresh = async () => {
 
 	isLoading.value = false;
 };
-
-
 </script>
 
 <style lang="scss">

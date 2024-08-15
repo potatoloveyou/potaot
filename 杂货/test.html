@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>滚轮条黏在底部</title>
+		<style>
+			#scrollbar {
+				position: fixed;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				height: 10px;
+				background-color: #f1f1f1;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="scrollbar"></div>
+		<textarea id="text-input" rows="10" cols="30"></textarea>
+		<div style="height: 2000px"></div>
+		<script>
+			// 在这里添加你的代码
+			document.addEventListener('scroll', function () {
+				const scrollbar = document.getElementById('scrollbar');
+				if (window.pageYOffset + window.innerHeight >= document.body.offsetHeight) {
+					scrollbar.style.top = '0';
+				} else {
+					scrollbar.style.top = window.pageYOffset + window.innerHeight - document.body.offsetHeight + 'px';
+				}
+			});
+
+			const textInput = document.getElementById('text-input');
+			textInput.addEventListener('input', function () {
+				const scrollbar = document.getElementById('scrollbar');
+				scrollbar.style.top = window.pageYOffset + window.innerHeight - document.body.offsetHeight + 'px';
+			});
+		</script>
+	</body>
+</html>

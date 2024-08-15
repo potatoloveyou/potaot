@@ -15,18 +15,23 @@ export const useFavoritesStore = defineStore('favorites', () => {
 
 	// 菜谱
 	const recipeFav = ref(JSON.parse(window.localStorage.getItem('recipeFav')) || []);
-	// const recipeFav = ref<string[]>(JSON.parse(window.localStorage.getItem('recipeFav')!) || []);
-	// const rawValue = window.localStorage.getItem('recipeFav');
-	// const parsedValue = rawValue ? JSON.parse(rawValue) : null;
-	// const recipeFav = ref<string[]>(parsedValue || []);
-
 	// 笔记
 	const noteFav = ref(JSON.parse(window.localStorage.getItem('noteFav')) || []);
 	// 广告
 	const advertisementFav = ref(JSON.parse(window.localStorage.getItem('advertisementFav')) || []);
 
 	// 添加收藏
-	const addFav = ({ type, recipe, note, advertisement }) => {
+	const addFav = ({
+		type,
+		recipe,
+		note,
+		advertisement,
+	}: {
+		type: number;
+		recipe?: number;
+		note?: number;
+		advertisement?: number;
+	}) => {
 		switch (type) {
 			case 1:
 				recipeFav.value = [...recipeFav.value, recipe];
@@ -41,28 +46,28 @@ export const useFavoritesStore = defineStore('favorites', () => {
 	};
 
 	// 移除收藏
-	const removeFav = ({ type, id }) => {
+	const removeFav = ({ type, id }: { type: number; id: number }) => {
 		switch (type) {
 			case 1:
-				recipeFav.value = recipeFav.value.filter((item) => item.id !== id);
+				recipeFav.value = recipeFav.value.filter((item: any) => item.id !== id);
 				break;
 			case 3:
-				noteFav.value = noteFav.value.filter((item) => item.id !== id);
+				noteFav.value = noteFav.value.filter((item: any) => item.id !== id);
 				break;
 			case 300:
-				advertisementFav.value = advertisementFav.value.filter((item) => item.id !== id);
+				advertisementFav.value = advertisementFav.value.filter((item: any) => item.id !== id);
 		}
 	};
 
 	// 是否在收藏中
-	const isInFav = ({ type, id }) => {
+	const isInFav = ({ type, id }: { type: number; id: number }): any => {
 		switch (type) {
 			case 1:
-				return recipeFav.value.some((item) => item.id === id);
+				return recipeFav.value.some((item: any) => item.id === id);
 			case 3:
-				return noteFav.value.some((item) => item.id === id);
+				return noteFav.value.some((item: any) => item.id === id);
 			case 300:
-				return advertisementFav.value.some((item) => item.id === id);
+				return advertisementFav.value.some((item: any) => item.id === id);
 		}
 	};
 

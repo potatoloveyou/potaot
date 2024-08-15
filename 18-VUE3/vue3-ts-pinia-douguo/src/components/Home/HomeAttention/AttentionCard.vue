@@ -36,7 +36,8 @@
 					size="1.5rem"
 					@click="addFav({ type: item.type, recipe: item })"
 					v-if="!isInFav({ type: item.type, id: item.id })" />
-				<van-icon name="star" size="1.5rem" @click="removeFav({ type: 1, id: item.id })" v-else />
+
+				<van-icon name="star" size="1.5rem" color="#ffce2d" @click="removeFav({ type: 1, id: item.id })" v-else />
 			</div>
 			<van-icon name="chat-o" size="1.5rem" />
 			<van-icon name="share-o" size="1.5rem" />
@@ -106,11 +107,6 @@ const isInFav = ({ type, id }) => favoritesStore.isInFav({ type, id });
 	justify-content: space-between;
 	.analysis {
 		display: flex;
-		.collect {
-			.van-icon-star {
-				color: #ffce2d;
-			}
-		}
 	}
 }
 </style>

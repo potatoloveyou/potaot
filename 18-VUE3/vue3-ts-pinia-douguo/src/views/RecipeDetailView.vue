@@ -1,7 +1,7 @@
 <template>
 	<!-- 菜谱详情 -->
 	<!-- <div>菜谱详情</div> -->
-	<div class="navbar">
+	<div class="navTop">
 		<van-icon name="arrow-left" @click="onClickLeft" />
 
 		<div class="user">
@@ -15,12 +15,34 @@
 		<van-icon name="weapp-nav" @click="showPopup" />
 		<van-popup v-model:show="showBottom" position="bottom" :style="{ height: '45%' }" />
 	</div>
+
 	<RecipeDetail v-if="recipeData.cook_id" :recipeData="recipeData" />
+
+	<div class="navBottom">
+		<input type="text" placeholder="说点什么" class="write-comment" />
+
+		<div class="read-comment">
+			<van-icon name="chat-o" size="1.4rem" />
+			{{ flatcomments.cc }}
+		</div>
+		<div class="collect">
+			<van-icon name="star-o" size="1.4rem" />
+			收藏
+		</div>
+		<!-- <div class="collect">
+			<van-icon name="star" size="1.4rem" color="#ffce2d" />
+			已收藏
+		</div> -->
+		<div class="imitate">
+			<van-icon name="photograph" size="1.4rem" />
+			传学做
+		</div>
+	</div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { getRecipeDetail } from '@/apis/api';
+import { getRecipeDetail, getFlatcomments } from '@/apis/api';
 import { useRecipeDetailStore } from '@/stores/recipeDetail';
 const recipeDetailStore = useRecipeDetailStore();
 
@@ -32,18 +54,27 @@ import RecipeDetail from '@/components/RecipeDetail/RecipeDetail.vue';
 
 // 菜谱资料
 const recipeData = ref({});
-
 const recipeDetail = async () => {
 	// await getRecipeDetail(recipeDetailStore.recipeId).then((res) => {
 	await getRecipeDetail(route.query.recipeId).then((res) => {
-		console.log(res.data.result.recipe);
 		recipeData.value = res.data.result.recipe;
+		console.log(recipeData.value);
+	});
+};
+
+// 评论
+const flatcomments = ref([]);
+const flatcommentsShow = async () => {
+	await getFlatcomments({ recipeid: route.query.recipeId }).then((res) => {
+		flatcomments.value = res.data.result;
+		console.log(flatcomments.value);
 	});
 };
 
 // 组件创建的时候调用
 onMounted(() => {
 	recipeDetail();
+	flatcommentsShow();
 });
 
 // 返回上一级
@@ -57,7 +88,7 @@ const showPopup = () => {
 </script>
 
 <style lang="scss" scoped>
-.navbar {
+.navTop {
 	width: 100%;
 	padding: 0.8rem 0;
 	display: flex;
@@ -82,5 +113,39 @@ const showPopup = () => {
 			background-color: #ffc533;
 		}
 	}
+}
+
+.navBottom {
+	width: 100%;
+	padding: 0.8rem 0;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	z-index: 999;
+	background-color: white;
+	padding: 1rem;
+	box-sizing: border-box;
+	input.write-comment {
+		width: 30%;
+		background-color: #f2f1f1;
+		padding: 0.8rem;
+		border-radius: 2rem;
+	}
+	.read-comment,
+	.collect,
+	.imitate {
+		display: flex;
+		justify-content: space-evenly;
+		align-items: center;
+		flex: 1;
+	}
+	.collect,
+	.imitate {
+		flex: 2;
+	}
+
 }
 </style>

@@ -46,6 +46,8 @@ const attentionList = async () => {
 	await getAttention({ offset: offset.value * 10 })
 		.then((res) => {
 			attention.value = [...attention.value, ...res.data.result.rfs];
+			console.log(attention.value);
+			
 			if (res.data.result.end == 1) {
 				isData.value = true;
 			}

@@ -49,3 +49,18 @@ export const getSearch = async (params: SearchParams): Promise<any> => {
 
 // 菜谱详情
 export const getRecipeDetail = async (recipeId?: string): Promise<any> => await axios.get(`/recipe/detail/${recipeId}`);
+
+// 菜谱相关信息（菜谱详情里的评论）
+export const getRecipeRelatedinfo = async (recipeId?: string): Promise<any> =>
+	await axios.get(`/recipe/relatedinfo/${recipeId}`);
+
+// 菜谱评论
+export const getFlatcomments = async ({
+	recipeid,
+	offset = 0,
+	limit = 20,
+}: {
+	recipeid?: string;
+	offset?: number;
+	limit?: number;
+}): Promise<any> => await axios.get(`/recipe/flatcomments/${recipeid}/${offset}/${limit}`);

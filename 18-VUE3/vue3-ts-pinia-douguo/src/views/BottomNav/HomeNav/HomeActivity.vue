@@ -17,10 +17,12 @@
 
 <script setup>
 import { ref } from 'vue';
-import { getActivities } from '@/apis/api';
+// import { getActivities } from '@/apis/api';
 
 import Activity from '@/components/Home/HomeActivity/Activity.vue';
 
+// 更新偏移量
+let offset = ref(0);
 const isLoading = ref(false);
 // 下拉刷新
 const onRefresh = async () => {
@@ -29,19 +31,11 @@ const onRefresh = async () => {
 	console.log(random_integer);
 	offset.value = random_integer;
 
-	await getActivities({ offset: offset.value * 20 }).then((res) => {
-		homeBanners.value = res.data.data.banner;
-		ongoings.value = res.data.data.ongoing.events;
-		endeds.value = res.data.data.ended.events;
-	});
-
 	isLoading.value = false;
 };
 </script>
 
 <style lang="scss" scoped>
-
-
 .loading {
 	width: 4rem;
 	height: 4rem;

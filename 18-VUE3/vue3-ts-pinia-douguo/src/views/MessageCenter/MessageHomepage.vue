@@ -1,5 +1,5 @@
 <template>
-	<!-- MessageCenterVIew 消息中心 -->
+	<!-- 消息中心主页 -->
 	<div class="navbar">
 		<van-nav-bar title="消息中心" placeholder z-index="999" class="navbar-top" @click-left="onClickLeft">
 			<template #left>

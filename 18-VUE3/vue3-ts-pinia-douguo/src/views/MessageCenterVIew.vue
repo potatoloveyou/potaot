@@ -1,4 +1,5 @@
 <template>
+	<!-- MessageCenterVIew 消息中心 -->
 	<RouterView />
 </template>
 

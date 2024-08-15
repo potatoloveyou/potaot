@@ -19,8 +19,18 @@ export const getNotes = async ({ offset = 0, limit = 20 }: { offset?: number; li
 	await axios.get(`/home/notes/${offset}/${limit}`);
 
 // 活动列表
-export const getActivities = async ({ offset = 0, limit = 20 }: { offset?: number; limit?: number }): Promise<any> =>
-	await axios.get(`/home/events/getlists?${offset}/${limit}`);
+export const getActivities = async ({ offset = 0, limit = 20 } = {}): Promise<any> =>
+	await axios.get(`/home/events/getlists?offset=${offset}limit=${limit}`);
+//
+// export const getActivities = async ({ offset = 0, limit = 20 } = {}): Promise<ActivitiesResponse> => {
+// 	try {
+// 		const response = await apiClient.get(`/getlists?offset=${offset}&limit=${limit}`);
+// 		return response.data;
+// } catch (error) {
+// 		console.error("Error fetching activities:", error);
+// 		throw error;
+// }
+// };
 
 // 菜谱
 export const getRecipe = async (): Promise<any> => await axios.get('/recipe/flatcatalogs');

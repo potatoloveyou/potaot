@@ -19,7 +19,7 @@
 
 		<van-list v-model:loading="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
 			<div class="list-card">
-				<div class="item-card" v-for="item in homeRecommend" @click="redirectRecipeDetail(item)">
+				<div class="item-card" v-for="item in homeRecommend" >
 					<!-- 1	菜谱 -->
 					<RecipeCard v-if="item.type === 1" :r="item" />
 					<!-- 3	笔记 -->
@@ -43,8 +43,7 @@ import { useRoute, useRouter } from 'vue-router';
 const route = useRoute();
 const router = useRouter();
 
-import { useRecipeDetailStore } from '@/stores/recipeDetail';
-const recipeDetailStore = useRecipeDetailStore();
+
 
 // vant列表组件加载更多
 const loading = ref(false);
@@ -52,7 +51,7 @@ const finished = ref(false);
 
 // 初始化获取数据
 // banner推荐轮播图列表S
-const homeBanners= ref([]);
+const homeBanners = ref([]);
 // 推荐列表
 let homeRecommend = ref([]);
 // 更新偏移量
@@ -108,25 +107,7 @@ const onRefresh = async () => {
 	isLoading.value = false;
 };
 
-// 跳转到菜谱详情页
-const redirectRecipeDetail = (item: any) => {
-	switch (item.type) {
-		case 1:
-			recipeDetailStore.recipeId = item.r.id;
-			router.push({ path: '/recipeDetail', query: { recipeId: item.r.id } });
-			break;
-		case 3:
-			recipeDetailStore.recipeId = item.note.id;
-			router.push({ path: '/recipeDetail', query: { recipeId: item.note.id } });
-			break;
-		case 300:
-			recipeDetailStore.recipeId = item.dsp.id;
-			router.push({ path: '/recipeDetail', query: { recipeId: item.dsp.id } });
-			break;
-		default:
-			break;
-	}
-};
+
 </script>
 
 <style lang="scss">
@@ -137,7 +118,6 @@ const redirectRecipeDetail = (item: any) => {
 	grid-template-columns: repeat(2, 1fr);
 	column-gap: 0.8rem;
 	.item-card {
-		aspect-ratio: 1/2;
 		display: flex;
 		flex-direction: column;
 		// 四角变圆滑

@@ -34,13 +34,13 @@ export const useFavoritesStore = defineStore('favorites', () => {
 	}) => {
 		switch (type) {
 			case 1:
-				recipeFav.value = [...recipeFav.value, recipe];
+				recipeFav.value = [...new Set([recipe, ...recipeFav.value])];
 				break;
 			case 3:
-				noteFav.value = [...noteFav.value, note];
+				noteFav.value = [...new Set([note, ...noteFav.value])];
 				break;
 			case 300:
-				advertisementFav.value = [...advertisementFav.value, advertisement];
+				advertisementFav.value = [...new Set([advertisement, ...advertisementFav.value])];
 				break;
 		}
 	};

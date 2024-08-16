@@ -7,6 +7,8 @@ export const useSearchStore = defineStore('search', () => {
 	const searchValue = ref<string>('');
 	const searchList = ref<any[]>([]);
 
+	const isData = computed(() => searchValue.value.length > 0);
+
 	// 历史搜索
 	const historyList = ref(JSON.parse(window.localStorage.getItem('historyList') || '[]'));
 
@@ -35,5 +37,5 @@ export const useSearchStore = defineStore('search', () => {
 		});
 	};
 
-	return { searchValue, searchList, historyList, addNewHistory, deleteHistory, suggestList, searchSuggest };
+	return { searchValue, searchList, isData, historyList, addNewHistory, deleteHistory, suggestList, searchSuggest };
 });

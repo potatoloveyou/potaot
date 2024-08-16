@@ -43,6 +43,13 @@ export const getSearchSuggest = async (keyword?: string): Promise<any> =>
 	await axios.get(`/recipe/search/suggests?kw=${keyword}`);
 
 // 搜索结果
+/**
+ * @param keyword 关键词
+ * @param order 排序方式 0-综合排序 1-收藏最多 2-学做最多
+ * @param type 搜索类型 0-文章 1-视频
+ * @param offset 分页偏移	limit的倍数
+ * @param limit 分页大小
+ */
 interface SearchParams {
 	keyword: string;
 	order?: number;

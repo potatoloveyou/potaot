@@ -1,5 +1,5 @@
 <template>
-	<!-- 搜索 -->
+	<!-- 搜索框 -->
 	<div class="search">
 		<div class="search-top">
 			<form action="#" @submit.stop.prevent>

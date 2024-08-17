@@ -25,14 +25,19 @@
 			<van-icon name="chat-o" size="1.4rem" />
 			{{ flatcomments.cc }}
 		</div>
-		<div class="collect" @click="addFav({ recipe: recipeData })">
+		<div
+			class="collect"
+			@click="addFav({ recipe: recipeData })"
+			v-if="!isInFav({ type: 1, id: parseInt(recipeData.cook_id, 10) })">
 			<van-icon name="star-o" size="1.4rem" />
 			收藏
 		</div>
-		<!-- <div class="collect">
+		<div class="collect" @click="removeFav({ id: recipeData.cook_id })" v-else>
 			<van-icon name="star" size="1.4rem" color="#ffce2d" />
 			已收藏
-		</div> -->
+		</div>
+		{{ !isInFav({ type: 1, id: recipeData.cook_id }) }}
+
 		<div class="imitate">
 			<van-icon name="photograph" size="1.4rem" color="#ffce2d" />
 			传学做
@@ -41,7 +46,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { getRecipeDetail, getFlatcomments } from '@/apis/api';
 
 import { useFavoritesStore } from '@/stores/favorites';
@@ -89,10 +94,10 @@ const showPopup = () => {
 const addFav = ({ type = 1, recipe }) => favoritesStore.addFav({ type, recipe });
 
 // 移除收藏
-const removeFav = ({ type, id }) => favoritesStore.removeFav({ type, id });
+const removeFav = ({ type = 1, id }) => favoritesStore.removeFav({ type, id });
 
 // 是否在收藏中
-const isInFav = ({ type, id }) => favoritesStore.isInFav({ type, id });
+const isInFav = favoritesStore.isInFav;
 </script>
 
 <style lang="scss" scoped>

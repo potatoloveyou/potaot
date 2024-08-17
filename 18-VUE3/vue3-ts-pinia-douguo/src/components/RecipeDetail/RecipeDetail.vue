@@ -1,4 +1,4 @@
-0<template>
+<template>
 	<van-image fit="cover" :src="recipeData.original_photo_path" />
 	<div class="recipedetail">
 		<!-- 标题 -->
@@ -216,7 +216,6 @@ const relatedinfo = ref([]);
 const relatedinfoShow = () => {
 	getRecipeRelatedinfo(props.recipeData.cook_id).then((res) => {
 		relatedinfo.value = res.data.result;
-		// console.log('relatedinfo', relatedinfo.value);
 	});
 };
 
@@ -225,7 +224,6 @@ const relatedinfoShow = () => {
 onMounted(() => {
 	props.recipeData.energy ? chartShow() : '';
 	relatedinfoShow();
-
 });
 </script>
 

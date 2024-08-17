@@ -43,6 +43,9 @@ export const useFavoritesStore = defineStore('favorites', () => {
 				advertisementFav.value = [...new Set([advertisement, ...advertisementFav.value])];
 				break;
 		}
+		console.log(type, recipe);
+		console.log(recipeFav.value);
+		
 	};
 
 	// 移除收藏
@@ -50,6 +53,7 @@ export const useFavoritesStore = defineStore('favorites', () => {
 		switch (type) {
 			case 1:
 				recipeFav.value = recipeFav.value.filter((item: any) => item.id !== id);
+				// recipeFav.value = recipeFav.value.filter((item: any) => item.id || item.cook_id !== id);
 				break;
 			case 3:
 				noteFav.value = noteFav.value.filter((item: any) => item.id !== id);
@@ -60,16 +64,22 @@ export const useFavoritesStore = defineStore('favorites', () => {
 	};
 
 	// 是否在收藏中
-	const isInFav = ({ type, id }: { type: number; id: number }): any => {
-		switch (type) {
-			case 1:
-				return recipeFav.value.some((item: any) => item.id === id);
-			case 3:
-				return noteFav.value.some((item: any) => item.id === id);
-			case 300:
-				return advertisementFav.value.some((item: any) => item.id === id);
-		}
-	};
+	const isInFav = computed(() => {
+		return ({ type, id }: { type: number; id: number }) => {
+			// switch (type) {
+			// 	case 1:
+			// 		console.log(type, id);
+			// 		return recipeFav.value.some((item: any) => item.id === id);
+			// 	case 3:
+			// 		return noteFav.value.some((item: any) => item.id === id);
+			// 	case 300:
+			// 		return advertisementFav.value.some((item: any) => item.id === id);
+			// 	default:
+			// 		return;
+			// }
+			console.log(type, id);
+		};
+	});
 
 	// 暂存到本地
 	watch(recipeFav, (newRecipeFav) => window.localStorage.setItem('recipeFav', JSON.stringify(newRecipeFav)));

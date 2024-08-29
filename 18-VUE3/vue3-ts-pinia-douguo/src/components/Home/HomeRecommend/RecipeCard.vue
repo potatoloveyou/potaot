@@ -18,9 +18,9 @@
 		<div class="collect">
 			<van-icon
 				name="star-o"
-				@click="addFav({ type: r.type, recipe: r.r })"
-				v-if="!isInFav({ type: r.type, id: r.r.id })" />
-			<van-icon name="star" @click="removeFav({ type: r.type, id: r.r.id })" v-else />
+				@click="addFav({ type: r.type, id: r.r.id.toString() })"
+				v-if="!isInFav({ type: r.type, id: r.r.id.toString() })" />
+			<van-icon name="star" @click="removeFav({ type: r.type, id: r.r.id.toString() })" v-else />
 			<div class="number">
 				{{ r.r.fc }}
 			</div>
@@ -29,7 +29,6 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
 import { useFavoritesStore } from '@/stores/favorites';
 const favoritesStore = useFavoritesStore();
 
@@ -48,10 +47,10 @@ defineProps({
 });
 
 // 添加收藏
-const addFav = ({ type, recipe }) => favoritesStore.addFav({ type, recipe });
+const addFav = favoritesStore.addFav;
 
 // 移除收藏
-const removeFav = ({ type, id }) => favoritesStore.removeFav({ type, id });
+const removeFav = favoritesStore.removeFav;
 
 // 是否在收藏中
 const isInFav = favoritesStore.isInFav;

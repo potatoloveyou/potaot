@@ -17,9 +17,9 @@
 		<div class="collect">
 			<van-icon
 				name="star-o"
-				@click="addFav({ type: note.type, note: note.note })"
-				v-if="!isInFav({ type: note.type, id: note.note.id })" />
-			<van-icon name="star" @click="removeFav({ type: note.type, id: note.note.id })" v-else />
+				@click="addFav({ type: note.type, id: note.note.id.toString() })"
+				v-if="!isInFav({ type: note.type, id: note.note.id.toString() })" />
+			<van-icon name="star" @click="removeFav({ type: note.type, id: note.note.id.toString() })" v-else />
 			<div class="number">
 				{{ note.note.like_count }}
 			</div>
@@ -40,13 +40,10 @@ defineProps({
 });
 
 // 添加收藏
-const addFav = ({ type, note }) => {
-	favoritesStore.addFav({ type, note });
-	// console.log(type, note);
-};
+const addFav = favoritesStore.addFav;
 
 // 移除收藏
-const removeFav = ({ type, id }) => favoritesStore.removeFav({ type, id });
+const removeFav = favoritesStore.removeFav;
 
 // 是否在收藏中
 const isInFav = favoritesStore.isInFav;

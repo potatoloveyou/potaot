@@ -18,9 +18,9 @@
 		<div class="collect">
 			<van-icon
 				name="star-o"
-				@click="addFav({ type: dsp.type, advertisement: dsp.dsp })"
-				v-if="!isInFav({ type: dsp.type, id: dsp.dsp.id })" />
-			<van-icon name="star" @click="removeFav({ type: dsp.type, id: dsp.dsp.id })" v-else />
+				@click="addFav({ type: dsp.type, id: dsp.dsp.id })"
+				v-if="!isInFav({ type: dsp.type, id: dsp.dsp.id.toString() })" />
+			<van-icon name="star" @click="removeFav({ type: dsp.type, id: dsp.dsp.id.toString() })" v-else />
 			<div class="number">
 				{{ dsp.commercial.dsp.like_count }}
 			</div>
@@ -29,8 +29,6 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-
 import { useFavoritesStore } from '@/stores/favorites';
 const favoritesStore = useFavoritesStore();
 
@@ -42,10 +40,10 @@ defineProps({
 });
 
 // 添加收藏
-const addFav = ({ type, advertisement }) => favoritesStore.addFav({ type, advertisement });
+const addFav = favoritesStore.addFav;
 
 // 移除收藏
-const removeFav = ({ type, id }) => favoritesStore.removeFav({ type, id });
+const removeFav = favoritesStore.removeFav;
 
 // 是否在收藏中
 const isInFav = favoritesStore.isInFav;

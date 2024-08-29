@@ -81,3 +81,6 @@ export const getFlatcomments = async ({
 	offset?: number;
 	limit?: number;
 }): Promise<any> => await axios.get(`/recipe/flatcomments/${recipeid}/${offset}/${limit}`);
+
+// 笔记详情
+export const getNoteDetail = async (noteId?: string): Promise<any> => await axios.get(`/note/detail/${noteId}`);

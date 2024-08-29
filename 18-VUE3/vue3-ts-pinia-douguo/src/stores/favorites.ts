@@ -1,5 +1,6 @@
 import { ref, watch, computed } from 'vue';
 import { defineStore } from 'pinia';
+import { getRecipeDetail, getNoteDetail } from '@/apis/api';
 
 export const useFavoritesStore = defineStore('favorites', () => {
 	// // state
@@ -13,6 +14,16 @@ export const useFavoritesStore = defineStore('favorites', () => {
 	// 	count.value++
 	// }
 
+	// 菜谱资料
+	const recipeDetail = async (recipeId: string | number): Promise<any> => {
+		return await getRecipeDetail(recipeId.toString());
+	};
+
+	// 笔记资料
+	const noteDetail = async (noteId: string | number): Promise<any> => {
+		return await getNoteDetail(noteId.toString());
+	};
+
 	// 菜谱
 	const recipeFav = ref(JSON.parse(window.localStorage.getItem('recipeFav')) || []);
 	// 笔记
@@ -21,65 +32,54 @@ export const useFavoritesStore = defineStore('favorites', () => {
 	const advertisementFav = ref(JSON.parse(window.localStorage.getItem('advertisementFav')) || []);
 
 	// 添加收藏
-	const addFav = ({
-		type,
-		recipe,
-		note,
-		advertisement,
-	}: {
-		type: number;
-		recipe?: object;
-		note?: object;
-		advertisement?: object;
-	}) => {
+	const addFav = ({ type, id }: { type: number; id: string }) => {
 		switch (type) {
 			case 1:
-				recipeFav.value = [...new Set([recipe, ...recipeFav.value])];
+				recipeDetail(id).then((res) => {
+					recipeFav.value = [...new Set([res.data.result.recipe, ...recipeFav.value])];
+				});
 				break;
 			case 3:
-				noteFav.value = [...new Set([note, ...noteFav.value])];
+				noteDetail(id).then((res) => {
+					noteFav.value = [...new Set([res.data.result.note, ...noteFav.value])];
+				});
 				break;
 			case 300:
-				advertisementFav.value = [...new Set([advertisement, ...advertisementFav.value])];
+				recipeDetail(id).then((res) => {
+					advertisementFav.value = [...new Set([res.data.result.advertisement, ...advertisementFav.value])];
+				});
+				break;
+			default:
 				break;
 		}
-		console.log(type, recipe);
-		console.log(recipeFav.value);
-		
 	};
 
 	// 移除收藏
-	const removeFav = ({ type, id }: { type: number; id: number }) => {
+	const removeFav = ({ type, id }: { type: number; id: string | number }) => {
 		switch (type) {
 			case 1:
-				recipeFav.value = recipeFav.value.filter((item: any) => item.id !== id);
-				// recipeFav.value = recipeFav.value.filter((item: any) => item.id || item.cook_id !== id);
+				recipeFav.value = recipeFav.value.filter((item: any) => item.cook_id !== id);
 				break;
 			case 3:
 				noteFav.value = noteFav.value.filter((item: any) => item.id !== id);
 				break;
 			case 300:
-				advertisementFav.value = advertisementFav.value.filter((item: any) => item.id !== id);
+				advertisementFav.value = advertisementFav.value.filter((item: any) => item.cook_id !== id);
+				break;
 		}
 	};
 
 	// 是否在收藏中
-	const isInFav = computed(() => {
-		return ({ type, id }: { type: number; id: number }) => {
-			// switch (type) {
-			// 	case 1:
-			// 		console.log(type, id);
-			// 		return recipeFav.value.some((item: any) => item.id === id);
-			// 	case 3:
-			// 		return noteFav.value.some((item: any) => item.id === id);
-			// 	case 300:
-			// 		return advertisementFav.value.some((item: any) => item.id === id);
-			// 	default:
-			// 		return;
-			// }
-			console.log(type, id);
-		};
-	});
+	const isInFav = ({ type, id }: { type: number; id: string | number }) => {
+		switch (type) {
+			case 1:
+				return recipeFav.value.some((item: any) => item.cook_id === id);
+			case 3:
+				return noteFav.value.some((item: any) => item.id === id);
+			case 300:
+				return advertisementFav.value.some((item: any) => item.cook_id === id);
+		}
+	};
 
 	// 暂存到本地
 	watch(recipeFav, (newRecipeFav) => window.localStorage.setItem('recipeFav', JSON.stringify(newRecipeFav)));
@@ -88,5 +88,5 @@ export const useFavoritesStore = defineStore('favorites', () => {
 		window.localStorage.setItem('advertisementFav', JSON.stringify(newAdvertisementFav)),
 	);
 
-	return { recipeFav, noteFav, advertisementFav, addFav, removeFav, isInFav };
+	return { recipeDetail, recipeFav, noteFav, advertisementFav, addFav, removeFav, isInFav };
 });

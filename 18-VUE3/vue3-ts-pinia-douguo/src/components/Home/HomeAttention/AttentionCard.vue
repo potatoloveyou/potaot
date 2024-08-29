@@ -93,8 +93,6 @@ const isInFav = favoritesStore.isInFav;
 			display: flex;
 			color: #999;
 			font-size: 0.8rem;
-			.author-fans {
-			}
 			.recipes-count-text {
 				margin-left: 0.4rem;
 			}

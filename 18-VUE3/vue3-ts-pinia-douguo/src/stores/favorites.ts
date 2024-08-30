@@ -31,26 +31,38 @@ export const useFavoritesStore = defineStore('favorites', () => {
 	// 广告
 	const advertisementFav = ref(JSON.parse(window.localStorage.getItem('advertisementFav')) || []);
 
+	// 按钮禁用状态
+	const isButtonDisabled = ref(false);
+
 	// 添加收藏
-	const addFav = ({ type, id }: { type: number; id: string }) => {
-		switch (type) {
-			case 1:
-				recipeDetail(id).then((res) => {
-					recipeFav.value = [...new Set([res.data.result.recipe, ...recipeFav.value])];
-				});
-				break;
-			case 3:
-				noteDetail(id).then((res) => {
-					noteFav.value = [...new Set([res.data.result.note, ...noteFav.value])];
-				});
-				break;
-			case 300:
-				recipeDetail(id).then((res) => {
-					advertisementFav.value = [...new Set([res.data.result.advertisement, ...advertisementFav.value])];
-				});
-				break;
-			default:
-				break;
+	const addFav = async ({ type, id }: { type: number; id: string }) => {
+		if (isButtonDisabled.value) {
+			return;
+		}
+		isButtonDisabled.value = true;
+
+		try {
+			switch (type) {
+				case 1:
+					await recipeDetail(id).then((res) => {
+						recipeFav.value = [...new Set([res.data.result.recipe, ...recipeFav.value])];
+					});
+					break;
+				case 3:
+					await noteDetail(id).then((res) => {
+						noteFav.value = [...new Set([res.data.result.note, ...noteFav.value])];
+					});
+					break;
+				case 300:
+					recipeDetail(id).then((res) => {
+						advertisementFav.value = [...new Set([res.data.result.advertisement, ...advertisementFav.value])];
+					});
+					break;
+				default:
+					break;
+			}
+		} finally {
+			isButtonDisabled.value = false;
 		}
 	};
 
@@ -88,5 +100,5 @@ export const useFavoritesStore = defineStore('favorites', () => {
 		window.localStorage.setItem('advertisementFav', JSON.stringify(newAdvertisementFav)),
 	);
 
-	return { recipeDetail, recipeFav, noteFav, advertisementFav, addFav, removeFav, isInFav };
+	return { recipeDetail, noteDetail, recipeFav, noteFav, advertisementFav, addFav, removeFav, isInFav };
 });

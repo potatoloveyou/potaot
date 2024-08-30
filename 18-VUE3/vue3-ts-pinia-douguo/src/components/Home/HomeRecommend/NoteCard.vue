@@ -1,5 +1,5 @@
 <template>
-	<div class="homeRecommend-card" @click="redirectRecipeDetail(note)">
+	<div class="homeRecommend-card" @click="redirectNoteDetail(note.note.id.toString())">
 		<van-image width="100%" height="14rem" :src="note.note.image_u" fit="fill" position="center" />
 		<div class="card-details">
 			<van-text-ellipsis :content="note.note.title" rows="2" />
@@ -18,8 +18,8 @@
 			<van-icon
 				name="star-o"
 				@click="addFav({ type: note.type, id: note.note.id.toString() })"
-				v-if="!isInFav({ type: note.type, id: note.note.id.toString() })" />
-			<van-icon name="star" @click="removeFav({ type: note.type, id: note.note.id.toString() })" v-else />
+				v-if="!isInFav({ type: note.type, id: note.note.id })" />
+			<van-icon name="star" @click="removeFav({ type: note.type, id: note.note.id })" v-else />
 			<div class="number">
 				{{ note.note.like_count }}
 			</div>
@@ -32,8 +32,8 @@ import { computed } from 'vue';
 import { useFavoritesStore } from '@/stores/favorites';
 const favoritesStore = useFavoritesStore();
 
-import { useRecipeDetailStore } from '@/stores/recipeDetail';
-const recipeDetailStore = useRecipeDetailStore();
+import { useNoteDetailStore } from '@/stores/noteDetail';
+const noteDetailStore = useNoteDetailStore();
 
 defineProps({
 	note: Object,
@@ -46,10 +46,13 @@ const addFav = favoritesStore.addFav;
 const removeFav = favoritesStore.removeFav;
 
 // 是否在收藏中
-const isInFav = favoritesStore.isInFav;
+const isInFav = computed(() => favoritesStore.isInFav);
 
 // 跳转到菜谱详情页
-const redirectRecipeDetail = (note: any) => recipeDetailStore.redirectRecipeDetail(note);
+// const redirectRecipeDetail = recipeDetailStore.redirectRecipeDetail;
+
+// 跳转到笔记详情页
+const redirectNoteDetail = noteDetailStore.redirectNoteDetail;
 </script>
 
 <style lang="scss" scoped></style>

@@ -29,6 +29,7 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
 import { useFavoritesStore } from '@/stores/favorites';
 const favoritesStore = useFavoritesStore();
 
@@ -46,7 +47,7 @@ const addFav = favoritesStore.addFav;
 const removeFav = favoritesStore.removeFav;
 
 // 是否在收藏中
-const isInFav = favoritesStore.isInFav;
+const isInFav = computed(() => favoritesStore.isInFav);
 
 // 跳转到菜谱详情页
 const redirectRecipeDetail = (dsp: any) => recipeDetailStore.redirectRecipeDetail(dsp);

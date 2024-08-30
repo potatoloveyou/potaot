@@ -144,7 +144,7 @@
 import { ref, onMounted, computed } from 'vue';
 import echarts from '@/echarts';
 
-import { getRecipeRelatedinfo, getFlatcomments } from '@/apis/api';
+import { getRecipeRelatedinfo } from '@/apis/api';
 
 const props = defineProps({
 	recipeData: Object,
@@ -218,8 +218,6 @@ const relatedinfoShow = () => {
 		relatedinfo.value = res.data.result;
 	});
 };
-
-
 
 onMounted(() => {
 	props.recipeData.energy ? chartShow() : '';
@@ -444,7 +442,7 @@ onMounted(() => {
 					display: flex;
 					align-items: center;
 					justify-content: space-between;
-					.isPraise{
+					.isPraise {
 						color: red;
 					}
 				}

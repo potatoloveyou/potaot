@@ -1,6 +1,5 @@
 <template>
 	<!-- 菜谱详情 -->
-	<!-- <div>菜谱详情</div> -->
 	<div class="navTop">
 		<van-icon name="arrow-left" @click="onClickLeft" />
 
@@ -43,7 +42,7 @@
 
 <script setup>
 import { ref, onMounted, computed } from 'vue';
-import { getRecipeDetail, getFlatcomments } from '@/apis/api';
+import { getFlatcomments } from '@/apis/api';
 
 import { useFavoritesStore } from '@/stores/favorites';
 const favoritesStore = useFavoritesStore();

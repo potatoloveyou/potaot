@@ -242,6 +242,13 @@ const router = createRouter({
 			component: () => import('@/views/RecipeDetailView.vue'),
 		},
 
+		// NoteDetail 笔记详情
+		{
+			path: '/noteDetail',
+			name: 'noteDetail',
+			component: () => import('@/views/NoteDetailView.vue'),
+		},
+
 		// login 登录
 		{
 			path: '/login',

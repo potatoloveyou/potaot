@@ -4,33 +4,17 @@
 		<div
 			class="recipeCard"
 			v-for="recipe in favoritesStore.recipeFav"
-			@click="redirectRecipeDetail(recipe.id || recipe.cook_id)">
-			<van-image
-				class="recipe-img"
-				width="45%"
-				height="8rem"
-				:src="recipe.img || recipe.photo_path"
-				fit="cover"
-				position="center" />
+			@click="redirectRecipeDetail(recipe.cook_id.toString())">
+			<van-image class="recipe-img" width="45%" height="8rem" :src="recipe.photo_path" fit="cover" position="center" />
 
 			<div class="introduce">
 				<div class="content">
-					<!-- <p class="name" v-if="recipe.n != ''">{{ recipe.n || recipe.title }}</p> -->
-					<p class="name">{{ recipe.n || recipe.title }}</p>
+					<p class="name">{{ recipe.title }}</p>
 					<p class="trim-title" v-if="recipe.trim_title != ''">{{ recipe.trim_title }}</p>
 					<div class="watch">{{ recipe.views_count_text || recipe.vc }}人看过</div>
 				</div>
 				<div class="author">
-					<!-- <van-image round width="1rem" height="1rem" :src="recipe.a.p" v-if="recipe.a" /> -->
-					<!-- <van-image round width="1rem" height="1rem" :src="recipe.u.p" v-else /> -->
-
-					<!-- <van-text-ellipsis :content="recipe.a.n" rows="1" v-if="recipe.a" /> -->
-					<!-- <van-text-ellipsis :content="recipe.u.n" rows="1" v-else /> -->
-
-					<van-image round width="1rem" height="1rem" :src="recipe.a.p" v-if="recipe.a" />
 					<van-image round width="1rem" height="1rem" :src="recipe.user.user_photo" v-if="recipe.user" />
-
-					<van-text-ellipsis :content="recipe.a.n" rows="1" v-if="recipe.a" />
 					<van-text-ellipsis :content="recipe.user.nickname" rows="1" v-if="recipe.user" />
 				</div>
 			</div>
@@ -51,12 +35,9 @@ import { useRecipeDetailStore } from '@/stores/recipeDetail';
 const recipeDetailStore = useRecipeDetailStore();
 
 console.log(favoritesStore.recipeFav);
+
 // 跳转到菜谱详情页
-const redirectRecipeDetail = (recipeId) => {
-	recipeDetailStore.recipeId = recipeId;
-	router.push({ path: '/recipeDetail', query: { recipeId: recipeId } });
-	// console.log(recipeId);
-};
+const redirectRecipeDetail = recipeDetailStore.redirectRecipeDetail;
 </script>
 
 <style lang="scss">

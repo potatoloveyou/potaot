@@ -69,7 +69,7 @@
 	.popup-above {
 		flex: 1;
 		justify-content: flex-end;
-    padding-bottom: 1rem;
+		padding-bottom: 1rem;
 	}
 	.popup-middle {
 		flex: 1;
@@ -77,7 +77,7 @@
 	.popup-below {
 		justify-content: flex-start;
 		flex: 1;
-    padding-top: 1rem;
+		padding-top: 1rem;
 	}
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-	<div class="homeRecommend-card" @click="redirectRecipeDetail(r)">
+	<div class="homeRecommend-card" @click="redirectRecipeDetail(r.r.id.toString())">
 		<van-image width="100%" height="14rem" :src="r.r.img" fit="cover" position="center" />
 		<!-- details 详情 -->
 		<div class="card-details">
@@ -29,6 +29,7 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
 import { useFavoritesStore } from '@/stores/favorites';
 const favoritesStore = useFavoritesStore();
 
@@ -53,10 +54,10 @@ const addFav = favoritesStore.addFav;
 const removeFav = favoritesStore.removeFav;
 
 // 是否在收藏中
-const isInFav = favoritesStore.isInFav;
+const isInFav = computed(() => favoritesStore.isInFav);
 
 // 跳转到菜谱详情页
-const redirectRecipeDetail = (r: any) => recipeDetailStore.redirectRecipeDetail(r);
+const redirectRecipeDetail = recipeDetailStore.redirectRecipeDetail;
 </script>
 
 <style lang="scss">

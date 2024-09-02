@@ -24,6 +24,7 @@
 			<van-icon name="chat-o" size="1.4rem" />
 			{{ flatcomments.cc }}
 		</div>
+
 		<div class="collect" @click="addFav({ recipe: recipeData })" v-if="!isInFav({ type: 1, id: recipeData.cook_id })">
 			<van-icon name="star-o" size="1.4rem" />
 			收藏

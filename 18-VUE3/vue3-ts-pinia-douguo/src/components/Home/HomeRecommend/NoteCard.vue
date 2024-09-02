@@ -18,8 +18,8 @@
 			<van-icon
 				name="star-o"
 				@click="addFav({ type: note.type, id: note.note.id.toString() })"
-				v-if="!isInFav({ type: note.type, id: note.note.id })" />
-			<van-icon name="star" @click="removeFav({ type: note.type, id: note.note.id })" v-else />
+				v-if="!isInFav({ type: note.type, id: note.note.id.toString() })" />
+			<van-icon name="star" @click="removeFav({ type: note.type, id: note.note.id.toString() })" v-else />
 			<div class="number">
 				{{ note.note.like_count }}
 			</div>
@@ -47,9 +47,6 @@ const removeFav = favoritesStore.removeFav;
 
 // 是否在收藏中
 const isInFav = computed(() => favoritesStore.isInFav);
-
-// 跳转到菜谱详情页
-// const redirectRecipeDetail = recipeDetailStore.redirectRecipeDetail;
 
 // 跳转到笔记详情页
 const redirectNoteDetail = noteDetailStore.redirectNoteDetail;

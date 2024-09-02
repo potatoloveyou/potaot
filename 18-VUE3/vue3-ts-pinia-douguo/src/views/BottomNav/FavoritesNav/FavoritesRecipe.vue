@@ -24,17 +24,13 @@
 </template>
 
 <script setup>
-import { useRoute, useRouter } from 'vue-router';
-const route = useRoute();
-const router = useRouter();
-
 import { useFavoritesStore } from '@/stores/favorites';
 const favoritesStore = useFavoritesStore();
+console.log(favoritesStore.recipeFav);
 
 import { useRecipeDetailStore } from '@/stores/recipeDetail';
 const recipeDetailStore = useRecipeDetailStore();
 
-console.log(favoritesStore.recipeFav);
 
 // 跳转到菜谱详情页
 const redirectRecipeDetail = recipeDetailStore.redirectRecipeDetail;

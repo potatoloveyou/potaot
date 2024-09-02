@@ -78,6 +78,17 @@ export const getFlatcomments = async ({
 // 笔记详情
 export const getNoteDetail = async (noteId?: string): Promise<any> => await axios.get(`/note/detail/${noteId}`);
 
+// 笔记相关笔记（笔记详情里的相关笔记）
+export const getNoteRelated = async ({
+	noteId,
+	offset = 0,
+	limit = 20,
+}: {
+	noteId?: string;
+	offset?: number;
+	limit?: number;
+}): Promise<any> => await axios.get(`/note/related/${noteId}/${offset}/${limit}`);
+
 // --------------------------------------------------------------------------------------------------------------------------------
 
 // import axios from '@/apis/request';

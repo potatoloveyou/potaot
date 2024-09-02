@@ -13,6 +13,8 @@ declare module 'vue' {
     AttentionCard: typeof import('./src/components/Home/HomeAttention/AttentionCard.vue')['default']
     LeftPopup: typeof import('./src/components/Home/HomePopupNav/LeftPopup.vue')['default']
     NoteCard: typeof import('./src/components/Home/HomeRecommend/NoteCard.vue')['default']
+    NoteDetail: typeof import('./src/components/NoteDetail/NoteDetail.vue')['default']
+    NoteDetailCard: typeof import('./src/components/NoteDetail/NoteDetailCard.vue')['default']
     NotesCard: typeof import('./src/components/Home/HomeNotes/NotesCard.vue')['default']
     RecipeCard: typeof import('./src/components/Home/HomeRecommend/RecipeCard.vue')['default']
     RecipeDetail: typeof import('./src/components/RecipeDetail/RecipeDetail.vue')['default']

@@ -33,15 +33,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, nextTick } from 'vue';
+import { ref, nextTick } from 'vue';
 import { getHomeRecommend } from '@/apis/api';
 import RecipeCard from '@/components/Home/HomeRecommend/RecipeCard.vue';
 import NoteCard from '@/components/Home/HomeRecommend/NoteCard.vue';
 import AdvertisementCard from '@/components/Home/HomeRecommend/AdvertisementCard.vue';
-
-import { useRoute, useRouter } from 'vue-router';
-const route = useRoute();
-const router = useRouter();
 
 // vant列表组件加载更多
 const loading = ref(false);

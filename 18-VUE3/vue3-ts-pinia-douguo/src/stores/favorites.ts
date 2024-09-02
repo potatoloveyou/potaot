@@ -70,13 +70,13 @@ export const useFavoritesStore = defineStore('favorites', () => {
 	const removeFav = ({ type, id }: { type: number; id: string | number }) => {
 		switch (type) {
 			case 1:
-				recipeFav.value = recipeFav.value.filter((item: any) => item.cook_id !== id);
+				recipeFav.value = recipeFav.value.filter((item: any) => item.cook_id != id);
 				break;
 			case 3:
-				noteFav.value = noteFav.value.filter((item: any) => item.id !== id);
+				noteFav.value = noteFav.value.filter((item: any) => item.id != id);
 				break;
 			case 300:
-				advertisementFav.value = advertisementFav.value.filter((item: any) => item.cook_id !== id);
+				advertisementFav.value = advertisementFav.value.filter((item: any) => item.cook_id != id);
 				break;
 		}
 	};
@@ -85,11 +85,11 @@ export const useFavoritesStore = defineStore('favorites', () => {
 	const isInFav = ({ type, id }: { type: number; id: string | number }) => {
 		switch (type) {
 			case 1:
-				return recipeFav.value.some((item: any) => item.cook_id === id);
+				return recipeFav.value.some((item: any) => item.cook_id == id);
 			case 3:
-				return noteFav.value.some((item: any) => item.id === id);
+				return noteFav.value.some((item: any) => item.id == id);
 			case 300:
-				return advertisementFav.value.some((item: any) => item.cook_id === id);
+				return advertisementFav.value.some((item: any) => item.cook_id == id);
 		}
 	};
 

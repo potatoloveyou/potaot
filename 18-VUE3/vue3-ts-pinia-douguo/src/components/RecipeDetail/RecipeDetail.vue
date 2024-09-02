@@ -1,6 +1,6 @@
 <template>
 	<van-image fit="cover" :src="recipeData.original_photo_path" />
-	<div class="recipedetail">
+	<div class="recipe-detail">
 		<!-- 标题 -->
 		<h2 class="title">{{ recipeData.title }}</h2>
 
@@ -103,13 +103,13 @@
 		<div class="hotComments">
 			<div class="hotComments-top">
 				<span class="hotComments-title">热门评论</span>
-				<span class="hotComments-num">{{ relatedinfo.first_level_comment_count }}条评论</span>
+				<span class="hotComments-num">{{ relatedInfo.first_level_comment_count }}条评论</span>
 				<div class="hotComments-prompt">说点什么，让TA也认识爱做饭的你</div>
 			</div>
 
 			<div class="hotComments-content">
 				<ul class="hotComments-list">
-					<li class="hotComments-item" v-for="user in relatedinfo.comments">
+					<li class="hotComments-item" v-for="user in relatedInfo.comments">
 						<div class="item-top">
 							<div class="author-left">
 								<van-image round width="2rem" height="2rem" :src="user.u.p" />
@@ -129,7 +129,7 @@
 						<p class="item-bottom" v-for="content in user.content">{{ content.c }}</p>
 					</li>
 				</ul>
-				<div class="allComments">查看全部的{{ relatedinfo.first_level_comment_count }}条评论</div>
+				<div class="allComments">查看全部的{{ relatedInfo.first_level_comment_count }}条评论</div>
 			</div>
 		</div>
 
@@ -212,10 +212,12 @@ const chartShow = () => {
 	myChart.setOption(option);
 };
 
-const relatedinfo = ref([]);
+// 菜谱相关信息（菜谱详情里的评论）
+const relatedInfo = ref([]);
 const relatedinfoShow = () => {
 	getRecipeRelatedinfo(props.recipeData.cook_id).then((res) => {
-		relatedinfo.value = res.data.result;
+		relatedInfo.value = res.data.result;
+		console.log(relatedInfo.value);
 	});
 };
 
@@ -226,7 +228,7 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.recipedetail {
+.recipe-detail {
 	padding: 0 1rem;
 }
 // 标题
@@ -417,7 +419,7 @@ onMounted(() => {
 	margin-top: 2rem;
 	.hotComments-top {
 		.hotComments-title {
-			font-size: 17.6px;
+			font-size: 1.1rem;
 			font-weight: bold;
 		}
 		.hotComments-num {

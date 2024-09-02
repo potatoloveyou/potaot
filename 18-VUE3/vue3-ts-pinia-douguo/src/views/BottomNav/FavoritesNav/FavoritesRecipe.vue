@@ -4,7 +4,7 @@
 		<div
 			class="recipeCard"
 			v-for="recipe in favoritesStore.recipeFav"
-			@click="redirectRecipeDetail(recipe.cook_id.toString())">
+			@click="toRecipeDetail(recipe.cook_id.toString())">
 			<van-image class="recipe-img" width="45%" height="8rem" :src="recipe.photo_path" fit="cover" position="center" />
 
 			<div class="introduce">
@@ -33,7 +33,7 @@ const recipeDetailStore = useRecipeDetailStore();
 
 
 // 跳转到菜谱详情页
-const redirectRecipeDetail = recipeDetailStore.redirectRecipeDetail;
+const toRecipeDetail = recipeDetailStore.toRecipeDetail;
 </script>
 
 <style lang="scss">

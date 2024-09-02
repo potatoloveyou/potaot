@@ -1,5 +1,5 @@
 <template>
-	<div class="homeRecommend-card" @click="redirectRecipeDetail(r.r.id.toString())">
+	<div class="homeRecommend-card" @click="toRecipeDetail(r.r.id.toString())">
 		<van-image width="100%" height="14rem" :src="r.r.img" fit="cover" position="center" />
 		<!-- details 详情 -->
 		<div class="card-details">
@@ -57,7 +57,7 @@ const removeFav = favoritesStore.removeFav;
 const isInFav = computed(() => favoritesStore.isInFav);
 
 // 跳转到菜谱详情页
-const redirectRecipeDetail = recipeDetailStore.redirectRecipeDetail;
+const toRecipeDetail = recipeDetailStore.toRecipeDetail;
 </script>
 
 <style lang="scss">

@@ -79,7 +79,7 @@ onMounted(() => {
 watch(
 	() => route.query.noteId,
 	(newNoteId) => {
-		noteDetailStore.redirectNoteDetail(newNoteId);
+		noteDetailStore.toNoteDetail(newNoteId);
 	},
 );
 

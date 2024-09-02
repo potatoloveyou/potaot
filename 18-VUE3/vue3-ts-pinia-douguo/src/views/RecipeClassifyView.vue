@@ -6,7 +6,7 @@
 				<van-icon name="arrow-left" size="1.5rem" color="#000" />
 			</template>
 			<template #right>
-				<van-icon name="search" size="1.5rem" color="#000" @click="redirectSearch" />
+				<van-icon name="search" size="1.5rem" color="#000" @click="toSearch" />
 			</template>
 		</van-nav-bar>
 
@@ -28,7 +28,7 @@
 					<div class="recipe-type" v-if="recipeList[active]" v-for="list in recipeList[active].cs">
 						<van-image width="100%" height="100%" :src="list.image_url" v-if="list.image_url" />
 						<ul class="type-details">
-							<li v-for="item in list.cs" @click="redirectSearchNav(item.name)">{{ item.name }}</li>
+							<li v-for="item in list.cs" @click="toSearchNav(item.name)">{{ item.name }}</li>
 						</ul>
 					</div>
 				</div>
@@ -65,11 +65,11 @@ onMounted(() => {
 const onClickLeft = () => history.back();
 
 // 跳转到搜索
-const redirectSearch = () => {
+const toSearch = () => {
 	router.push('/search');
 };
 
-const redirectSearchNav = (value) => {
+const toSearchNav = (value) => {
 	searchStore.searchValue = value;
 	router.push('/search/searchNav');
 	console.log(value);

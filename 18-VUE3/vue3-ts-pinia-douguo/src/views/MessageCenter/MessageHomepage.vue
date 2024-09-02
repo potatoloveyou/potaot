@@ -13,20 +13,20 @@
 
 	<div class="message-center">
 		<div class="module">
-			<div class="container" @click="redirectComment">
+			<div class="container" @click="toComment">
 				<div class="container-icon-big">
 					<van-icon class="container-icon" name="comment-o" size="1.8rem" />
 				</div>
 				<div class="container-text">评论和@</div>
 			</div>
 
-			<div class="container" @click="redirectCollect">
+			<div class="container" @click="toCollect">
 				<div class="container-icon-big">
 					<van-icon class="container-icon" name="star-o" size="1.8rem" />
 				</div>
 				<div class="container-text">收藏和赞</div>
 			</div>
-			<div class="container" @click="redirectNewFans">
+			<div class="container" @click="toNewFans">
 				<div class="container-icon-big">
 					<van-icon class="container-icon" name="contact-o" size="1.8rem" />
 				</div>
@@ -39,7 +39,7 @@
 			<div class="ongoing-top">
 				<h2 class="title">热门活动</h2>
 				<!-- 全部活动 -->
-				<input type="button" class="default" value="全部活动" @click.prevent="redirectHotActivity" />
+				<input type="button" class="default" value="全部活动" @click.prevent="toHotActivity" />
 			</div>
 			<div class="print">
 				<div class="print-card" v-for="ongoing in ongoings.slice(0, 2)">
@@ -77,22 +77,22 @@ onMounted(() => {
 });
 
 // 跳转到评论和@
-const redirectComment = () => {
+const toComment = () => {
 	router.push('/messageCenter/commentRemind');
 };
 
 // 跳转到收藏和赞
-const redirectCollect = () => {
+const toCollect = () => {
 	router.push('/messageCenter/collectLike');
 };
 
 // 跳转到新的粉丝
-const redirectNewFans = () => {
+const toNewFans = () => {
 	router.push('/messageCenter/newFans');
 };
 
 // 跳转到活动
-const redirectHotActivity = () => {
+const toHotActivity = () => {
 	router.push('/messageCenter/hotActivity');
 };
 </script>

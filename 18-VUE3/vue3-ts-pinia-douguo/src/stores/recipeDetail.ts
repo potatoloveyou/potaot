@@ -10,10 +10,10 @@ export const useRecipeDetailStore = defineStore('recipeDetail', () => {
 	const router = useRouter();
 
 	// 跳转到菜谱详情页
-	const redirectRecipeDetail = (id: string) => {
+	const toRecipeDetail = (id: string) => {
 		recipeId.value = id;
 		router.push({ path: '/recipeDetail', query: { recipeId: id } });
 	};
 
-	return { recipeId, redirectRecipeDetail };
+	return { recipeId, toRecipeDetail };
 });

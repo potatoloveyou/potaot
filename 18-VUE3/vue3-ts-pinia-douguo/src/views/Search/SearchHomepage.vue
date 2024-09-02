@@ -28,7 +28,7 @@
 		<div class="classification" v-show="!searchStore.searchValue">
 			<div class="top-text">
 				<div class="text-left">分类</div>
-				<div class="text-right" @click="redirectRecipe">全部分类</div>
+				<div class="text-right" @click="toRecipe">全部分类</div>
 			</div>
 
 			<ul class="list">
@@ -98,7 +98,7 @@ onMounted(() => {
 });
 
 // 跳转到食谱
-const redirectRecipe = () => {
+const toRecipe = () => {
 	router.push('/recipe');
 };
 

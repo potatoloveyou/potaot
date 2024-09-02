@@ -10,10 +10,10 @@ export const useNoteDetailStore = defineStore('noteDetail', () => {
 	const router = useRouter();
 
 	// 跳转到笔记详情页
-	const redirectNoteDetail = (id: string) => {
+	const toNoteDetail = (id: string) => {
 		noteId.value = id;
 		router.push({ path: '/noteDetail', query: { noteId: id } });
 	};
 
-	return { noteId, redirectNoteDetail };
+	return { noteId, toNoteDetail };
 });

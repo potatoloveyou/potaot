@@ -3,7 +3,7 @@
 	<div class="note">
 		<div class="list-noteCard">
 			<div class="item-noteCard" v-for="note in favoritesStore.noteFav">
-				<div class="homeRecommend-card" @click="redirectNoteDetail(note.id.toString())">
+				<div class="homeRecommend-card" @click="toNoteDetail(note.id.toString())">
 					<van-image width="100%" height="14rem" :src="note.entity.img" fit="fill" position="center" />
 					<div class="card-details">
 						<van-text-ellipsis :content="note.entity.title" rows="2" />
@@ -35,7 +35,7 @@ import { useNoteDetailStore } from '@/stores/noteDetail';
 const noteDetailStore = useNoteDetailStore();
 
 // 跳转到笔记详情页
-const redirectNoteDetail = noteDetailStore.redirectNoteDetail;
+const toNoteDetail = noteDetailStore.toNoteDetail;
 </script>
 
 <style lang="scss" scoped>

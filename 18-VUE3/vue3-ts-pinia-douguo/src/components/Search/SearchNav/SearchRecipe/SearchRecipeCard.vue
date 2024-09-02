@@ -1,6 +1,6 @@
 <template>
 	<!-- SearchRecipeCard-->
-	<div class="search-recipe-card" @click="redirectRecipeDetail(search.r.id)">
+	<div class="search-recipe-card" @click="toRecipeDetail(search.r.id)">
 		<van-image
 			class="recipe-img"
 			width="45%"
@@ -42,7 +42,7 @@ defineProps({
 });
 
 // 跳转到菜谱详情页
-const redirectRecipeDetail = (recipeId) => {
+const toRecipeDetail = (recipeId) => {
 	recipeDetailStore.recipeId = recipeId;
 	router.push({ path: '/recipeDetail', query: { recipeId: recipeId } });
 };

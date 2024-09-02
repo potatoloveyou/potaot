@@ -1,5 +1,5 @@
 <template>
-	<div class="noteDetail-card" @click="redirectNoteDetail(noteDetail.note.id.toString())">
+	<div class="noteDetail-card" @click="toNoteDetail(noteDetail.note.id.toString())">
 		<van-image width="100%" height="14rem" :src="noteDetail.note.image_u" fit="fill" position="center" />
 		<div class="card-details">
 			<van-text-ellipsis :content="noteDetail.note.title" rows="2" />
@@ -27,7 +27,7 @@ defineProps({
 });
 
 // 跳转到笔记详情页;
-const redirectNoteDetail = noteDetailStore.redirectNoteDetail;
+const toNoteDetail = noteDetailStore.toNoteDetail;
 
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-	<div class="homeRecommend-card" @click="redirectNoteDetail(note.note.id.toString())">
+	<div class="homeRecommend-card" @click="toNoteDetail(note.note.id.toString())">
 		<van-image width="100%" height="14rem" :src="note.note.image_u" fit="fill" position="center" />
 		<div class="card-details">
 			<van-text-ellipsis :content="note.note.title" rows="2" />
@@ -49,7 +49,7 @@ const removeFav = favoritesStore.removeFav;
 const isInFav = computed(() => favoritesStore.isInFav);
 
 // 跳转到笔记详情页
-const redirectNoteDetail = noteDetailStore.redirectNoteDetail;
+const toNoteDetail = noteDetailStore.toNoteDetail;
 </script>
 
 <style lang="scss" scoped></style>

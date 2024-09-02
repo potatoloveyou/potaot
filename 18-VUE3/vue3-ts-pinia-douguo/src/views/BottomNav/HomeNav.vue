@@ -3,16 +3,16 @@
 		<section class="home-top">
 			<!-- 左侧弹出框 -->
 			<van-icon name="wap-nav" class="top-wap-nav" @click="showPopup" />
-			<van-popup v-model:show="showLeft" position="left" :style="{ width: '50%', height: '100%' }">
+			<van-popup v-model:show="showLeft" position="left" :style="{ width: '70%', height: '100%' }">
 				<LeftPopup />
 			</van-popup>
 
 			<!-- 搜索框 -->
-			<van-search class="top-input" placeholder="请输入搜索关键词" readonly @click.prevent="redirectSearch" />
+			<van-search class="top-input" placeholder="请输入搜索关键词" readonly @click.prevent="toSearch" />
 			<!-- 菜谱分类 -->
-			<van-icon name="comment-o" class="top-icon" @click="redirectRecipe" />
+			<van-icon name="comment-o" class="top-icon" @click="toRecipe" />
 			<!-- 消息中心 -->
-			<van-icon name="volume-o" class="top-icon" @click="redirectMessageCenter" />
+			<van-icon name="volume-o" class="top-icon" @click="toMessageCenter" />
 		</section>
 
 		<van-tabs :active="active" class="home-nav-top" line-width="1.2rem" line-height="0.2rem" swipeable>
@@ -88,7 +88,7 @@ router.beforeEach((to, from) => {
 
 // 输入框
 // 跳转到搜索
-const redirectSearch = (event) => {
+const toSearch = (event) => {
 	router.push('/search');
 };
 
@@ -99,12 +99,12 @@ const showPopup = () => {
 };
 
 // 跳转到食谱
-const redirectRecipe = () => {
+const toRecipe = () => {
 	router.push('/recipeClassify');
 };
 
 // 跳转到消息中心
-const redirectMessageCenter = () => {
+const toMessageCenter = () => {
 	router.push('/messageCenter');
 };
 </script>

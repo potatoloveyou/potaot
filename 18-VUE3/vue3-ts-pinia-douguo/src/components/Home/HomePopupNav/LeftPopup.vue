@@ -9,7 +9,7 @@
 				<van-icon name="todo-list-o" />
 				草稿箱
 			</div>
-			<div class="purchase">
+			<div class="purchase" @click="toPurchase">
 				<van-icon name="bag-o" />
 				采购清单
 			</div>
@@ -47,7 +47,16 @@
 	</div>
 </template>
 
-<script setup></script>
+<script setup>
+import { useRoute, useRouter } from 'vue-router';
+const route = useRoute();
+const router = useRouter();
+
+// 跳转到采购清单
+const toPurchase = () => {
+	router.push('/leftPopup/purchase');
+};
+</script>
 
 <style lang="scss" scoped>
 .df {

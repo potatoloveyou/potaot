@@ -41,8 +41,12 @@
 		<div class="foodInventory">
 			<div class="foodInventory-top section-top">
 				<span class="foodInventory-title section-title">食材清单</span>
-				<span class="foodInventory-join section-join" v-if="!isJoinInventory">加入采购清单</span>
-				<span class="foodInventory-join section-join" v-else>移除采购清单</span>
+				<span class="foodInventory-join section-join" @click="addPurchaseList({ recipe: recipeData })" v-if="!isInFav">
+					加入采购清单
+				</span>
+				<span class="foodInventory-join section-join" @click="removePurchaseList({ id: recipeData.cook_id })" v-else>
+					移除采购清单
+				</span>
 			</div>
 			<div class="foodInventory-content">
 				<ul class="food-list">
@@ -146,12 +150,13 @@ import echarts from '@/echarts';
 
 import { getRecipeRelatedinfo } from '@/apis/api';
 
+import { useFavoritesStore } from '@/stores/favorites';
+const favoritesStore = useFavoritesStore();
+
 const props = defineProps({
 	recipeData: Object,
 });
 
-// 加入采购清单
-const isJoinInventory = ref(false);
 // 当前评分值
 const isLike = ref(false);
 
@@ -159,15 +164,15 @@ const isLike = ref(false);
 const chart = ref();
 
 // 转化格式
-const pieDate = computed(() => {
-	return props.recipeData.nutrition_facts.map((item) => {
+const pieDate = computed(() =>
+	props.recipeData.nutrition_facts.map((item) => {
 		return {
 			value: item.calorie,
 			name: item.nutrient,
 			itemStyle: { color: item.pie_chart_color },
 		};
-	});
-});
+	}),
+);
 
 // 初始化一个名为chartShow的函数
 const chartShow = () => {
@@ -225,6 +230,19 @@ onMounted(() => {
 	props.recipeData.energy ? chartShow() : '';
 	relatedinfoShow();
 });
+
+// 加入采购清单
+const addPurchaseList = ({ recipe }) =>
+	(favoritesStore.purchaseListFav = [...new Set([...favoritesStore.purchaseListFav, recipe])]);
+
+// 移除采购清单
+const removePurchaseList = ({ id }) =>
+	(favoritesStore.purchaseListFav = favoritesStore.purchaseListFav.filter((item) => item.cook_id !== id));
+
+// 是否加入采购清单
+const isInFav = computed(() =>
+	favoritesStore.purchaseListFav.some((item) => item.cook_id === props.recipeData.cook_id),
+);
 </script>
 
 <style lang="scss" scoped>

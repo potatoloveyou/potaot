@@ -1,6 +1,6 @@
 <template>
 	<!-- SearchNav -->
-	<van-tabs :active="active" class="SearchNav-top" line-width="1.2rem" line-height="0.2rem">
+	<van-tabs :active="active" class="SearchNav-top" line-width="1.2rem" line-height="0.2rem" color="#ffc533">
 		<van-tab
 			v-for="item in searchNav_view"
 			:key="item.name"
@@ -58,13 +58,9 @@ router.beforeEach((to) => {
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .SearchNav-top {
 	border-bottom: 1px solid #b4b4b4;
 	padding: 0 0.8rem;
-
-	.van-tabs__line {
-		background-color: #ffc533;
-	}
 }
 </style>

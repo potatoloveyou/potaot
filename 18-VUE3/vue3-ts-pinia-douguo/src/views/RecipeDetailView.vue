@@ -89,10 +89,8 @@ const showPopup = () => {
 const addFav = ({ recipe }) => (favoritesStore.recipeFav = [...new Set([...favoritesStore.recipeFav, recipe])]);
 
 // 移除收藏
-// const removeFav = favoritesStore.removeFav;
-const removeFav = ({ id }) => {
-	favoritesStore.recipeFav = favoritesStore.recipeFav.filter((item) => item.cook_id !== id);
-};
+const removeFav = ({ id }) =>
+	(favoritesStore.recipeFav = favoritesStore.recipeFav.filter((item) => item.cook_id !== id));
 
 // 是否在收藏中
 const isInFav = computed(() => favoritesStore.isInFav);

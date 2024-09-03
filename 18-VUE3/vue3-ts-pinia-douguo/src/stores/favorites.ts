@@ -30,6 +30,8 @@ export const useFavoritesStore = defineStore('favorites', () => {
 	const noteFav = ref(JSON.parse(window.localStorage.getItem('noteFav')) || []);
 	// 广告
 	const advertisementFav = ref(JSON.parse(window.localStorage.getItem('advertisementFav')) || []);
+	// 采购清单
+	const purchaseListFav = ref(JSON.parse(window.localStorage.getItem('purchaseListFav')) || []);
 
 	// 按钮禁用状态
 	const isButtonDisabled = ref(false);
@@ -99,6 +101,19 @@ export const useFavoritesStore = defineStore('favorites', () => {
 	watch(advertisementFav, (newAdvertisementFav) =>
 		window.localStorage.setItem('advertisementFav', JSON.stringify(newAdvertisementFav)),
 	);
+	watch(purchaseListFav, (newPurchaseListFav) =>
+		window.localStorage.setItem('purchaseListFav', JSON.stringify(newPurchaseListFav)),
+	);
 
-	return { recipeDetail, noteDetail, recipeFav, noteFav, advertisementFav, addFav, removeFav, isInFav };
+	return {
+		recipeDetail,
+		noteDetail,
+		recipeFav,
+		noteFav,
+		advertisementFav,
+		purchaseListFav,
+		addFav,
+		removeFav,
+		isInFav,
+	};
 });

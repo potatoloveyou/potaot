@@ -127,6 +127,21 @@ const router = createRouter({
 			],
 		},
 
+		// leftPopup 左侧弹出
+		{
+			path: '/leftPopup',
+			name: 'leftPopup',
+			component: () => import('@/views/LeftPopupView.vue'),
+			children: [
+				{
+					// leftPopup.purchase
+					path: 'purchase',
+					name: 'leftPopup.purchase',
+					component: () => import('@/views/LeftPopup/LeftPopupPurchase.vue'),
+				},
+			],
+		},
+
 		// search 搜索
 		{
 			path: '/search',
@@ -185,21 +200,13 @@ const router = createRouter({
 			path: '/recipeClassify',
 			name: 'recipeClassify',
 			component: () => import('@/views/RecipeClassifyView.vue'),
-			children: [
-				// // attention 关注
-				// {
-				// 	path: 'attention',
-				// 	name: 'home.attention',
-				// 	component: () => import('@/views/BottomNav/Home/HomeAttention.vue'),
-				// },
-			],
 		},
 
 		// messageCenter 消息中心
 		{
 			path: '/messageCenter',
 			name: 'messageCenter',
-			component: () => import('@/views/MessageCenterVIew.vue'),
+			component: () => import('@/views/MessageCenterView.vue'),
 			children: [
 				{
 					// messageCenter.homepage 消息中心主页

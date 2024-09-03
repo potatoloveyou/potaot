@@ -31,7 +31,6 @@ console.log(favoritesStore.recipeFav);
 import { useRecipeDetailStore } from '@/stores/recipeDetail';
 const recipeDetailStore = useRecipeDetailStore();
 
-
 // 跳转到菜谱详情页
 const toRecipeDetail = recipeDetailStore.toRecipeDetail;
 </script>

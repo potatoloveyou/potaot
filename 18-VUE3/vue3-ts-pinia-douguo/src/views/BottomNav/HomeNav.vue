@@ -15,7 +15,7 @@
 			<van-icon name="volume-o" class="top-icon" @click="toMessageCenter" />
 		</section>
 
-		<van-tabs :active="active" class="home-nav-top" line-width="1.2rem" line-height="0.2rem" swipeable>
+		<van-tabs :active="active" class="home-nav-top" line-width="1.2rem" line-height="0.2rem" swipeable color="#ffc533">
 			<!-- swipeable 开启滑动 -->
 			<van-tab
 				v-for="item in homeNav_view"
@@ -110,10 +110,6 @@ const toMessageCenter = () => {
 </script>
 
 <style lang="scss">
-.van-tabs__line {
-	background-color: #ffc533;
-}
-
 .home-top {
 	display: flex;
 	align-items: center;

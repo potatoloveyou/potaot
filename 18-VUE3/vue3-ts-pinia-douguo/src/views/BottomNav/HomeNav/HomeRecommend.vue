@@ -102,7 +102,7 @@ const onRefresh = async () => {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .list-card {
 	background-color: #9e9e9e15;
 	padding: 0 0.8rem;

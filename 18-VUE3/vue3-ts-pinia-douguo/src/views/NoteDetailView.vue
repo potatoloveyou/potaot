@@ -65,7 +65,7 @@ import NoteDetail from '@/components/NoteDetail/NoteDetail.vue';
 // 笔记资料
 const noteData = ref({});
 const noteDetail = () => {
-	favoritesStore.noteDetail(route.query.noteId).then((res) => {
+	favoritesStore.noteDetail(route.params.noteId).then((res) => {
 		noteData.value = res.data.result.note;
 		console.log(noteData.value);
 	});
@@ -75,11 +75,14 @@ onMounted(() => {
 	noteDetail();
 });
 
-// 此处很有问题
+// // 此处很有问题
 watch(
-	() => route.query.noteId,
+	() => route.params.noteId,
 	(newNoteId) => {
+		console.log(newNoteId);
 		noteDetailStore.toNoteDetail(newNoteId);
+		// 强制刷新组件
+		router.go(0);
 	},
 );
 

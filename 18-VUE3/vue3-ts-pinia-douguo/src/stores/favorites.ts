@@ -1,18 +1,10 @@
-import { ref, watch, computed } from 'vue';
+import { ref, watch, computed, watchEffect } from 'vue';
 import { defineStore } from 'pinia';
 import { getRecipeDetail, getNoteDetail } from '@/apis/api';
 
 export const useFavoritesStore = defineStore('favorites', () => {
-	// // state
-	// const count = ref(100)
-
 	// // getters
 	// const doubleCount = computed(() => count.value * 2)
-
-	// // actions
-	// function increment() {
-	// 	count.value++
-	// }
 
 	// 菜谱资料
 	const recipeDetail = async (recipeId: string | number): Promise<any> => {
@@ -42,7 +34,6 @@ export const useFavoritesStore = defineStore('favorites', () => {
 			return;
 		}
 		isButtonDisabled.value = true;
-
 		try {
 			switch (type) {
 				case 1:

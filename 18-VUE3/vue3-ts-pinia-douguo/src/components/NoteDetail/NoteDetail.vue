@@ -161,9 +161,7 @@ const onLoad = () => {
 }
 
 .correlation {
-	// margin-top: 2rem;
 	.list-card {
-		background-color: #9e9e9e15;
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
 		column-gap: 0.8rem;

@@ -251,7 +251,7 @@ const router = createRouter({
 
 		// NoteDetail 笔记详情
 		{
-			path: '/noteDetail',
+			path: '/noteDetail/:noteId',
 			name: 'noteDetail',
 			component: () => import('@/views/NoteDetailView.vue'),
 		},

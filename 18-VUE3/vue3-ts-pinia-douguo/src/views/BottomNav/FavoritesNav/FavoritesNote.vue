@@ -40,8 +40,6 @@ const toNoteDetail = noteDetailStore.toNoteDetail;
 
 <style lang="scss" scoped>
 .list-noteCard {
-	// background-color: #9e9e9e15;
-	padding: 0 0.8rem;
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	column-gap: 0.8rem;

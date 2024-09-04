@@ -6,7 +6,8 @@
 				<van-icon name="arrow-left" size="1.5rem" color="#000" />
 			</template>
 			<template #right>
-				<div class="reset" @click="onClickRight">清除</div>
+				<!-- <div class="reset" @click="onClickRight">清除</div> -->
+				<div class="reset" @click="showDialog">清除</div>
 			</template>
 		</van-nav-bar>
 	</div>
@@ -69,6 +70,19 @@ const onClickLeft = () => history.back();
 
 // 清空采购清单
 const onClickRight = () => (favoritesStore.purchaseListFav = []);
+// 确认清除框
+const showDialog = () =>
+	showConfirmDialog({
+		title: '提示',
+		message: '确认清空吗',
+		messageAlign: 'left',
+		closeOnClickOverlay: true,
+	})
+		.then(() => {
+			onClickRight();
+		})
+		.catch(() => {
+		});
 </script>
 
 <style lang="scss">

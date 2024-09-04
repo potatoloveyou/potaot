@@ -17,13 +17,13 @@ export const useFavoritesStore = defineStore('favorites', () => {
 	};
 
 	// 菜谱
-	const recipeFav = ref(JSON.parse(window.localStorage.getItem('recipeFav')) || []);
+	const recipeFav = ref(JSON.parse(window.localStorage.getItem('recipeFav') as string) || []);
 	// 笔记
-	const noteFav = ref(JSON.parse(window.localStorage.getItem('noteFav')) || []);
+	const noteFav = ref(JSON.parse(window.localStorage.getItem('noteFav') as string) || []);
 	// 广告
-	const advertisementFav = ref(JSON.parse(window.localStorage.getItem('advertisementFav')) || []);
+	const advertisementFav = ref(JSON.parse(window.localStorage.getItem('advertisementFav') as string) || []);
 	// 采购清单
-	const purchaseListFav = ref(JSON.parse(window.localStorage.getItem('purchaseListFav')) || []);
+	const purchaseListFav = ref(JSON.parse(window.localStorage.getItem('purchaseListFav') as string) || []);
 
 	// 按钮禁用状态
 	const isButtonDisabled = ref(false);

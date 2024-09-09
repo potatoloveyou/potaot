@@ -35,21 +35,19 @@ export const useFavoritesStore = defineStore('favorites', () => {
 		}
 		isButtonDisabled.value = true;
 		try {
+			let res;
 			switch (type) {
 				case 1:
-					await recipeDetail(id).then((res) => {
-						recipeFav.value = [...new Set([res.data.result.recipe, ...recipeFav.value])];
-					});
+					res = await recipeDetail(id);
+					recipeFav.value = [...new Set([res.data.result.recipe, ...recipeFav.value])];
 					break;
 				case 3:
-					await noteDetail(id).then((res) => {
-						noteFav.value = [...new Set([res.data.result.note, ...noteFav.value])];
-					});
+					res = await noteDetail(id);
+					noteFav.value = [...new Set([res.data.result.note, ...noteFav.value])];
 					break;
 				case 300:
-					recipeDetail(id).then((res) => {
-						advertisementFav.value = [...new Set([res.data.result.advertisement, ...advertisementFav.value])];
-					});
+					res = await recipeDetail(id);
+					advertisementFav.value = [...new Set([res.data.result.advertisement, ...advertisementFav.value])];
 					break;
 				default:
 					break;

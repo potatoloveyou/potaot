@@ -6,7 +6,7 @@
 	</view>
 </template>
 
-<script setup lang="ts">
+<script setup>
 	import themeItem from '@/components/themeItem/themeItem.vue';
 </script>
 

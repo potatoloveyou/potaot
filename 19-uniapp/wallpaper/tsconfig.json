@@ -4,10 +4,11 @@
 		"sourceMap": true,
 		"baseUrl": ".",
 		"paths": {
-			"@/*": ["./src/*"]
+			"@/*": ["src/*"]
 		},
 		"lib": ["esnext", "dom"],
-		"types": ["@dcloudio/types", "@types/wechat-miniprogram", "@uni-helper/uni-app-types"]
+		"types": ["@dcloudio/types", "@types/wechat-miniprogram", "@uni-helper/uni-app-types"],
+		"ignoreDeprecations": "5.0"
 	},
 	"vueCompilerOptions": {
 		"nativeTags": ["block", "component", "template", "slot"]

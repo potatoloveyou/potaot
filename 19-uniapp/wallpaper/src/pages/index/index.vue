@@ -152,9 +152,11 @@
 							height: 100%;
 							border-radius: 10rpx;
 						}
-						&::list-child {
-							margin-right: 30rpx;
+						&:last-child {
+							margin-right: 55rpx;
 						}
+					}
+					&:last-child {
 					}
 				}
 			}

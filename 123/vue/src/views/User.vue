@@ -10,8 +10,8 @@
 						></template>
 					</el-input>
 				</el-form-item>
-				<el-form-item label="姓名">
-					<el-input v-model="search2" placeholder="请输入姓名" clearable>
+				<el-form-item label="用户名">
+					<el-input v-model="search2" placeholder="请输入用户名" clearable>
 						<template #prefix
 							><el-icon class="el-input__icon"><search /></el-icon
 						></template>
@@ -40,7 +40,7 @@
 			</el-form>
 		</div>
 		<!-- 数据字段 -->
-		<el-table :data="tableData" stripe border="true" @selection-change="handleSelectionChange">
+		<el-table :data="tableData" stripe :border="true" @selection-change="handleSelectionChange">
 			<el-table-column v-if="user.role == 1" type="selection" width="55"></el-table-column>
 			<el-table-column prop="id" label="用户编号" sortable />
 			<el-table-column prop="username" label="用户名" />
@@ -106,6 +106,7 @@
 
 	export default {
 		created() {
+			console.log('created');
 			this.load();
 			let userStr = sessionStorage.getItem('user') || '{}';
 			this.user = JSON.parse(userStr);
@@ -129,23 +130,28 @@
 					}
 				});
 			},
-			load() {
-				request
-					.get('/user/usersearch', {
-						params: {
-							pageNum: this.currentPage,
-							pageSize: this.pageSize,
-							search1: this.search1,
-							search2: this.search2,
-							search3: this.search3,
-							search4: this.search4,
-						},
-					})
-					.then((res) => {
-						// this.tableData = res;
-						this.tableData = res.records;
-						this.total = res.total;
-					});
+			async load() {
+				let res = await request.get('user/usersearch', {
+					params: {
+						pageNum: this.currentPage,
+						pageSize: this.pageSize,
+						id: this.search1,
+						username: this.search2,
+						phone: this.search3,
+						address: this.search4,
+					},
+				});
+				// .then((res) => {
+				// 	// this.tableData = res;
+				// 	this.tableData = res.records;
+				// 	this.total = res.total;
+				// });
+				if (res.status === 200) {
+					this.tableData = res.data.list;
+					this.total = res.data.total;
+				} else {
+					ElMessage.error(res.message);
+				}
 			},
 			clear() {
 				this.search1 = '';
@@ -154,31 +160,29 @@
 				this.search4 = '';
 				this.load();
 			},
-			handleDelete(id) {
-				request.delete('user/' + id).then((res) => {
-					if (res.code == 0) {
-						ElMessage.success('删除成功');
-					} else {
-						ElMessage.error(res.msg);
-					}
+			async handleDelete(id) {
+				let res = await request.delete('user/' + id);
+				if (res.status == 200) {
+					ElMessage.success('删除成功');
 					this.load();
-				});
+				} else {
+					ElMessage.error(res.message);
+				}
 			},
 			add() {
 				this.dialogVisible = true;
 				this.form = {};
 			},
-			save() {
+			async save() {
 				if (this.form.id) {
-					request.put('/user', this.form).then((res) => {
-						if (res.code == 0) {
-							ElMessage.success('更新成功');
-						} else {
-							ElMessage.error(res.msg);
-						}
+					let res = await request.put('/user', this.form);
+					if (res.status === 200) {
+						ElMessage.success('更新成功');
 						this.load();
 						this.dialogVisible = false;
-					});
+					} else {
+						ElMessage.error(res.message);
+					}
 				} else {
 					request.post('/user', this.form).then((res) => {
 						if (res.code == 0) {

@@ -1,5 +1,5 @@
 <template>
-	<view class="userLayout">
+	<view class="userLayout pageBg">
 		<view class="userInfo">
 			<view class="avater">
 				<image src="@/static/images/xxmLogo.png" mode="scaleToFill" />
@@ -10,32 +10,36 @@
 
 		<view class="section">
 			<view class="list">
-				<view class="row">
-					<view class="left">
-						<uni-icons type="download-filled" size="20" color="#28b389"></uni-icons>
-						<view class="text">我的下载</view>
+				<navigator url="/pages/classlist/classlist">
+					<view class="row">
+						<view class="left">
+							<uni-icons type="download-filled" size="20"></uni-icons>
+							<view class="text">我的下载</view>
+						</view>
+						<view class="right">
+							<view class="text">33</view>
+							<uni-icons type="right" size="15" color="#aaa"></uni-icons>
+						</view>
 					</view>
-					<view class="right">
-						<view class="text">33</view>
-						<uni-icons type="right" size="15" color="#aaa"></uni-icons>
+				</navigator>
+
+				<navigator url="/pages/classlist/classlist">
+					<view class="row">
+						<view class="left">
+							<uni-icons type="download-filled" size="20"></uni-icons>
+							<view class="text">我的评分</view>
+						</view>
+
+						<view class="right">
+							<view class="text">33</view>
+							<uni-icons type="right" size="15" color="#aaa"></uni-icons>
+						</view>
 					</view>
-				</view>
+				</navigator>
 
 				<view class="row">
 					<view class="left">
-						<uni-icons type="download-filled" size="20" color="#28b389"></uni-icons>
-						<view class="text">我的评分</view>
-					</view>
-
-					<view class="right">
-						<view class="text">33</view>
-						<uni-icons type="right" size="15" color="#aaa"></uni-icons>
-					</view>
-				</view>
-
-				<view class="row">
-					<view class="left">
-						<uni-icons type="download-filled" size="20" color="#28b389"></uni-icons>
+						<uni-icons type="download-filled" size="20"></uni-icons>
 						<view class="text">联系客服</view>
 					</view>
 
@@ -57,7 +61,7 @@
 			<view class="list">
 				<view class="row" v-for="item in 2" :key="item">
 					<view class="left">
-						<uni-icons type="download-filled" size="20" color="#28b389"></uni-icons>
+						<uni-icons type="download-filled" size="20"></uni-icons>
 						<view class="text">我的下载</view>
 					</view>
 
@@ -71,7 +75,7 @@
 	</view>
 </template>
 
-<script setup lang="ts">
+<script setup>
 	const clickContact = () => {
 		uni.makePhoneCall({
 			phoneNumber: '123456789',
@@ -125,6 +129,7 @@
 					height: 100rpx;
 					border-bottom: 1px solid #eee;
 					position: relative;
+					background-color: #fff;
 					&:last-child {
 						border-bottom: none;
 					}
@@ -135,6 +140,11 @@
 							padding-left: 20rpx;
 							color: #666;
 						}
+						:deep() {
+							.uni-icons {
+								color: $brand-theme-color !important;
+							}
+						}
 					}
 					.right {
 						display: flex;
@@ -142,6 +152,11 @@
 						.text {
 							font-size: 28rpx;
 							color: #aaa;
+						}
+						:deep() {
+							.uni-icons {
+								color: $brand-theme-color !important;
+							}
 						}
 					}
 					button {

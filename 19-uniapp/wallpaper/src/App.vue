@@ -11,5 +11,5 @@
 	});
 </script>
 <style lang="scss">
-	@import 'common/style/common';
+	@import '@/common/style/common.scss';
 </style>

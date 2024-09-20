@@ -1,29 +1,24 @@
 <template>
-	<view class="homeLayou">
+	<view class="homeLayou pageBg">
+		<customNavbar :title="'推荐'" />
 		<view class="banner">
 			<swiper indicator-dots indicator-color="rgba(255, 255, 255, 0.5)" indicator-active-color="#fff" autoplay circular>
-				<swiper-item>
-					<image src="@/common/images/banner1.jpg" mode="aspectFill"></image>
-				</swiper-item>
-				<swiper-item>
-					<image src="@/common/images/banner2.jpg" mode="aspectFill"></image>
-				</swiper-item>
-				<swiper-item>
-					<image src="@/common/images/banner3.jpg" mode="aspectFill"></image>
+				<swiper-item v-for="banner in bannerList" :key="banner._id">
+					<image :src="banner.picurl" mode="aspectFill" />
 				</swiper-item>
 			</swiper>
 		</view>
 
 		<view class="notice">
 			<view class="left">
-				<uni-icons type="sound-filled" size="20" color="#28b389"></uni-icons>
+				<uni-icons type="sound-filled" size="20"></uni-icons>
 				<text class="notice-text">公告</text>
 			</view>
 
 			<view class="center">
 				<swiper vertical autoplay circular interval="1500" duration="300">
-					<swiper-item v-for="(item, index) in 4" :key="index">
-						文字内容{{ index }}内容内容内容内容内容内容内容内容内容内容内容内容内容
+					<swiper-item v-for="wallNew in wallNewList" :key="wallNew._id" @click="goNoticeDetail">
+						<text>{{ wallNew.title }}</text>
 					</swiper-item>
 				</swiper>
 			</view>
@@ -38,7 +33,7 @@
 				<template #name>每日推荐</template>
 				<template #custom>
 					<view class="data">
-						<uni-icons type="calendar" size="18" color="#28b389"></uni-icons>
+						<uni-icons type="calendar" size="18"></uni-icons>
 						<view class="text">
 							<uni-dateformat :date="Date.now()" format="dd"></uni-dateformat>
 							日
@@ -48,8 +43,8 @@
 			</commonTitle>
 			<view class="content">
 				<scroll-view scroll-x>
-					<view class="box" v-for="(item, index) in 8" :key="index">
-						<image src="@/common/images/preview_small.webp" mode="aspectFill" />
+					<view class="box" v-for="wallpaper in wallpaperList" :key="wallpaper._id">
+						<image :src="wallpaper.smallPicurl" mode="aspectFill" />
 					</view>
 				</scroll-view>
 			</view>
@@ -64,7 +59,7 @@
 			</commonTitle>
 
 			<view class="content">
-				<themeItem v-for="(item, index) in 8" :key="index"></themeItem>
+				<themeItem v-for="classify in classifyList" :key="classify._id" :classify="classify"></themeItem>
 				<themeItem :isMore="true"></themeItem>
 			</view>
 		</view>
@@ -73,7 +68,65 @@
 
 <script setup>
 	import { ref } from 'vue';
+	import { onLoad } from '@dcloudio/uni-app';
+
+	import { getBanner, getwallNews, getWallpaper, getClassify } from '@/apis/api';
+
 	import commonTitle from '@/components/commonTitle/commonTitle.vue';
+	import customNavbar from '@/components/customNavbar/customNavbar.vue';
+
+	// 跳转到照片全屏
+	const goPreview = () => {
+		uni.navigateTo({
+			url: '/pages/preview/preview',
+		});
+	};
+
+	// 跳转到公告
+	const goNoticeDetail = () => {
+		uni.navigateTo({
+			url: '/pages/notice/detail',
+		});
+	};
+
+	// 首页海报列表
+	const bannerList = ref([]);
+	const Banner = async () => {
+		const res = await getBanner();
+		bannerList.value = res.data;
+	};
+
+	// 壁纸资讯公告列表
+	const wallNewList = ref([]);
+	const wallNew = async () => {
+		const res = await getwallNews({
+			select: true,
+		});
+		wallNewList.value = res.data;
+	};
+
+	// 随机9张壁纸
+	const wallpaperList = ref([]);
+	const Wallpaper = async () => {
+		const res = await getWallpaper();
+		wallpaperList.value = res.data;
+	};
+
+	// 壁纸大分类
+	const classifyList = ref([]);
+	const Classify = async () => {
+		const res = await getClassify({
+			select: true,
+		});
+		classifyList.value = res.data;
+	};
+
+	onLoad(() => {
+		Banner();
+		wallNew();
+		Wallpaper();
+		Classify();
+	});
 </script>
 
 <style lang="scss" scoped>
@@ -108,8 +161,13 @@
 				flex-wrap: wrap;
 				align-content: center;
 				.notice-text {
-					color: #28b389;
+					color: $brand-theme-color;
 					font-size: 600;
+				}
+				:deep() {
+					.uni-icons {
+						color: $brand-theme-color !important;
+					}
 				}
 			}
 			.center {
@@ -131,10 +189,15 @@
 		.select {
 			padding-top: 50rpx;
 			.data {
-				color: #28b389;
+				color: $brand-theme-color;
 				display: flex;
 				align-items: center;
 				margin-left: 5rpx;
+				:deep() {
+					.uni-icons {
+						color: $brand-theme-color !important;
+					}
+				}
 			}
 			.content {
 				width: 100%;
@@ -155,8 +218,6 @@
 						&:last-child {
 							margin-right: 55rpx;
 						}
-					}
-					&:last-child {
 					}
 				}
 			}

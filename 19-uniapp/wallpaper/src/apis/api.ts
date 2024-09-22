@@ -1,4 +1,4 @@
-import { request } from '@/apis/request';
+import { request } from '@/utils/request';
 
 // 首页海报列表
 export const getBanner = (): Promise<any> => {

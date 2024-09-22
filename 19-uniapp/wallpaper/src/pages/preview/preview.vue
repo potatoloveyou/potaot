@@ -1,8 +1,9 @@
 <template>
 	<view class="preview">
-		<swiper circular>
-			<swiper-item v-for="item in 5" :key="item">
-				<image @click="maskChange" src="@/common/images/preview1.jpg" mode="scaleToFill" />
+		<swiper circular :current="currentIndex" @change="swiperChange">
+			<swiper-item v-for="(item, index) in classList" :key="item._id">
+				<image v-if="readImgs.includes(index)" @click="maskChange" :src="item.picurl" mode="scaleToFill" />
+				<!-- <image v-if="(index == currentIndex)" @click="maskChange" :src="item.picurl" mode="scaleToFill" /> -->
 			</swiper-item>
 		</swiper>
 
@@ -10,7 +11,7 @@
 			<view class="goBack" :style="`top: ${getStatusBarHeight}px`" @click="goBack">
 				<uni-icons type="back" color="#fff" size="20" />
 			</view>
-			<view class="count">3 / 9</view>
+			<view class="count">{{ currentIndex + 1 }} / {{ classList.length }}</view>
 			<view class="time">
 				<uni-dateformat :date="Date.now()" format="hh:mm" />
 			</view>
@@ -34,60 +35,74 @@
 				</view>
 			</view>
 		</view>
-	</view>
 
-	<uni-popup ref="infoPopup" type="bottom">
-		<view class="infoPopup">
-			<view class="popHeader">
-				<view></view>
-				<view class="title">壁纸信息</view>
-				<view class="close" @click="clickInfoClose">
-					<uni-icons type="closeempty" size="=18" color="#999" />
-				</view>
-			</view>
-
-			<scroll-view scroll-y>
-				<view class="content">
-					<view class="row" v-for="item in 5">
-						<view class="label">壁纸ID: </view>
-						<text class="value">1234567890</text>
+		<uni-popup ref="infoPopup" type="bottom">
+			<view class="infoPopup">
+				<view class="popHeader">
+					<view></view>
+					<view class="title">壁纸信息</view>
+					<view class="close" @click="clickInfoClose">
+						<uni-icons type="closeempty" size="=18" color="#999" />
 					</view>
-					<view class="row">
-						<view class="label">评分: </view>
-						<view class="value rateBox">
-							<uni-rate readonly :value="userScore" size="16" />
-							<text class="score">{{ userScore }}</text>
+				</view>
+
+				<scroll-view scroll-y>
+					<view class="content">
+						<view class="row" v-for="item in 5">
+							<view class="label">壁纸ID: </view>
+							<text class="value">1234567890</text>
+						</view>
+						<view class="row">
+							<view class="label">评分: </view>
+							<view class="value rateBox">
+								<uni-rate readonly :value="userScore" size="16" />
+								<text class="score">{{ userScore }}</text>
+							</view>
 						</view>
 					</view>
-				</view>
-			</scroll-view>
-		</view>
-	</uni-popup>
+				</scroll-view>
+			</view>
+		</uni-popup>
 
-	<uni-popup ref="scorePopup" type="center" :is-mask-click="false">
-		<view class="scorePopup">
-			<view class="popHeader">
-				<view></view>
-				<view class="title">壁纸评分</view>
-				<view class="close" @click="clickScoreClose">
-					<uni-icons type="closeempty" size="=18" color="#999" />
+		<uni-popup ref="scorePopup" type="center" :is-mask-click="false">
+			<view class="scorePopup">
+				<view class="popHeader">
+					<view></view>
+					<view class="title">壁纸评分</view>
+					<view class="close" @click="clickScoreClose">
+						<uni-icons type="closeempty" size="=18" color="#999" />
+					</view>
+				</view>
+
+				<view class="content">
+					<uni-rate v-model="userScore" allowHalf />
+					<text class="text">{{ userScore }}分</text>
+				</view>
+				<view class="footer">
+					<button type="default" size="mini" :disabled="!userScore" @click="submitScore">确认评分</button>
 				</view>
 			</view>
-
-			<view class="content">
-				<uni-rate v-model="userScore" allowHalf />
-				<text class="text">{{ userScore }}分</text>
-			</view>
-			<view class="footer">
-				<button type="default" size="mini" :disabled="!userScore" @click="submitScore">确认评分</button>
-			</view>
-		</view>
-	</uni-popup>
+		</uni-popup>
+	</view>
 </template>
 
 <script setup>
 	import { ref } from 'vue';
+	import { onLoad } from '@dcloudio/uni-app';
 	import { getStatusBarHeight } from '@/utils/system';
+
+	import { useWellListStore } from '@/stores/wellList';
+	const wellListStore = useWellListStore();
+
+	const classList = ref([]);
+	const wallNewList = wellListStore.wallNewList || [];
+	classList.value = wallNewList.map((item) => {
+		return {
+			...item,
+			picurl: item.smallPicurl.replace('_small.webp', '.jpg'),
+		};
+	});
+	console.log(classList.value);
 
 	const userScore = ref(0);
 
@@ -126,7 +141,35 @@
 
 	// 返回上一页
 	const goBack = () => {
-		uni.navigateBack(); 
+		uni.navigateBack();
+	};
+
+	// 存储已看过的图片
+	const readImgs = ref([]);
+	// 当前壁纸id
+	const currentId = ref(null);
+	// 当前壁纸索引
+	const currentIndex = ref(0);
+
+	const readImgsFun = () => {
+		readImgs.value.push(
+			currentIndex.value <= 0 ? currentIndex.value.length - 1 : currentIndex.value - 1,
+			currentIndex.value,
+			currentIndex.value >= currentIndex.value.length - 1 ? 0 : currentIndex.value + 1,
+		);
+		readImgs.value = [...new Set(readImgs.value)];
+	};
+
+	onLoad((event) => {
+		currentId.value = event.id;
+		currentIndex.value = classList.value.findIndex((item) => item._id == currentId.value);
+		readImgsFun();
+	});
+
+	// 滑动时修改当前索引值
+	const swiperChange = (e) => {
+		currentIndex.value = e.detail.current;
+		readImgsFun();
 	};
 </script>
 

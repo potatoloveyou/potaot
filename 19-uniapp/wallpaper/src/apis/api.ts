@@ -31,7 +31,7 @@ export const getClassify = async (data = {}): Promise<any> => {
 };
 
 // 分类中壁纸列表（分类详情）
-export const getWallList = async (data = {}): Promise<any> => {
+export const  getWallList = async (data = {}): Promise<any> => {
 	return request({
 		url: '/wallList',
 		data,
@@ -61,3 +61,19 @@ export const getDetailWall = async (data = {}): Promise<any> => {
 		data,
 	});
 };
+
+// 用户个人信息
+export const getUserInfo = async (data = {}): Promise<any> => {
+	return request({
+		url: '/userInfo',
+		data,
+	});
+};
+
+// 我的评分/下载列表
+export const getUserWallList = async (data = {}): Promise<any> => {
+	return request({
+		url: '/userWallList',
+		data,
+	});
+}

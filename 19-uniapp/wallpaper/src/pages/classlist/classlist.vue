@@ -22,7 +22,7 @@
 <script setup>
 	import { ref } from 'vue';
 	import { onLoad, onUnload, onReachBottom, onShareAppMessage, onShareTimeline } from '@dcloudio/uni-app';
-	import { getWallList } from '@/apis/api';
+	import { getWallList, getUserWallList } from '@/apis/api';
 
 	import { gotoHome } from '@/utils/common';
 
@@ -33,10 +33,11 @@
 	// 分类中壁纸列表（分类详情）
 	// const wallList = ref([]);
 	const getWall = async () => {
-		const res = await getWallList(queryparams.value);
-		wellListStore.wallNewList = [...wellListStore.wallNewList, ...res.data];
+		let res;
+		queryparams.value.classid ? (res = await getWallList(queryparams.value)) : '';
+		queryparams.value.type ? (res = await getUserWallList(queryparams.value)) : '';
+		wellListStore.wallNewList = [...wellListStore.wallNewList, ...res.data]; 
 		queryparams.value.pageSize > res.data.length ? (isData.value = true) : '';
-		console.log(wellListStore.wallNewList);
 	};
 
 	const queryparams = ref({
@@ -47,15 +48,18 @@
 	const pageName = ref('');
 
 	onLoad((event) => {
-		const { classid = null, name = null } = event;
-		classid ? '' : gotoHome();
+		const { classid = null, name = null, type = null } = event;
+		console.log(event);
+		
+		type ? (queryparams.value.type = type) : '';
+		classid ? (queryparams.value.classid = classid) : '';
+		// // classid ? '' : gotoHome();
 		queryparams.value.classid = classid;
 		pageName.value = name;
 		getWall();
 		uni.setNavigationBarTitle({
 			title: name,
 		});
-		console.log(event.name);
 	});
 
 	onUnload(() => {

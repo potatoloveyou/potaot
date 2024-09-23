@@ -1,29 +1,33 @@
 <template>
-	<view class="userLayout pageBg">
+	<view class="userLayout pageBg" v-if="userData">
+		<view :style="{ height: getNavBarHeight + 'px' }"></view>
+
 		<view class="userInfo">
 			<view class="avater">
 				<image src="@/static/images/xxmLogo.png" mode="scaleToFill" />
 			</view>
-			<view class="ip">192.168.80.123</view>
-			<view class="address">来自于：广州</view>
+			<view class="ip">{{ userData.IP }}</view>
+			<view class="address"
+				>来自于：{{ userData.address.city || userData.address.province || userData.address.country }}</view
+			>
 		</view>
 
 		<view class="section">
 			<view class="list">
-				<navigator url="/pages/classlist/classlist">
+				<navigator url="/pages/classlist/classlist?name=我的下载&type=download">
 					<view class="row">
 						<view class="left">
 							<uni-icons type="download-filled" size="20"></uni-icons>
 							<view class="text">我的下载</view>
 						</view>
 						<view class="right">
-							<view class="text">33</view>
+							<view class="text">{{ userData.downloadSize }}</view>
 							<uni-icons type="right" size="15" color="#aaa"></uni-icons>
 						</view>
 					</view>
 				</navigator>
 
-				<navigator url="/pages/classlist/classlist">
+				<navigator url="/pages/classlist/classlist?name=我的评分&type=score">
 					<view class="row">
 						<view class="left">
 							<uni-icons type="download-filled" size="20"></uni-icons>
@@ -31,7 +35,7 @@
 						</view>
 
 						<view class="right">
-							<view class="text">33</view>
+							<view class="text">{{ userData.scoreSize }}</view>
 							<uni-icons type="right" size="15" color="#aaa"></uni-icons>
 						</view>
 					</view>
@@ -73,9 +77,19 @@
 			</view>
 		</view>
 	</view>
+
+	<view class="loadingLayout" v-else>
+		<view :style="{ height: getNavBarHeight + 'px' }"></view>
+		<uni-load-more status="loading"></uni-load-more>
+	</view>
 </template>
 
 <script setup>
+	import { ref } from 'vue';
+	import { onLoad } from '@dcloudio/uni-app';
+	import { getNavBarHeight } from '@/utils/system';
+	import { getUserInfo } from '@/apis/api';
+
 	const clickContact = () => {
 		uni.makePhoneCall({
 			phoneNumber: '123456789',
@@ -84,6 +98,18 @@
 			},
 		});
 	};
+
+	const userData = ref(null);
+	const userInfo = async () => {
+		let res = await getUserInfo();
+		console.log(res);
+		userData.value = res.data;
+		console.log(userData.value);
+	};
+
+	onLoad(() => {
+		userInfo();
+	});
 </script>
 
 <style lang="scss" scoped>

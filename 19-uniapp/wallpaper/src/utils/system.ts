@@ -12,4 +12,5 @@ export const getTitleBarHeight = computed(() => {
 	}
 });
 
+// 获取导航栏高度
 export const getNavBarHeight = computed(() => getStatusBarHeight.value + getTitleBarHeight.value);

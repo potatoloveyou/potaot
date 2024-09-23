@@ -41,9 +41,10 @@
 					</view>
 				</template>
 			</commonTitle>
+
 			<view class="content">
 				<scroll-view scroll-x>
-					<view class="box" v-for="wallpaper in wallpaperList" :key="wallpaper._id">
+					<view class="box" v-for="wallpaper in wallpaperList" :key="wallpaper._id" @click="goPreview(wallpaper._id)">
 						<image :src="wallpaper.smallPicurl" mode="aspectFill" />
 					</view>
 				</scroll-view>
@@ -68,17 +69,20 @@
 
 <script setup>
 	import { ref } from 'vue';
-	import { onLoad } from '@dcloudio/uni-app';
-
+	import { onLoad, onShareAppMessage, onShareTimeline } from '@dcloudio/uni-app';
 	import { getBanner, getwallNews, getWallpaper, getClassify } from '@/apis/api';
 
 	import commonTitle from '@/components/commonTitle/commonTitle.vue';
 	import customNavbar from '@/components/customNavbar/customNavbar.vue';
 
+	import { useWellListStore } from '@/stores/wellList';
+	const wellListStore = useWellListStore();
+
 	// 跳转到照片全屏
-	const goPreview = () => {
+	const goPreview = (id) => {
+		wellListStore.wallNewList = wallpaperList.value;
 		uni.navigateTo({
-			url: '/pages/preview/preview',
+			url: `/pages/preview/preview?id=${id}`,
 		});
 	};
 
@@ -126,6 +130,22 @@
 		wallNew();
 		Wallpaper();
 		Classify();
+	});
+
+	// 分享给好友
+	onShareAppMessage(() => {
+		return {
+			title: '咸虾米壁纸',
+			path: '/pages/index/index',
+		};
+	});
+
+	// 分享朋友圈
+	onShareTimeline(() => {
+		return {
+			title: '咸虾米壁纸',
+			imageUrl: '/static/images/xxmLogo.png',
+		};
 	});
 </script>
 

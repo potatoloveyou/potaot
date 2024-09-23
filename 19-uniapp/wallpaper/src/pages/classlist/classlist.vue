@@ -17,13 +17,14 @@
 		</view>
 		<view class="safe-area-inset-bottom"></view>
 	</view>
-
 </template>
 
 <script setup>
 	import { ref } from 'vue';
-	import { onLoad, onReachBottom } from '@dcloudio/uni-app';
+	import { onLoad, onUnload, onReachBottom, onShareAppMessage, onShareTimeline } from '@dcloudio/uni-app';
 	import { getWallList } from '@/apis/api';
+
+	import { gotoHome } from '@/utils/common';
 
 	import { useWellListStore } from '@/stores/wellList';
 	const wellListStore = useWellListStore();
@@ -43,21 +44,45 @@
 		pageNum: 1,
 		pageSize: 12,
 	});
+	const pageName = ref('');
 
 	onLoad((event) => {
 		const { classid = null, name = null } = event;
+		classid ? '' : gotoHome();
 		queryparams.value.classid = classid;
-		wellListStore.wallNewList = [];
+		pageName.value = name;
 		getWall();
 		uni.setNavigationBarTitle({
 			title: name,
 		});
+		console.log(event.name);
+	});
+
+	onUnload(() => {
+		wellListStore.wallNewList = [];
 	});
 
 	onReachBottom(() => {
 		if (isData.value) return;
 		queryparams.value.pageNum++;
 		getWall();
+	});
+
+	// 分享给好友
+	onShareAppMessage(() => {
+		return {
+			title: `咸虾米壁纸-${pageName.value}`,
+			path: `/pages/classlist/classlist?classid=${queryparams.value.classid}&name=${pageName.value}`,
+		};
+	});
+
+	// 分享朋友圈
+	onShareTimeline(() => {
+		return {
+			title: '咸虾米壁纸',
+			imageUrl: '/static/images/xxmLogo.png',
+			query: `classid=${queryparams.value.classid}&name=${pageName.value}`,
+		};
 	});
 </script>
 

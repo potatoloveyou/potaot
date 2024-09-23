@@ -9,7 +9,8 @@
 
 <script setup>
 	import { ref } from 'vue';
-	import { onLoad } from '@dcloudio/uni-app';
+	import { onLoad, onShareAppMessage, onShareTimeline } from '@dcloudio/uni-app';
+
 	import { getClassify } from '@/apis/api';
 	import themeItem from '@/components/themeItem/themeItem.vue';
 
@@ -23,10 +24,26 @@
 		console.log(classifyList.value);
 	};
 
-
-
 	onLoad(() => {
 		Classify();
+	});
+
+
+
+	// 分享给好友
+	onShareAppMessage(() => {
+		return {
+			title: '咸虾米壁纸',
+			path: '/pages/classify/classify',
+		};
+	});
+
+	// 分享朋友圈
+	onShareTimeline(() => {
+		return {
+			title: '咸虾米壁纸',
+			imageUrl: '/static/images/xxmLogo.png',
+		};
 	});
 </script>
 

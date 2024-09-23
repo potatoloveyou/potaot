@@ -1,4 +1,4 @@
-export function compareTimestamp(timestamp: any) {
+export const compareTimestamp = (timestamp: any) => {
 	const currentTime = new Date().getTime();
 	const timeDiff = currentTime - timestamp;
 
@@ -15,9 +15,9 @@ export function compareTimestamp(timestamp: any) {
 	} else {
 		return '很久';
 	}
-}
+};
 
-export function gotoHome() {
+export const gotoHome = () => {
 	uni.showModal({
 		title: '提示',
 		content: '页面有误将返回首页',
@@ -30,4 +30,5 @@ export function gotoHome() {
 			}
 		},
 	});
-}
+};
+

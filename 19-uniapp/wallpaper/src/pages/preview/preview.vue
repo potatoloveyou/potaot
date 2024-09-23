@@ -1,5 +1,5 @@
 <template>
-	<view class="preview">
+	<view class="preview" v-if="currentInfo">
 		<swiper circular :current="currentIndex" @change="swiperChange">
 			<swiper-item v-for="(item, index) in classList" :key="item._id">
 				<image v-if="readImgs.includes(index)" @click="maskChange" :src="item.picurl" mode="scaleToFill" />
@@ -26,17 +26,17 @@
 
 				<view class="box" @click="clickScore">
 					<uni-icons type="star" size="28" />
-					<view class="text">{{ userScore }}</view>
+					<view class="text">{{ currentInfo.score }}分</view>
 				</view>
 
-				<view class="box">
+				<view class="box" @click="clickDownload">
 					<uni-icons type="download" size="28" />
 					<view class="text">下载</view>
 				</view>
 			</view>
 		</view>
 
-		<uni-popup ref="infoPopup" type="bottom">
+		<uni-popup ref="infoPopup" type="bottom" :safe-area="false">
 			<view class="infoPopup">
 				<view class="popHeader">
 					<view></view>
@@ -48,17 +48,45 @@
 
 				<scroll-view scroll-y>
 					<view class="content">
-						<view class="row" v-for="item in 5">
-							<view class="label">壁纸ID: </view>
-							<text class="value">1234567890</text>
-						</view>
 						<view class="row">
-							<view class="label">评分: </view>
+							<view class="label">壁纸ID：</view>
+							<text selectable class="value">{{ currentInfo._id }}</text>
+						</view>
+
+						<view class="row">
+							<view class="label">发布者：</view>
+							<text class="value">{{ currentInfo.nickname }}</text>
+						</view>
+
+						<view class="row">
+							<text class="label">评分：</text>
 							<view class="value rateBox">
-								<uni-rate readonly :value="userScore" size="16" />
-								<text class="score">{{ userScore }}</text>
+								<uni-rate readonly touchable :value="currentInfo.score" size="16" />
+								<text class="score">{{ currentInfo.score }}分</text>
 							</view>
 						</view>
+
+						<view class="row">
+							<text class="label">摘要：</text>
+							<view class="value">
+								{{ currentInfo.description }}
+							</view>
+						</view>
+
+						<view class="row">
+							<text class="label">标签：</text>
+							<view class="value tabs">
+								<view class="tab" v-for="tab in currentInfo.tabs" :key="tab">
+									{{ tab }}
+								</view>
+							</view>
+						</view>
+
+						<view class="copyright">
+							声明：本图片来用户投稿，非商业使用，用于免费学习交流，如侵犯了您的权益，您可以拷贝壁纸ID举报至平台，邮箱513894357@qq.com，管理将删除侵权壁纸，维护您的权益。
+						</view>
+
+						<view class="safe-area-inset-bottom"></view>
 					</view>
 				</scroll-view>
 			</view>
@@ -68,18 +96,18 @@
 			<view class="scorePopup">
 				<view class="popHeader">
 					<view></view>
-					<view class="title">壁纸评分</view>
+					<view class="title">{{ isScore ? '评分过了' : '壁纸评分' }}</view>
 					<view class="close" @click="clickScoreClose">
 						<uni-icons type="closeempty" size="=18" color="#999" />
 					</view>
 				</view>
 
 				<view class="content">
-					<uni-rate v-model="userScore" allowHalf />
+					<uni-rate v-model="userScore" allowHalf :disabled="isScore" disabled-color="#ffca3e" />
 					<text class="text">{{ userScore }}分</text>
 				</view>
 				<view class="footer">
-					<button type="default" size="mini" :disabled="!userScore" @click="submitScore">确认评分</button>
+					<button type="default" size="mini" :disabled="!userScore || isScore" @click="submitScore">确认评分</button>
 				</view>
 			</view>
 		</uni-popup>
@@ -88,23 +116,25 @@
 
 <script setup>
 	import { ref } from 'vue';
-	import { onLoad } from '@dcloudio/uni-app';
+	import { onLoad, onReachBottom, onShareAppMessage, onShareTimeline } from '@dcloudio/uni-app';
 	import { getStatusBarHeight } from '@/utils/system';
+	import { getSetupScore, getWallDownload, getDetailWall } from '@/apis/api';
 
 	import { useWellListStore } from '@/stores/wellList';
 	const wellListStore = useWellListStore();
 
 	const classList = ref([]);
 	const wallNewList = wellListStore.wallNewList || [];
-	classList.value = wallNewList.map((item) => {
-		return {
-			...item,
-			picurl: item.smallPicurl.replace('_small.webp', '.jpg'),
-		};
-	});
-	console.log(classList.value);
 
-	const userScore = ref(0);
+	// 给接口获取的对象中添加picurl大图地址
+	const addPicurl = (list) =>
+		list.map((item) => {
+			return {
+				...item,
+				picurl: item.smallPicurl.replace('_small.webp', '.jpg'),
+			};
+		});
+	classList.value = addPicurl(wallNewList);
 
 	// 点击照片全屏
 	const maskCState = ref(true);
@@ -122,26 +152,60 @@
 		infoPopup.value.close();
 	};
 
+	// 判断是否有评分
+	const isScore = ref(false);
+
 	// 打开评分弹窗
 	const scorePopup = ref(null);
 	const clickScore = () => {
-		// console.log('score');
+		if (currentInfo.value.userScore) {
+			isScore.value = true;
+			userScore.value = currentInfo.value.userScore;
+		}
 		scorePopup.value.open();
 	};
+
+	// 确认评分时的值
+	const userScore = ref(0);
 	// 关闭评分弹窗
 	const clickScoreClose = () => {
 		scorePopup.value.close();
+		userScore.value = 0;
+		isScore.value = false;
 	};
 
 	// 提交评分
-	const submitScore = () => {
-		// scorePopup.value.close();
-		console.log('确认评分');
+	const submitScore = async () => {
+		uni.showLoading({
+			title: '评分中',
+		});
+		let { classid, _id: wallId } = currentInfo.value;
+		let res = await getSetupScore({
+			classid,
+			wallId,
+			userScore: userScore.value,
+		});
+		uni.hideLoading();
+		if (res.errCode === 0) {
+			uni.showToast({
+				title: '评分成功',
+				icon: 'none',
+			});
+			classList.value[currentIndex.value].userScore = userScore.value;
+			wellListStore.wallNewList = classList.value;
+			clickScoreClose();
+		}
+		console.log(userScore.value);
 	};
 
 	// 返回上一页
 	const goBack = () => {
-		uni.navigateBack();
+		uni.navigateBack({
+			success: (res) => {},
+			fail: (err) => {
+				uni.reLaunch({ url: '/pages/index/index' });
+			},
+		});
 	};
 
 	// 存储已看过的图片
@@ -150,6 +214,9 @@
 	const currentId = ref(null);
 	// 当前壁纸索引
 	const currentIndex = ref(0);
+
+	// 当前壁纸信息
+	const currentInfo = ref(null);
 
 	const readImgsFun = () => {
 		readImgs.value.push(
@@ -160,20 +227,130 @@
 		readImgs.value = [...new Set(readImgs.value)];
 	};
 
-	onLoad((event) => {
+	onLoad(async (event) => {
 		currentId.value = event.id;
+		// event.type=="share"?
+		if (event.type == 'share') {
+			let res = await getDetailWall({ id: currentId.value });
+			console.log(res);
+			classList.value = addPicurl(res.data);
+		}
 		currentIndex.value = classList.value.findIndex((item) => item._id == currentId.value);
 		readImgsFun();
+		currentInfo.value = classList.value[currentIndex.value];
 	});
 
 	// 滑动时修改当前索引值
 	const swiperChange = (e) => {
 		currentIndex.value = e.detail.current;
 		readImgsFun();
+		currentInfo.value = classList.value[currentIndex.value];
 	};
+
+	//点击下载
+	const clickDownload = async () => {
+		// #ifdef H5
+		uni.showModal({
+			content: '请右键保存壁纸',
+			showCancel: false,
+		});
+		// #endif
+
+		// #ifndef H5
+		try {
+			uni.showLoading({
+				title: '下载中...',
+				mask: true,
+			});
+			let { classid, _id: wallId } = currentInfo.value;
+			let res = await getWallDownload({
+				classid,
+				wallId,
+			});
+			if (res.errCode != 0) throw res;
+			// 获取图片信息
+			uni.getImageInfo({
+				// 获得图片临时地址
+				src: currentInfo.value.picurl,
+				success: (res) => {
+					// 下载图片
+					uni.saveImageToPhotosAlbum({
+						filePath: res.path,
+						success: (res) => {
+							uni.showToast({
+								title: '保存成功，请到相册查看',
+								icon: 'none',
+							});
+						},
+						fail: (err) => {
+							if (err.errMsg == 'saveImageToPhotosAlbum:fail cancel') {
+								uni.showToast({
+									title: '保存失败，请重新点击下载',
+									icon: 'none',
+								});
+								return;
+							}
+							uni.showModal({
+								title: '授权提示',
+								content: '需要授权保存相册',
+								success: (res) => {
+									if (res.confirm) {
+										uni.openSetting({
+											success: (setting) => {
+												console.log(setting);
+												if (setting.authSetting['scope.writePhotosAlbum']) {
+													uni.showToast({
+														title: '获取授权成功',
+														icon: 'none',
+													});
+												} else {
+													uni.showToast({
+														title: '获取权限失败',
+														icon: 'none',
+													});
+												}
+											},
+										});
+									}
+								},
+							});
+						},
+						complete: () => {
+							uni.hideLoading();
+						},
+					});
+				},
+			});
+		} catch (err) {
+			console.log(err);
+			uni.hideLoading();
+		}
+		// #endif
+	};
+
+	// 分享给好友
+	onShareAppMessage(() => {
+		return {
+			title: `咸虾米壁纸-`,
+			path: `/pages/preview/preview?id=${currentId.value}&type=share`,
+		};
+	});
+
+	// 分享朋友圈
+	onShareTimeline(() => {
+		return {
+			title: '咸虾米壁纸',
+			imageUrl: '/static/images/xxmLogo.png',
+			query: `id=${currentId.value}&type=share`,
+		};
+	});
 </script>
 
 <style lang="scss" scoped>
+	::v-deep .uni-popup__wrapper-box {
+		padding-bottom: 0 !important;
+	}
+
 	.preview {
 		width: 100%;
 		height: 100vh;
@@ -335,6 +512,35 @@
 							padding-left: 10px;
 						}
 					}
+
+					.tabs {
+						display: flex;
+						flex-wrap: wrap;
+
+						.tab {
+							border: 1px solid $brand-theme-color;
+							color: $brand-theme-color;
+							font-size: 22rpx;
+							padding: 10rpx 30rpx;
+							border-radius: 40rpx;
+							line-height: 1em;
+							margin: 0 10rpx 10rpx 0;
+						}
+					}
+
+					.class {
+						color: $brand-theme-color;
+					}
+				}
+
+				.copyright {
+					font-size: 28rpx;
+					padding: 20rpx;
+					background: #f6f6f6;
+					color: #666;
+					border-radius: 10rpx;
+					margin: 20rpx 0;
+					line-height: 1.6em;
 				}
 			}
 		}

@@ -31,9 +31,33 @@ export const getClassify = async (data = {}): Promise<any> => {
 };
 
 // 分类中壁纸列表（分类详情）
-export const getWallList= async (data = {}): Promise<any> => {
+export const getWallList = async (data = {}): Promise<any> => {
 	return request({
 		url: '/wallList',
 		data,
 	});
-}
+};
+
+// 为壁纸评分
+export const getSetupScore = async (data = {}): Promise<any> => {
+	return request({
+		url: '/setupScore',
+		data,
+	});
+};
+
+// 壁纸下载
+export const getWallDownload = async (data = {}): Promise<any> => {
+	return request({
+		url: '/downloadWall',
+		data,
+	});
+};
+
+// 单个壁纸详情
+export const getDetailWall = async (data = {}): Promise<any> => {
+	return request({
+		url: '/detailWall',
+		data,
+	});
+};

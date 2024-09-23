@@ -4,9 +4,9 @@ export const request = (config: any = {}) => {
 	let { url, data = {}, method = 'GET', header = {} } = config;
 
 	url = `${base_url}${url}`;
-	header['access-key'] = '707565';
-	// header['access-key'] = '232338';
-	// header['access-key'] = '209618';
+	header['access-key'] = '451476';
+	// header['access-key'] = '907771';
+
 
 	return new Promise((resolve, reject) => {
 		uni.request({

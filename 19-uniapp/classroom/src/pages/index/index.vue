@@ -1,36 +1,50 @@
 <template>
-	<view class="content"> 起飞123 </view>
+	<view class="classRoom">
+		<view class="scrollView">
+			<scroll-view scroll-x>
+				<view class="view1 common">
+					<view class="text">李慧</view>
+				</view>
+				<view class="view2 common">
+					<view class="text">221450204</view>
+				</view>
+				<view class="view3 common">
+					<view class="text">21本软件工程(专升本)2班</view>
+				</view>
+			</scroll-view>
+		</view>
+	</view>
 </template>
 
-<script setup lang="ts">
-	import { ref } from 'vue';
-	const title = ref('Hello');
-</script>
+<script setup></script>
 
-<style>
-	.content {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.logo {
-		height: 200rpx;
-		width: 200rpx;
-		margin-top: 200rpx;
-		margin-left: auto;
-		margin-right: auto;
-		margin-bottom: 50rpx;
-	}
-
-	.text-area {
-		display: flex;
-		justify-content: center;
-	}
-
-	.title {
-		font-size: 36rpx;
-		color: #8f8f94;
+<style lang="scss" scoped>
+	.classRoom {
+		width: 100%;
+		height: 100vh;
+		.scrollView {
+			width: 100%;
+			height: 50vh;
+			background-color: rgb(253, 218, 218);
+			scroll-view {
+				width: 100%;
+				height: 100%;
+				white-space: nowrap;
+				.common {
+					display: inline-block;
+					width: 50%;
+					height: 100%;
+					border: 1px solid #000;
+					box-sizing: border-box;
+					position: relative;
+					.text {
+						position: absolute;7
+						top: 50%;
+						left: 50%;
+						transform: translate(-50%, -50%);
+					}
+				}
+			}
+		}
 	}
 </style>

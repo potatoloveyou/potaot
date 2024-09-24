@@ -1,17 +1,50 @@
 <template>
 	<view class="noticeLayout">
 		<view class="title">
-			<!-- v-if="detail.select" -->
 			<view class="tag">
 				<uni-tag inverted text="置顶" type="error" />
 			</view>
-			<!-- {{ detail.title }} -->
-			<view class="font"></view>
+			<view class="font">{{ detail.title }}</view>
 		</view>
+
+		<view class="info">
+			<view class="item">{{ detail.author }}</view>
+			<view class="item">
+				<uni-dateformat :date="detail.publish_date" format="yyyy-MM-dd hh:mm:ss"></uni-dateformat>
+			</view>
+		</view>
+
+		<view class="content">
+			<!-- <mp-html :content="detail.content" /> -->
+			<rich-text :nodes="detail.content"></rich-text>
+		</view>
+
+		<view class="count"> 阅读 {{ detail.view_count }} </view>
 	</view>
 </template>
 
-<script setup></script>
+<script setup>
+	import { ref } from 'vue';
+	import { onLoad } from '@dcloudio/uni-app';
+	import { getWallNewsDetail } from '@/apis/api';
+
+	const detail = ref({});
+	const wallNewsDetail = async () => {
+		let res = await getWallNewsDetail({ id: noticeId });
+		detail.value = res.data;
+		console.log(detail.value);
+	};
+
+	let noticeId;
+	onLoad((event) => {
+		const { name = '公告', id = null } = event;
+		noticeId = id;
+		wallNewsDetail();
+		uni.setNavigationBarTitle({
+			title: name,
+		});
+	});
+</script>
 
 <style lang="scss" scoped>
 	.noticeLayout {
@@ -30,6 +63,22 @@
 			.font {
 				padding-left: 6rpx;
 			}
+		}
+		.info {
+			display: flex;
+			align-items: center;
+			color: #999;
+			font-size: 28rpx;
+			.item {
+				padding-right: 20rpx;
+			}
+		}
+		.content {
+			padding: 50rpx 0;
+		}
+		.count {
+			color: #999;
+			font-size: 28rpx;
 		}
 	}
 </style>

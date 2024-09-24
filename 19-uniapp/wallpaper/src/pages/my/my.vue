@@ -63,17 +63,27 @@
 
 		<view class="section">
 			<view class="list">
-				<view class="row" v-for="item in 2" :key="item">
+				<navigator url="/pages/notice/detail?name=订阅更新&id=653507c6466d417a3718e94b" class="row">
 					<view class="left">
-						<uni-icons type="download-filled" size="20"></uni-icons>
-						<view class="text">我的下载</view>
+						<uni-icons type="notification-filled" size="20"></uni-icons>
+						<view class="text">订阅更新</view>
 					</view>
-
 					<view class="right">
-						<view class="text">33 </view>
+						<view class="text"></view>
 						<uni-icons type="right" size="15" color="#aaa"></uni-icons>
 					</view>
-				</view>
+				</navigator>
+
+				<navigator url="/pages/notice/detail?name=常见问题&id=6536358ce0ec19c8d67fbe82" class="row">
+					<view class="left">
+						<uni-icons type="flag-filled" size="20"></uni-icons>
+						<view class="text">常见问题</view>
+					</view>
+					<view class="right">
+						<view class="text"></view>
+						<uni-icons type="right" size="15" color="#aaa"></uni-icons>
+					</view>
+				</navigator>
 			</view>
 		</view>
 	</view>

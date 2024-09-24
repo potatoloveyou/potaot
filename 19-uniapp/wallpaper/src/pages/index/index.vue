@@ -18,7 +18,9 @@
 			<view class="center">
 				<swiper vertical autoplay circular interval="1500" duration="300">
 					<swiper-item v-for="wallNew in wallNewList" :key="wallNew._id" @click="goNoticeDetail">
-						<text>{{ wallNew.title }}</text>
+						<navigator :url="`/pages/notice/detail?id=${wallNew._id}`">
+							{{ wallNew.title }}
+						</navigator>
 					</swiper-item>
 				</swiper>
 			</view>

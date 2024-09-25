@@ -24,8 +24,6 @@
 	import { onLoad, onUnload, onReachBottom, onShareAppMessage, onShareTimeline } from '@dcloudio/uni-app';
 	import { getWallList, getUserWallList } from '@/apis/api';
 
-	import { gotoHome } from '@/utils/common';
-
 	import { useWellListStore } from '@/stores/wellList';
 	const wellListStore = useWellListStore();
 
@@ -36,7 +34,7 @@
 		let res;
 		queryparams.value.classid ? (res = await getWallList(queryparams.value)) : '';
 		queryparams.value.type ? (res = await getUserWallList(queryparams.value)) : '';
-		wellListStore.wallNewList = [...wellListStore.wallNewList, ...res.data]; 
+		wellListStore.wallNewList = [...wellListStore.wallNewList, ...res.data];
 		queryparams.value.pageSize > res.data.length ? (isData.value = true) : '';
 	};
 
@@ -48,12 +46,11 @@
 	const pageName = ref('');
 
 	onLoad((event) => {
-		const { classid = null, name = null, type = null } = event;
-		console.log(event);
-		
+		let { classid = null, name = null, type = null, id = null } = event;
+		id ? (classid = id) : '';
 		type ? (queryparams.value.type = type) : '';
 		classid ? (queryparams.value.classid = classid) : '';
-		// // classid ? '' : gotoHome();
+		// classid ? '' : gotoHome();
 		queryparams.value.classid = classid;
 		pageName.value = name;
 		getWall();

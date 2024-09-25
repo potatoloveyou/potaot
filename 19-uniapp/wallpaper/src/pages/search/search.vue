@@ -85,31 +85,40 @@
 	const classList = ref([]);
 
 	// 清除结果列表
-	const initParams = () => {
+	const initParams = (value = '') => {
 		classList.value = [];
+		// wellListStore.wallNewList = [];
 		noData.value = false;
 		noSearch.value = false;
 		queryParams.value = {
 			pageNum: 1,
 			pageSize: 12,
-			keyword: '',
+			keyword: value || '',
 		};
 	};
 
 	// 搜索壁纸
 	const searchWall = async () => {
-		let res = await getSearchWall(queryParams.value);
-		classList.value = [...classList.value, ...res.data];
-		wellListStore.wallNewList = classList.value;
-		queryParams.value.pageSize > res.data.length ? (noData.value = true) : (noData.value = false);
-		res.data.length == 0 && classList.value.length == 0 ? (noSearch.value = true) : (noSearch.value = false);
-		console.log(res);
+		try {
+			let res = await getSearchWall(queryParams.value);
+			classList.value = [...classList.value, ...res.data];
+			wellListStore.wallNewList = classList.value;
+			queryParams.value.pageSize > res.data.length ? (noData.value = true) : (noData.value = false);
+			res.data.length == 0 && classList.value.length == 0 ? (noSearch.value = true) : (noSearch.value = false);
+			console.log(res);
+		} finally {
+			uni.hideLoading();
+		}
 	};
 
 	//点击搜索
 	const onSearch = () => {
-		historySearch.value = [...new Set([queryParams.value.keyword, ...historySearch.value])];
+		uni.showLoading({
+			title: '加载中...',
+		});
+		historySearch.value = [...new Set([queryParams.value.keyword, ...historySearch.value])].slice(0, 10);
 		uni.setStorageSync('historySearch', historySearch.value);
+		initParams(queryParams.value.keyword);
 		searchWall();
 		console.log(queryParams.value.keyword);
 	};
@@ -121,8 +130,7 @@
 
 	//点击标签进行搜索
 	const clickTab = (value) => {
-		initParams();
-		queryParams.value.keyword = value;
+		initParams(value);
 		onSearch();
 	};
 

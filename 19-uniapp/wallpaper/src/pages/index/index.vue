@@ -4,7 +4,25 @@
 		<view class="banner">
 			<swiper indicator-dots indicator-color="rgba(255, 255, 255, 0.5)" indicator-active-color="#fff" autoplay circular>
 				<swiper-item v-for="banner in bannerList" :key="banner._id">
-					<image :src="banner.picurl" mode="aspectFill" />
+					<navigator
+						class="link"
+						:url="banner.url"
+						open-type="navigate"
+						target="miniProgram"
+						:app-id="banner.appid"
+						@click="goClassList(banner)"
+						v-if="banner.target == 'miniProgram'">
+						<image :src="banner.picurl" mode="aspectFill" />
+					</navigator>
+
+					<navigator
+						class="link"
+						:url="`/pages/classlist/classlist?${banner.url}`"
+						open-type="navigate"
+						@click="goClassList(banner)"
+						v-else>
+						<image :src="banner.picurl" mode="aspectFill" />
+					</navigator>
 				</swiper-item>
 			</swiper>
 		</view>
@@ -57,7 +75,7 @@
 			<commonTitle>
 				<template #name>专题精选</template>
 				<template #custom>
-					<navigator url="" class="more">More+</navigator>
+					<navigator url="/pages/classify/classify" open-type="reLaunch" class="more">More+</navigator>
 				</template>
 			</commonTitle>
 
@@ -79,6 +97,21 @@
 
 	import { useWellListStore } from '@/stores/wellList';
 	const wellListStore = useWellListStore();
+
+	// 跳转分类列表
+	const goClassList = (banner) => {
+		console.log(banner);
+		// if (banner.target == 'miniProgram') {
+		// 	uni.navigateTo({
+		// 		url: `/pages/classlist/classlist?${banner.url}`,
+		// 	});
+		// } else {
+		// 	uni.navigateTo({
+		// 		url: `/pages/classlist/classlist?${banner.url}`,
+		// 	});
+		// }
+		// console.log(banner.target);
+	};
 
 	// 跳转到照片全屏
 	const goPreview = (id) => {
@@ -160,10 +193,14 @@
 				&-item {
 					padding: 0 30rpx;
 					box-sizing: border-box;
-					image {
+					.link {
 						width: 100%;
 						height: 100%;
-						border-radius: 10rpx;
+						image {
+							width: 100%;
+							height: 100%;
+							border-radius: 10rpx;
+						}
 					}
 				}
 			}

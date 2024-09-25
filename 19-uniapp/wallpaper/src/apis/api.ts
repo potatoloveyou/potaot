@@ -85,3 +85,11 @@ export const getWallNewsDetail = async (data = {}): Promise<any> => {
 		data,
 	});
 };
+
+// 搜索壁纸
+export const getSearchWall = async (data = {}): Promise<any> => {
+	return request({
+		url: '/searchWall',
+		data,
+	});
+};

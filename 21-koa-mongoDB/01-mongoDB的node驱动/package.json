@@ -1,0 +1,9 @@
+{
+	"dependencies": {
+		"@koa/router": "^13.1.0",
+		"crypto-js": "^4.2.0",
+		"koa": "^2.15.3",
+		"koa-bodyparser": "^4.4.1",
+		"mongodb": "^6.9.0"
+	}
+}

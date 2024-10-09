@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<template v-if="user">
+				<h1>{{user.username }}</h1>
+				<p>{{user.signature}}</p>
+				<img width="200" height="200" :src="user.avatar" alt="" />
+			</template>
+			<hr />
+		</div>
+
+		<script>
+			// 请求拦截器
+			let _axios = axios.create({
+				headers: {
+					authorization:
+						'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzAzYjQwMGY5YWY2M2Q3YjZlNTQxMTQiLCJ1c2VybmFtZSI6Im5pY2siLCJhdmF0YXIiOiJhdmF0YXItMTcyODM5ODM3ODYwMi5qcGciLCJnZW5kZXIiOiIxIiwic2lnbmF0dXJlIjoi5ZOI5ZOI5ZOIIiwiaWF0IjoxNzI4NDcxNjE5fQ.1Y1FuApEYAP-RiDTQgma2FwTFkHsyjfY9CMyR4_2ki0',
+				},
+			});
+
+			new Vue({
+				el: '#app',
+				data: {
+					user: null,
+				},
+				created() {
+					_axios.get('http://localhost:8080/profile').then((res) => {
+						this.user = res.data.user;
+					});
+				},
+			});
+		</script>
+	</body>
+</html>

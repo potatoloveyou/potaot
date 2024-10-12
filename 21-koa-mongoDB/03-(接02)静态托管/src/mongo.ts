@@ -6,7 +6,10 @@ const uri = 'mongodb://localhost:27017';
 const client = new MongoClient(uri); // 创建一个客户端
 
 const db = client.db('learn_mongo');
+
 const users = db.collection('users');
+
+const articles = db.collection('articles');
 
 // (async function () {
 // 	console.log('123');
@@ -15,4 +18,4 @@ const users = db.collection('users');
 // 	console.log('res', res);
 // })();
 
-module.exports = { ObjectId, client, users };
+module.exports = { ObjectId, client, users, articles };

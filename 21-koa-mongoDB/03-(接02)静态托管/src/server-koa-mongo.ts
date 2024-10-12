@@ -22,8 +22,14 @@ app.use(
 	}),
 );
 
-// 引入路由 使用路由
+const Router = require('@koa/router');
+// https://github.com/koajs/router
+const router = new Router();
+router.get('/', (ctx, next) => {
+	ctx.body = 'get 方式';
+});
 
+// 引入路由 使用路由
 // 注册
 const registerRouter = require('./router/register.ts');
 app.use(registerRouter.routes());
@@ -33,15 +39,12 @@ const loginRouter = require('./router/login.ts');
 app.use(loginRouter.routes());
 
 // 更新用户信息
-const profileRouter = require("./router/profile.ts");
+const profileRouter = require('./router/profile.ts');
 app.use(profileRouter.routes());
 
-const Router = require('@koa/router');
-// https://github.com/koajs/router
-const router = new Router();
-router.get('/', (ctx, next) => {
-	ctx.body = 'get 方式';
-});
+// 文章
+const articleRouter = require('./router/article.ts');
+app.use(articleRouter.routes());
 
 app.use(router.routes());
 

@@ -10,7 +10,7 @@ const getToken = async (ctx, next) => {
 		ctx.state.user = decoded;
 		await next();
 	} catch (error) {
-		ctx.body = { state: 401, msg: 'error', text: 'token无效或过期' };
+		ctx.body = { state: 401, msg: 'error', text: 'token无效或过期，请重新登录' };
 	}
 };
 

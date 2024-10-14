@@ -6,7 +6,10 @@ const { client, users } = require('./mongo.ts');
 
 	// 排序
 	let options = {
+		// sort	对查询结果按照某个字段排序
 		// sort: { age: 1 },
+		
+		// projection	只返回某些字段(1表示返回,0表示不返回)
 		// projection: { name: 1 },
 		// projection: { pwd: 0 },
 		limit: 2,

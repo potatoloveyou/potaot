@@ -38,7 +38,7 @@
 					box-sizing: border-box;
 					position: relative;
 					.text {
-						position: absolute;7
+						position: absolute;
 						top: 50%;
 						left: 50%;
 						transform: translate(-50%, -50%);

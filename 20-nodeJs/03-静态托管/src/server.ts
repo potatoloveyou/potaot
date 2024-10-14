@@ -4,7 +4,14 @@ const app = new Koa();
 // 处理静态资源
 const KoaStatic = require('koa-static');
 // https://github.com/koajs/static
-app.use(KoaStatic('public'));
+// 设置静态托管
+app.use(
+	KoaStatic('public', {
+		maxage: 3600 * 1000,
+		gzip: true,
+		index: 'default.html',
+	}),
+);
 
 // 处理路由
 const Router = require('@koa/router');
@@ -29,7 +36,7 @@ const router = new Router();
 // router.get("/", func)
 // GET方式  /路径  响应函数
 router
-	.get('/', (ctx, next ) => {
+	.get('/', (ctx, next) => {
 		ctx.body = '首页';
 	})
 	.get('/about', (ctx, next) => {
@@ -43,7 +50,6 @@ router
 		console.log(ctx.params.id);
 	});
 // GET params传参 /user/123
-
 
 app.use(router.routes());
 app.listen(8080);

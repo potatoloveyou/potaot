@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<template v-if="user">
+
+				<a href="/login.html">登录</a>
+				<a href="/register.html">注册</a>
+
+				<h1>{{user.username }}</h1>
+				<p>{{user.signature}}</p>
+				<img width="20" height="20" :src="user.avatar" alt="" />
+			</template>
+			<hr />
+
+			<ul>
+				<li v-for="doc in lists">
+					<h3>{{doc.title}}</h3>
+					<p>{{doc.content}}</p>
+					<div style="display: flex">
+						<img :src="doc.user.avatar" width="20" height="20" alt="" />
+						<h5 style="margin: 0">{{doc.user.username}}</h5>
+						<button @click="deleteArticle(doc._id)" v-if="doc.author === user._id">删除</button>
+					</div>
+				</li>
+			</ul>
+		</div>
+
+		<script>
+			// 请求拦截器
+			let _axios = axios.create({
+				headers: {
+					authorization:
+						'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzAzYjQwMGY5YWY2M2Q3YjZlNTQxMTQiLCJ1c2VybmFtZSI6Im5pY2siLCJhdmF0YXIiOiJhdmF0YXItMTcyODUyMzMwNTc2OS5qcGciLCJnZW5kZXIiOiIxIiwic2lnbmF0dXJlIjoi5ZOI5ZOI5ZOIIiwiaWF0IjoxNzI4NjQ0MTkyfQ.4sOlWLUDK4bMY_juITFiaWXmroDYd2ptY7r_mdM4HtE',
+				},
+			});
+
+			new Vue({
+				el: '#app',
+				data: {
+					user: null,
+					lists: [],
+				},
+				created() {
+					_axios.get('http://localhost:8080/profile').then((res) => {
+						this.user = res.data.user;
+					});
+
+					_axios
+						.get('http://localhost:8080/article', {
+							params: {
+								limit: 3,
+								offset: 0,
+							},
+						})
+						.then((res) => {
+							this.lists = res.data.list;
+						});
+				},
+
+				methods: {
+					deleteArticle(id) {
+						_axios.delete(`http://localhost:8080/article/${id}`).then((res) => {
+							if (res.data.state == 200) {
+								// console.log("删除成功");
+								this.lists = this.lists.filter((o) => o._id !== id);
+							}
+							// console.log(res);
+						});
+					},
+				},
+			});
+		</script>
+	</body>
+</html>

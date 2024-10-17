@@ -18,13 +18,14 @@ app.use(
 	KoaStatic('public', {
 		maxage: 3600 * 1000,
 		gzip: true,
-		index: 'default.html',
+		index: 'test.html',
 	}),
 );
 
 const Router = require('@koa/router');
 // https://github.com/koajs/router
 const router = new Router();
+
 router.get('/', (ctx, next) => {
 	ctx.body = 'get 方式';
 });

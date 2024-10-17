@@ -21,13 +21,29 @@ router.post('/login', bodyParser(), async (ctx, next) => {
 
 	let responseMsg = {};
 	let findUser = await users.findOne({ username: name });
+	// if (findUser) {
+	// 	// 去掉密码
+	// 	let { password, ...user } = findUser;
+	// 	responseMsg =
+	// 		findUser.password === CryptoJS.MD5(pwd + 'xyz').toString()
+	// 			? { state: 200, msg: 'success', text: '登录成功', token: jwt.sign(user, 'shhhhh') }
+	// 			: { state: 401, msg: 'error', text: '密码错误' };
+	// 	ctx.redirect('/');
+	// } else {
+	// 	responseMsg = { state: 401, msg: 'error', text: '用户不存在' };
+	// }
+
 	if (findUser) {
 		// 去掉密码
 		let { password, ...user } = findUser;
-		responseMsg =
-			findUser.password === CryptoJS.MD5(pwd + 'xyz').toString()
-				? { state: 200, msg: 'success', text: '登录成功', token: jwt.sign(user, 'shhhhh') }
-				: { state: 401, msg: 'error', text: '密码错误' };
+		if (findUser.password === CryptoJS.MD5(pwd + 'xyz').toString()) {
+			responseMsg = { state: 200, msg: 'success', text: '登录成功', token: jwt.sign(user, 'shhhhh') };
+			ctx.redirect('/'); // 仅在登录成功时重定向
+		} else {
+			responseMsg = { state: 401, msg: 'error', text: '密码错误' };
+			await new Promise((resolve) => setTimeout(resolve, 2000)); // 等待2秒
+			ctx.redirect('/login.html'); // 2秒后重定向
+		}
 	} else {
 		responseMsg = { state: 401, msg: 'error', text: '用户不存在' };
 	}

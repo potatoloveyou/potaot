@@ -5,8 +5,8 @@
 			class="box"
 			v-if="!isMore">
 			<image class="pic" :src="classify.picurl" mode="aspectFill"></image>
-			<view class="mask">{{ classify.name }}</view>
-			<view class="tab">{{ compareTimestamp(classify.updateTime) }}前更新</view>
+			<!-- <view class="mask">{{ classify.name }}</view> -->
+			<!-- <view class="tab">{{ compareTimestamp(classify.updateTime) }}前更新</view> -->
 		</navigator>
 
 		<navigator url="/pages/classify/classify" open-type="reLaunch" class="box more" v-if="isMore">

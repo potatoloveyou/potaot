@@ -1,6 +1,43 @@
 {
 	"pages": [
 		{
+			"path": "pages/report/report",
+			"style": {
+				"navigationBarTitleText": "report"
+			}
+		},
+		,
+		{
+			"path": "pages/classroom6/classroom6",
+			"style": {
+				"navigationBarTitleText": "classroom6"
+			}
+		},
+		{
+			"path": "pages/classroom5/classroom5",
+			"style": {
+				"navigationBarTitleText": "classroom5"
+			}
+		},
+		{
+			"path": "pages/practice1/practice1",
+			"style": {
+				"navigationBarTitleText": "practice1"
+			}
+		},
+		{
+			"path": "pages/classroom4/classroom4",
+			"style": {
+				"navigationBarTitleText": "classroom4"
+			}
+		},
+		{
+			"path": "pages/dome2/dome2",
+			"style": {
+				"navigationBarTitleText": "dome2"
+			}
+		},
+		{
 			"path": "pages/dome1/dome1",
 			"style": {
 				"navigationBarTitleText": "dome1"
@@ -10,6 +47,12 @@
 			"path": "pages/index/index",
 			"style": {
 				"navigationBarTitleText": "uni-app"
+			}
+		},
+		{
+			"path": "pages/practice1",
+			"style": {
+				"navigationBarTitleText": "practice1"
 			}
 		}
 	],

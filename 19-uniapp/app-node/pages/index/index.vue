@@ -67,7 +67,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { onLoad, onReady } from '@dcloudio/uni-app';
+import { onLoad, onReady, onNavigationBarButtonTap } from '@dcloudio/uni-app';
 import IndexSwiper from '@/components/index/recommend/IndexSwiper.vue';
 import Recommend from '@/components/index/recommend/Recommend.vue';
 import Card from '@/components/common/Card.vue';
@@ -157,7 +157,7 @@ const queryparams = ref({
 });
 
 // 对应显示不同数据
-const addData = async (callback) => {
+const addData = async () => {
 	let index = topBarIndex.value;
 
 	// 切换到那个就存储哪个的id
@@ -167,28 +167,29 @@ const addData = async (callback) => {
 
 	//
 	let page = Math.ceil(newTopBar.value[index].data.length / 5) + 1;
+	console.log(page);
 	queryparams.value.offset = page;
+	// console.log(queryparams.value);
 
-	console.log(queryparams.value);
 	// 请求不同数据
 	let res = await getIndexClassify(queryparams.value);
 	newTopBar.value[index].data = [...newTopBar.value[index].data, ...res.data];
+	console.log(queryparams.value);
 
 	// 记录已滑动过的
 	newTopBar.value[index].load = 'last';
 
-	if (typeof callback == 'function') {
-		callback();
-	}
+	newTopBar.value[index].loadText = '上拉加载更多...';
 };
 
 // 上拉加载更多
 const loadMore = (index) => {
 	newTopBar.value[index].loadText = '加载中...';
-	addData(() => {
-		newTopBar.value[index].loadText = '上拉加载更多...';
-	});
+	addData();
 };
+
+// 监听原生标题栏按钮点击事件
+onNavigationBarButtonTap((e) => {});
 </script>
 
 <style lang="scss" scoped>

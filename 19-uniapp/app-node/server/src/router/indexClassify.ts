@@ -20,19 +20,19 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 					data: [
 						{
 							type: 'bannerList',
-							imgUrl: '../../../static/imgs/banner2.jpg',
+							imgUrl: '/static/imgs/banner2.jpg',
 						},
 						{
 							type: 'iconsList',
 							data: [
-								{ imgUrl: '../../../static/imgs/xxmLogo.png', name: '运动户外' },
-								{ imgUrl: '../../../static/imgs/xxmLogo.png', name: '运动户外' },
-								{ imgUrl: '../../../static/imgs/xxmLogo.png', name: '运动户外' },
-								{ imgUrl: '../../../static/imgs/xxmLogo.png', name: '运动户外' },
-								{ imgUrl: '../../../static/imgs/xxmLogo.png', name: '运动户外' },
-								{ imgUrl: '../../../static/imgs/xxmLogo.png', name: '运动户外' },
-								{ imgUrl: '../../../static/imgs/xxmLogo.png', name: '运动户外' },
-								{ imgUrl: '../../../static/imgs/xxmLogo.png', name: '运动户外' },
+								{ imgUrl: '/static/imgs/xxmLogo.png', name: '运动户外' },
+								{ imgUrl: '/static/imgs/xxmLogo.png', name: '运动户外' },
+								{ imgUrl: '/static/imgs/xxmLogo.png', name: '运动户外' },
+								{ imgUrl: '/static/imgs/xxmLogo.png', name: '运动户外' },
+								{ imgUrl: '/static/imgs/xxmLogo.png', name: '运动户外' },
+								{ imgUrl: '/static/imgs/xxmLogo.png', name: '运动户外' },
+								{ imgUrl: '/static/imgs/xxmLogo.png', name: '运动户外' },
+								{ imgUrl: '/static/imgs/xxmLogo.png', name: '运动户外' },
 							],
 						},
 						{
@@ -40,7 +40,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 							data: [
 								{
 									id: 1,
-									imgUrl: '../../static/imgs/classify1.jpg',
+									imgUrl: '/static/imgs/classify1.jpg',
 									name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 									pprice: '299',
 									oprice: '699',
@@ -48,7 +48,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 								},
 								{
 									id: 2,
-									imgUrl: '../../static/imgs/classify1.jpg',
+									imgUrl: '/static/imgs/classify1.jpg',
 									name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 									pprice: '399',
 									oprice: '699',
@@ -56,7 +56,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 								},
 								{
 									id: 3,
-									imgUrl: '../../static/imgs/classify1.jpg',
+									imgUrl: '/static/imgs/classify1.jpg',
 									name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 									pprice: '499',
 									oprice: '699',
@@ -68,11 +68,11 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 							type: 'shopList',
 							data: [
 								{
-									bigImgUrl: '../../../static/imgs/banner3.jpg',
+									bigImgUrl: '/static/imgs/banner3.jpg',
 									data: [
 										{
 											id: 1,
-											imgUrl: '../../static/imgs/classify1.jpg',
+											imgUrl: '/static/imgs/classify1.jpg',
 											name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 											pprice: '299',
 											oprice: '699',
@@ -80,7 +80,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 										},
 										{
 											id: 2,
-											imgUrl: '../../static/imgs/classify1.jpg',
+											imgUrl: '/static/imgs/classify1.jpg',
 											name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 											pprice: '399',
 											oprice: '699',
@@ -88,7 +88,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 										},
 										{
 											id: 3,
-											imgUrl: '../../static/imgs/classify1.jpg',
+											imgUrl: '/static/imgs/classify1.jpg',
 											name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 											pprice: '499',
 											oprice: '699',
@@ -96,7 +96,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 										},
 										{
 											id: 4,
-											imgUrl: '../../static/imgs/classify1.jpg',
+											imgUrl: '/static/imgs/classify1.jpg',
 											name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 											pprice: '499',
 											oprice: '699',
@@ -104,7 +104,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 										},
 										{
 											id: 5,
-											imgUrl: '../../static/imgs/classify1.jpg',
+											imgUrl: '/static/imgs/classify1.jpg',
 											name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 											pprice: '499',
 											oprice: '699',
@@ -112,7 +112,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 										},
 										{
 											id: 6,
-											imgUrl: '../../static/imgs/classify1.jpg',
+											imgUrl: '/static/imgs/classify1.jpg',
 											name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 											pprice: '499',
 											oprice: '699',
@@ -121,11 +121,11 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 									],
 								},
 								{
-									bigImgUrl: '../../../static/imgs/banner3.jpg',
+									bigImgUrl: '/static/imgs/banner3.jpg',
 									data: [
 										{
 											id: 1,
-											imgUrl: '../../static/imgs/classify1.jpg',
+											imgUrl: '/static/imgs/classify1.jpg',
 											name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 											pprice: '299',
 											oprice: '699',
@@ -133,7 +133,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 										},
 										{
 											id: 2,
-											imgUrl: '../../static/imgs/classify1.jpg',
+											imgUrl: '/static/imgs/classify1.jpg',
 											name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 											pprice: '399',
 											oprice: '699',
@@ -141,7 +141,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 										},
 										{
 											id: 3,
-											imgUrl: '../../static/imgs/classify1.jpg',
+											imgUrl: '/static/imgs/classify1.jpg',
 											name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 											pprice: '499',
 											oprice: '699',
@@ -149,7 +149,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 										},
 										{
 											id: 4,
-											imgUrl: '../../static/imgs/classify1.jpg',
+											imgUrl: '/static/imgs/classify1.jpg',
 											name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 											pprice: '499',
 											oprice: '699',
@@ -157,7 +157,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 										},
 										{
 											id: 5,
-											imgUrl: '../../static/imgs/classify1.jpg',
+											imgUrl: '/static/imgs/classify1.jpg',
 											name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 											pprice: '499',
 											oprice: '699',
@@ -165,7 +165,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 										},
 										{
 											id: 6,
-											imgUrl: '../../static/imgs/classify1.jpg',
+											imgUrl: '/static/imgs/classify1.jpg',
 											name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 											pprice: '499',
 											oprice: '699',
@@ -180,7 +180,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 							data: [
 								{
 									id: 1,
-									imgUrl: '../../static/imgs/classify1.jpg',
+									imgUrl: '/static/imgs/classify1.jpg',
 									name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 									pprice: '299',
 									oprice: '699',
@@ -188,7 +188,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 								},
 								{
 									id: 2,
-									imgUrl: '../../static/imgs/classify1.jpg',
+									imgUrl: '/static/imgs/classify1.jpg',
 									name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 									pprice: '399',
 									oprice: '699',
@@ -196,7 +196,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 								},
 								{
 									id: 3,
-									imgUrl: '../../static/imgs/classify1.jpg',
+									imgUrl: '/static/imgs/classify1.jpg',
 									name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 									pprice: '499',
 									oprice: '699',
@@ -204,7 +204,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 								},
 								{
 									id: 4,
-									imgUrl: '../../static/imgs/classify1.jpg',
+									imgUrl: '/static/imgs/classify1.jpg',
 									name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 									pprice: '499',
 									oprice: '699',
@@ -223,19 +223,19 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 					data: [
 						{
 							type: 'bannerList',
-							imgUrl: '../../../static/imgs/banner2.jpg',
+							imgUrl: '/static/imgs/banner2.jpg',
 						},
 						{
 							type: 'iconsList',
 							data: [
-								{ imgUrl: '../../../static/imgs/xxmLogo.png', name: '服饰内衣' },
-								{ imgUrl: '../../../static/imgs/xxmLogo.png', name: '服饰内衣' },
-								{ imgUrl: '../../../static/imgs/xxmLogo.png', name: '服饰内衣' },
-								{ imgUrl: '../../../static/imgs/xxmLogo.png', name: '服饰内衣' },
-								{ imgUrl: '../../../static/imgs/xxmLogo.png', name: '服饰内衣' },
-								{ imgUrl: '../../../static/imgs/xxmLogo.png', name: '服饰内衣' },
-								{ imgUrl: '../../../static/imgs/xxmLogo.png', name: '服饰内衣' },
-								{ imgUrl: '../../../static/imgs/xxmLogo.png', name: '服饰内衣' },
+								{ imgUrl: '/static/imgs/xxmLogo.png', name: '服饰内衣' },
+								{ imgUrl: '/static/imgs/xxmLogo.png', name: '服饰内衣' },
+								{ imgUrl: '/static/imgs/xxmLogo.png', name: '服饰内衣' },
+								{ imgUrl: '/static/imgs/xxmLogo.png', name: '服饰内衣' },
+								{ imgUrl: '/static/imgs/xxmLogo.png', name: '服饰内衣' },
+								{ imgUrl: '/static/imgs/xxmLogo.png', name: '服饰内衣' },
+								{ imgUrl: '/static/imgs/xxmLogo.png', name: '服饰内衣' },
+								{ imgUrl: '/static/imgs/xxmLogo.png', name: '服饰内衣' },
 							],
 						},
 						{
@@ -243,7 +243,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 							data: [
 								{
 									id: 1,
-									imgUrl: '../../static/imgs/classify1.jpg',
+									imgUrl: '/static/imgs/classify1.jpg',
 									name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 									pprice: '299',
 									oprice: '699',
@@ -251,7 +251,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 								},
 								{
 									id: 2,
-									imgUrl: '../../static/imgs/classify1.jpg',
+									imgUrl: '/static/imgs/classify1.jpg',
 									name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 									pprice: '399',
 									oprice: '699',
@@ -259,7 +259,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 								},
 								{
 									id: 3,
-									imgUrl: '../../static/imgs/classify1.jpg',
+									imgUrl: '/static/imgs/classify1.jpg',
 									name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 									pprice: '499',
 									oprice: '699',
@@ -271,11 +271,11 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 							type: 'shopList',
 							data: [
 								{
-									bigImgUrl: '../../../static/imgs/banner3.jpg',
+									bigImgUrl: '/static/imgs/banner3.jpg',
 									data: [
 										{
 											id: 1,
-											imgUrl: '../../static/imgs/classify1.jpg',
+											imgUrl: '/static/imgs/classify1.jpg',
 											name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 											pprice: '299',
 											oprice: '699',
@@ -283,7 +283,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 										},
 										{
 											id: 2,
-											imgUrl: '../../static/imgs/classify1.jpg',
+											imgUrl: '/static/imgs/classify1.jpg',
 											name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 											pprice: '399',
 											oprice: '699',
@@ -291,7 +291,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 										},
 										{
 											id: 3,
-											imgUrl: '../../static/imgs/classify1.jpg',
+											imgUrl: '/static/imgs/classify1.jpg',
 											name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 											pprice: '499',
 											oprice: '699',
@@ -299,7 +299,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 										},
 										{
 											id: 4,
-											imgUrl: '../../static/imgs/classify1.jpg',
+											imgUrl: '/static/imgs/classify1.jpg',
 											name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 											pprice: '499',
 											oprice: '699',
@@ -307,7 +307,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 										},
 										{
 											id: 5,
-											imgUrl: '../../static/imgs/classify1.jpg',
+											imgUrl: '/static/imgs/classify1.jpg',
 											name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 											pprice: '499',
 											oprice: '699',
@@ -315,7 +315,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 										},
 										{
 											id: 6,
-											imgUrl: '../../static/imgs/classify1.jpg',
+											imgUrl: '/static/imgs/classify1.jpg',
 											name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 											pprice: '499',
 											oprice: '699',
@@ -324,11 +324,11 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 									],
 								},
 								{
-									bigImgUrl: '../../../static/imgs/banner3.jpg',
+									bigImgUrl: '/static/imgs/banner3.jpg',
 									data: [
 										{
 											id: 1,
-											imgUrl: '../../static/imgs/classify1.jpg',
+											imgUrl: '/static/imgs/classify1.jpg',
 											name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 											pprice: '299',
 											oprice: '699',
@@ -336,7 +336,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 										},
 										{
 											id: 2,
-											imgUrl: '../../static/imgs/classify1.jpg',
+											imgUrl: '/static/imgs/classify1.jpg',
 											name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 											pprice: '399',
 											oprice: '699',
@@ -344,7 +344,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 										},
 										{
 											id: 3,
-											imgUrl: '../../static/imgs/classify1.jpg',
+											imgUrl: '/static/imgs/classify1.jpg',
 											name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 											pprice: '499',
 											oprice: '699',
@@ -352,7 +352,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 										},
 										{
 											id: 4,
-											imgUrl: '../../static/imgs/classify1.jpg',
+											imgUrl: '/static/imgs/classify1.jpg',
 											name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 											pprice: '499',
 											oprice: '699',
@@ -360,7 +360,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 										},
 										{
 											id: 5,
-											imgUrl: '../../static/imgs/classify1.jpg',
+											imgUrl: '/static/imgs/classify1.jpg',
 											name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 											pprice: '499',
 											oprice: '699',
@@ -368,7 +368,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 										},
 										{
 											id: 6,
-											imgUrl: '../../static/imgs/classify1.jpg',
+											imgUrl: '/static/imgs/classify1.jpg',
 											name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 											pprice: '499',
 											oprice: '699',
@@ -383,7 +383,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 							data: [
 								{
 									id: 1,
-									imgUrl: '../../static/imgs/classify1.jpg',
+									imgUrl: '/static/imgs/classify1.jpg',
 									name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 									pprice: '299',
 									oprice: '699',
@@ -391,7 +391,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 								},
 								{
 									id: 2,
-									imgUrl: '../../static/imgs/classify1.jpg',
+									imgUrl: '/static/imgs/classify1.jpg',
 									name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 									pprice: '399',
 									oprice: '699',
@@ -399,7 +399,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 								},
 								{
 									id: 3,
-									imgUrl: '../../static/imgs/classify1.jpg',
+									imgUrl: '/static/imgs/classify1.jpg',
 									name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 									pprice: '499',
 									oprice: '699',
@@ -407,7 +407,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 								},
 								{
 									id: 4,
-									imgUrl: '../../static/imgs/classify1.jpg',
+									imgUrl: '/static/imgs/classify1.jpg',
 									name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 									pprice: '499',
 									oprice: '699',
@@ -426,19 +426,19 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 					data: [
 						{
 							type: 'bannerList',
-							imgUrl: '../../../static/imgs/banner2.jpg',
+							imgUrl: '/static/imgs/banner2.jpg',
 						},
 						{
 							type: 'iconsList',
 							data: [
-								{ imgUrl: '../../../static/imgs/xxmLogo.png', name: '运动户外' },
-								{ imgUrl: '../../../static/imgs/xxmLogo.png', name: '运动户外' },
-								{ imgUrl: '../../../static/imgs/xxmLogo.png', name: '运动户外' },
-								{ imgUrl: '../../../static/imgs/xxmLogo.png', name: '运动户外' },
-								{ imgUrl: '../../../static/imgs/xxmLogo.png', name: '运动户外' },
-								{ imgUrl: '../../../static/imgs/xxmLogo.png', name: '运动户外' },
-								{ imgUrl: '../../../static/imgs/xxmLogo.png', name: '运动户外' },
-								{ imgUrl: '../../../static/imgs/xxmLogo.png', name: '运动户外' },
+								{ imgUrl: '/static/imgs/xxmLogo.png', name: '运动户外' },
+								{ imgUrl: '/static/imgs/xxmLogo.png', name: '运动户外' },
+								{ imgUrl: '/static/imgs/xxmLogo.png', name: '运动户外' },
+								{ imgUrl: '/static/imgs/xxmLogo.png', name: '运动户外' },
+								{ imgUrl: '/static/imgs/xxmLogo.png', name: '运动户外' },
+								{ imgUrl: '/static/imgs/xxmLogo.png', name: '运动户外' },
+								{ imgUrl: '/static/imgs/xxmLogo.png', name: '运动户外' },
+								{ imgUrl: '/static/imgs/xxmLogo.png', name: '运动户外' },
 							],
 						},
 						{
@@ -446,7 +446,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 							data: [
 								{
 									id: 1,
-									imgUrl: '../../static/imgs/classify1.jpg',
+									imgUrl: '/static/imgs/classify1.jpg',
 									name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 									pprice: '299',
 									oprice: '699',
@@ -454,7 +454,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 								},
 								{
 									id: 2,
-									imgUrl: '../../static/imgs/classify1.jpg',
+									imgUrl: '/static/imgs/classify1.jpg',
 									name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 									pprice: '399',
 									oprice: '699',
@@ -462,7 +462,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 								},
 								{
 									id: 3,
-									imgUrl: '../../static/imgs/classify1.jpg',
+									imgUrl: '/static/imgs/classify1.jpg',
 									name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 									pprice: '499',
 									oprice: '699',
@@ -474,11 +474,11 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 							type: 'shopList',
 							data: [
 								{
-									bigImgUrl: '../../../static/imgs/banner3.jpg',
+									bigImgUrl: '/static/imgs/banner3.jpg',
 									data: [
 										{
 											id: 1,
-											imgUrl: '../../static/imgs/classify1.jpg',
+											imgUrl: '/static/imgs/classify1.jpg',
 											name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 											pprice: '299',
 											oprice: '699',
@@ -486,7 +486,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 										},
 										{
 											id: 2,
-											imgUrl: '../../static/imgs/classify1.jpg',
+											imgUrl: '/static/imgs/classify1.jpg',
 											name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 											pprice: '399',
 											oprice: '699',
@@ -494,7 +494,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 										},
 										{
 											id: 3,
-											imgUrl: '../../static/imgs/classify1.jpg',
+											imgUrl: '/static/imgs/classify1.jpg',
 											name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 											pprice: '499',
 											oprice: '699',
@@ -502,7 +502,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 										},
 										{
 											id: 4,
-											imgUrl: '../../static/imgs/classify1.jpg',
+											imgUrl: '/static/imgs/classify1.jpg',
 											name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 											pprice: '499',
 											oprice: '699',
@@ -510,7 +510,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 										},
 										{
 											id: 5,
-											imgUrl: '../../static/imgs/classify1.jpg',
+											imgUrl: '/static/imgs/classify1.jpg',
 											name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 											pprice: '499',
 											oprice: '699',
@@ -518,7 +518,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 										},
 										{
 											id: 6,
-											imgUrl: '../../static/imgs/classify1.jpg',
+											imgUrl: '/static/imgs/classify1.jpg',
 											name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 											pprice: '499',
 											oprice: '699',
@@ -527,11 +527,11 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 									],
 								},
 								{
-									bigImgUrl: '../../../static/imgs/banner3.jpg',
+									bigImgUrl: '/static/imgs/banner3.jpg',
 									data: [
 										{
 											id: 1,
-											imgUrl: '../../static/imgs/classify1.jpg',
+											imgUrl: '/static/imgs/classify1.jpg',
 											name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 											pprice: '299',
 											oprice: '699',
@@ -539,7 +539,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 										},
 										{
 											id: 2,
-											imgUrl: '../../static/imgs/classify1.jpg',
+											imgUrl: '/static/imgs/classify1.jpg',
 											name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 											pprice: '399',
 											oprice: '699',
@@ -547,7 +547,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 										},
 										{
 											id: 3,
-											imgUrl: '../../static/imgs/classify1.jpg',
+											imgUrl: '/static/imgs/classify1.jpg',
 											name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 											pprice: '499',
 											oprice: '699',
@@ -555,7 +555,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 										},
 										{
 											id: 4,
-											imgUrl: '../../static/imgs/classify1.jpg',
+											imgUrl: '/static/imgs/classify1.jpg',
 											name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 											pprice: '499',
 											oprice: '699',
@@ -563,7 +563,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 										},
 										{
 											id: 5,
-											imgUrl: '../../static/imgs/classify1.jpg',
+											imgUrl: '/static/imgs/classify1.jpg',
 											name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 											pprice: '499',
 											oprice: '699',
@@ -571,7 +571,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 										},
 										{
 											id: 6,
-											imgUrl: '../../static/imgs/classify1.jpg',
+											imgUrl: '/static/imgs/classify1.jpg',
 											name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 											pprice: '499',
 											oprice: '699',
@@ -586,7 +586,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 							data: [
 								{
 									id: 1,
-									imgUrl: '../../static/imgs/classify1.jpg',
+									imgUrl: '/static/imgs/classify1.jpg',
 									name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 									pprice: '299',
 									oprice: '699',
@@ -594,7 +594,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 								},
 								{
 									id: 2,
-									imgUrl: '../../static/imgs/classify1.jpg',
+									imgUrl: '/static/imgs/classify1.jpg',
 									name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 									pprice: '399',
 									oprice: '699',
@@ -602,7 +602,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 								},
 								{
 									id: 3,
-									imgUrl: '../../static/imgs/classify1.jpg',
+									imgUrl: '/static/imgs/classify1.jpg',
 									name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 									pprice: '499',
 									oprice: '699',
@@ -610,7 +610,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 								},
 								{
 									id: 4,
-									imgUrl: '../../static/imgs/classify1.jpg',
+									imgUrl: '/static/imgs/classify1.jpg',
 									name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 									pprice: '499',
 									oprice: '699',
@@ -633,7 +633,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 							data: [
 								{
 									id: 1,
-									imgUrl: '../../static/imgs/classify1.jpg',
+									imgUrl: '/static/imgs/classify1.jpg',
 									name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 									pprice: '299',
 									oprice: '699',
@@ -641,7 +641,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 								},
 								{
 									id: 2,
-									imgUrl: '../../static/imgs/classify1.jpg',
+									imgUrl: '/static/imgs/classify1.jpg',
 									name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 									pprice: '399',
 									oprice: '699',
@@ -649,7 +649,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 								},
 								{
 									id: 3,
-									imgUrl: '../../static/imgs/classify1.jpg',
+									imgUrl: '/static/imgs/classify1.jpg',
 									name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 									pprice: '499',
 									oprice: '699',
@@ -657,7 +657,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 								},
 								{
 									id: 4,
-									imgUrl: '../../static/imgs/classify1.jpg',
+									imgUrl: '/static/imgs/classify1.jpg',
 									name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 									pprice: '499',
 									oprice: '699',
@@ -677,7 +677,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 							data: [
 								{
 									id: 1,
-									imgUrl: '../../static/imgs/classify1.jpg',
+									imgUrl: '/static/imgs/classify1.jpg',
 									name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 									pprice: '299',
 									oprice: '699',
@@ -685,7 +685,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 								},
 								{
 									id: 2,
-									imgUrl: '../../static/imgs/classify1.jpg',
+									imgUrl: '/static/imgs/classify1.jpg',
 									name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 									pprice: '399',
 									oprice: '699',
@@ -693,7 +693,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 								},
 								{
 									id: 3,
-									imgUrl: '../../static/imgs/classify1.jpg',
+									imgUrl: '/static/imgs/classify1.jpg',
 									name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 									pprice: '499',
 									oprice: '699',
@@ -701,7 +701,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 								},
 								{
 									id: 4,
-									imgUrl: '../../static/imgs/classify1.jpg',
+									imgUrl: '/static/imgs/classify1.jpg',
 									name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 									pprice: '499',
 									oprice: '699',
@@ -722,7 +722,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 				// 			data: [
 				// 				{
 				// 					id: 1,
-				// 					imgUrl: '../../static/imgs/classify1.jpg',
+				// 					imgUrl: '/static/imgs/classify1.jpg',
 				// 					name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 				// 					pprice: '299',
 				// 					oprice: '699',
@@ -730,7 +730,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 				// 				},
 				// 				{
 				// 					id: 2,
-				// 					imgUrl: '../../static/imgs/classify1.jpg',
+				// 					imgUrl: '/static/imgs/classify1.jpg',
 				// 					name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 				// 					pprice: '399',
 				// 					oprice: '699',
@@ -738,7 +738,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 				// 				},
 				// 				{
 				// 					id: 3,
-				// 					imgUrl: '../../static/imgs/classify1.jpg',
+				// 					imgUrl: '/static/imgs/classify1.jpg',
 				// 					name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 				// 					pprice: '499',
 				// 					oprice: '699',
@@ -746,7 +746,7 @@ router.get('/index_list/data/:index', bodyParser(), async (ctx, next) => {
 				// 				},
 				// 				{
 				// 					id: 4,
-				// 					imgUrl: '../../static/imgs/classify1.jpg',
+				// 					imgUrl: '/static/imgs/classify1.jpg',
 				// 					name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 				// 					pprice: '499',
 				// 					oprice: '699',

@@ -8,7 +8,6 @@
 import { ref } from 'vue';
 import Commodity from '@/components/common/Commodity.vue';
 
-import { defineProps } from 'vue';
 const props = defineProps({
 	dataList: {
 		type: Array,

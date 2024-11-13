@@ -6,7 +6,6 @@
 
 <script setup>
 import { ref } from 'vue';
-import { defineProps } from 'vue';
 import Commodity from '@/components/common/Commodity.vue';
 
 const props = defineProps({

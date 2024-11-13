@@ -6,6 +6,7 @@
 				"navigationBarTitleText": "首页",
 				"navigationBarBackgroundColor": "#ffffff",
 				// "navigationStyle": "custom",
+				// 这里设置的只有app能生效
 				"app-plus": {
 					"scrollIndicator": "none",
 					"titleNView": {
@@ -38,6 +39,12 @@
 		},
 		{
 			"path": "pages/my/my",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/search/search",
 			"style": {
 				"navigationBarTitleText": ""
 			}

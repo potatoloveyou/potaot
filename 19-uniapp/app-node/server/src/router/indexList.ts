@@ -26,13 +26,13 @@ router.get('/index_list/data', async (ctx, next) => {
 						type: 'swiperList',
 						data: [
 							{
-								imgUrl: '../../../static/imgs/banner1.jpg',
+								imgUrl: '/static/imgs/banner1.jpg',
 							},
 							{
-								imgUrl: '../../../static/imgs/banner2.jpg',
+								imgUrl: '/static/imgs/banner2.jpg',
 							},
 							{
-								imgUrl: '../../../static/imgs/banner3.jpg',
+								imgUrl: '/static/imgs/banner3.jpg',
 							},
 						],
 					},
@@ -40,19 +40,19 @@ router.get('/index_list/data', async (ctx, next) => {
 						type: 'recommendList',
 						data: [
 							{
-								bigImgUrl: '../../../static/imgs/banner2.jpg',
+								bigImgUrl: '/static/imgs/banner2.jpg',
 								data: [
-									{ imgUrl: '../../../static/imgs/xxmLogo.png' },
-									{ imgUrl: '../../../static/imgs/xxmLogo.png' },
-									{ imgUrl: '../../../static/imgs/xxmLogo.png' },
+									{ imgUrl: '/static/imgs/xxmLogo.png' },
+									{ imgUrl: '/static/imgs/xxmLogo.png' },
+									{ imgUrl: '/static/imgs/xxmLogo.png' },
 								],
 							},
 							{
-								bigImgUrl: '../../../static/imgs/banner2.jpg',
+								bigImgUrl: '/static/imgs/banner2.jpg',
 								data: [
-									{ imgUrl: '../../../static/imgs/xxmLogo.png' },
-									{ imgUrl: '../../../static/imgs/xxmLogo.png' },
-									{ imgUrl: '../../../static/imgs/xxmLogo.png' },
+									{ imgUrl: '/static/imgs/xxmLogo.png' },
+									{ imgUrl: '/static/imgs/xxmLogo.png' },
+									{ imgUrl: '/static/imgs/xxmLogo.png' },
 								],
 							},
 						],
@@ -62,7 +62,7 @@ router.get('/index_list/data', async (ctx, next) => {
 						data: [
 							{
 								id: 1,
-								imgUrl: '../../static/imgs/classify1.jpg',
+								imgUrl: '/static/imgs/classify1.jpg',
 								name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 								pprice: '299',
 								oprice: '699',
@@ -70,7 +70,7 @@ router.get('/index_list/data', async (ctx, next) => {
 							},
 							{
 								id: 2,
-								imgUrl: '../../static/imgs/classify1.jpg',
+								imgUrl: '/static/imgs/classify1.jpg',
 								name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 								pprice: '399',
 								oprice: '699',
@@ -78,7 +78,7 @@ router.get('/index_list/data', async (ctx, next) => {
 							},
 							{
 								id: 3,
-								imgUrl: '../../static/imgs/classify1.jpg',
+								imgUrl: '/static/imgs/classify1.jpg',
 								name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 								pprice: '499',
 								oprice: '699',
@@ -86,7 +86,7 @@ router.get('/index_list/data', async (ctx, next) => {
 							},
 							{
 								id: 4,
-								imgUrl: '../../static/imgs/classify1.jpg',
+								imgUrl: '/static/imgs/classify1.jpg',
 								name: '阿德杀杀毒哈师大哈拉少等哈拉萨大叔大撒打算手打阿是、婶',
 								pprice: '499',
 								oprice: '699',

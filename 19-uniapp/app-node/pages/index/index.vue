@@ -16,6 +16,18 @@
 		<!-- <Card cardName="为您推荐" /> -->
 		<!-- <CommodityList /> -->
 
+		<NavBar>
+			<template #titleBar-slot>
+				<view class="wx-app-nav">
+					<view class="nav-icons">
+						<view class="iconfont icon-search" @click="goSearch"></view>
+						<view class="iconfont icon-xiaoxi"></view>
+					</view>
+					<text class="nav-text">首页</text>
+				</view>
+			</template>
+		</NavBar>
+
 		<scroll-view scroll-x="true" :scroll-into-view="scrollIntoIndex" class="scroll-content">
 			<view
 				class="scroll-item"
@@ -67,7 +79,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { onLoad, onReady, onNavigationBarButtonTap } from '@dcloudio/uni-app';
+import { onLoad, onReady } from '@dcloudio/uni-app';
 import IndexSwiper from '@/components/index/recommend/IndexSwiper.vue';
 import Recommend from '@/components/index/recommend/Recommend.vue';
 import Card from '@/components/common/Card.vue';
@@ -77,6 +89,7 @@ import Banner from '@/components/index/Outdoors/Banner.vue';
 import Icons from '@/components/index/Outdoors/Icons.vue';
 import Hot from '@/components/index/Outdoors/Hot.vue';
 import Shop from '@/components/index/Outdoors/Shop.vue';
+import NavBar from '@/components/common/NavBar.vue';
 
 import { getIndexList, getIndexClassify } from '@/api/apis.ts';
 
@@ -188,11 +201,29 @@ const loadMore = (index) => {
 	addData();
 };
 
-// 监听原生标题栏按钮点击事件
-onNavigationBarButtonTap((e) => {});
+// 跳转到搜索页面
+const goSearch = () => {
+	uni.navigateTo({
+		url: '/pages/search/search',
+	});
+};
 </script>
 
 <style lang="scss" scoped>
+.wx-app-nav {
+	.nav-icons {
+		position: absolute;
+		left: 0;
+		display: flex;
+		.iconfont {
+			font-size: 50rpx;
+			padding-left: 50rpx;
+		}
+	}
+	.nav-text {
+		font-size: 40rpx;
+	}
+}
 .f-active-color {
 	padding: 10rpx 0;
 	border-bottom: 6rpx solid #49bdfb;

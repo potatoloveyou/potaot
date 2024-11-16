@@ -1,4 +1,5 @@
-const base_url = 'http://localhost:8080';
+// const base_url = 'http://localhost:9229';
+const base_url = 'http://192.168.150.71:9229';
 
 interface Config {
 	url: string;

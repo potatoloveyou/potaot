@@ -7,17 +7,38 @@ export const getIndexList = (): Promise<any> => {
 	});
 };
 
-interface Data {
+// 首页分类
+interface IndexData {
 	index: number | string;
 	offset: number | string;
 }
-// 首页分类
-export const getIndexClassify = (data: Data) => {
+export const getIndexClassify = (data: IndexData) => {
 	let { index = 1, offset = 1 } = data;
 	return request({
 		url: `/index_list/data/${index}`,
 		data: {
 			offset,
 		},
+	});
+};
+
+const mapQueryParams = (params) => {
+	const { keyword, ...rest } = params;
+	return {
+		name: keyword, // 映射为 name
+		...rest, // 其他参数保持不变
+	};
+};
+
+// 商品搜索
+interface ShopData {
+	keyword: string;
+	pprice: number;
+	discount: number;
+}
+export const getGoodsSearch = (data: ShopData) => {
+	return request({
+		url: `/goods/search`,
+		data: mapQueryParams(data),
 	});
 };

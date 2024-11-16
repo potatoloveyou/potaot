@@ -5,7 +5,7 @@
 
 			<view class="commodity-content">
 				<text class="commodity-name" :style="`font-size:${nameSize};`">{{ item.name }}</text>
-				<view>
+				<view class="price">
 					<text class="pprice">￥{{ item.pprice }}</text>
 					<text class="oprice">￥{{ item.oprice }}</text>
 				</view>
@@ -60,17 +60,20 @@ const props = defineProps({
 		.commodity-content {
 			text-align: center;
 			.commodity-name {
-				overflow: hidden;
 				text-overflow: ellipsis;
+				overflow: hidden;
 				display: -webkit-box;
 				-webkit-line-clamp: 2;
 				-webkit-box-orient: vertical;
-				padding: 6rpx 20rpx;
+				padding: 0 20rpx;
 			}
-			.oprice {
-				text-decoration: line-through;
-				font-size: 24rpx;
-				color: #999;
+			.price {
+				padding-top: 6rpx;
+				.oprice {
+					text-decoration: line-through;
+					font-size: 24rpx;
+					color: #999;
+				}
 			}
 			.discount {
 				border-radius: 4rpx;

@@ -84,7 +84,7 @@
 					"titleNView": {
 						"searchInput": {
 							"placeholder": "nike",
-							"disabled": true,
+							"disabled": false,
 							"align": "left",
 							"autoFocus": true,
 							"borderRadius": "15px",

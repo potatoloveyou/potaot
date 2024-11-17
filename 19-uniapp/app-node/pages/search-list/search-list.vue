@@ -7,6 +7,7 @@
 <script setup>
 import { ref, getCurrentInstance } from 'vue';
 import { onLoad, onReady } from '@dcloudio/uni-app';
+
 import ShopList from '@/components/common/ShopList.vue';
 
 const keyword = ref('');

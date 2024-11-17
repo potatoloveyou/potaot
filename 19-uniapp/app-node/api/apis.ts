@@ -33,10 +33,13 @@ const mapQueryParams = (params) => {
 // 商品搜索
 interface ShopData {
 	keyword: string;
+	limit: number;
+	offset: number;
 	pprice: number;
 	discount: number;
 }
 export const getGoodsSearch = (data: ShopData) => {
+	console.log(data);
 	return request({
 		url: `/goods/search`,
 		data: mapQueryParams(data),

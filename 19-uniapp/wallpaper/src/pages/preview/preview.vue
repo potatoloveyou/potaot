@@ -57,7 +57,6 @@
 							<view class="label">发布者：</view>
 							<text class="value">{{ currentInfo.nickname }}</text>
 						</view>
-
 						<view class="row">
 							<text class="label">评分：</text>
 							<view class="value rateBox">
@@ -65,14 +64,12 @@
 								<text class="score">{{ currentInfo.score }}分</text>
 							</view>
 						</view>
-
 						<view class="row">
 							<text class="label">摘要：</text>
 							<view class="value">
 								{{ currentInfo.description }}
 							</view>
 						</view>
-
 						<view class="row">
 							<text class="label">标签：</text>
 							<view class="value tabs">
@@ -81,7 +78,6 @@
 								</view>
 							</view>
 						</view>
-
 						<view class="copyright">
 							声明：本图片来用户投稿，非商业使用，用于免费学习交流，如侵犯了您的权益，您可以拷贝壁纸ID举报至平台，邮箱513894357@qq.com，管理将删除侵权壁纸，维护您的权益。
 						</view>
@@ -459,32 +455,6 @@
 		padding: 30rpx;
 		border-radius: 30rpx 30rpx 0 0;
 		overflow: hidden;
-		.popHeader {
-			.title {
-			}
-			.close {
-			}
-		}
-
-		.content {
-			.row {
-				.label {
-				}
-				.value {
-				}
-			}
-			.row {
-				.label {
-				}
-				.value {
-					.score {
-					}
-				}
-				.rateBox {
-				}
-			}
-		}
-
 		scroll-view {
 			max-height: 60vh;
 			.content {

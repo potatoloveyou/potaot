@@ -4,7 +4,7 @@ export const request = (config: any = {}) => {
 	let { url, data = {}, method = 'GET', header = {} } = config;
 
 	url = `${base_url}${url}`;
-	header['access-key'] = '290289';
+	header['access-key'] = '638939';
 
 
 	return new Promise((resolve, reject) => {

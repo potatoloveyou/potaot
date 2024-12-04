@@ -1,12 +1,18 @@
 {
 	"pages": [
 		{
+			"path": "pages/news/news",
+			"style": {
+				"navigationBarTitleText": "news"
+			}
+		},
+		{
 			"path": "pages/report/report",
 			"style": {
 				"navigationBarTitleText": "report"
 			}
 		},
-		,
+
 		{
 			"path": "pages/classroom6/classroom6",
 			"style": {

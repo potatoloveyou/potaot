@@ -11,6 +11,8 @@ import { VantResolver } from '@vant/auto-import-resolver';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+	// 打包这里要加上base
+	base: './',
 	plugins: [
 		vue(),
 		vueJsx(),

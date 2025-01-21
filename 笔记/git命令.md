@@ -57,11 +57,11 @@ git branch		查看本地分支
 git branch -r		查看远程仓库分支
 
 (12)创建分支
-git checkout -b (potato)		创建potato分支
+git checkout -b (potato)		创建potato分支(老)
 git branch (potato)		创建potato分支
 
 (13)切换分支
-git checkout (main)		切换main分支
+git checkout (main)		切换main分支(老)
 git switch (main)		切换main分支
 
 (14)合并分支

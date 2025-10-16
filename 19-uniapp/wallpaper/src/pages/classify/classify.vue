@@ -28,8 +28,6 @@
 		Classify();
 	});
 
-
-
 	// 分享给好友
 	onShareAppMessage(() => {
 		return {

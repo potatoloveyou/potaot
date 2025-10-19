@@ -6,7 +6,7 @@
 		},
 		"emit": false
 	},
-	"include": ["src/**/*"],
+	"include": ["src/**/*", "../potato-blog-manage/src/router/guard.ts"],
 	"references": [
 		{
 			"path": "./tsconfig.node.json"

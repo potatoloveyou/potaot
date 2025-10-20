@@ -1,6 +1,6 @@
 // 包装层，使用队列包装请求
-import { RequestQueue } from '@/utils/RequestQueue';
-import request from './request'; // 你已有的带拦截器的 axios 实例
+import { RequestQueue } from '@/utils/RequestQueue.ts';
+import request from '@/api/request.ts'; // 你已有的带拦截器的 axios 实例
 
 // 创建请求队列
 const requestQueue = new RequestQueue(3);

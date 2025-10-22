@@ -1,0 +1,23 @@
+@use './theme.scss' as *;
+@use 'sass:map';
+
+$currentTheme: '';
+@mixin useTheme {
+	// 遍历$themes映射中的每个键值对
+	@each $key, $value in $themes {
+		// 将当前主题的键名(如'light'或'dark')赋值给全局变量$currentTheme
+		$currentTheme: $key !global;
+		// 直接应用到当前元素
+		// &[data-theme='#{$key}'] {
+		// 任何一个祖先元素都有这个属性
+		[data-theme='#{$key}'] & {
+			// 插入使用@include useTheme时传入的内容块
+			@content;
+		}
+	}
+}
+
+@function getVar($varName) {
+	// 先从$themes中获取当前主题的映射，再从该映射中获取指定变量名的值
+	@return map.get(map.get($themes, $currentTheme), $varName);
+}

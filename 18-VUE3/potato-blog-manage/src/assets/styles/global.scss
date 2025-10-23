@@ -1,12 +1,17 @@
+@use './theme/handle.scss' as *;
+
 $p-0: 0;
-body {
-	// 禁用文字选中
-	user-select: none;
-}
-img {
-	// 禁用图片拖动
-	-webkit-user-drag: none;
-}
+$rem-4: 4rem;
+
 .p-0 {
 	padding: $p-0;
+}
+
+.header-height {
+	padding-top: $rem-4;
+}
+
+// 鼠标变成小手
+.cursor-pointer {
+	cursor: pointer;
 }

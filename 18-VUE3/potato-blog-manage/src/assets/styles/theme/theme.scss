@@ -1,11 +1,19 @@
+$c-000: #000;
+$c-fff: #fff;
+$c-141414: #141414;
+$c-14141430: #14141430;
+$c-f4f4f4: #f4f4f4;
 $themes: (
 	'light': (
-		'textColor': #3bce16,
-		'bgColor': #ec0e0e,
+		'textColor': $c-000,
+		'bgColor': $c-f4f4f4,
+		'borderColor': $c-14141430,
+		'specialColor': $c-fff,
 	),
 	'dark': (
-		'textColor': #4015ac,
-		'bgColor': #e813cf,
+		'textColor': $c-fff,
+		'bgColor': $c-141414,
+		'borderColor': $c-f4f4f4,
+		'specialColor': $c-000,
 	),
 );
-

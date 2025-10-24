@@ -10,9 +10,6 @@ import Components from 'unplugin-vue-components/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 // Element Plus 手动导入
 import ElementPlus from 'unplugin-element-plus/vite';
-// 导入Element Plus icon图标组件
-import Icons from 'unplugin-icons/vite';
-import IconsResolver from 'unplugin-icons/resolver';
 
 // 引入 tailwindcss
 import tailwindcss from '@tailwindcss/vite';
@@ -34,11 +31,6 @@ export default defineConfig(({ command, mode }) => {
 				resolvers: [
 					// 自动导入 Element Plus 相关函数，如：ElMessage, ElMessageBox... (带样式)
 					ElementPlusResolver(),
-					// Auto import icon components
-					// 自动导入图标组件
-					IconsResolver({
-						prefix: 'Icon',
-					}),
 				],
 				dts: path.resolve(pathSrc, 'auto-imports.d.ts'),
 			}),
@@ -46,18 +38,10 @@ export default defineConfig(({ command, mode }) => {
 				resolvers: [
 					// 自动导入 Element Plus 组件
 					ElementPlusResolver(),
-					// 自动注册图标组件
-					IconsResolver({
-						enabledCollections: ['ep'],
-					}),
 				],
 				dts: path.resolve(pathSrc, 'components.d.ts'),
 			}),
 			ElementPlus({}),
-			// 自动安装图标组件
-			Icons({
-				autoInstall: true,
-			}),
 			tailwindcss(),
 		],
 		resolve: {

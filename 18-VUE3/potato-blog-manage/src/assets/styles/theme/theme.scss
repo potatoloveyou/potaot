@@ -3,12 +3,17 @@ $c-fff: #fff;
 $c-141414: #141414;
 $c-14141430: #14141430;
 $c-f4f4f4: #f4f4f4;
+$gradient-1: linear-gradient(180deg, #2b5aede0 0%, #2b5aed 100%);
+$gradient-2: linear-gradient(180deg, #2b5aedcc 0%, #2b5aed 100%);
+
 $themes: (
 	'light': (
 		'textColor': $c-000,
 		'bgColor': $c-f4f4f4,
 		'borderColor': $c-14141430,
 		'specialColor': $c-fff,
+		'buttonGradient': $gradient-1,
+		'showGradient': $gradient-2,
 	),
 	'dark': (
 		'textColor': $c-fff,

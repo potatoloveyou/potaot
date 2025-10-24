@@ -2,6 +2,8 @@
 
 $p-0: 0;
 $rem-4: 4rem;
+$gradient-1: linear-gradient(180deg, #2b5aede0 0%, #2b5aed 100%);
+$gradient-2: linear-gradient(180deg, #2b5aedcc 0%, #2b5aed 100%);
 
 .p-0 {
 	padding: $p-0;
@@ -14,4 +16,8 @@ $rem-4: 4rem;
 // 鼠标变成小手
 .cursor-pointer {
 	cursor: pointer;
+}
+
+.bg-red {
+	background-color: red;
 }

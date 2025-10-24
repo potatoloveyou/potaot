@@ -1,5 +1,5 @@
 <template>
-	<div class="switch-theme">
+	<div class="app-theme">
 		<RouterView />
 	</div>
 </template>
@@ -14,11 +14,10 @@ onMounted(() => {
 </script>
 <style lang="scss" scoped>
 @use '@/assets/styles/theme/handle.scss' as *;
-.switch-theme {
+.app-theme {
 	transition: all 0.3s ease-in-out;
 	@include useTheme {
-		color: getVar('textColor') !important;
-		background-color: getVar('bgColor') !important;
+		background-color: getVar('bgColor');
 	}
 }
 </style>

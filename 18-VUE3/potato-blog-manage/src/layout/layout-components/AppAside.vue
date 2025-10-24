@@ -72,7 +72,6 @@ const handleSelect = (key: string, keyPath: string[]) => {
 <style lang="scss" scoped>
 @use '@/assets/styles/theme/handle.scss' as *;
 .aside-theme {
-	transition: all 0.3s ease-in-out;
 	@include useTheme {
 		color: getVar('textColor');
 		background-color: getVar('bgColor');

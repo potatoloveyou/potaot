@@ -21,3 +21,6 @@ $gradient-2: linear-gradient(180deg, #2b5aedcc 0%, #2b5aed 100%);
 .bg-red {
 	background-color: red;
 }
+.transition {
+	transition: all 0.3s ease-in-out;
+}

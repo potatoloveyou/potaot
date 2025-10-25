@@ -11,10 +11,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue';
+import type { ref, Component } from 'vue';
 import { House, Folder, Document, Camera, EditPen, Menu, Setting } from '@element-plus/icons-vue';
 
-const menuItems = [
+interface MenuItem {
+	index: string;
+	icon: Component;
+	text: string;
+	path: string;
+}
+
+const menuItems: MenuItem[] = [
 	{
 		index: '1',
 		icon: House,
@@ -72,6 +79,7 @@ const handleSelect = (key: string, keyPath: string[]) => {
 <style lang="scss" scoped>
 @use '@/assets/styles/theme/handle.scss' as *;
 .aside-theme {
+	transition: color, background-color 0.3s ease-in-out;
 	@include useTheme {
 		color: getVar('textColor');
 		background-color: getVar('bgColor');

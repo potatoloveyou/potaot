@@ -18,11 +18,13 @@ declare module 'vue' {
     ElHeader: typeof import('element-plus/es')['ElHeader']
     ElIcon: typeof import('element-plus/es')['ElIcon']
     ElImage: typeof import('element-plus/es')['ElImage']
+    ElInput: typeof import('element-plus/es')['ElInput']
     ElMain: typeof import('element-plus/es')['ElMain']
     ElMenu: typeof import('element-plus/es')['ElMenu']
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
     ElRow: typeof import('element-plus/es')['ElRow']
     ElText: typeof import('element-plus/es')['ElText']
+    Headline: typeof import('./components/Topic.vue')['default']
     IEpCamera: typeof import('~icons/ep/camera')['default']
     IEpDit: typeof import('~icons/ep/dit')['default']
     IEpDocument: typeof import('~icons/ep/document')['default']
@@ -44,5 +46,7 @@ declare module 'vue' {
     IEpSunny: typeof import('~icons/ep/sunny')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Rubric: typeof import('./components/Rubric.vue')['default']
+    Topic: typeof import('./components/Topic.vue')['default']
   }
 }

@@ -11,7 +11,7 @@
 				<el-aside class="p-0 !m-2" width="192px">
 					<AppAside />
 				</el-aside>
-				<el-main class="p-0">
+				<el-main class="p-0 !m-8">
 					<RouterView />
 				</el-main>
 			</el-container>
@@ -20,8 +20,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-
 import AppHeader from '@/layout/layout-components/AppHeader.vue';
 import AppAside from '@/layout/layout-components/AppAside.vue';
 

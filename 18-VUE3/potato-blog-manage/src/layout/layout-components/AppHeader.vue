@@ -1,12 +1,12 @@
 <template>
 	<el-row justify="space-between" class="items-center">
-		<el-col :span="4" class="cursor-pointer">
+		<el-col :span="12" class="cursor-pointer">
 			<div class="flex items-center" @click="goOverview">
 				<el-image src="src/assets/images/yike.png" class="w-8 h-8 rounded-full !mr-2" />
 				<el-text size="large" class="!font-bold !text-xl header-theme">土豆博客后台</el-text>
 			</div>
 		</el-col>
-		<el-col :span="4" class="!flex justify-end items-center">
+		<el-col :span="12" class="!flex justify-end items-center">
 			<el-icon :size="20" class="!mr-4 cursor-pointer">
 				<Message />
 			</el-icon>
@@ -20,13 +20,12 @@
 					<Moon />
 				</el-icon>
 			</div>
-			<el-button type="primary" size="small">退出</el-button>
+			<el-button type="primary">退出</el-button>
 		</el-col>
 	</el-row>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
 import { Message, Sunny, Moon } from '@element-plus/icons-vue';
 
 import { useRouter } from 'vue-router';

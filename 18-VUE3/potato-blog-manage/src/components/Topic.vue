@@ -1,6 +1,6 @@
 <template>
 	<!-- 标题组件 -->
-	<el-row justify="space-between" class="items-center">
+	<el-row justify="space-between" class="items-center !mb-6">
 		<el-col :span="8">
 			<span class="!text-2xl">{{ props.name }}</span>
 		</el-col>
@@ -30,7 +30,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { Search } from '@element-plus/icons-vue';
-import type { T } from 'node_modules/tailwindcss/dist/types-WlZgYgM8.d.mts';
 
 type TopicProps = {
 	/**

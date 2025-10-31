@@ -5,5 +5,11 @@ api:
   - request.ts              :axios二次封装（添加拦截器）
   - requestWithQueue.ts     :包装层,糅合请求队列模块和axios二次封装模块
 
+stores:
+  - theme.ts                :主题状态管理模块（用于管理应用主题）
+
 utils:
-  - RequestQueue.ts       :请求队列模块（用于管理并发请求）
+  - RequestQueue.ts         :请求队列模块（用于管理并发请求）
+
+router:
+  - guard.ts                :全局路由守卫模块（用于处理路由跳转前的权限验证）

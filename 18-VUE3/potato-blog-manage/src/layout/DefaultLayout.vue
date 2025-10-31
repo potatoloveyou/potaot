@@ -11,7 +11,7 @@
 				<el-aside class="p-0 !m-2" width="192px">
 					<AppAside />
 				</el-aside>
-				<el-main class="p-0 !m-8">
+				<el-main class="!p-8">
 					<RouterView />
 				</el-main>
 			</el-container>

@@ -58,7 +58,7 @@ export default defineConfig(({ command, mode }) => {
 				disable: false, // 是否禁用压缩
 				threshold: 10240, // 压缩阈值，大于 10kb以上文件将压缩
 				algorithm: 'brotliCompress', // brotli压缩算法
-				ext: '.br', // 压缩文件后缀
+				ext: '.br', // 压缩文件
 			}),
 		],
 		/**

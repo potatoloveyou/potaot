@@ -2,7 +2,7 @@
 	<el-row justify="space-between" class="items-center">
 		<el-col :span="12" class="cursor-pointer">
 			<div class="flex items-center" @click="goOverview">
-				<el-image src="src/assets/images/yike.png" class="w-8 h-8 rounded-full !mr-2" />
+				<el-image src="src/assets/images/yike.png" class="w-9 h-9 rounded-full !mr-2" />
 				<el-text size="large" class="!font-bold !text-xl header-theme">土豆博客后台</el-text>
 			</div>
 		</el-col>

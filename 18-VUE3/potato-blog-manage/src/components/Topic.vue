@@ -1,8 +1,8 @@
 <template>
 	<!-- 标题组件 -->
-	<el-row justify="space-between" class="items-center !mb-6">
+	<el-row justify="space-between" class="items-center">
 		<el-col :span="8">
-			<span class="!text-2xl">{{ props.name }}</span>
+			<span class="!text-[1.5rem]">{{ props.name }}</span>
 		</el-col>
 		<el-col :span="10" v-if="isSearch" class="!flex justify-end">
 			<slot name="custom" />

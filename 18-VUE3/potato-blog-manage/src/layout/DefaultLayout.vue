@@ -8,10 +8,10 @@
 			</el-header>
 
 			<el-container class="header-height">
-				<el-aside class="p-0 !m-2" width="192px">
+				<el-aside class="!py-6 !pl-6 !pr-4" width="auto">
 					<AppAside />
 				</el-aside>
-				<el-main class="!p-8">
+				<el-main class="!pr-6 !pl-4 !py-3">
 					<RouterView />
 				</el-main>
 			</el-container>
@@ -29,12 +29,14 @@ const themeStore = useThemeStore();
 
 <style lang="scss" scoped>
 @use '@/assets/styles/theme/handle.scss' as *;
-.default-layout-header-theme {
-	transition: all 0.3s ease-in-out;
-	@include useTheme {
-		color: getVar('textColor');
-		background-color: getVar('specialColor');
-		border-bottom: 1px solid getVar('borderColor');
+.default-layout {
+	.default-layout-header-theme {
+		transition: all 0.3s ease-in-out;
+		@include useTheme {
+			color: getVar('textColor');
+			background-color: getVar('specialColor');
+			border-bottom: 1px solid getVar('borderColor');
+		}
 	}
 }
 </style>

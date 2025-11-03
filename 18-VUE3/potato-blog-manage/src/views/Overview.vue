@@ -1,13 +1,20 @@
 <template>
-	<div class="over-view">
-		<Topic @search="changeSearch" :isSearch="false" />
-		<Gather />
-	</div>
+	<el-scrollbar :native="false" noresize class="main-height">
+		<Topic @search="changeSearch" :isSearch="false" class="!mb-4" />
+		<Gather class="!mb-4" />
+		<div class="grid grid-cols-2 gap-x-4 grid-flow-col">
+			<Chart />
+			<Comment />
+		</div>
+	</el-scrollbar>
 </template>
 
 <script setup lang="ts">
 import Topic from '@/components/Topic.vue';
 import Gather from '@/components/Overview/Gather.vue';
+
+import Chart from '@/components/Overview/Chart.vue';
+import Comment from '@/components/Overview/Comment.vue';
 
 // 搜索回调
 const changeSearch = (value: string) => {
@@ -15,4 +22,10 @@ const changeSearch = (value: string) => {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+// :deep(.el-scrollbar__view) {
+// 	display: grid !important;
+// 	height: 100%;
+// 	grid-template-rows: auto auto 1fr;
+// }
+</style>

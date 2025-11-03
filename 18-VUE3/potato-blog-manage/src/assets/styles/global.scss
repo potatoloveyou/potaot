@@ -13,6 +13,10 @@ $gradient-2: linear-gradient(180deg, #2b5aedcc 0%, #2b5aed 100%);
 	padding-top: $rem-4;
 }
 
+.main-height {
+	height: calc(100dvh - $rem-4 - 2rem);
+}
+
 // 鼠标变成小手
 .cursor-pointer {
 	cursor: pointer;

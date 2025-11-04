@@ -13,7 +13,6 @@ declare module 'vue' {
   export interface GlobalComponents {
     Chart: typeof import('./components/Overview/Chart.vue')['default']
     Comment: typeof import('./components/Overview/Comment.vue')['default']
-    Datas: typeof import('./components/Overview/Datas.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCol: typeof import('element-plus/es')['ElCol']
@@ -31,6 +30,7 @@ declare module 'vue' {
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     ElText: typeof import('element-plus/es')['ElText']
     Gather: typeof import('./components/Overview/Gather.vue')['default']
+    Line: typeof import('./components/Overview/Chart/Line.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Topic: typeof import('./components/Topic.vue')['default']

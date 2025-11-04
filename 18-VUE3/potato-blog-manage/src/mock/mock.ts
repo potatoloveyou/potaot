@@ -12,3 +12,15 @@ export const overView = Mock.mock({
 		'diary|0-50': 0,
 	},
 });
+
+// 访问量
+export const visit = Mock.mock({
+	code: 200,
+	'data|30': [
+		{
+			// 随机生成一个日期
+			data: '@datetime(MM-dd)',
+			count: '@integer(0, 500)',
+		},
+	],
+});

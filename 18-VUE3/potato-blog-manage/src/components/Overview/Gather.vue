@@ -47,7 +47,6 @@ const overLink = reactive([
 ]);
 const drawGatherData = async () => {
 	let res = await overView.data;
-	console.log(res);
 	overLink[0].totle = res.file;
 	overLink[1].totle = res.article;
 	overLink[2].totle = res.gallery;

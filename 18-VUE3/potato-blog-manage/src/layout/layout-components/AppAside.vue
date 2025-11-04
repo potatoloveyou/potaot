@@ -1,5 +1,5 @@
 <template>
-	<el-menu :default-active="menuItems[0].path" router @select="handleSelect" class="h-full  aside-theme">
+	<el-menu :default-active="menuItems[0].path" router @select="handleSelect" class="h-full aside-theme">
 		<el-menu-item v-for="item in menuItems" :index="item.path" class="w-40 !h-10 !mb-3 aside-theme">
 			<el-icon>
 				<component :is="item.icon" />

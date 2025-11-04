@@ -107,13 +107,11 @@ export default defineConfig(({ command, mode }) => {
 					],
 				},
 			},
+			esbuild: {
+				drop: ['console', 'debugger'], // 删除 console 和 debugger 语句
+			},
 		},
-		/**
-		 *
-		 */
-		esbuild: {
-			drop: ['console', 'debugger'], // 删除 console 和 debugger 语句
-		},
+
 		/**
 		 * 开发服务器配置
 		 */

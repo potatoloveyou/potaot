@@ -23,9 +23,9 @@ const changeSearch = (value: string) => {
 </script>
 
 <style lang="scss" scoped>
-// :deep(.el-scrollbar__view) {
-// 	display: grid !important;
-// 	height: 100%;
-// 	grid-template-rows: auto auto 1fr;
-// }
+:deep(.el-scrollbar__view) {
+	display: grid !important;
+	height: 100%;
+	grid-template-rows: auto auto 1fr;
+}
 </style>

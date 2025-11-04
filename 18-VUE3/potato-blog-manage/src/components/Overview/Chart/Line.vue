@@ -3,44 +3,26 @@
 </template>
 
 <script setup lang="ts">
-import { ref, useTemplateRef } from 'vue';
+import { ref, useTemplateRef, computed } from 'vue';
 import type { EChartsOption } from '@/utils/echarts';
 import echarts from '@/utils/echarts';
 
-interface ChartDataItem {
+interface LineDataItem {
 	data: string;
 	count: number;
 }
 
 interface Props {
-	data?: ChartDataItem[];
+	data?: LineDataItem[];
 }
 
 const props = withDefaults(defineProps<Props>(), {
 	data: () => [],
 });
 
-const line = useTemplateRef('line');
-const myLine = ref<echarts.ECharts>();
-// 初始化图表
-const initChart = async (): Promise<void> => {
-	await nextTick(); // 等待DOM更新
-	if (!line.value) return;
+const xAxisData = computed(() => props.data.map((item) => item.data));
+const seriesData = computed(() => props.data.map((item) => item.count));
 
-	// 若实例不存在才初始化
-	if (!myLine.value) {
-		myLine.value = echarts.init(line.value, null, {
-			renderer: 'canvas',
-			useDirtyRect: true,
-		});
-	}
-
-	// 更新配置
-	updateChart();
-};
-
-const xAxisData = ref<string[]>([]);
-const seriesData = ref<number[]>([]);
 /**
  * 生成图表配置选项
  */
@@ -53,8 +35,6 @@ const generateChartOption = (): EChartsOption => {
 			left: '0%',
 			right: '0%',
 			bottom: '0%',
-			// containLabel: true,
-			outerBounds: {},
 		},
 		xAxis: {
 			type: 'category',
@@ -73,98 +53,66 @@ const generateChartOption = (): EChartsOption => {
 	};
 };
 
-const fillData = (data: ChartDataItem[]): void => {
-	xAxisData.value = [];
-	seriesData.value = [];
-	data.forEach((item) => {
-		xAxisData.value.push(item.data);
-		seriesData.value.push(item.count);
-	});
-};
+const myLine = ref<echarts.ECharts>();
 // 更新图表数据和配置
-const updateChart = (): void => {
+const updateLineChart = (): void => {
 	if (!myLine.value) return;
-
-	fillData(props.data);
 	const option = generateChartOption();
 	myLine.value.setOption(option, true);
+};
+
+const line = useTemplateRef('line');
+// 初始化图表
+const initChart = async (): Promise<void> => {
+	await nextTick(); // 等待DOM更新
+	if (!line.value) return;
+
+	// 若实例不存在才初始化
+	if (!myLine.value) {
+		myLine.value = echarts.init(line.value, null, {
+			renderer: 'canvas',
+			useDirtyRect: true,
+		});
+	}
+
+	// 更新配置
+	updateLineChart();
 };
 
 /**
  * 窗口调整大小处理
  */
-const handleResize = (): void => {
-	nextTick(() => {
-		if (myLine.value) {
-			myLine.value.resize();
-		}
-	});
-};
+// const handleResize = (): void => {
+// 	if (myLine.value) {
+// 		myLine.value.resize();
+// 	}
+// };
+
+onMounted(() => {
+	initChart();
+	// nextTick(() => {
+	// 	window.addEventListener('resize', handleResize);
+	// });
+});
+
+onUnmounted(() => {
+	// 清理资源
+	// 	window.removeEventListener('resize', handleResize);
+	if (myLine.value) {
+		myLine.value.dispose();
+	}
+});
 
 // 监听数据变化
 watch(
 	() => props.data,
 	(newData) => {
 		if (newData && newData.length > 0) {
-			updateChart();
+			updateLineChart();
 		}
 	},
 	{ deep: true },
 );
-
-onMounted(() => {
-	initChart();
-	window.addEventListener('resize', handleResize);
-});
-
-onUnmounted(() => {
-	// 清理资源
-	window.removeEventListener('resize', handleResize);
-	if (myLine.value) {
-		myLine.value.dispose();
-		myLine.value = null;
-	}
-});
-
-// const lineShow = (): void => {
-// 	let option: EChartsOption = {
-// 		color: ['#2B5AED'],
-// 		// 设置图表距离容器距离
-// 		grid: {
-// 			top: '6%',
-// 			left: '0%',
-// 			right: '0%',
-// 			bottom: '0%',
-// 			containLabel: true,
-// 		},
-// 		xAxis: {
-// 			type: 'category',
-// 			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-// 		},
-// 		yAxis: {
-// 			type: 'value',
-// 		},
-// 		series: [
-// 			{
-// 				data: [820, 932, 901, 934, 1290, 1330, 1320],
-// 				type: 'line',
-// 				smooth: true,
-// 			},
-// 		],
-// 	};
-
-// 	// 使用echarts.init初始化一个名为line的DOM元素，并将其赋值给myLine
-// 	const myLine = echarts.init(line.value, null, {
-// 		renderer: 'canvas',
-// 		useDirtyRect: true,
-// 	});
-
-// 	myLine.setOption(option);
-// };
-
-// onMounted(() => {
-// 	lineShow();
-// });
 </script>
 
 <style lang="scss" scoped></style>

@@ -2,7 +2,7 @@
 	<el-scrollbar :native="false" noresize class="main-height">
 		<Topic @search="changeSearch" :isSearch="false" class="!mb-4" />
 		<Gather class="!mb-4" />
-		<div class="grid grid-cols-2 gap-x-4 grid-flow-col">
+		<div class="grid grid-cols-[2fr_1.5fr] gap-x-4">
 			<Chart />
 			<Comment />
 		</div>

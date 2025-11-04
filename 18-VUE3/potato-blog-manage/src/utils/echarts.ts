@@ -2,34 +2,54 @@
 import * as echarts from 'echarts/core';
 
 // 引入柱状图和饼状图图表，图表后缀都为 Chart，具体为 图标名称+Chart （注意图标名称为首字母大写）
-import { LineChart } from 'echarts/charts';
+import { LineChart, PieChart } from 'echarts/charts';
 
 // 引入提示框，标题，直角坐标系，数据集，内置数据转换器组件，组件后缀都为 Component
-import { GridComponent } from 'echarts/components';
+import { GridComponent, TooltipComponent, LegendComponent, TitleComponent, DatasetComponent } from 'echarts/components';
 
 // 标签自动布局、全局过渡动画等特性
-import { UniversalTransition } from 'echarts/features';
+import { UniversalTransition, LabelLayout } from 'echarts/features';
 
 // 引入 Canvas 渲染器，注意引入 CanvasRenderer 或者 SVGRenderer 是必须的一步
 import { CanvasRenderer } from 'echarts/renderers';
 // import { SVGRenderer } from 'echarts/renderers';
 
 // 系列类型的定义后缀都为 SeriesOption
-import type { LineSeriesOption } from 'echarts/charts';
+import type { LineSeriesOption, PieSeriesOption } from 'echarts/charts';
 // 组件类型的定义后缀都为 ComponentOption
-import type { GridComponentOption } from 'echarts/components';
+import type {
+	GridComponentOption,
+	TooltipComponentOption,
+	LegendComponentOption,
+	TitleComponentOption,
+	DatasetComponentOption,
+} from 'echarts/components';
 
 import type { ComposeOption } from 'echarts/core';
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
-type EChartsOption = ComposeOption<LineSeriesOption | GridComponentOption>;
+type EChartsOption = ComposeOption<
+	| LineSeriesOption
+	| PieSeriesOption
+	| GridComponentOption
+	| TooltipComponentOption
+	| LegendComponentOption
+	| TitleComponentOption
+	| DatasetComponentOption
+>;
 
 // 注册必须的组件
 echarts.use([
 	LineChart,
+	PieChart,
 
 	GridComponent,
+	TooltipComponent,
+	LegendComponent,
+	TitleComponent,
+	DatasetComponent,
 
 	UniversalTransition,
+	LabelLayout,
 
 	CanvasRenderer,
 	// SVGRenderer,

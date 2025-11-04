@@ -3,7 +3,7 @@ import { RequestQueue } from '@/utils/RequestQueue.ts';
 import request from '@/api/request.ts'; // 你已有的带拦截器的 axios 实例
 
 // 创建请求队列
-const requestQueue = new RequestQueue(3);
+const requestQueue = new RequestQueue(5);
 
 // 包装原有的请求方法，加入队列控制
 export const queuedRequest = {

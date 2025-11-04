@@ -24,3 +24,44 @@ export const visit = Mock.mock({
 		},
 	],
 });
+
+// 数据监测
+export const survey = Mock.mock({
+	code: 200,
+	data: {
+		device: [
+			{
+				key: 'mobile',
+				name: '移动端',
+				value: '@integer(0, 500)',
+			},
+			{
+				key: 'pc',
+				name: '电脑端',
+				value: '@integer(0, 500)',
+			},
+		],
+		website: [
+			{
+				key: 'home',
+				name: '首页',
+				value: '@integer(0, 500)',
+			},
+			{
+				key: 'project',
+				name: '项目',
+				value: '@integer(0, 500)',
+			},
+			{
+				key: 'diary',
+				name: '日记',
+				value: '@integer(0, 500)',
+			},
+			{
+				key: 'photo',
+				name: '摄影',
+				value: '@integer(0, 500)',
+			},
+		],
+	},
+});

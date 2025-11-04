@@ -11,13 +11,17 @@
 			</div>
 			<Line :data="lineData" />
 		</div>
-		<div class="bg-white rounded-lg !p-4 grid grid-rows-[auto_1fr]">
-			<div class="flex justify-between items-center">
+		<div class="bg-white rounded-lg  grid grid-rows-[auto_1fr]">
+			<div class="!px-4 !pt-4 flex justify-between items-center">
 				<span class="!text-[1.2rem]">数据监控</span>
 				<el-radio-group v-model="monitor" size="default" fill="#2B5AED">
 					<el-radio-button label="近一周" value="week" />
 					<el-radio-button label="近一月" value="month" />
 				</el-radio-group>
+			</div>
+			<div class="grid grid-cols-2">
+				<Pie title="设备总数" :data="survey.data.device" />
+				<Pie title="访问总数" :data="survey.data.website" />
 			</div>
 		</div>
 	</div>
@@ -25,9 +29,10 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { visit } from '@/mock/mock';
+import { visit, survey } from '@/mock/mock';
 
 import Line from '@/components/Overview/Chart/Line.vue';
+import Pie from '@/components/Overview/Chart/Pie.vue';
 
 const visits = ref('week');
 const monitor = ref('week');

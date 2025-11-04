@@ -1,11 +1,6 @@
 {
 	"liveServer.settings.port": 5503,
-	"Codegeex.Comment.LanguagePreference": "中文",
-	"Codegeex.SidebarUI.LanguagePreference": "中文",
-	"Codegeex.CompletionDelay": 0.4,
-	"Codegeex.GenerationPreference": "block",
-	"Codegeex.CompletionModel": "CodeGeeX Pro[Beta]",
 	"git.ignoreLimitWarning": true,
-	"px-to-rem.px-per-rem": 16,
-	"Codegeex.RepoIndex": true
+	"codingcopilot.enableNextEditSuggestions": false,
+	"codingcopilot.enableAutoCompletions": true
 }

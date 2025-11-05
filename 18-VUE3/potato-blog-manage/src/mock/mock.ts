@@ -1,4 +1,5 @@
 // @ts-ignore  // 临时忽略类型声明缺失，确保构建通过
+import { id } from 'element-plus/es/locales.mjs';
 import Mock from 'mockjs';
 const Random = Mock.Random;
 
@@ -61,6 +62,36 @@ export const survey = Mock.mock({
 				key: 'photo',
 				name: '摄影',
 				value: '@integer(0, 500)',
+			},
+		],
+	},
+});
+
+// 评论
+export const comment = Mock.mock({
+	code: 200,
+	data: {
+		total: '@integer(0, 1000)',
+		'list|50': [
+			{
+				user: {
+					'id|+1': '@id',
+					username: '@name',
+					avatar: 'https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg',
+					time: '@datetime(MM-dd)',
+				},
+				'id|+1': '@id',
+				content: '@cparagraph(1, 3)',
+				likeCount: '@integer(0, 100)', // 点赞数
+				report: '@integer(0, 50)', // 举报数
+				'createTime|+1': '@datetime(YYYY-MM-dd HH:mm:ss)', // 创建时间
+				'level|1-3': 1,
+				// reply: {
+				// 	total: '@integer(0, 10)',
+				// 	'list|5': [
+
+				// 	],
+				// },
 			},
 		],
 	},

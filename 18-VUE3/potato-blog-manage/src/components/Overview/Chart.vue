@@ -2,8 +2,8 @@
 	<!-- <div class="grid grid-rows-[auto_auto] gap-y-4"> -->
 	<div class="grid grid-rows-[1fr_1fr] gap-y-4">
 		<div class="bg-white rounded-lg !p-4 h-80 grid grid-rows-[auto_1fr]">
-			<div class="flex justify-between items-center">
-				<span class="!text-[1.2rem]">访问量</span>
+			<div class="flex justify-between items-center !pb-4">
+				<span class="!text-[1.3rem]">访问量</span>
 				<el-radio-group v-model="visits" size="default" fill="#2B5AED" @change="getVisit">
 					<el-radio-button label="近一周" value="week" />
 					<el-radio-button label="近一月" value="month" />
@@ -11,17 +11,17 @@
 			</div>
 			<Line :data="lineData" />
 		</div>
-		<div class="bg-white rounded-lg  grid grid-rows-[auto_1fr]">
-			<div class="!px-4 !pt-4 flex justify-between items-center">
-				<span class="!text-[1.2rem]">数据监控</span>
+		<div class="bg-white rounded-lg grid grid-rows-[auto_1fr]">
+			<div class="!p-4 flex justify-between items-center">
+				<span class="!text-[1.3rem]">数据监控</span>
 				<el-radio-group v-model="monitor" size="default" fill="#2B5AED">
 					<el-radio-button label="近一周" value="week" />
 					<el-radio-button label="近一月" value="month" />
 				</el-radio-group>
 			</div>
 			<div class="grid grid-cols-2">
-				<Pie title="设备总数" :data="survey.data.device" />
-				<Pie title="访问总数" :data="survey.data.website" />
+				<Pie title="设备总数" :data="surveyData.device" />
+				<Pie title="访问总数" :data="surveyData.website" />
 			</div>
 		</div>
 	</div>
@@ -39,7 +39,7 @@ const monitor = ref('week');
 
 const lineData = ref([]);
 // 访问量
-const getVisit = async (value: string | number | boolean) => {
+const getVisit = async (value: string) => {
 	let res = await visit.data;
 	if (value === 'week') {
 		res = res.slice(0, 7);
@@ -47,8 +47,22 @@ const getVisit = async (value: string | number | boolean) => {
 	lineData.value = res;
 };
 
+interface SurveyData {
+	device: [];
+	website: [];
+}
+const surveyData = ref<SurveyData>({
+	device: [],
+	website: [],
+});
+const getSurvey = async () => {
+	let res = await survey.data;
+	surveyData.value = res;
+};
+
 onMounted(() => {
 	getVisit(visits.value);
+	getSurvey();
 });
 </script>
 

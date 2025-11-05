@@ -13,6 +13,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     Chart: typeof import('./components/Overview/Chart.vue')['default']
     Comment: typeof import('./components/Overview/Comment.vue')['default']
+    Commonnt: typeof import('./components/Overview/Commonnt.vue')['default']
     Doughnut: typeof import('./components/Overview/Chart/Pie.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElButton: typeof import('element-plus/es')['ElButton']
@@ -33,6 +34,8 @@ declare module 'vue' {
     Gather: typeof import('./components/Overview/Gather.vue')['default']
     Line: typeof import('./components/Overview/Chart/Line.vue')['default']
     Pie: typeof import('./components/Overview/Chart/Pie.vue')['default']
+    PrivateMessage: typeof import('./components/Overview/Comment/PrivateMessage.vue')['default']
+    Reply: typeof import('./components/Overview/Comment/Reply.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Topic: typeof import('./components/Topic.vue')['default']

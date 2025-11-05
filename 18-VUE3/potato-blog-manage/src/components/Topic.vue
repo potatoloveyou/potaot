@@ -2,7 +2,7 @@
 	<!-- 标题组件 -->
 	<el-row justify="space-between" class="items-center">
 		<el-col :span="8">
-			<span class="!text-[1.5rem]">{{ props.name }}</span>
+			<span class="!text-[1.5rem]">{{ name }}</span>
 		</el-col>
 		<el-col :span="10" v-if="isSearch" class="!flex justify-end">
 			<slot name="custom" />
@@ -39,10 +39,11 @@ type TopicProps = {
 	isSearch: boolean;
 };
 // withDefaults 为defineProps定义默认值
-const props = withDefaults(defineProps<TopicProps>(), {
-	name: '总览',
-	isSearch: true,
-});
+// const props = withDefaults(defineProps<TopicProps>(), {
+// 	name: '总览',
+// 	isSearch: true,
+// });
+const { name = '总览', isSearch = true } = defineProps<TopicProps>();
 
 const input = ref<string>('');
 

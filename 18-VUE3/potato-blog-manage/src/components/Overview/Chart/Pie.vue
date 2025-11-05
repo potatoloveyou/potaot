@@ -18,27 +18,38 @@ interface Props {
 	title: string;
 }
 
-const props = withDefaults(defineProps<Props>(), {
-	data: () => [],
-	title: '',
-});
+// const props = withDefaults(defineProps<Props>(), {
+// 	data: () => [],
+// 	title: '',
+// });
 
-const total = computed<number>(() => props.data.reduce((sum, item) => sum + item.value, 0));
+const { data, title } = defineProps<Props>();
+
+const total = computed<number>(() => data.reduce((sum, item) => sum + item.value, 0));
 
 const generateChartOption = (): EChartsOption => {
 	return {
 		color: ['#2B5AED', '#FA5247', '#1CCBB6', '#F625AF', '#FFB435'],
+		grid: {
+			top: 0, // 移除上边距
+			left: 0, // 移除左边距
+			right: 0, // 移除右边距
+			bottom: 0, // 移除下边距
+			containLabel: false,
+		},
 		title: {
 			text: `${total.value}`, // 主标题文本
-			subtext: props.title, // 副标题文本
-			top: '40%', // 主标题距离容器顶部距离
+			subtext: title, // 副标题文本
+			top: '36%', // 主标题距离容器顶部距离
+			left: '46%',
+			textAlign: 'center',
 			textStyle: {
-				fontSize: '1.5rem',
+				fontSize: '2rem',
 				color: '#686B73',
 				align: 'center',
 			},
 			subtextStyle: {
-				fontSize: "1rem",
+				fontSize: '1rem',
 				color: '#686B73',
 			},
 		},
@@ -54,8 +65,9 @@ const generateChartOption = (): EChartsOption => {
 			{
 				// name: '设备总数',
 				type: 'pie',
-				radius: ['35%', '55%'], // 饼图半径(内半径，外半径)
-				center: ['50%', '50%'], // 饼图中心位置
+				radius: ['50%', '80%'], // 饼图半径(内半径，外半径)
+				// center: ['48%', '50%'], // 饼图中心位置(x,y)
+				center: ['47%', '50%'], // 饼图中心位置(x,y)
 				avoidLabelOverlap: true, // 避免标签重叠
 				itemStyle: {
 					borderRadius: 5, // 圆角设计
@@ -64,10 +76,10 @@ const generateChartOption = (): EChartsOption => {
 				},
 				label: {
 					show: true, // 显示标签
-					// position: 'inside',
 					formatter: '{b}:\n{d}%', // b: 标签名称, d: 标签百分百
 					fontStyle: 'oblique',
-					// distance: 20,
+					// position: 'insideRight',
+					distanceToLabelLine: -10,
 				},
 				// emphasis: {
 				// 	label: {
@@ -79,8 +91,9 @@ const generateChartOption = (): EChartsOption => {
 				labelLine: {
 					show: true, // 标签线
 					length: 10, // 标签线长度
+					smooth: true, // 平滑的引导线
 				},
-				data: props.data,
+				data: data,
 			},
 		],
 	};
@@ -112,8 +125,6 @@ const initChart = async (): Promise<void> => {
 };
 
 onMounted(() => {
-	console.log(props);
-
 	initChart();
 });
 
@@ -126,7 +137,7 @@ onUnmounted(() => {
 
 // 监听数据变化
 watch(
-	() => props.data,
+	() => data,
 	(newData) => {
 		if (newData && newData.length > 0) {
 			updatePieChart();

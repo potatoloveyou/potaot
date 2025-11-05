@@ -12,16 +12,17 @@ interface LineDataItem {
 	count: number;
 }
 
-interface Props {
+interface LineProps {
 	data?: LineDataItem[];
 }
 
-const props = withDefaults(defineProps<Props>(), {
-	data: () => [],
-});
+// const props = withDefaults(defineProps<Props>(), {
+// 	data: () => [],
+// });
+const { data } = defineProps<LineProps>();
 
-const xAxisData = computed(() => props.data.map((item) => item.data));
-const seriesData = computed(() => props.data.map((item) => item.count));
+const xAxisData = computed(() => data.map((item) => item.data));
+const seriesData = computed(() => data.map((item) => item.count));
 
 /**
  * 生成图表配置选项
@@ -105,7 +106,7 @@ onUnmounted(() => {
 
 // 监听数据变化
 watch(
-	() => props.data,
+	() => data,
 	(newData) => {
 		if (newData && newData.length > 0) {
 			updateLineChart();

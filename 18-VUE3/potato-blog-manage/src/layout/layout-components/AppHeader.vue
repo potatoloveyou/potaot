@@ -10,7 +10,7 @@
 			<el-icon :size="20" class="!mr-4 cursor-pointer">
 				<Message />
 			</el-icon>
-			<el-image src="src/assets/images/xxmLogo.png" class="w-8 h-8 rounded-full !mr-4" />
+			<el-avatar shape="circle" size="default" src="src/assets/images/xxmLogo.png" class="!mr-4" />
 			<div class="cursor-pointer">
 				<el-icon :size="20" @click="themeStore.switchTheme" v-if="themeStore.themes == 'light'" class="!mr-4">
 					<Sunny />

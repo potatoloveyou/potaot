@@ -8,9 +8,9 @@ export const overView = Mock.mock({
 	code: 200,
 	data: {
 		file: Random.float(60, 100, 3, 2) + 'M',
-		'article|0-50': 0,
-		'gallery|0-50': 0,
-		'diary|0-50': 0,
+		article: '@integer(0, 50)',
+		gallery: '@integer(0, 50)',
+		diary: '@integer(0, 50)',
 	},
 });
 
@@ -84,8 +84,10 @@ export const comment = Mock.mock({
 				content: '@cparagraph(1, 3)',
 				likeCount: '@integer(0, 100)', // 点赞数
 				report: '@integer(0, 50)', // 举报数
-				'createTime|+1': '@datetime(YYYY-MM-dd HH:mm:ss)', // 创建时间
+				'createTime|+1': '@datetime(yyyy-MM-dd HH:mm:ss)', // 创建时间
 				'level|1-3': 1,
+				limit: '@integer(0, 100)',
+				offset: '@integer(0, 100)',
 				// reply: {
 				// 	total: '@integer(0, 10)',
 				// 	'list|5': [

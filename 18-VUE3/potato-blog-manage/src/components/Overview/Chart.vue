@@ -1,7 +1,7 @@
 <template>
 	<!-- <div class="grid grid-rows-[auto_auto] gap-y-4"> -->
 	<div class="grid grid-rows-[1fr_1fr] gap-y-4">
-		<div class="bg-white rounded-lg !p-4 h-80 grid grid-rows-[auto_1fr]">
+		<div class="bg-white rounded-lg !p-4 grid grid-rows-[auto_1fr]">
 			<div class="flex justify-between items-center !pb-4">
 				<span class="!text-[1.3rem]">访问量</span>
 				<el-radio-group v-model="visits" size="default" fill="#2B5AED" @change="getVisit">

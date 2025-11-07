@@ -1,3 +1,4 @@
+<!-- 此页面绝对不能自动格式化文档！！！ -->
 api:
   - services                :API 请求服务模块
   - types                   :类型定义模块
@@ -13,3 +14,14 @@ utils:
 
 router:
   - guard.ts                :全局路由守卫模块（用于处理路由跳转前的权限验证）
+
+type:
+  - index.ts                :统一导出所有类型定义模块
+  - comment.ts              :评论类型定义模块
+  - user.ts                 :用户类型定义模块
+
+页面大致结构：
+layout:                     :布局模块
+  - DefaultLayout.vue       :头部、侧边、内容(路由出口)
+    - AppHeader.vue         :头部
+    - AppAside.vue          :侧边

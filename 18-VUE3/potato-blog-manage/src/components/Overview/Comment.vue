@@ -1,8 +1,8 @@
 <template>
-	<div class="bg-white !p-4">
+	<div class="bg-white !p-4 rounded-lg">
 		<span class="!text-[1.3rem]">评论{{ commentData.total }}</span>
 		<div v-if="commentData.list.length">
-			<Reply v-for="item in sliceData" :data="item" :key="item.id" />
+			<Reply v-for="item in sliceData" :data="item" :key="item.id" @deleteReply="deleteReply" />
 			<el-pagination
 				background
 				size="small"
@@ -29,10 +29,19 @@ const commentData = ref<CommentResponse<CommentItem>>({
 const sliceData = ref<CommentItem[]>();
 const limit = ref(5);
 const offset = ref(0);
+
+// 获取评论
 const getComment = async () => {
 	let res = await comment.data;
 	commentData.value = res;
 	sliceData.value = commentData.value.list.slice(offset.value, limit.value + offset.value);
+};
+
+// 删除评论
+const deleteReply = async (id: number | string) => {
+	console.log('我是Comment', id);
+
+	// getComment();
 };
 
 const changePag = (value: number) => {

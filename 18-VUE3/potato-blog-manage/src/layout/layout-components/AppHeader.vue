@@ -7,7 +7,7 @@
 			</div>
 		</el-col>
 		<el-col :span="12" class="!flex justify-end items-center">
-			<el-icon :size="20" class="!mr-4 cursor-pointer">
+			<el-icon :size="20" @click="openDrawer" class="!mr-4 cursor-pointer">
 				<Message />
 			</el-icon>
 			<el-avatar shape="circle" size="default" src="src/assets/images/xxmLogo.png" class="!mr-4" />
@@ -23,6 +23,7 @@
 			<el-button type="primary">退出</el-button>
 		</el-col>
 	</el-row>
+	<PrivateMessage v-model:drawer="drawer" />
 </template>
 
 <script setup lang="ts">
@@ -34,8 +35,17 @@ const router = useRouter();
 import { useThemeStore } from '@/stores/theme';
 const themeStore = useThemeStore();
 
+import PrivateMessage from '@/components/PrivateMessage.vue';
+
 const goOverview = () => {
 	router.push('/');
+};
+
+const drawer = ref(false);
+const openDrawer = () => {
+	
+	drawer.value = true;
+	console.log("父组件drawer",drawer.value);
 };
 </script>
 

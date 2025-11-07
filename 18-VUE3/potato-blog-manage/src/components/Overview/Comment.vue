@@ -18,19 +18,15 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue';
 import { comment } from '@/mock/mock';
+import type { CommentResponse, CommentItem } from '@/type/index';
 
 import Reply from '@/components/Overview/Comment/Reply.vue';
 
-interface CommentData<T = any> {
-	total: number;
-	list: T[];
-}
-
-const commentData = ref<CommentData>({
+const commentData = ref<CommentResponse<CommentItem>>({
 	total: 0,
 	list: [],
 });
-const sliceData = ref([]);
+const sliceData = ref<CommentItem[]>();
 const limit = ref(5);
 const offset = ref(0);
 const getComment = async () => {
@@ -39,7 +35,7 @@ const getComment = async () => {
 	sliceData.value = commentData.value.list.slice(offset.value, limit.value + offset.value);
 };
 
-const changePag = (value) => {
+const changePag = (value: number) => {
 	offset.value = (value - 1) * limit.value;
 	getComment();
 };

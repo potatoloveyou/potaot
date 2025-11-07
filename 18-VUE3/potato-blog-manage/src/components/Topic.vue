@@ -31,13 +31,13 @@
 import { ref } from 'vue';
 import { Search } from '@element-plus/icons-vue';
 
-type TopicProps = {
+interface TopicProps {
 	/**
 	 * 标题
 	 */
 	name?: string;
 	isSearch: boolean;
-};
+}
 // withDefaults 为defineProps定义默认值
 // const props = withDefaults(defineProps<TopicProps>(), {
 // 	name: '总览',

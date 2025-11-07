@@ -40,7 +40,7 @@ const generateChartOption = (): EChartsOption => {
 		title: {
 			text: `${total.value}`, // 主标题文本
 			subtext: title, // 副标题文本
-			top: '36%', // 主标题距离容器顶部距离
+			top: '40%', // 主标题距离容器顶部距离
 			left: '46%',
 			textAlign: 'center',
 			textStyle: {

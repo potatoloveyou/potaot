@@ -81,7 +81,7 @@ export const comment = Mock.mock({
 					time: '@datetime(MM-dd)',
 				},
 				'id|+1': '@id',
-				content: '@cparagraph(1, 3)',
+				content: '@cparagraph(1, 3)', // 评论内容
 				likeCount: '@integer(0, 100)', // 点赞数
 				report: '@integer(0, 50)', // 举报数
 				'createTime|+1': '@datetime(yyyy-MM-dd HH:mm:ss)', // 创建时间

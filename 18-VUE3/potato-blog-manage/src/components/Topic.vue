@@ -1,12 +1,10 @@
 <template>
 	<!-- 标题组件 -->
-	<el-row justify="space-between" class="items-center">
-		<el-col :span="8">
-			<span class="!text-[1.5rem]">{{ name }}</span>
-		</el-col>
+	<div class="grid grid-cols-[1fr_auto] items-center">
+		<span class="!text-[1.5rem]">{{ name }}</span>
 		<!-- 放置插槽自定义标题组件右侧内容 -->
 		<slot name="custom" />
-		<el-col :span="10" v-if="isSearch" class="!flex justify-end items-center">
+		<div v-if="isSearch" class="grid grid-cols-[auto_auto] items-center">
 			<el-button
 				type="info"
 				plain
@@ -25,8 +23,8 @@
 				@keydown.enter="keydownInput"
 				@clear="clearInput"
 				class="!w-80 opacity-80" />
-		</el-col>
-	</el-row>
+		</div>
+	</div>
 </template>
 
 <script setup lang="ts">

@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue';
+import { ref } from 'vue';
 import { comment } from '@/mock/mock';
 import type { CommentResponse, CommentItem } from '@/type/index';
 

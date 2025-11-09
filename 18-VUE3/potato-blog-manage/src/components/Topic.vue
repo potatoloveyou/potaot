@@ -4,8 +4,7 @@
 		<el-col :span="8">
 			<span class="!text-[1.5rem]">{{ name }}</span>
 		</el-col>
-		<el-col :span="10" v-if="isSearch" class="!flex justify-end">
-			<slot name="custom" />
+		<el-col :span="10" v-if="isSearch" class="!flex justify-end items-center">
 			<el-button
 				type="info"
 				plain
@@ -20,9 +19,10 @@
 				clearable
 				:prefix-icon="Search"
 				placeholder="请输入标题/简介"
+				size="default"
 				@keydown.enter="keydownInput"
 				@clear="clearInput"
-				class="!w-80 opacity-80 !text-xs" />
+				class="!w-80 opacity-80" />
 		</el-col>
 	</el-row>
 </template>
@@ -38,11 +38,6 @@ interface TopicProps {
 	name?: string;
 	isSearch: boolean;
 }
-// withDefaults 为defineProps定义默认值
-// const props = withDefaults(defineProps<TopicProps>(), {
-// 	name: '总览',
-// 	isSearch: true,
-// });
 const { name = '总览', isSearch = true } = defineProps<TopicProps>();
 
 const input = ref<string>('');

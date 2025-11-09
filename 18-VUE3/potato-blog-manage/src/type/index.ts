@@ -1,2 +1,3 @@
-export * from '@/type/user';
-export * from '@/type/comment';
+export * from '@/type/user.type';
+export * from '@/type/comment.type';
+export * from '@/type/grouping.type';

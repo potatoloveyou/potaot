@@ -4,6 +4,8 @@
 		<el-col :span="8">
 			<span class="!text-[1.5rem]">{{ name }}</span>
 		</el-col>
+		<!-- 放置插槽自定义标题组件右侧内容 -->
+		<slot name="custom" />
 		<el-col :span="10" v-if="isSearch" class="!flex justify-end items-center">
 			<el-button
 				type="info"

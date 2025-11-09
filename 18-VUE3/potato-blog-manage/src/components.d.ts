@@ -35,6 +35,7 @@ declare module 'vue' {
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     ElTag: typeof import('element-plus/es')['ElTag']
     ElText: typeof import('element-plus/es')['ElText']
+    ElUpload: typeof import('element-plus/es')['ElUpload']
     Gather: typeof import('./components/Overview/Gather.vue')['default']
     Line: typeof import('./components/Overview/Chart/Line.vue')['default']
     Pie: typeof import('./components/Overview/Chart/Pie.vue')['default']
@@ -43,5 +44,6 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Topic: typeof import('./components/Topic.vue')['default']
+    Upload: typeof import('./components/LocalFilesView/Upload.vue')['default']
   }
 }

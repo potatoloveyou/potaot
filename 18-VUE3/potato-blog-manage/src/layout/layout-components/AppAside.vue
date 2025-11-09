@@ -1,5 +1,5 @@
 <template>
-	<el-menu :default-active="menuItems[0].path" router @select="handleSelect" class="h-full aside-theme">
+	<el-menu :default-active="routePath" router class="h-full aside-theme">
 		<el-menu-item v-for="item in menuItems" :index="item.path" class="w-40 !h-10 !mb-3 aside-theme">
 			<el-icon>
 				<component :is="item.icon" />
@@ -10,8 +10,16 @@
 </template>
 
 <script setup lang="ts">
-import type { ref, Component } from 'vue';
+import { ref } from 'vue';
+import type { Component } from 'vue';
 import { House, Folder, Document, Camera, EditPen, Menu, Setting } from '@element-plus/icons-vue';
+
+import { useRoute, useRouter } from 'vue-router';
+// import type { RouteRecordNameGeneric } from 'vue-router';
+const route = useRoute();
+const router = useRouter();
+
+const routePath = ref<string>(route.name as string);
 
 interface MenuItem {
 	index: string;
@@ -25,54 +33,47 @@ const menuItems: MenuItem[] = [
 		index: '1',
 		icon: House,
 		text: '总览',
-		path: '/',
+		path: 'Overview',
 	},
 	{
 		index: '2',
 		icon: Folder,
 		text: '本地文件',
-		path: '/LocalFiles',
+		path: 'LocalFiles',
 	},
 	{
 		index: '3',
 		icon: Document,
 		text: '博客文章',
-		path: '/BlogPosts',
+		path: 'BlogPosts',
 	},
 	{
 		index: '4',
 		icon: Camera,
 		text: '摄影图库',
-		path: '/PhotographyGallery',
+		path: 'PhotographyGallery',
 	},
 	{
 		index: '5',
 		icon: EditPen,
 		text: '随手笔记',
-		path: '/HandwrittenNotes',
+		path: 'HandwrittenNotes',
 	},
 	{
 		index: '6',
 		icon: Menu,
 		text: '资源分享',
-		path: '/ResourceSharing',
+		path: 'ResourceSharing',
 	},
 	{
 		index: '7',
 		icon: Setting,
 		text: '系统设置',
-		path: '/SystemSettings',
+		path: 'SystemSettings',
 	},
 ];
 
-// 菜单激活回调
-const handleSelect = (key: string, keyPath: string[]) => {
-	console.log(key, keyPath);
-};
-// // 菜单点击回调
-// const handleClick = () => {
-// 	console.log(123);
-// };
+onMounted(() => {});
 </script>
 
 <style lang="scss" scoped>

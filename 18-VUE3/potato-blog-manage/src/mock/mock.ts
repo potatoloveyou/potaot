@@ -98,3 +98,35 @@ export const comment = Mock.mock({
 		],
 	},
 });
+
+// 文章状态
+export const state = Mock.mock({
+	code: 200,
+	data: [
+		{
+			id: '@id',
+			name: '已发布',
+			value: '@integer(0, 100)',
+		},
+		{
+			id: '@id',
+			name: '未发布',
+			value: '@integer(0, 100)',
+		},
+	],
+});
+
+// 分组
+export const grouping = Mock.mock({
+	code: 200,
+	data: {
+		count: '@integer(0, 1000)',
+		'list|3': [
+			{
+				id: '@id',
+				name: '@ctitle(2,4)',
+				value: '@integer(0, 100)',
+			},
+		],
+	},
+});

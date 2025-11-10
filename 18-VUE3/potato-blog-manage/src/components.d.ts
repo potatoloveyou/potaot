@@ -18,6 +18,7 @@ declare module 'vue' {
     ElAside: typeof import('element-plus/es')['ElAside']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElCheckTag: typeof import('element-plus/es')['ElCheckTag']
     ElCol: typeof import('element-plus/es')['ElCol']
     ElContainer: typeof import('element-plus/es')['ElContainer']
     ElDrawer: typeof import('element-plus/es')['ElDrawer']
@@ -29,6 +30,7 @@ declare module 'vue' {
     ElMenu: typeof import('element-plus/es')['ElMenu']
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
     ElPagination: typeof import('element-plus/es')['ElPagination']
+    ElPopover: typeof import('element-plus/es')['ElPopover']
     ElRadioButton: typeof import('element-plus/es')['ElRadioButton']
     ElRadioGroup: typeof import('element-plus/es')['ElRadioGroup']
     ElRow: typeof import('element-plus/es')['ElRow']
@@ -37,6 +39,7 @@ declare module 'vue' {
     ElText: typeof import('element-plus/es')['ElText']
     ElUpload: typeof import('element-plus/es')['ElUpload']
     Gather: typeof import('./components/Overview/Gather.vue')['default']
+    Grouping: typeof import('./components/Grouping.vue')['default']
     Line: typeof import('./components/Overview/Chart/Line.vue')['default']
     Pie: typeof import('./components/Overview/Chart/Pie.vue')['default']
     PrivateMessage: typeof import('./components/PrivateMessage.vue')['default']
@@ -45,5 +48,8 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     Topic: typeof import('./components/Topic.vue')['default']
     Upload: typeof import('./components/LocalFilesView/Upload.vue')['default']
+  }
+  export interface GlobalDirectives {
+    vPopover: typeof import('element-plus/es')['ElPopoverDirective']
   }
 }

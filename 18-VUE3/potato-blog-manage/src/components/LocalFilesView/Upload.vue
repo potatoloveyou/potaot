@@ -7,8 +7,9 @@
 		:on-remove="handleRemove"
 		:before-remove="beforeRemove"
 		:limit="3"
+		:show-file-list="false"
 		:on-exceed="handleExceed">
-		<el-button type="primary">上传</el-button>
+		<el-button type="primary" class="!mb-0">上传</el-button>
 	</el-upload>
 </template>
 

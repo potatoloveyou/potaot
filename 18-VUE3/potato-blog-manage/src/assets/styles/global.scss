@@ -10,10 +10,11 @@ $gradient-2: linear-gradient(180deg, #2b5aedcc 0%, #2b5aed 100%);
 }
 
 .header-height {
-	padding-top: $rem-4;
+	// padding-top: $rem-4;
+	margin-top: $rem-4;
 }
 
-.main-height {
+.min-height {
 	height: calc(100dvh - $rem-4 - 2rem);
 }
 

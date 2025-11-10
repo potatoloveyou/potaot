@@ -1,6 +1,6 @@
 <template>
 	<!-- 总览 -->
-	<el-scrollbar :native="false" noresize class="main-height">
+	<el-scrollbar noresize class="min-height">
 		<Topic @search="changeSearch" :isSearch="false" class="!mb-4" />
 		<Gather class="!mb-4" />
 		<div class="grid grid-cols-[2fr_1.5fr] gap-x-4">

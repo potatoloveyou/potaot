@@ -1,5 +1,6 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-html{
-  font-size: 14px;
+html {
+	font-size: 14px;
+	user-select: none;
 }

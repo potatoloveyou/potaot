@@ -25,31 +25,13 @@ import 'vue-virtual-scroller/dist/vue-virtual-scroller.css';
 import Reply from '@/components/Overview/Comment/Reply.vue';
 
 interface PrivateMessageProps {
-	drawer: boolean;
 	data: CommentItem[];
 	privateMessageDataTotal: number;
 }
 
-const { drawer = false, data = [], privateMessageDataTotal = 0 } = defineProps<PrivateMessageProps>();
+const { data = [], privateMessageDataTotal = 0 } = defineProps<PrivateMessageProps>();
 
-const emit = defineEmits<{
-	(e: 'update:drawer', value: boolean): void;
-}>();
-
-const localDrawer = ref(drawer);
-// 当父组件 drawer 改变时，同步更新本地状态
-watch(
-	() => drawer,
-	(val) => {
-		localDrawer.value = val;
-	},
-);
-
-// 当本地状态改变时（例如抽屉关闭），通知父组件
-watch(localDrawer, (val) => {
-	if (drawer == localDrawer.value) return;
-	emit('update:drawer', val);
-});
+const localDrawer = defineModel<boolean>('drawer');
 
 // 关闭抽屉
 const close = (): void => {};

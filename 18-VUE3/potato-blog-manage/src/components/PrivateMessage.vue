@@ -7,7 +7,7 @@
 
 		<DynamicScroller :items="data" :min-item-size="100" :buffer="300" style="height: 100%" @scroll-end="loadMore">
 			<template #default="{ item }">
-				<DynamicScrollerItem :item="item" active>
+				<DynamicScrollerItem :item active>
 					<Reply :data="item" :lineClamp="3" :isShow="false" @deleteReply="deleteReply"
 				/></DynamicScrollerItem>
 			</template>

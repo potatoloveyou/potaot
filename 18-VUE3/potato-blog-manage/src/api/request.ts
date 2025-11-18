@@ -8,8 +8,8 @@ import axios, {
 
 const config: AxiosRequestConfig = {
   // 通过vite配置，将/api前缀接口代理成后端接口地址
-	baseURL: '/api',
-	timeout: 10000,
+	baseURL: import.meta.env.VITE_DEV_API,
+	timeout: 5000,
 };
 
 const request: AxiosInstance = axios.create(config);

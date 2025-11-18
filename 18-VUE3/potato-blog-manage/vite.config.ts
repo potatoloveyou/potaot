@@ -119,7 +119,7 @@ export default defineConfig(({ command, mode }) => {
 			port: 5173, // 开发服务器端口
 			// open: true, // 自动打开浏览器
 			proxy: {
-				'/api': {
+				[env.VITE_DEV_API]: {
 					target: env.VITE_DEV_API_BASE_URL, // 目标服务器地址
 					changeOrigin: true, // 是否改变请求头中的 Origin 为目标服务器地址
 					rewrite: (path) => path.replace(/^\/api/, ''), // 重写请求路径

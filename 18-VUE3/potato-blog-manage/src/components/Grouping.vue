@@ -25,13 +25,13 @@
 				<el-icon class="!mr-1" color="#2B5AED"><Tools /></el-icon>
 				管理分组
 			</div>
-			<ModalTableDialog v-model:visible="visible" />
+			<ModalTableDialog v-model:visible="visible" title="文章分类管理" width="50rem" tableHeight="24rem" />
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, useTemplateRef } from 'vue';
+import { ref } from 'vue';
 import { CirclePlus, Tools } from '@element-plus/icons-vue';
 
 import GroupingTag from '@/components/Grouping/GroupingTag.vue';
@@ -55,11 +55,7 @@ const changeManage = () => {
 	visible.value = true;
 };
 
-onMounted(() => {
-	// console.log(stateData.value);
-	// console.log(groupingData.value);
-	// console.log(exclude.value);
-});
+onMounted(() => {});
 </script>
 
 <style lang="scss" scoped>

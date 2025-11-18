@@ -37,12 +37,12 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { storeToRefs } from 'pinia';
-import { useGroupingStore } from '@/stores/grouping';
-const { stateData, groupingData, exclude } = storeToRefs(useGroupingStore());
 
-type TagType = 'info' | 'primary' | 'success' | 'warning' | 'danger';
-const tagType = ref<TagType>('info');
+import type { StateType, GroupingType } from '@/type/grouping.type';
+
+const stateData = inject<Ref<StateType[]> | null>('stateData', null);
+const groupingData = inject<Ref<GroupingType> | null>('groupingData', null);
+const exclude = inject<ComputedRef<any> | null>('exclude', null);
 
 const selectTagId = ref<number | string>(0);
 const changeTag = (id: number | string) => {
@@ -53,10 +53,13 @@ const changeTag = (id: number | string) => {
 // 判断是否选中（返回 boolean）
 const isSelected = (id: number | string) => selectTagId.value === id;
 
+type TagType = 'info' | 'primary' | 'success' | 'warning' | 'danger';
 // 根据 id 返回要绑定到 el-tag 的 type
 const getTagType = (id: number | string): TagType => {
 	return isSelected(id) ? 'primary' : 'info';
 };
+
+onMounted(() => {});
 </script>
 
 <style lang="scss" scoped></style>

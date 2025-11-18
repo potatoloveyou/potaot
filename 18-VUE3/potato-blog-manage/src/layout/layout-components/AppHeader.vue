@@ -20,10 +20,14 @@
 					<Moon />
 				</el-icon>
 			</div>
-			<el-button type="primary">退出</el-button>
+			<el-button type="primary" class="button">退出</el-button>
 		</el-col>
 	</el-row>
-	<PrivateMessage v-model:drawer="drawer" :data="sliceData" v-if="privateMessageData.list.length" :privateMessageDataTotal="privateMessageData.total"/>
+	<PrivateMessage
+		v-model:drawer="drawer"
+		:data="sliceData"
+		v-if="privateMessageData.list.length"
+		:privateMessageDataTotal="privateMessageData.total" />
 </template>
 
 <script setup lang="ts">
@@ -76,9 +80,5 @@ onMounted(() => {
 	@include useTheme {
 		color: getVar('textColor');
 	}
-}
-.a {
-	background-color: red;
-	// width: ;
 }
 </style>

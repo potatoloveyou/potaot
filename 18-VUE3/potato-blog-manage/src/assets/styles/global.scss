@@ -29,3 +29,6 @@ $gradient-2: linear-gradient(180deg, #2b5aedcc 0%, #2b5aed 100%);
 .transition {
 	transition: all 0.3s ease-in-out;
 }
+.button {
+	background-image: $gradient-1 !important;
+}

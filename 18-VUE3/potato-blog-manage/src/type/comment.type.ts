@@ -1,14 +1,14 @@
-import type { User } from './user.type';
+import type { UserType } from './user.type';
 
-export interface CommentResponse<T> {
+export interface CommentResponseType<T> {
 	total: number;
 	list: T[];
 }
-export interface CommentItem {
+export interface CommentItemType {
 	id: number | string;
 	content: string;
 	likeCount: number;
 	report: number;
 	createTime: string;
-	user: User;
+	user: UserType;
 }

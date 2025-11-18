@@ -1,10 +1,10 @@
-export interface State {
+export interface StateType {
 	id: number | string;
 	name: string;
 	value: number;
 }
 
-export interface Grouping {
+export interface GroupingType {
 	count: number;
-	list: State[];
+	list: StateType[];
 }

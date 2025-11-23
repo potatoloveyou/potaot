@@ -14,8 +14,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-import { state, grouping } from '@/mock/mock';
-import type { StateType, GroupingType } from '@/type/grouping.type';
+import { storeToRefs } from 'pinia';
+import { useGroupingStore } from '@/stores/LocalFilesStores';
+const { stateData, groupingData, exclude } = storeToRefs(useGroupingStore());
 
 import Topic from '@/components/Topic.vue';
 import Upload from '@/components/LocalFilesView/Upload.vue';
@@ -26,24 +27,13 @@ const changeSearch = (value: string) => {
 	console.log('我是父组件', value);
 };
 
-const stateData = ref<StateType[]>([]);
-const groupingData = ref<GroupingType>({ count: 0, list: [] });
-const exclude = computed(() => {
-	let arr: Array<string | number> = [];
-	let n = groupingData.value.count;
-	groupingData.value.list.forEach((item) => {
-		arr.push(item.id);
-		n -= item.value;
-	});
-	return { id: arr.join(','), name: '未分组', value: n };
-});
 provide('stateData', stateData);
 provide('groupingData', groupingData);
 provide('exclude', exclude);
 
 const getGroupingList = async () => {
-	stateData.value = state.data;
-	groupingData.value = grouping.data;
+	// stateData.value = state.data;
+	// groupingData.value = grouping.data;
 };
 
 onMounted(() => {

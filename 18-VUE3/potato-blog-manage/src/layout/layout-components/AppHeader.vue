@@ -31,9 +31,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref } from 'vue';	
 import { comment } from '@/mock/mock';
-import type { CommentResponse, CommentItem } from '@/type/index';
+import type { CommentResponseType, CommentItemType } from '@/type/index';
 
 import { useRouter } from 'vue-router';
 const router = useRouter();
@@ -54,11 +54,11 @@ const openDrawer = () => {
 	drawer.value = true;
 };
 
-const privateMessageData = ref<CommentResponse<CommentItem>>({
+const privateMessageData = ref<CommentResponseType<CommentItemType>>({
 	total: 0,
 	list: [],
 });
-const sliceData = ref<CommentItem[]>();
+const sliceData = ref<CommentItemType[]>();
 const limit = ref(20);
 const offset = ref(0);
 // 获取私信

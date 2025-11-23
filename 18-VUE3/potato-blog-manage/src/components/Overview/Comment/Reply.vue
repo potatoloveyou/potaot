@@ -22,10 +22,10 @@
 import { ref, markRaw } from 'vue';
 import { Delete } from '@element-plus/icons-vue';
 
-import type { CommentItem } from '@/type/index';
+import type { CommentItemType } from '@/type/index';
 
 interface ReplyProps {
-	data: CommentItem;
+	data: CommentItemType;
 	isShow?: boolean;
 	lineClamp?: number | string;
 }

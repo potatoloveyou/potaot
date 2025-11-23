@@ -19,15 +19,15 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { comment } from '@/mock/mock';
-import type { CommentResponse, CommentItem } from '@/type/index';
+import type { CommentResponseType, CommentItemType } from '@/type/index';
 
 import Reply from '@/components/Overview/Comment/Reply.vue';
 
-const commentData = ref<CommentResponse<CommentItem>>({
+const commentData = ref<CommentResponseType<CommentItemType>>({
 	total: 0,
 	list: [],
 });
-const sliceData = ref<CommentItem[]>();
+const sliceData = ref<CommentItemType[]>();
 const limit = ref(5);
 const offset = ref(0);
 

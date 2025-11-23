@@ -120,12 +120,13 @@ export const state = Mock.mock({
 export const grouping = Mock.mock({
 	code: 200,
 	data: {
-		count: '@integer(0, 1000)',
+		count: '@integer(300, 1000)',
 		'list|3': [
 			{
 				id: '@id',
 				name: '@ctitle(2,4)',
 				value: '@integer(0, 100)',
+				createTime: '@datetime(yyyy-MM-dd HH:mm:ss)',
 			},
 		],
 	},

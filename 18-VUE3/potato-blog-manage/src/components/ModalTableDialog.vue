@@ -11,7 +11,8 @@
 			<AutoResizerTable :height="tableHeight" :columns="columns" :data="rows" />
 		</template>
 		<template #footer>
-			<el-button type="primary" class="button">确认</el-button>
+			<el-button type="success" v-if="changedRows.length > 0">取消</el-button>
+			<el-button type="primary" class="button" @click="saveRow">确认</el-button>
 		</template>
 	</el-dialog>
 </template>
@@ -19,11 +20,17 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
+import type { StateRow } from '@/type/grouping.type';
+
 import type { Column } from 'element-plus';
 
 import AutoResizerTable from '@/components/ModalTableDialog/AutoResizerTable.vue';
 
 const dialogVisible = defineModel<boolean>('visible');
+
+const emit = defineEmits<{
+	saveRow: [changedRows: StateRow[]];
+}>();
 
 interface ModalTableDialogProps {
 	title: string;
@@ -42,6 +49,18 @@ const dialogWidth = computed(() => {
 	const totalWidth = columns.reduce((acc, cur) => acc + (cur.width || 0), 0);
 	return `${totalWidth + 32}px`;
 });
+
+const changedRows = computed<StateRow[]>(() => {
+	return rows.filter((r) => r._dirty);
+});
+
+const saveRow = () => {
+	dialogVisible.value = false;
+	if (!changedRows.value.length) return;
+
+	emit('saveRow', changedRows.value);
+	console.log(changedRows.value);
+};
 
 onMounted(() => {});
 </script>

@@ -5,6 +5,12 @@ export interface StateType {
 	createTime: string;
 }
 
+export interface StateRow extends StateType {
+	isExclude: boolean;
+	originalName?: string;
+	_dirty?: boolean;
+}
+
 export interface GroupingType {
 	count: number;
 	list: StateType[];

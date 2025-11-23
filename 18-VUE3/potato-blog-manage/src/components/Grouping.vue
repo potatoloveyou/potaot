@@ -21,7 +21,7 @@
 				</template>
 			</el-popover>
 
-			<div class="flex items-center !ml-6 cursor-pointe text-[#2B5AED]" @click="changeManage">
+			<div class="flex items-center !ml-6 cursor-pointer text-[#2B5AED]" @click="changeManage">
 				<el-icon class="!mr-1" color="#2B5AED"><Tools /></el-icon>
 				管理分组
 			</div>
@@ -29,14 +29,17 @@
 				v-model:visible="visible"
 				title="文章分类管理"
 				tableHeight="24rem"
-				:rows="rows"
-				:columns="columns" />
+				:rows="editableRows"
+				:columns="columns"
+				@saveRow="saveRow" />
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
 import { ref, h } from 'vue';
+
+import type { StateRow } from '@/type/grouping.type';
 
 import { storeToRefs } from 'pinia';
 import { useGroupingStore } from '@/stores/LocalFilesStores';
@@ -61,39 +64,31 @@ const changeInput = () => {
 	console.log('new grouping name:', newGroupingName.value);
 };
 
-const visible = ref(false);
-// 管理分组弹窗
-const changeManage = () => {
-	visible.value = true;
-};
-
-// 删除函数
-const removeRow = (id: string) => {
-	console.log('我是被删除的id', id);
-};
-
-const rows = computed(() => {
-	const excludeRow = {
+const rows = computed<StateRow[]>(() => {
+	const excludeRow: StateRow = {
 		id: 'exclude',
 		name: '未分组',
-		relatedCount: exclude.value.value,
-		createdAt: '-',
+		value: exclude.value.value,
+		createTime: '-',
 		isExclude: true,
 	};
 
 	return [
 		excludeRow,
 		...groupingData.value.list.map((item) => ({
-			id: item.id,
-			name: item.name,
-			relatedCount: item.value,
-			createdAt: item.createTime,
+			...item,
 			isExclude: false,
 		})),
 	];
 });
 
-const columns = ref<Column<any>[]>([
+const visible = ref(false);
+// 打开分组弹窗
+const changeManage = () => {
+	visible.value = true;
+};
+
+const columns = ref<Column<StateRow>[]>([
 	{
 		key: 'number',
 		dataKey: 'number',
@@ -112,22 +107,27 @@ const columns = ref<Column<any>[]>([
 			if (rowData.isExclude) return rowData.name;
 			return h(ElInput, {
 				modelValue: rowData.name,
-				'onUpdate:modelValue': (val: string) => (rowData.name = val),
+				'onUpdate:modelValue': (val: string) => ((rowData.name = val), onEditName(rowData)),
 				size: 'default',
 				style: { width: '15rem' },
+				onKeydown: (e: KeyboardEvent) => {
+					if (e.key === 'Enter') {
+						saveRow(rowData);
+					}
+				},
 			});
 		},
 	},
 	{
-		key: 'relatedCount',
-		dataKey: 'relatedCount',
+		key: 'value',
+		dataKey: 'value',
 		title: '关联文章数',
 		width: 125,
 		align: 'left',
 	},
 	{
-		key: 'createdAt',
-		dataKey: 'createdAt',
+		key: 'createTime',
+		dataKey: 'createTime',
 		title: '创建日期',
 		width: 180,
 		align: 'left',
@@ -154,7 +154,60 @@ const columns = ref<Column<any>[]>([
 	},
 ]);
 
-onMounted(() => {});
+const nameSet = computed(() => new Set(rows.value.map((r) => r.name.trim())));
+// 校验名称
+const validateName = (rowData: StateRow) => {
+	const name = rowData.name.trim();
+	if (!name) {
+		ElMessage.error('名称不能为空');
+		return false;
+	}
+
+	// 如果当前名字和原始名字不同且已经存在于 nameSet
+	const originalName = originalNameMap.get(rowData.id) ?? '';
+	if (name !== originalName && nameSet.value.has(name)) {
+		ElMessage.error('名称已存在，请输入其他名称');
+		return false;
+	}
+
+	return true;
+};
+
+// 模拟保存（未来换成接口）
+const saveRow = (payload: StateRow | StateRow[]) => {
+	const rowsToValidate = Array.isArray(payload) ? payload : [payload];
+
+	// 执行校验（任意一个不通过都 return）
+	for (const row of rowsToValidate) {
+		if (!validateName(row)) return;
+	}
+
+	// // 此处未来可替换为 axios 请求
+	// // ElMessage.success('保存成功');
+	const changedRows = editableRows.value.filter((r) => r._dirty).map((r) => ({ id: r.id, name: r.name }));
+	console.log('需要提交的数据：', changedRows);
+};
+
+// 输入修改
+const onEditName = (rowData: StateRow) => {
+	const originalName = originalNameMap.get(rowData.id) ?? '';
+	rowData._dirty = rowData.name !== originalName;
+};
+
+// 删除
+const removeRow = (id: string) => {
+	console.log('我是被删除的id', id);
+};
+
+// **可编辑副本**
+const editableRows = ref<StateRow[]>([]);
+const originalNameMap = new Map<string | number, string>();
+onMounted(() => {
+	editableRows.value = rows.value.map((row) => {
+		originalNameMap.set(row.id, row.name);
+		return { ...row, _dirty: false }; // 可以加上 _dirty 标记
+	});
+});
 </script>
 
 <style lang="scss" scoped>

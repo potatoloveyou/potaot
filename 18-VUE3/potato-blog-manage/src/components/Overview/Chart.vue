@@ -2,7 +2,7 @@
 	<!-- 总览左侧echarts卡片 -->
 	<!-- <div class="grid grid-rows-[auto_auto] gap-y-4"> -->
 	<div class="grid grid-rows-[1fr_1fr] gap-y-4">
-		<div class="bg-white rounded-lg !p-4 grid grid-rows-[auto_1fr]">
+		<WhiteContainer class="grid grid-rows-[auto_1fr]">
 			<div class="flex justify-between items-center !pb-4">
 				<span class="!text-[1.3rem]">访问量</span>
 				<el-radio-group v-model="visits" size="default" fill="#2B5AED" @change="getVisit">
@@ -11,8 +11,8 @@
 				</el-radio-group>
 			</div>
 			<Line :data="lineData" />
-		</div>
-		<div class="bg-white rounded-lg grid grid-rows-[auto_1fr]">
+		</WhiteContainer>
+		<WhiteContainer class="grid grid-rows-[auto_1fr]">
 			<div class="!p-4 flex justify-between items-center">
 				<span class="!text-[1.3rem]">数据监控</span>
 				<el-radio-group v-model="monitor" size="default" fill="#2B5AED">
@@ -24,7 +24,7 @@
 				<Pie title="设备总数" :data="surveyData.device" />
 				<Pie title="访问总数" :data="surveyData.website" />
 			</div>
-		</div>
+		</WhiteContainer>
 	</div>
 </template>
 
@@ -32,6 +32,7 @@
 import { ref } from 'vue';
 import { visit, survey } from '@/mock/mock';
 
+import WhiteContainer from '@/components/WhiteContainer.vue';
 import Line from '@/components/Overview/Chart/Line.vue';
 import Pie from '@/components/Overview/Chart/Pie.vue';
 

@@ -1,6 +1,6 @@
 <template>
 	<!-- 分组组件 -->
-	<div class="grid grid-cols-[1fr_auto] items-center bg-white !p-4 rounded-lg">
+	<WhiteContainer class="grid grid-cols-[1fr_auto] items-center">
 		<GroupingTag />
 		<div class="flex items-center">
 			<el-popover width="220" title="请输入分组名称" content="Bottom Right prompts info" placement="bottom-end">
@@ -33,7 +33,7 @@
 				:columns="columns"
 				@saveRow="saveRow" />
 		</div>
-	</div>
+	</WhiteContainer>
 </template>
 
 <script setup lang="ts">
@@ -49,6 +49,7 @@ import { CirclePlus, Tools } from '@element-plus/icons-vue';
 import type { Column } from 'element-plus';
 import { ElInput, ElButton } from 'element-plus';
 
+import WhiteContainer from '@/components/WhiteContainer.vue';
 import GroupingTag from '@/components/Grouping/GroupingTag.vue';
 import ModalTableDialog from '@/components/ModalTableDialog.vue';
 

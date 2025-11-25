@@ -1,6 +1,6 @@
 <template>
 	<!-- 总览右侧评论 -->
-	<div class="bg-white !p-4 rounded-lg">
+	<WhiteContainer>
 		<span class="!text-[1.3rem]">评论{{ commentData.total }}</span>
 		<div v-if="commentData.list.length">
 			<Reply v-for="item in sliceData" :data="item" :key="item.id" @deleteReply="deleteReply" />
@@ -13,7 +13,7 @@
 				@change="changePag"
 				class="justify-center !pt-4" />
 		</div>
-	</div>
+	</WhiteContainer>
 </template>
 
 <script setup lang="ts">
@@ -21,6 +21,7 @@ import { ref } from 'vue';
 import { comment } from '@/mock/mock';
 import type { CommentResponseType, CommentItemType } from '@/type/index';
 
+import WhiteContainer from '@/components/WhiteContainer.vue';
 import Reply from '@/components/Overview/Comment/Reply.vue';
 
 const commentData = ref<CommentResponseType<CommentItemType>>({

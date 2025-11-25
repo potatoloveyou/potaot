@@ -8,7 +8,8 @@
 			</div>
 		</template>
 	</Topic>
-	<Grouping />
+	<Grouping class="!mb-4"/>
+	<Files />
 </template>
 
 <script setup lang="ts">
@@ -21,6 +22,7 @@ const { stateData, groupingData, exclude } = storeToRefs(useGroupingStore());
 import Topic from '@/components/Topic.vue';
 import Upload from '@/components/LocalFilesView/Upload.vue';
 import Grouping from '@/components/Grouping.vue';
+import Files from '@/components/LocalFilesView/Files.vue';
 
 // 搜索回调
 const changeSearch = (value: string) => {

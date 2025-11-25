@@ -42,6 +42,7 @@ declare module 'vue' {
     ElTag: typeof import('element-plus/es')['ElTag']
     ElText: typeof import('element-plus/es')['ElText']
     ElUpload: typeof import('element-plus/es')['ElUpload']
+    Files: typeof import('./components/LocalFilesView/Files.vue')['default']
     Gather: typeof import('./components/Overview/Gather.vue')['default']
     Grouping: typeof import('./components/Grouping.vue')['default']
     GroupingTag: typeof import('./components/Grouping/GroupingTag.vue')['default']
@@ -57,6 +58,7 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     Topic: typeof import('./components/Topic.vue')['default']
     Upload: typeof import('./components/LocalFilesView/Upload.vue')['default']
+    WhiteContainer: typeof import('./components/WhiteContainer.vue')['default']
   }
   export interface GlobalDirectives {
     vPopover: typeof import('element-plus/es')['ElPopoverDirective']

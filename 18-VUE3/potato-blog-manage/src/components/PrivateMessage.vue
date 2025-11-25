@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { CommentItem } from '@/type/index';
+import type { CommentItemType } from '@/type/index';
 
 import { DynamicScroller, DynamicScrollerItem } from 'vue-virtual-scroller';
 import 'vue-virtual-scroller/dist/vue-virtual-scroller.css';
@@ -25,7 +25,7 @@ import 'vue-virtual-scroller/dist/vue-virtual-scroller.css';
 import Reply from '@/components/Overview/Comment/Reply.vue';
 
 interface PrivateMessageProps {
-	data: CommentItem[];
+	data: CommentItemType[];
 	privateMessageDataTotal: number;
 }
 

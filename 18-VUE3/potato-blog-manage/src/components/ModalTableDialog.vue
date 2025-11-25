@@ -11,7 +11,7 @@
 			<AutoResizerTable :height="tableHeight" :columns="columns" :data="rows" />
 		</template>
 		<template #footer>
-			<el-button type="success" v-if="changedRows.length > 0">取消</el-button>
+			<el-button type="success" v-if="changedRows.length > 0" @click="resetRow">取消</el-button>
 			<el-button type="primary" class="button" @click="saveRow">确认</el-button>
 		</template>
 	</el-dialog>
@@ -60,6 +60,14 @@ const saveRow = () => {
 
 	emit('saveRow', changedRows.value);
 	console.log(changedRows.value);
+};
+
+const resetRow = () => {
+	console.log('取消');
+
+	// changedRows.value.forEach((row) => {
+	// 	row._dirty = false;
+	// });
 };
 
 onMounted(() => {});

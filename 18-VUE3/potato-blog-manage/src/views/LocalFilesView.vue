@@ -1,15 +1,17 @@
 <template>
 	<!-- 本地文件 -->
-	<Topic name="本地文件" @search="changeSearch" :isSearch="false" class="!mb-4">
-		<template #custom>
-			<div class="grid grid-cols-[1fr_auto] items-center">
-				<el-text class="!mr-4">图片、视频、音频不超过20M</el-text>
-				<Upload />
-			</div>
-		</template>
-	</Topic>
-	<Grouping class="!mb-4"/>
-	<Files />
+	<div class="h-full flex flex-col">
+		<Topic name="本地文件" @search="changeSearch" :isSearch="false" class="!mb-4">
+			<template #custom>
+				<div class="grid grid-cols-[1fr_auto] items-center">
+					<el-text class="!mr-4">图片、视频、音频不超过20M</el-text>
+					<Upload />
+				</div>
+			</template>
+		</Topic>
+		<Grouping class="!mb-4" />
+		<Files class="flex-1" />
+	</div>
 </template>
 
 <script setup lang="ts">

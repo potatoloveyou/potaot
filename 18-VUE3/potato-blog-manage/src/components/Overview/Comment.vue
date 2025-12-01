@@ -9,7 +9,7 @@
 				size="small"
 				layout="prev, pager, next"
 				:total="commentData.total"
-				:page-size="5"
+				:page-size="limit"
 				@change="changePag"
 				class="justify-center !pt-4" />
 		</div>

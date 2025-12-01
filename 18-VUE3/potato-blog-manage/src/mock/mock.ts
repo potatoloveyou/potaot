@@ -131,3 +131,20 @@ export const grouping = Mock.mock({
 		],
 	},
 });
+
+// 文件数据
+export const files = Mock.mock({
+	code: 200,
+	data: {
+		count: 9,
+		'list|9': [
+			{
+				id: '@id',
+				url: '@url()',
+				fileName: '@ctitle(2,12)',
+				format: 'jpeg',
+				'subsetId|0-4': 3,
+			},
+		],
+	},
+});

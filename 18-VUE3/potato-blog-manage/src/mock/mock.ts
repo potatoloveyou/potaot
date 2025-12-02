@@ -141,7 +141,7 @@ export const files = Mock.mock({
 			{
 				id: '@id',
 				url: '@url()',
-				fileName: '@ctitle(10)',
+				fileName: '@ctitle(50)',
 				format: 'jpeg',
 				'subsetId|0-4': 3,
 			},

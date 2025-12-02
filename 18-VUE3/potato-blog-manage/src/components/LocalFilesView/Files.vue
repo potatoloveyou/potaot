@@ -1,6 +1,6 @@
 <template>
 	<WhiteContainer>
-		<div class="bg-[#f4f4f4] !py-2 !px-4 grid grid-cols-[1fr_auto] items-center">
+		<div class="bg-[#f4f4f4] !py-2 !px-4 !mb-4 grid grid-cols-[1fr_auto] items-center">
 			<div class="[&>*]:!mr-4 flex items-center">
 				<el-checkbox v-model="checkAll" :indeterminate="isIndeterminate" @change="handleCheckAllChange">
 					全选
@@ -18,9 +18,9 @@
 			v-model="checkedCities"
 			@change="handleCheckedCitiesChange"
 			class="grid grid-cols-5 gap-4 place-items-center">
-			<div v-for="item in filesData" :key="item.id" class="flex flex-col !justify-between w-58 h-60 group relative">
-				<el-checkbox :value="item.id" :border="checkedCities.includes(item.id)" class="img-box !mr-0 !p-0 !h-50">
-					<el-image :src="item.url" class="w-full max-h-50" />
+			<div v-for="item in filesData" :key="item.id" class="grid w-68 h-68 group relative">
+				<el-checkbox :value="item.id" :border="checkedCities.includes(item.id)" class="img-box p-0 !h-58 rounded-md">
+					<el-image fit="scale-down" :src="item.url" class="h-full" />
 				</el-checkbox>
 
 				<div class="absolute opacity-0 group-hover:opacity-100 bottom-10 right-0 [&>*]:!mr-2">
@@ -37,7 +37,11 @@
 						><Switch
 					/></el-icon>
 				</div>
-				<span class="!text-sm text-center">{{ item.fileName }}.{{ item.format }}</span>
+
+				<div class="w-68 flex justify-center items-center">
+					<el-text truncated line-clamp="1" class="!text-base text-center">{{ item.fileName }}</el-text>
+					<el-text class="!text-base text-center">.{{ item.format }}</el-text>
+				</div>
 			</div>
 		</el-checkbox-group>
 
@@ -73,6 +77,7 @@ const urls = [
 	'https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg',
 	'https://fuss10.elemecdn.com/1/34/19aa98b1fcb2781c4fba33d850549jpeg.jpeg',
 	'https://fuss10.elemecdn.com/0/6f/e35ff375812e6b0020b6b4e8f9583jpeg.jpeg',
+	'https://pic1.arkoo.com/56D0B40F99F841DF8A2425762AE2565D/picture/o_1i4qop009177v1tgf14db15he1iaj1is.jpg',
 	'https://fuss10.elemecdn.com/9/bb/e27858e973f5d7d3904835f46abbdjpeg.jpeg',
 	'https://fuss10.elemecdn.com/d/e6/c4d93a3805b3ce3f323f7974e6f78jpeg.jpeg',
 	'https://fuss10.elemecdn.com/3/28/bbf893f792f03a54408b3b7a7ebf0jpeg.jpeg',
@@ -140,8 +145,10 @@ onMounted(() => {
 .el-checkbox.img-box {
 	position: relative;
 	border: 1px solid white;
+	transition: all 0.3s ease-in-out;
 	&.is-bordered.is-checked {
 		border: 1px solid #409eff;
+		background-color: #2b5bed17;
 		:deep(.el-checkbox__input) {
 			opacity: 1;
 		}
@@ -152,22 +159,26 @@ onMounted(() => {
 		left: 5%;
 		opacity: 0;
 		.el-checkbox__inner {
-			width: 1.5rem ;
+			width: 1.5rem;
 			height: 1.5rem;
 			&::after {
-				width: 0.5rem;
+				width: 0.4rem;
 				height: 0.75rem;
 				top: 45%;
 			}
 		}
 	}
 	&:hover {
+		background-color: rgba(0, 0, 0, 0.06);
 		:deep(.el-checkbox__input) {
 			opacity: 1;
 		}
 	}
 	:deep(.el-checkbox__label) {
 		padding: 0;
+		width: 100%;
+		height: 100%;
+		display: grid;
 	}
 }
 </style>

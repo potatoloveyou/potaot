@@ -56,8 +56,17 @@
 			virtual-triggering>
 			<template #default>
 				<div class="grid">
-					<el-scrollbar noresize class="!h-40">
-						<div v-for="item in 10">{{ item }}</div>
+					<el-scrollbar noresize class="!h-50">
+						<el-button
+							type="info"
+							plain
+							round
+							size="default"
+							@click="handleGroupingClick(item.id)"
+							v-for="item in groupingData?.list"
+							class="w-full !ml-0 mb-2 !justify-start hover:!bg-[#409eff] hover:!border-[#409eff]"
+							>{{ item.name }} {{ item.value }}</el-button
+						>
 					</el-scrollbar>
 					<div class="flex justify-end">
 						<el-button type="info" plain size="small" @click="resetInput">取消</el-button>
@@ -82,6 +91,10 @@ import { ref, useTemplateRef } from 'vue';
 
 import type { FileData } from '@/type/files.type';
 import { files } from '@/mock/mock';
+
+import { storeToRefs } from 'pinia';
+import { useGroupingStore } from '@/stores/LocalFilesStores';
+const { stateData, groupingData, exclude } = storeToRefs(useGroupingStore());
 
 import { Delete, Switch } from '@element-plus/icons-vue';
 import type { PopoverInstance } from 'element-plus';
@@ -161,6 +174,12 @@ const switchRef = useTemplateRef('switchRef');
 const popoverRef = useTemplateRef<PopoverInstance>('popoverRef');
 const onClickOutside = () => {
 	popoverRef.value?.hide();
+};
+
+// 分组点击
+const handleGroupingClick = (id: string | number) => {
+	console.log('selected tag id:', id);
+	console.log(checkedCities.value);
 };
 
 // 取消插入

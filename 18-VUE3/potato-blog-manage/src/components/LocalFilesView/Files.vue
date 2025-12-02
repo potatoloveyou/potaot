@@ -18,13 +18,24 @@
 			v-model="checkedCities"
 			@change="handleCheckedCitiesChange"
 			class="flex-1 grid grid-cols-5 gap-4 place-items-center">
-			<div v-for="item in filesData" :key="item.id" class="flex flex-col !justify-between w-50 h-50">
-				<el-checkbox
-					:value="item.id"
-					:border="checkedCities.includes(item.id)"
-					class="!mr-0 !p-0 !h-50 image-container [&span:first-of-type]:absolute">
+			<div v-for="item in filesData" :key="item.id" class="flex flex-col !justify-between w-58 h-60 group relative">
+				<el-checkbox :value="item.id" :border="checkedCities.includes(item.id)" class="!mr-0 !p-0 !h-50">
 					<el-image :src="item.url" class="w-full max-h-50" />
 				</el-checkbox>
+				<div class="absolute hidden group-hover:block bottom-10 right-0 [&>*]:!mr-2">
+					<el-icon
+						:size="18"
+						class="!w-10 !h-10 bg-[rgba(255,255,255,0.5)] hover:bg-[rgba(255,255,255,0.8)] transition-all duration-300 cursor-pointer rounded-lg"
+						@click.stop="handleDeleteClick(item.id)"
+						><Delete
+					/></el-icon>
+					<el-icon
+						:size="18"
+						class="!w-10 !h-10 bg-[rgba(255,255,255,0.5)] hover:bg-[rgba(255,255,255,0.8)] transition-all duration-300 cursor-pointer rounded-lg"
+						@click.stop="handleSwitchClick(item.id)"
+						><Switch
+					/></el-icon>
+				</div>
 				<span class="!text-sm text-center">{{ item.fileName }}.{{ item.format }}</span>
 			</div>
 		</el-checkbox-group>
@@ -46,7 +57,6 @@ import type { FileData } from '@/type/files.type';
 import { files } from '@/mock/mock';
 
 import { Delete, Switch } from '@element-plus/icons-vue';
-import type { CheckboxValueType } from 'element-plus';
 
 import WhiteContainer from '@/components/WhiteContainer.vue';
 
@@ -105,12 +115,19 @@ const getFiles = async () => {
 	let res = await files.data;
 	filesData.value = res.list.map((item: FileData, index: number) => ({ ...item, url: urls[index] }));
 	filesCount.value = res.count;
-	console.log(filesData.value);
 };
 
+// 分页
 const changePag = (value: number) => {
 	offset.value = (value - 1) * limit.value;
-	console.log(offset.value);
+};
+
+const handleDeleteClick = (id: number) => {
+	console.log(id);
+};
+
+const handleSwitchClick = (id: number) => {
+	console.log(id);
 };
 
 onMounted(() => {
@@ -118,4 +135,9 @@ onMounted(() => {
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.a {
+	// background-color: g;
+	background-color: rgba(255, 255, 255, 0.8);
+}
+</style>

@@ -1,6 +1,6 @@
 <template>
 	<!-- 本地文件 -->
-	<div class="h-full flex flex-col">
+	<el-scrollbar noresize class="min-height">
 		<Topic name="本地文件" @search="changeSearch" :isSearch="false" class="!mb-4">
 			<template #custom>
 				<div class="grid grid-cols-[1fr_auto] items-center">
@@ -11,7 +11,7 @@
 		</Topic>
 		<Grouping class="!mb-4" />
 		<Files class="flex-1" />
-	</div>
+	</el-scrollbar>
 </template>
 
 <script setup lang="ts">

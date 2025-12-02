@@ -52,9 +52,10 @@ import { ref } from 'vue';
 
 import type { StateType, GroupingType } from '@/type/grouping.type';
 
-const stateData = inject<Ref<StateType[]> | null>('stateData', null);
-const groupingData = inject<Ref<GroupingType> | null>('groupingData', null);
-const exclude = inject<ComputedRef<any> | null>('exclude', null);
+import { storeToRefs } from 'pinia';
+import { useGroupingStore } from '@/stores/LocalFilesStores';
+const { stateData, groupingData, exclude } = storeToRefs(useGroupingStore());
+
 
 const selectTagId = ref<number | string>(0);
 const changeTag = (id: number | string) => {

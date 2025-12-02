@@ -16,16 +16,16 @@
 					text
 					:disabled="checkedCities.length === 0"
 					@click="handleDeleteClick"
-					class="!p-2 !ml-0" />
+					class="!p-2 !ml-0 !text-xl" />
 
+				<!-- :disabled="checkedCities.length === 0" -->
 				<el-button
 					size="large"
 					:icon="Switch"
 					text
-					:disabled="checkedCities.length === 0"
 					ref="switchRef"
 					v-click-outside="onClickOutside"
-					class="!p-2 !ml-0" />
+					class="!p-2 !ml-0 !text-xl" />
 			</div>
 		</div>
 
@@ -56,6 +56,9 @@
 			virtual-triggering>
 			<template #default>
 				<div class="grid">
+					<el-scrollbar noresize class="!h-40">
+						<div v-for="item in 10">{{ item }}</div>
+					</el-scrollbar>
 					<div class="flex justify-end">
 						<el-button type="info" plain size="small" @click="resetInput">取消</el-button>
 						<el-button type="primary" size="small" @click="changeInput">确定</el-button>
@@ -151,11 +154,6 @@ const changePag = (value: number) => {
 
 // 删除
 const handleDeleteClick = () => {
-	console.log(checkedCities.value);
-};
-
-// 分组
-const handleSwitchClick = () => {
 	console.log(checkedCities.value);
 };
 

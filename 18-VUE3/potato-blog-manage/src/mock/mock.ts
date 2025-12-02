@@ -121,7 +121,7 @@ export const grouping = Mock.mock({
 	code: 200,
 	data: {
 		count: '@integer(300, 1000)',
-		'list|3': [
+		'list|4': [
 			{
 				id: '@id',
 				name: '@ctitle(2,4)',

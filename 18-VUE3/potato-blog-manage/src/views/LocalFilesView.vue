@@ -17,10 +17,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-import { storeToRefs } from 'pinia';
-import { useGroupingStore } from '@/stores/LocalFilesStores';
-const { stateData, groupingData, exclude } = storeToRefs(useGroupingStore());
-
 import Topic from '@/components/Topic.vue';
 import Upload from '@/components/LocalFilesView/Upload.vue';
 import Grouping from '@/components/Grouping.vue';
@@ -30,10 +26,6 @@ import Files from '@/components/LocalFilesView/Files.vue';
 const changeSearch = (value: string) => {
 	console.log('我是父组件', value);
 };
-
-provide('stateData', stateData);
-provide('groupingData', groupingData);
-provide('exclude', exclude);
 
 const getGroupingList = async () => {
 	// stateData.value = state.data;

@@ -1,36 +1,48 @@
 <template>
 	<!-- 分组标签 -->
 	<el-scrollbar view-class="el-scrollbar-view">
-		<div class="h-full flex items-center">
-			<el-tag :type="getTagType(0)" effect="light" round @click="changeTag(0)" class="!mr-2 cursor-pointer">
-				全部 {{ groupingData.count }}
-			</el-tag>
-			<el-tag
-				:type="getTagType(item.id)"
-				effect="light"
+		<div class="h-full flex items-center tag-container">
+			<el-button
+				:type="getTagType(0)"
+				:plain="!isSelected(0)"
 				round
+				size="small"
+				@click="changeTag(0)"
+				class="!mr-2 !ml-0"
+				>全部</el-button
+			>
+
+			<el-button
+				:type="getTagType(item.id)"
+				:plain="!isSelected(item.id)"
+				round
+				size="small"
 				@click="changeTag(item.id)"
 				v-for="item in stateData"
-				class="!mr-2 cursor-pointer">
-				{{ item.name }} {{ item.value }}
-			</el-tag>
-			<el-tag
+				class="!mr-2 !ml-0 !hover:bg-[#409eff]"
+				>{{ item.name }} {{ item.value }}</el-button
+			>
+
+			<el-button
 				:type="getTagType(exclude.id)"
-				effect="light"
+				:plain="!isSelected(exclude.id)"
 				round
+				size="small"
 				@click="changeTag(exclude.id)"
-				class="!mr-2 cursor-pointer">
+				class="!mr-2 !ml-0">
 				{{ exclude.name }} {{ exclude.value }}
-			</el-tag>
-			<el-tag
+			</el-button>
+
+			<el-button
 				:type="getTagType(item.id)"
-				effect="light"
+				:plain="!isSelected(item.id)"
 				round
+				size="small"
 				@click="changeTag(item.id)"
 				v-for="item in groupingData?.list"
-				class="!mr-2 cursor-pointer">
-				{{ item.name }} {{ item.value }}
-			</el-tag>
+				class="!mr-2 !ml-0"
+				>{{ item.name }} {{ item.value }}</el-button
+			>
 		</div>
 	</el-scrollbar>
 </template>
@@ -62,4 +74,15 @@ const getTagType = (id: number | string): TagType => {
 onMounted(() => {});
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.tag-container {
+	& > .el-button {
+		border-color: #f4f4f5;
+		// color: #000;
+		&:hover {
+			background-color: #79bbff;
+			border-color: #79bbff;
+		}
+	}
+}
+</style>

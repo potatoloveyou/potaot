@@ -7,9 +7,8 @@
 			</div>
 		</el-col>
 		<el-col :span="12" class="!flex justify-end items-center">
-			<el-icon :size="20" @click="openDrawer" class="!mr-4 cursor-pointer">
-				<Message />
-			</el-icon>
+			<el-button :icon="Message" text @click="openDrawer" class="!p-2 !mr-4 !text-2xl" />
+
 			<el-avatar shape="circle" size="default" src="src/assets/images/xxmLogo.png" class="!mr-4" />
 			<div class="cursor-pointer">
 				<el-icon :size="20" @click="themeStore.switchTheme" v-if="themeStore.themes == 'light'" class="!mr-4">
@@ -31,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';	
+import { ref } from 'vue';
 import { comment } from '@/mock/mock';
 import type { CommentResponseType, CommentItemType } from '@/type/index';
 

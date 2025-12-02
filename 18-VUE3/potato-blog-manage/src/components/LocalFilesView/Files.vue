@@ -8,9 +8,9 @@
 				<span>已选择 {{ checkedCities.length }} 项内容</span>
 				<el-button type="text" v-if="checkedCities.length > 0" @click="CheckNoAll">取消选择</el-button>
 			</div>
-			<div class="[&>*]:!ml-4 flex items-center">
-				<el-icon :size="16"><Delete /></el-icon>
-				<el-icon :size="16"><Switch /></el-icon>
+			<div class="flex items-center">
+				<el-button size="large" :icon="Delete" text class="!p-2 !ml-0" />
+				<el-button size="large" :icon="Switch" text class="!p-2 !ml-0" />
 			</div>
 		</div>
 
@@ -132,7 +132,11 @@ const handleDeleteClick = (id: number) => {
 	console.log(id);
 };
 
-const handleSwitchClick = (id: number) => {
+const handleSwitchClick = (id?: number) => {
+	if (id) {
+		console.log(123);
+		return;
+	}
 	console.log(id);
 };
 

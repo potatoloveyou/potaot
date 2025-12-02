@@ -17,12 +17,13 @@
 		<el-checkbox-group
 			v-model="checkedCities"
 			@change="handleCheckedCitiesChange"
-			class="flex-1 grid grid-cols-5 gap-4 place-items-center">
+			class="grid grid-cols-5 gap-4 place-items-center">
 			<div v-for="item in filesData" :key="item.id" class="flex flex-col !justify-between w-58 h-60 group relative">
-				<el-checkbox :value="item.id" :border="checkedCities.includes(item.id)" class="!mr-0 !p-0 !h-50">
+				<el-checkbox :value="item.id" :border="checkedCities.includes(item.id)" class="img-box !mr-0 !p-0 !h-50">
 					<el-image :src="item.url" class="w-full max-h-50" />
 				</el-checkbox>
-				<div class="absolute hidden group-hover:block bottom-10 right-0 [&>*]:!mr-2">
+
+				<div class="absolute opacity-0 group-hover:opacity-100 bottom-10 right-0 [&>*]:!mr-2">
 					<el-icon
 						:size="18"
 						class="!w-10 !h-10 bg-[rgba(255,255,255,0.5)] hover:bg-[rgba(255,255,255,0.8)] transition-all duration-300 cursor-pointer rounded-lg"
@@ -136,8 +137,37 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.a {
-	// background-color: g;
-	background-color: rgba(255, 255, 255, 0.8);
+.el-checkbox.img-box {
+	position: relative;
+	border: 1px solid white;
+	&.is-bordered.is-checked {
+		border: 1px solid #409eff;
+		:deep(.el-checkbox__input) {
+			opacity: 1;
+		}
+	}
+	:deep(.el-checkbox__input) {
+		position: absolute;
+		top: 5%;
+		left: 5%;
+		opacity: 0;
+		.el-checkbox__inner {
+			width: 1.5rem ;
+			height: 1.5rem;
+			&::after {
+				width: 0.5rem;
+				height: 0.75rem;
+				top: 45%;
+			}
+		}
+	}
+	&:hover {
+		:deep(.el-checkbox__input) {
+			opacity: 1;
+		}
+	}
+	:deep(.el-checkbox__label) {
+		padding: 0;
+	}
 }
 </style>

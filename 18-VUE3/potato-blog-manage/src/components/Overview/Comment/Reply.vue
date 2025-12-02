@@ -6,7 +6,7 @@
 				<el-text size="large" tag="b">{{ data?.user.username }}</el-text>
 				<el-text size="small" type="info">{{ data?.createTime }}</el-text>
 				<el-text :line-clamp="lineClamp" class="!leading-6">{{ data?.content }}</el-text>
-				<el-icon class="!absolute !top-0 !right-5 cursor-pointer !hidden group-hover:!block" @click="changeDel(data.id)"
+				<el-icon class="!absolute !top-0 !right-5 cursor-pointer !opacity-0 group-hover:!opacity-100" @click="changeDel(data.id)"
 					><Delete
 				/></el-icon>
 			</div>

@@ -1,5 +1,6 @@
 <template>
 	<WhiteContainer>
+		<!-- 文件列表组件 -->
 		<div class="bg-[#f4f4f4] !py-2 !px-4 !mb-4 grid grid-cols-[1fr_auto] items-center">
 			<div class="[&>*]:!mr-4 flex items-center">
 				<el-checkbox v-model="checkAll" :indeterminate="isIndeterminate" @change="handleCheckAllChange">
@@ -9,8 +10,22 @@
 				<el-button type="text" v-if="checkedCities.length > 0" @click="CheckNoAll">取消选择</el-button>
 			</div>
 			<div class="flex items-center">
-				<el-button size="large" :icon="Delete" text class="!p-2 !ml-0" />
-				<el-button size="large" :icon="Switch" text class="!p-2 !ml-0" />
+				<el-button
+					size="large"
+					:icon="Delete"
+					text
+					:disabled="checkedCities.length === 0"
+					@click="handleDeleteClick"
+					class="!p-2 !ml-0" />
+
+				<el-button
+					size="large"
+					:icon="Switch"
+					text
+					:disabled="checkedCities.length === 0"
+					ref="switchRef"
+					v-click-outside="onClickOutside"
+					class="!p-2 !ml-0" />
 			</div>
 		</div>
 
@@ -23,27 +38,31 @@
 					<el-image fit="scale-down" :src="item.url" class="h-full" />
 				</el-checkbox>
 
-				<div class="absolute opacity-0 group-hover:opacity-100 bottom-10 right-0 [&>*]:!mr-2">
-					<el-icon
-						:size="18"
-						class="!w-10 !h-10 bg-[rgba(255,255,255,0.5)] hover:bg-[rgba(255,255,255,0.8)] transition-all duration-300 cursor-pointer rounded-lg"
-						@click.stop="handleDeleteClick(item.id)"
-						><Delete
-					/></el-icon>
-					<el-icon
-						:size="18"
-						class="!w-10 !h-10 bg-[rgba(255,255,255,0.5)] hover:bg-[rgba(255,255,255,0.8)] transition-all duration-300 cursor-pointer rounded-lg"
-						@click.stop="handleSwitchClick(item.id)"
-						><Switch
-					/></el-icon>
-				</div>
-
 				<div class="w-68 flex justify-center items-center">
 					<el-text truncated line-clamp="1" class="!text-base text-center">{{ item.fileName }}</el-text>
 					<el-text class="!text-base text-center">.{{ item.format }}</el-text>
 				</div>
 			</div>
 		</el-checkbox-group>
+
+		<el-popover
+			width="220"
+			title="请选择分组"
+			content="Bottom Right prompts info"
+			placement="bottom-end"
+			ref="popoverRef"
+			:virtual-ref="switchRef"
+			trigger="click"
+			virtual-triggering>
+			<template #default>
+				<div class="grid">
+					<div class="flex justify-end">
+						<el-button type="info" plain size="small" @click="resetInput">取消</el-button>
+						<el-button type="primary" size="small" @click="changeInput">确定</el-button>
+					</div>
+				</div>
+			</template></el-popover
+		>
 
 		<el-pagination
 			background
@@ -56,12 +75,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, useTemplateRef } from 'vue';
 
 import type { FileData } from '@/type/files.type';
 import { files } from '@/mock/mock';
 
 import { Delete, Switch } from '@element-plus/icons-vue';
+import type { PopoverInstance } from 'element-plus';
+import { ClickOutside as vClickOutside } from 'element-plus';
 
 import WhiteContainer from '@/components/WhiteContainer.vue';
 
@@ -128,16 +149,30 @@ const changePag = (value: number) => {
 	offset.value = (value - 1) * limit.value;
 };
 
-const handleDeleteClick = (id: number) => {
-	console.log(id);
+// 删除
+const handleDeleteClick = () => {
+	console.log(checkedCities.value);
 };
 
-const handleSwitchClick = (id?: number) => {
-	if (id) {
-		console.log(123);
-		return;
-	}
-	console.log(id);
+// 分组
+const handleSwitchClick = () => {
+	console.log(checkedCities.value);
+};
+
+const switchRef = useTemplateRef('switchRef');
+const popoverRef = useTemplateRef<PopoverInstance>('popoverRef');
+const onClickOutside = () => {
+	popoverRef.value?.hide();
+};
+
+// 取消插入
+const resetInput = () => {
+	console.log('取消插入');
+};
+
+// 确定插入
+const changeInput = () => {
+	console.log('确定插入');
 };
 
 onMounted(() => {

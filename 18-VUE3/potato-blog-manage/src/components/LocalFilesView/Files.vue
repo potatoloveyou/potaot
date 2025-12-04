@@ -11,7 +11,6 @@
 			</div>
 			<div class="flex items-center">
 				<el-button
-					size="large"
 					:icon="Delete"
 					text
 					:disabled="checkedCities.length === 0"
@@ -19,7 +18,6 @@
 					class="p-2 ml-0 text-xl" />
 
 				<el-button
-					size="large"
 					:icon="Switch"
 					text
 					:disabled="checkedCities.length === 0"
@@ -33,10 +31,17 @@
 			v-model="checkedCities"
 			@change="handleCheckedCitiesChange"
 			class="grid grid-cols-5 gap-4 place-items-center">
-			<div v-for="item in filesData" :key="item.id" class="grid w-68 h-68 group relative">
+			<div v-for="(item, index) in filesData" :key="item.id" class="grid w-68 h-68 group relative">
 				<el-checkbox :value="item.id" :border="checkedCities.includes(item.id)" class="img-box p-0 h-58 rounded-md">
 					<el-image fit="scale-down" :src="item.url" class="h-full" />
 				</el-checkbox>
+
+				<el-button
+					:icon="ZoomIn"
+					circle
+					type="primary"
+					@click.stop="handlePreviewClick(item.url)"
+					class="absolute top-2 right-2 p-5 m-0 opacity-0 group-hover:opacity-100 text-2xl " />
 
 				<div class="w-68 flex justify-center items-center">
 					<el-text truncated line-clamp="1" class="text-base text-center">{{ item.fileName }}</el-text>
@@ -44,6 +49,8 @@
 				</div>
 			</div>
 		</el-checkbox-group>
+
+		<el-image-viewer v-if="showPreview" :url-list="previewList" @close="showPreview = false" />
 
 		<el-popover
 			width="220"
@@ -64,9 +71,9 @@
 							size="default"
 							@click="handleGroupingClick(item.id)"
 							v-for="item in groupingData?.list"
-							class="w-full ml-0 mb-2 justify-start hover:bg-[#409eff] hover:border-[#409eff]"
-							>{{ item.name }} {{ item.value }}</el-button
-						>
+							class="w-full ml-0 mb-2 justify-start hover:bg-[#409eff] hover:border-[#409eff]">
+							{{ item.name }} {{ item.value }}
+						</el-button>
 					</el-scrollbar>
 					<div class="flex justify-end">
 						<el-button type="info" plain size="small" @click="resetInput">取消</el-button>
@@ -94,10 +101,10 @@ import { files } from '@/mock/mock';
 
 import { storeToRefs } from 'pinia';
 import { useGroupingStore } from '@/stores/LocalFilesStores';
-const { stateData, groupingData, exclude } = storeToRefs(useGroupingStore());
+const { groupingData } = storeToRefs(useGroupingStore());
 
-import { Delete, Switch } from '@element-plus/icons-vue';
-import type { PopoverInstance } from 'element-plus';
+import { Delete, Switch, ZoomIn } from '@element-plus/icons-vue';
+import type { ImageInstance, PopoverInstance } from 'element-plus';
 import { ClickOutside as vClickOutside } from 'element-plus';
 
 import WhiteContainer from '@/components/WhiteContainer.vue';
@@ -145,6 +152,14 @@ const handleCheckedCitiesChange = (value: number[]) => {
 	checkAll.value = checkedCount === filesCount.value;
 	// 选中数是否大于0 且 小于文件总数
 	isIndeterminate.value = checkedCount > 0 && checkedCount < filesCount.value;
+};
+
+const showPreview = ref(false);
+const previewList = ref<string[]>([]);
+// 点击预览
+const handlePreviewClick = (url: string) => {
+	showPreview.value = true;
+	previewList.value = [url];
 };
 
 const limit = ref(10);

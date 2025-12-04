@@ -1,6 +1,6 @@
 <template>
 	<!-- 分组标签 -->
-	<el-scrollbar view-class="el-scrollbar-view">
+	<el-scrollbar view-class="el-scrollbar-view" class="pb-4">
 		<div class="h-full flex items-center tag-container">
 			<el-button
 				:type="getTagType(0)"
@@ -19,9 +19,9 @@
 				size="small"
 				@click="changeTag(item.id)"
 				v-for="item in stateData"
-				class="mr-2 ml-0 hover:bg-[#409eff]"
-				>{{ item.name }} {{ item.value }}</el-button
-			>
+				class="mr-2 ml-0 hover:bg-[#409eff]">
+				{{ item.name }} {{ item.value }}
+			</el-button>
 
 			<el-button
 				:type="getTagType(exclude.id)"
@@ -41,8 +41,8 @@
 				@click="changeTag(item.id)"
 				v-for="item in groupingData?.list"
 				class="mr-2 ml-0"
-				>{{ item.name }} {{ item.value }}</el-button
-			>
+				>{{ item.name }} {{ item.value }}
+			</el-button>
 		</div>
 	</el-scrollbar>
 </template>
@@ -55,7 +55,6 @@ import type { StateType, GroupingType } from '@/type/grouping.type';
 import { storeToRefs } from 'pinia';
 import { useGroupingStore } from '@/stores/LocalFilesStores';
 const { stateData, groupingData, exclude } = storeToRefs(useGroupingStore());
-
 
 const selectTagId = ref<number | string>(0);
 const changeTag = (id: number | string) => {

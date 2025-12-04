@@ -1,6 +1,6 @@
 <template>
 	<!-- 标题组件 -->
-	<div class="grid grid-cols-[1fr_auto] items-center">
+	<div class="h-10 grid grid-cols-[1fr_auto] items-center">
 		<span class="!text-[1.5rem]">{{ name }}</span>
 		<!-- 放置插槽自定义标题组件右侧内容 -->
 		<slot name="custom" />

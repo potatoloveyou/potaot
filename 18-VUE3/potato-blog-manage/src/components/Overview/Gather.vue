@@ -1,6 +1,6 @@
 <template>
 	<!-- 总览数据 -->
-	<div class="grid grid-cols-4 gap-x-4">
+	<div class="grid grid-cols-4 gap-x-4 mb-4">
 		<div v-for="(value, index) in overLink" :key="value.name">
 			<div :style="{ background: value.bgColor }" class="p-4 flex items-center justify-between rounded-lg">
 				<div class="flex flex-col">

@@ -19,7 +19,7 @@
 					<Moon />
 				</el-icon>
 			</div>
-			<el-button type="primary" class="button">退出</el-button>
+			<el-button type="primary" color="#2b5aed">退出</el-button>
 		</el-col>
 	</el-row>
 	<PrivateMessage

@@ -2,20 +2,20 @@
 	<el-row justify="space-between" class="items-center">
 		<el-col :span="12" class="cursor-pointer">
 			<div class="flex items-center" @click="goOverview">
-				<el-image src="src/assets/images/yike.png" class="w-9 h-9 rounded-full !mr-2" />
-				<el-text size="large" class="!font-bold !text-xl header-theme">土豆博客后台</el-text>
+				<el-image src="src/assets/images/yike.png" class="w-9 h-9 rounded-full mr-2" />
+				<el-text size="large" class="font-bold text-xl header-theme">土豆博客后台</el-text>
 			</div>
 		</el-col>
-		<el-col :span="12" class="!flex justify-end items-center">
-			<el-button :icon="Message" text @click="openDrawer" class="!p-2 !mr-4 !text-2xl" />
+		<el-col :span="12" class="flex justify-end items-center">
+			<el-button :icon="Message" text @click="openDrawer" class="p-2 mr-4 text-2xl" />
 
-			<el-avatar shape="circle" size="default" src="src/assets/images/xxmLogo.png" class="!mr-4" />
+			<el-avatar shape="circle" size="default" src="src/assets/images/xxmLogo.png" class="mr-4" />
 			<div class="cursor-pointer">
-				<el-icon :size="20" @click="themeStore.switchTheme" v-if="themeStore.themes == 'light'" class="!mr-4">
+				<el-icon :size="20" @click="themeStore.switchTheme" v-if="themeStore.themes == 'light'" class="mr-4">
 					<Sunny />
 				</el-icon>
 
-				<el-icon :size="20" @click="themeStore.switchTheme" v-else class="!mr-4">
+				<el-icon :size="20" @click="themeStore.switchTheme" v-else class="mr-4">
 					<Moon />
 				</el-icon>
 			</div>

@@ -1,7 +1,7 @@
 <template>
 	<!-- 总览右侧评论 -->
 	<WhiteContainer>
-		<span class="!text-[1.3rem]">评论{{ commentData.total }}</span>
+		<span class="text-[1.3rem]">评论{{ commentData.total }}</span>
 		<div v-if="commentData.list.length">
 			<Reply v-for="item in sliceData" :data="item" :key="item.id" @deleteReply="deleteReply" />
 			<el-pagination
@@ -11,7 +11,7 @@
 				:total="commentData.total"
 				:page-size="limit"
 				@change="changePag"
-				class="justify-center !pt-4" />
+				class="justify-center pt-4" />
 		</div>
 	</WhiteContainer>
 </template>

@@ -6,13 +6,13 @@
 			<el-popover width="220" title="请输入分组名称" content="Bottom Right prompts info" placement="bottom-end">
 				<template #reference>
 					<div class="flex items-center cursor-pointer text-[#2B5AED]">
-						<el-icon class="!mr-1" color="#2B5AED"><CirclePlus /></el-icon>
+						<el-icon class="mr-1" color="#2B5AED"><CirclePlus /></el-icon>
 						新建
 					</div>
 				</template>
 				<template #default>
 					<div class="grid">
-						<el-input v-model="newGroupingName" placeholder="请输入" class="!mb-3 !bg-[#f4f4f4]"></el-input>
+						<el-input v-model="newGroupingName" placeholder="请输入" class="mb-3 bg-[#f4f4f4]"></el-input>
 						<div class="flex justify-end">
 							<el-button type="info" plain size="small" @click="resetInput">取消</el-button>
 							<el-button type="primary" size="small" @click="changeInput">确定</el-button>
@@ -21,8 +21,8 @@
 				</template>
 			</el-popover>
 
-			<div class="flex items-center !ml-6 cursor-pointer text-[#2B5AED]" @click="changeManage">
-				<el-icon class="!mr-1" color="#2B5AED"><Tools /></el-icon>
+			<div class="flex items-center ml-6 cursor-pointer text-[#2B5AED]" @click="changeManage">
+				<el-icon class="mr-1" color="#2B5AED"><Tools /></el-icon>
 				管理分组
 			</div>
 			<ModalTableDialog

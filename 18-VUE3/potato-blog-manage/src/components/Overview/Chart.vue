@@ -1,10 +1,9 @@
 <template>
 	<!-- 总览左侧echarts卡片 -->
-	<!-- <div class="grid grid-rows-[auto_auto] gap-y-4"> -->
 	<div class="grid grid-rows-[1fr_1fr] gap-y-4">
 		<WhiteContainer class="grid grid-rows-[auto_1fr]">
-			<div class="flex justify-between items-center !pb-4">
-				<span class="!text-[1.3rem]">访问量</span>
+			<div class="flex justify-between items-center pb-4">
+				<span class="text-[1.3rem]">访问量</span>
 				<el-radio-group v-model="visits" size="default" fill="#2B5AED" @change="getVisit">
 					<el-radio-button label="近一周" value="week" />
 					<el-radio-button label="近一月" value="month" />
@@ -13,8 +12,8 @@
 			<Line :data="lineData" />
 		</WhiteContainer>
 		<WhiteContainer class="grid grid-rows-[auto_1fr]">
-			<div class="!p-4 flex justify-between items-center">
-				<span class="!text-[1.3rem]">数据监控</span>
+			<div class="p-4 flex justify-between items-center">
+				<span class="text-[1.3rem]">数据监控</span>
 				<el-radio-group v-model="monitor" size="default" fill="#2B5AED">
 					<el-radio-button label="近一周" value="week" />
 					<el-radio-button label="近一月" value="month" />

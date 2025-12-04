@@ -1,8 +1,8 @@
 <template>
 	<WhiteContainer>
 		<!-- 文件列表组件 -->
-		<div class="bg-[#f4f4f4] !py-2 !px-4 !mb-4 grid grid-cols-[1fr_auto] items-center">
-			<div class="[&>*]:!mr-4 flex items-center">
+		<div class="bg-[#f4f4f4] py-2 px-4 mb-4 grid grid-cols-[1fr_auto] items-center">
+			<div class="[&>*]:mr-4 flex items-center">
 				<el-checkbox v-model="checkAll" :indeterminate="isIndeterminate" @change="handleCheckAllChange">
 					全选
 				</el-checkbox>
@@ -16,16 +16,16 @@
 					text
 					:disabled="checkedCities.length === 0"
 					@click="handleDeleteClick"
-					class="!p-2 !ml-0 !text-xl" />
+					class="p-2 ml-0 text-xl" />
 
-				<!-- :disabled="checkedCities.length === 0" -->
 				<el-button
 					size="large"
 					:icon="Switch"
 					text
+					:disabled="checkedCities.length === 0"
 					ref="switchRef"
 					v-click-outside="onClickOutside"
-					class="!p-2 !ml-0 !text-xl" />
+					class="p-2 ml-0 text-xl" />
 			</div>
 		</div>
 
@@ -34,13 +34,13 @@
 			@change="handleCheckedCitiesChange"
 			class="grid grid-cols-5 gap-4 place-items-center">
 			<div v-for="item in filesData" :key="item.id" class="grid w-68 h-68 group relative">
-				<el-checkbox :value="item.id" :border="checkedCities.includes(item.id)" class="img-box p-0 !h-58 rounded-md">
+				<el-checkbox :value="item.id" :border="checkedCities.includes(item.id)" class="img-box p-0 h-58 rounded-md">
 					<el-image fit="scale-down" :src="item.url" class="h-full" />
 				</el-checkbox>
 
 				<div class="w-68 flex justify-center items-center">
-					<el-text truncated line-clamp="1" class="!text-base text-center">{{ item.fileName }}</el-text>
-					<el-text class="!text-base text-center">.{{ item.format }}</el-text>
+					<el-text truncated line-clamp="1" class="text-base text-center">{{ item.fileName }}</el-text>
+					<el-text class="text-base text-center">.{{ item.format }}</el-text>
 				</div>
 			</div>
 		</el-checkbox-group>
@@ -56,7 +56,7 @@
 			virtual-triggering>
 			<template #default>
 				<div class="grid">
-					<el-scrollbar noresize class="!h-50">
+					<el-scrollbar noresize class="h-50">
 						<el-button
 							type="info"
 							plain
@@ -64,7 +64,7 @@
 							size="default"
 							@click="handleGroupingClick(item.id)"
 							v-for="item in groupingData?.list"
-							class="w-full !ml-0 mb-2 !justify-start hover:!bg-[#409eff] hover:!border-[#409eff]"
+							class="w-full ml-0 mb-2 justify-start hover:bg-[#409eff] hover:border-[#409eff]"
 							>{{ item.name }} {{ item.value }}</el-button
 						>
 					</el-scrollbar>
@@ -82,7 +82,7 @@
 			:total="filesCount"
 			:page-size="limit"
 			@change="changePag"
-			class="justify-end !pt-4" />
+			class="justify-end pt-4" />
 	</WhiteContainer>
 </template>
 

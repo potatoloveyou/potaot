@@ -8,7 +8,7 @@
 				round
 				size="small"
 				@click="changeTag(0)"
-				class="!mr-2 !ml-0"
+				class="mr-2 ml-0"
 				>全部</el-button
 			>
 
@@ -19,7 +19,7 @@
 				size="small"
 				@click="changeTag(item.id)"
 				v-for="item in stateData"
-				class="!mr-2 !ml-0 !hover:bg-[#409eff]"
+				class="mr-2 ml-0 hover:bg-[#409eff]"
 				>{{ item.name }} {{ item.value }}</el-button
 			>
 
@@ -29,7 +29,7 @@
 				round
 				size="small"
 				@click="changeTag(exclude.id)"
-				class="!mr-2 !ml-0">
+				class="mr-2 ml-0">
 				{{ exclude.name }} {{ exclude.value }}
 			</el-button>
 
@@ -40,7 +40,7 @@
 				size="small"
 				@click="changeTag(item.id)"
 				v-for="item in groupingData?.list"
-				class="!mr-2 !ml-0"
+				class="mr-2 ml-0"
 				>{{ item.name }} {{ item.value }}</el-button
 			>
 		</div>

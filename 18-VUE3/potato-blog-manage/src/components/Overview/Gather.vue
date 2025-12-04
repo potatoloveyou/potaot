@@ -2,12 +2,12 @@
 	<!-- 总览数据 -->
 	<div class="grid grid-cols-4 gap-x-4">
 		<div v-for="(value, index) in overLink" :key="value.name">
-			<div :style="{ background: value.bgColor }" class="!p-4 flex items-center justify-between rounded-lg">
+			<div :style="{ background: value.bgColor }" class="p-4 flex items-center justify-between rounded-lg">
 				<div class="flex flex-col">
 					<text class="pb-4">{{ value.name }}</text>
 					<text class="text-3xl">{{ value.totle }}</text>
 				</div>
-				<el-button :icon="Plus" color="#1e202514" v-if="index > 0" class="!w-12 !h-12"></el-button>
+				<el-button :icon="Plus" color="#1e202514" v-if="index > 0" class="w-12 h-12"></el-button>
 			</div>
 		</div>
 	</div>

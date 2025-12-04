@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import 'tailwindcss' important;
 
 html {
 	font-size: 14px;

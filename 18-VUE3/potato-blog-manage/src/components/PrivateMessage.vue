@@ -1,8 +1,8 @@
 <template>
 	<!-- 私信抽屉 -->
 	<el-drawer v-model="localDrawer" @close="close" header-class="pm-header" body-class="pm-body">
-		<template #header class="!mb-8">
-			<span class="!text-xl">私信 {{ privateMessageDataTotal }}</span>
+		<template #header class="mb-8">
+			<span class="text-xl">私信 {{ privateMessageDataTotal }}</span>
 		</template>
 
 		<DynamicScroller :items="data" :min-item-size="100" :buffer="300" style="height: 100%" @scroll-end="loadMore">

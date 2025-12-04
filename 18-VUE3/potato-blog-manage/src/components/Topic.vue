@@ -1,7 +1,7 @@
 <template>
 	<!-- 标题组件 -->
 	<div class="h-10 grid grid-cols-[1fr_auto] items-center">
-		<span class="!text-[1.5rem]">{{ name }}</span>
+		<span class="text-[1.5rem]">{{ name }}</span>
 		<!-- 放置插槽自定义标题组件右侧内容 -->
 		<slot name="custom" />
 		<div v-if="isSearch" class="grid grid-cols-[auto_auto] items-center">
@@ -11,7 +11,7 @@
 				color="#1e202514"
 				v-show="input"
 				@click="cancelSearch"
-				class="!text-black !mr-2 transition"
+				class="text-black mr-2 transition"
 				>取消搜索</el-button
 			>
 			<el-input
@@ -22,7 +22,7 @@
 				size="default"
 				@keydown.enter="keydownInput"
 				@clear="clearInput"
-				class="!w-80 opacity-80" />
+				class="w-80 opacity-80" />
 		</div>
 	</div>
 </template>

@@ -39,9 +39,9 @@
 				<el-button
 					:icon="ZoomIn"
 					circle
-					type="primary"
+					color="#2b5aed"
 					@click.stop="handlePreviewClick(item.url)"
-					class="absolute top-2 right-2 p-5 m-0 opacity-0 group-hover:opacity-100 text-2xl " />
+					class="absolute top-2 right-2 p-5 m-0 opacity-0 group-hover:opacity-100 text-2xl" />
 
 				<div class="w-68 flex justify-center items-center">
 					<el-text truncated line-clamp="1" class="text-base text-center">{{ item.fileName }}</el-text>

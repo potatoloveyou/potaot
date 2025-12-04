@@ -3,44 +3,48 @@
 	<el-scrollbar view-class="el-scrollbar-view" class="pb-4">
 		<div class="h-full flex items-center tag-container">
 			<el-button
-				:type="getTagType(0)"
+				:type="isSelected(0) ? 'primary' : 'info'"
 				:plain="!isSelected(0)"
 				round
+				:color="isSelected(0) ? '#2b5aed' : ''"
 				size="small"
 				@click="changeTag(0)"
-				class="mr-2 ml-0"
-				>全部</el-button
-			>
+				class="mr-2 ml-0 hover:bg-[#6b8cf2]">
+				全部
+			</el-button>
 
 			<el-button
-				:type="getTagType(item.id)"
+				:type="isSelected(item.id) ? 'primary' : 'info'"
 				:plain="!isSelected(item.id)"
 				round
+				:color="isSelected(item.id) ? '#2b5aed' : ''"
 				size="small"
 				@click="changeTag(item.id)"
 				v-for="item in stateData"
-				class="mr-2 ml-0 hover:bg-[#409eff]">
+				class="mr-2 ml-0 hover:bg-[#6b8cf2]">
 				{{ item.name }} {{ item.value }}
 			</el-button>
 
 			<el-button
-				:type="getTagType(exclude.id)"
+				:type="isSelected(exclude.id) ? 'primary' : 'info'"
 				:plain="!isSelected(exclude.id)"
 				round
+				:color="isSelected(exclude.id) ? '#2b5aed' : ''"
 				size="small"
 				@click="changeTag(exclude.id)"
-				class="mr-2 ml-0">
+				class="mr-2 ml-0 hover:bg-[#6b8cf2]">
 				{{ exclude.name }} {{ exclude.value }}
 			</el-button>
 
 			<el-button
-				:type="getTagType(item.id)"
+				:type="isSelected(item.id) ? 'primary' : 'info'"
 				:plain="!isSelected(item.id)"
 				round
+				:color="isSelected(item.id) ? '#2b5aed' : ''"
 				size="small"
 				@click="changeTag(item.id)"
 				v-for="item in groupingData?.list"
-				class="mr-2 ml-0"
+				class="mr-2 ml-0 hover:bg-[#6b8cf2]"
 				>{{ item.name }} {{ item.value }}
 			</el-button>
 		</div>
@@ -77,12 +81,7 @@ onMounted(() => {});
 <style lang="scss" scoped>
 .tag-container {
 	& > .el-button {
-		border-color: #f4f4f5;
-		// color: #000;
-		&:hover {
-			background-color: #79bbff;
-			border-color: #79bbff;
-		}
+		border-color: #f4f4f4;
 	}
 }
 </style>

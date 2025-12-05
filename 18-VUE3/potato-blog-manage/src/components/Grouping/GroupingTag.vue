@@ -1,6 +1,6 @@
 <template>
 	<!-- 分组标签 -->
-	<el-scrollbar view-class="el-scrollbar-view" class="pb-4">
+	<el-scrollbar view-class="el-scrollbar-view" class="pb-4 pr-10">
 		<div class="h-full flex items-center tag-container">
 			<el-button
 				:type="isSelected(0) ? 'primary' : 'info'"

@@ -1,8 +1,8 @@
 <template>
 	<!-- 分组组件 -->
-	<WhiteContainer class="grid grid-cols-[1fr_auto] items-center mb-4 pb-0">
+	<WhiteContainer class="grid grid-cols-[1fr_auto] mb-4 pb-0">
 		<GroupingTag />
-		<div class="flex items-center">
+		<div class="flex items-center pb-4">
 			<el-popover width="220" title="请输入分组名称" content="Bottom Right prompts info" placement="bottom-end">
 				<template #reference>
 					<div class="flex items-center cursor-pointer text-[#2B5AED]">

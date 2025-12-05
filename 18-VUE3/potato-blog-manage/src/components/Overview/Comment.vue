@@ -2,7 +2,7 @@
 	<!-- 总览右侧评论 -->
 	<WhiteContainer>
 		<span class="text-[1.3rem]">评论{{ commentData.total }}</span>
-		<div v-if="commentData.list.length">
+		<div v-if="commentData.list.length" class="h-full">
 			<Reply v-for="item in sliceData" :data="item" :key="item.id" @deleteReply="deleteReply" />
 			<el-pagination
 				background
@@ -13,6 +13,7 @@
 				@change="changePag"
 				class="justify-center pt-4" />
 		</div>
+		<div v-else>暂无评论</div>
 	</WhiteContainer>
 </template>
 

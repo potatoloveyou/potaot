@@ -3,7 +3,7 @@
 	<el-scrollbar noresize class="min-height">
 		<Topic @search="changeSearch" :isSearch="false" />
 		<Gather />
-		<div class="grid grid-cols-[2fr_1.5fr] gap-x-4">
+		<div class="grid grid-cols-[2fr_1.5fr] gap-x-4 min-h-dvh">
 			<Chart />
 			<Comment />
 		</div>

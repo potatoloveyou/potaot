@@ -11,19 +11,16 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    ArticleList: typeof import('./components/BlogPostsView/ArticleList.vue')['default']
     AutoResizerTable: typeof import('./components/ModalTableDialog/AutoResizerTable.vue')['default']
     Chart: typeof import('./components/Overview/Chart.vue')['default']
     Comment: typeof import('./components/Overview/Comment.vue')['default']
-    Commonnt: typeof import('./components/Overview/Commonnt.vue')['default']
-    Doughnut: typeof import('./components/Overview/Chart/Pie.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElAutoResizer: typeof import('element-plus/es')['ElAutoResizer']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
-    ElCheckboxButton: typeof import('element-plus/es')['ElCheckboxButton']
     ElCheckboxGroup: typeof import('element-plus/es')['ElCheckboxGroup']
-    ElCheckTag: typeof import('element-plus/es')['ElCheckTag']
     ElCol: typeof import('element-plus/es')['ElCol']
     ElContainer: typeof import('element-plus/es')['ElContainer']
     ElDialog: typeof import('element-plus/es')['ElDialog']
@@ -50,10 +47,8 @@ declare module 'vue' {
     Gather: typeof import('./components/Overview/Gather.vue')['default']
     Grouping: typeof import('./components/Grouping.vue')['default']
     GroupingTag: typeof import('./components/Grouping/GroupingTag.vue')['default']
-    GroupingTop: typeof import('./components/Grouping/GroupingTop.vue')['default']
-    Lable: typeof import('./components/Grouping/Lable.vue')['default']
+    Label: typeof import('./components/BlogPostsView/Label.vue')['default']
     Line: typeof import('./components/Overview/Chart/Line.vue')['default']
-    ManageGrouping: typeof import('./components/ModalTableDialog.vue')['default']
     ModalTableDialog: typeof import('./components/ModalTableDialog.vue')['default']
     Pie: typeof import('./components/Overview/Chart/Pie.vue')['default']
     PrivateMessage: typeof import('./components/PrivateMessage.vue')['default']
@@ -63,8 +58,5 @@ declare module 'vue' {
     Topic: typeof import('./components/Topic.vue')['default']
     Upload: typeof import('./components/LocalFilesView/Upload.vue')['default']
     WhiteContainer: typeof import('./components/WhiteContainer.vue')['default']
-  }
-  export interface GlobalDirectives {
-    vPopover: typeof import('element-plus/es')['ElPopoverDirective']
   }
 }

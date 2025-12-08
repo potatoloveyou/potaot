@@ -148,3 +148,18 @@ export const files = Mock.mock({
 		],
 	},
 });
+
+// 分组
+export const label = Mock.mock({
+	code: 200,
+	data: {
+		count: '@integer(300, 1000)',
+		'list|4': [
+			{
+				id: '@id',
+				name: '@ctitle(2,4)',
+				createTime: '@datetime(yyyy-MM-dd HH:mm:ss)',
+			},
+		],
+	},
+});

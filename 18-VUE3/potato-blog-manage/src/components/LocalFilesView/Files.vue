@@ -96,7 +96,7 @@
 <script setup lang="ts">
 import { ref, useTemplateRef } from 'vue';
 
-import type { FileData } from '@/type/files.type';
+import type { FileType } from '@/type/files.type';
 import { files } from '@/mock/mock';
 
 import { storeToRefs } from 'pinia';
@@ -167,11 +167,11 @@ const offset = ref(0);
 
 // 文件总数
 const filesCount = ref(0);
+const filesData = ref<FileType[]>([]);
 // 获取文件列表
-const filesData = ref<FileData[]>([]);
 const getFiles = async () => {
 	let res = await files.data;
-	filesData.value = res.list.map((item: FileData, index: number) => ({ ...item, url: urls[index] }));
+	filesData.value = res.list.map((item: FileType, index: number) => ({ ...item, url: urls[index] }));
 	filesCount.value = res.count;
 };
 

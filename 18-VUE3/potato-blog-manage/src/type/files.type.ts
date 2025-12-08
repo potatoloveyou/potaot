@@ -1,4 +1,4 @@
-export interface FileData{
+export interface FileType{
   id: number;
   url: string;
   fileName: string;

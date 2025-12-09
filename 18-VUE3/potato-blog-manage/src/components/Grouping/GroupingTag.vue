@@ -1,6 +1,6 @@
 <template>
 	<!-- 分组标签 -->
-	<el-scrollbar view-class="el-scrollbar-view" class="pb-4 pr-10">
+	<el-scrollbar class="pb-4 pr-10">
 		<div class="h-full flex items-center tag-container">
 			<el-button
 				:type="isSelected(0) ? 'primary' : 'info'"
@@ -68,12 +68,6 @@ const changeTag = (id: number | string) => {
 
 // 判断是否选中（返回 boolean）
 const isSelected = (id: number | string) => selectTagId.value === id;
-
-type TagType = 'info' | 'primary' | 'success' | 'warning' | 'danger';
-// 根据 id 返回要绑定到 el-tag 的 type
-const getTagType = (id: number | string): TagType => {
-	return isSelected(id) ? 'primary' : 'info';
-};
 
 onMounted(() => {});
 </script>

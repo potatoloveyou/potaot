@@ -154,7 +154,7 @@ export const label = Mock.mock({
 	code: 200,
 	data: {
 		count: '@integer(300, 1000)',
-		'list|4': [
+		'list|20': [
 			{
 				id: '@id',
 				name: '@ctitle(2,4)',

@@ -8,7 +8,7 @@
 		footer-class="d-footer"
 		class="dialog-wrapper grid">
 		<template #default>
-			<AutoResizerTable :height="tableHeight" :columns="columns" :data="rows" />
+			<AutoResizerTable :height="tableHeight" :columns :data="rows" />
 		</template>
 		<template #footer>
 			<el-button type="success" v-if="changedRows.length > 0" @click="resetRow">取消</el-button>

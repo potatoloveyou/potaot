@@ -30,7 +30,7 @@
 				title="文章分类管理"
 				tableHeight="24rem"
 				:rows="editableRows"
-				:columns="columns"
+				:columns
 				@saveRow="saveRow" />
 		</div>
 	</WhiteContainer>

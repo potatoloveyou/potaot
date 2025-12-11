@@ -54,8 +54,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-import type { StateType, GroupingType } from '@/type/grouping.type';
-
 import { storeToRefs } from 'pinia';
 import { useGroupingStore } from '@/stores/LocalFilesStores';
 const { stateData, groupingData, exclude } = storeToRefs(useGroupingStore());

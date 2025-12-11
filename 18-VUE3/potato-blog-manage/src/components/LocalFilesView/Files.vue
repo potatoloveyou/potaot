@@ -96,7 +96,7 @@
 <script setup lang="ts">
 import { ref, useTemplateRef } from 'vue';
 
-import type { FileType } from '@/type/files.type';
+import type { FileType } from '@/type/index';
 import { files } from '@/mock/mock';
 
 import { storeToRefs } from 'pinia';

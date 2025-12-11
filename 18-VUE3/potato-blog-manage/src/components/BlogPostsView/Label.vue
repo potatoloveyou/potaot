@@ -37,7 +37,7 @@
 import { ref, computed } from 'vue';
 import { label } from '@/mock/mock';
 
-import type { LabelType, LabelRow } from '@/type/label.type';
+import type { LabelType, LabelRow } from '@/type/index';
 
 import { Tools } from '@element-plus/icons-vue';
 import type { Column } from 'element-plus';

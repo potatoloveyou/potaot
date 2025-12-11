@@ -20,7 +20,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-import type { StateRow } from '@/type/grouping.type';
+import type { StateRow } from '@/type/index';
 
 import type { Column } from 'element-plus';
 

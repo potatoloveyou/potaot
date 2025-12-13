@@ -163,3 +163,26 @@ export const label = Mock.mock({
 		],
 	},
 });
+
+// 文章数据
+export const articles = Mock.mock({
+	code: 200,
+	data: {
+		count: '@integer(0, 1000)',
+		'list|50': [
+			{
+				id: '@id',
+				cover: 'https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg', // 文章封面
+				title: '@ctitle(4,10)', // 文章标题
+				createTime: '@datetime(yyyy-MM-dd)',
+				label: '@ctitle(2)/@ctitle(2)/@ctitle(2)', // 文章标签
+				region: '@ctitle(2)', // 文章地区
+				introduce: '@cparagraph(1, 4)', // 文章介绍
+				viewCount: '@integer(0, 1000)', // 文章阅读量
+				praiseCount: '@integer(0, 1000)', // 文章点赞数
+				commentCount: '@integer(0, 1000)', // 文章评论数
+				'state|0-1': 0, // 文章状态 0未发布 1已发布
+			},
+		],
+	},
+});

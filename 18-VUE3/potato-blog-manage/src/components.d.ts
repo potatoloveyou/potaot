@@ -11,6 +11,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    ArticleItem: typeof import('./components/BlogPostsView/ArticleItem.vue')['default']
     ArticleList: typeof import('./components/BlogPostsView/ArticleList.vue')['default']
     AutoResizerTable: typeof import('./components/ModalTableDialog/AutoResizerTable.vue')['default']
     Chart: typeof import('./components/Overview/Chart.vue')['default']

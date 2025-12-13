@@ -11,6 +11,9 @@ import 'reset-css/reset.css';
 // 引入tailwindcss
 import '@/assets/styles/main.css';
 
+// 映入iconfont图标
+import '@/assets/iconfont/iconfont.css';
+
 const app = createApp(App);
 
 app.use(createPinia());

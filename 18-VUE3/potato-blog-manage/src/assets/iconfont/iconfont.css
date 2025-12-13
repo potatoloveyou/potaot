@@ -1,0 +1,31 @@
+@font-face {
+	font-family: 'iconfont'; /* Project id 5088145 */
+	src: url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAATsAAsAAAAACVQAAASfAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHFQGYACDKgqFZIR5ATYCJAMUCwwABCAFhGcHTxsaCBEVpKOQfZUQ9Xyiw8C0RFLtURXuELzZdNN/TV0SxwRRv5/u3Xthdikw2fqogupEVahfCSRkZccTG4eWQFXn+O/SeYl3Axl3aX2h0foP9OZSlcnCcsG60mTD0C4+ud+R/P4ln17uYrwMlC8AC0hpr7Cb5BN3XD4BAsh8/u8d/+UFuC6AN9akNS0vfGDfA/pAjT0IO3mgGHsP8AwTfPAcBPDTDgZANm1h5wbhcnBaAuSBAocvkJdLOToyGLyyG9sjFrw299ixFtkDStB1smMAduP3yxeoIBpQXAZnkXk2D4PbZ5rPykeE/wTAPEPIQ8D2CrgAAzSfzCsr/eFlMGmuGcjxt2Us/QCc8aKwaiHhWfn/f6bLtDdl9rp/eGAxKALixjEHiRvPW3jV9NW5JQGdGLSUoRNFSzlqX4fZFY7xAwHgD0BacOzVa56qWCRTrUIpbNgDuL+6RKoj1mLYRj+QOQM4Xror8pdyRy0wj7uIKACtp9jVawD7csO3zLwgstnH2cdbx+lbx9Fm5YWq2dyHhJAfLZdkxwRRE2cTD2qUrJsZAe4GIHCxoWY5VA0E9hp8UUNPVJ8tiUi6Ssyt7WXLqq4vPqqGPdjUIzVMDwgDpCGEFmo4a/o4AxHRzyMy12Pwzi2psOpmAGfenHOckUN376RhyGF3r2HHawiGxFoOD29oLRbp7unm4TlEknYf6Ais7qpfh1Bo8/ZtwsctjI7U4XnXFREf7ihKc8haLdtKP/5u8Q43ZTRjnGRQC3867N78HgZdqFJZSHwwhPIEOIwNpa+g1BIxGX85jOKq2UtLHdie0dD33pe9i7HbebFRidS5JEL/BdekB1DH8cizZPwPOG396KCe8Wj3mVG4mpVTRABKvKCWlv4wleU9I613Ls8wbRqQwpDIX9/MGZWNqrdMW7FLIUzuVffMQxWtSxy26JnzzPRjUn7GRuMCPMnxVNQH9u9tza+C9idSSdVlS2YL5su/fh4/YH5pZvaSmeH491c/mymTmWfCk5dUbtdvqChTqMnDcbzajevuwq407m6fvxQVOTp8/uzg6KZhVlJVzQ7m58w0zHdjZ1WURSTtAE3NgBRPEfXRbndqdzCRMBYXN5YwaUYFKjJFcREHUilllQhkAUAlJ8hFYsnOkjN3Zg5HtgCY2+GPP9N3uDz/6iyQUe+fBrcAvIQ6WGOswsJ49Z9BY6j/Oha/kURrKsli2yr9IILpYbXQDQX8+IF/SwnicG+daAIgDwpeWYNQPBRg8FKkLNcIFwE64cbLCPw0gfnkAAlIAoNYH1AL5wBCFAaghDmDIQp7lOU836DE4QdUmPwB49FsPpxE/lzJGZ2weMHopWPPZrHQGwq5cdqUfiDtIyZxv9lVi9fUkS4xoH8MBzNGVmnxStyMmkYwqVTkbVOapeN2y20v2Xhp4ZwijiEnqPACRZ7ocEi28ufdIEHWcHQk9RBUPatIONrb2I2grs3dqKonadx7FBwYw9yJKdFCV2aQNG5OoNTeqkI8s1HOyCRHWyLxWPNmf2v7BtcAgHHmoKzIOD50R9e9ekesvaSXMbsiT59jDi5OfUlljgAA')
+			format('woff2'),
+		url('iconfont.woff?t=1765645769565') format('woff'), url('iconfont.ttf?t=1765645769565') format('truetype'),
+		url('iconfont.svg?t=1765645769565#iconfont') format('svg');
+}
+
+.iconfont {
+	font-family: 'iconfont' !important;
+	font-size: currentColor;
+	font-style: normal;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-dianzan-copy:before {
+	content: '\e690';
+}
+
+.icon-fabu:before {
+	content: '\e68f';
+}
+
+.icon-xiugai:before {
+	content: '\e66e';
+}
+
+.icon-chehui:before {
+	content: '\e637';
+}

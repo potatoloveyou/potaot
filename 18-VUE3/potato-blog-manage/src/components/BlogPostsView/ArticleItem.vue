@@ -26,10 +26,16 @@
 
 					<div
 						class="flex items-center [&>*]:mr-5 [&>*]:cursor-pointer [&>*]:text-[#909399] [&>*:hover]:text-[#2B5AED] text-xl">
-						<span v-if="item.state" class="iconfont icon-fabu"></span>
-						<span v-else class="iconfont icon-chehui"></span>
-						<span class="iconfont icon-xiugai"></span>
-						<el-icon><Delete /></el-icon>
+						<el-tooltip :content="item.state ? '发布' : '撤回'" placement="top">
+							<span v-if="item.state" class="iconfont icon-fabu"></span>
+							<span v-else class="iconfont icon-chehui"></span>
+						</el-tooltip>
+						<el-tooltip content="编辑" placement="top">
+							<span class="iconfont icon-xiugai"></span>
+						</el-tooltip>
+						<el-tooltip content="删除" placement="top">
+							<el-icon><Delete /></el-icon>
+						</el-tooltip>
 					</div>
 				</div>
 			</div>
@@ -80,13 +86,14 @@ const iconItems: IconItem[] = [
 onMounted(() => {
 	// console.log(sliceData);
 });
-
-// watch(
-// 	() => sliceData,
-// 	(newVal) => {
-// 		console.log(newVal);
-// 	},
-// );
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+:deep(.el-popover__title) {
+	margin: 0;
+	background-color: red;
+}
+:deep(.el-popper) {
+	background-color: red;
+}
+</style>

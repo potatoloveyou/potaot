@@ -43,6 +43,8 @@ declare module 'vue' {
     ElTableV2: typeof import('element-plus/es')['ElTableV2']
     ElTag: typeof import('element-plus/es')['ElTag']
     ElText: typeof import('element-plus/es')['ElText']
+    ElToolti: typeof import('element-plus/es')['ElToolti']
+    ElTooltip: typeof import('element-plus/es')['ElTooltip']
     ElUpload: typeof import('element-plus/es')['ElUpload']
     Files: typeof import('./components/LocalFilesView/Files.vue')['default']
     Gather: typeof import('./components/Overview/Gather.vue')['default']

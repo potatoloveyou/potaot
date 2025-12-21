@@ -17,9 +17,10 @@
 						<el-text size="small" type="info" class="mx-4">{{ item.createTime }}</el-text>
 
 						<div v-for="icon in iconItems" class="flex items-center mr-3 [&>*]:text-[#909399]">
-							<el-icon class="mr-1 text-sm">
+							<el-icon class="mr-1 text-sm" v-if="icon.icon.name != 'Pointer'">
 								<component :is="icon.icon" />
 							</el-icon>
+							<span v-else class="iconfont icon-dianzan"></span>
 							<el-text size="small">{{ item[icon.value] }}</el-text>
 						</div>
 					</div>

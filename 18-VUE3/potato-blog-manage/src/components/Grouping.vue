@@ -25,8 +25,9 @@
 				<el-icon class="mr-1" color="#2B5AED"><Tools /></el-icon>
 				管理分组
 			</div>
+			<!-- v-model:visible="visible" 具名v-model -->
 			<ModalTableDialog
-				v-model:visible="visible"
+				v-model="visible"
 				title="文章分类管理"
 				tableHeight="24rem"
 				:rows="editableRows"
@@ -54,7 +55,6 @@ import GroupingTag from '@/components/Grouping/GroupingTag.vue';
 import ModalTableDialog from '@/components/ModalTableDialog.vue';
 
 const newGroupingName = ref('');
-
 // 取消插入
 const resetInput = () => {
 	newGroupingName.value = '';

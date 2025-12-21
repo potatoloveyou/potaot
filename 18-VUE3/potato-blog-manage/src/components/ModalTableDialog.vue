@@ -1,7 +1,7 @@
 <template>
 	<!-- 管理分组弹窗 -->
 	<el-dialog
-		v-model="dialogVisible"
+		v-model="visible"
 		:title
 		:width="dialogWidth"
 		header-class="d-header"
@@ -26,7 +26,10 @@ import type { Column } from 'element-plus';
 
 import AutoResizerTable from '@/components/ModalTableDialog/AutoResizerTable.vue';
 
-const dialogVisible = defineModel<boolean>('visible');
+// 若使用具名v-model，则需在defineModel定义时指定名称
+// const visible = defineModel<boolean>('visible');
+// 若未使用具名v-model，则可解构defineModel获取v-model值(此数据响应式)
+const [visible] = defineModel<boolean>();
 
 const emit = defineEmits<{
 	saveRow: [changedRows: StateRow[]];
@@ -55,7 +58,8 @@ const changedRows = computed<StateRow[]>(() => {
 });
 
 const saveRow = () => {
-	dialogVisible.value = false;
+	// dialogVisible.value = false;
+	visible.value = false;
 	if (!changedRows.value.length) return;
 
 	emit('saveRow', changedRows.value);

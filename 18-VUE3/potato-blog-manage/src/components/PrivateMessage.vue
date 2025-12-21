@@ -1,6 +1,6 @@
 <template>
 	<!-- 私信抽屉 -->
-	<el-drawer v-model="localDrawer" @close="close" header-class="pm-header" body-class="pm-body">
+	<el-drawer v-model="drawer" @close="close" header-class="pm-header" body-class="pm-body">
 		<template #header class="mb-8">
 			<span class="text-xl">私信 {{ privateMessageDataTotal }}</span>
 		</template>
@@ -31,7 +31,7 @@ interface PrivateMessageProps {
 
 const { data = [], privateMessageDataTotal = 0 } = defineProps<PrivateMessageProps>();
 
-const localDrawer = defineModel<boolean>('drawer');
+const [drawer] = defineModel<boolean>();
 
 // 关闭抽屉
 const close = (): void => {};

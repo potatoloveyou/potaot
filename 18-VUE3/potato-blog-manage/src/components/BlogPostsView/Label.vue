@@ -8,7 +8,7 @@
 				管理标签
 			</div>
 			<ModalTableDialog
-				v-model:visible="visible"
+				v-model="visible"
 				title="标签管理"
 				tableHeight="24rem"
 				:rows="editableRows"

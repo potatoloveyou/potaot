@@ -56,12 +56,10 @@ import { ref } from 'vue';
 
 import { storeToRefs } from 'pinia';
 import { useGroupingStore } from '@/stores/LocalFilesStores';
-const { stateData, groupingData, exclude } = storeToRefs(useGroupingStore());
+const { stateData, groupingData, exclude, selectTagId } = storeToRefs(useGroupingStore());
 
-const selectTagId = ref<number | string>(0);
 const changeTag = (id: number | string) => {
 	selectTagId.value = id;
-	console.log('selected tag id:', selectTagId.value);
 };
 
 // 判断是否选中（返回 boolean）

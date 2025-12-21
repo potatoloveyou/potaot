@@ -25,6 +25,10 @@ import { ref } from 'vue';
 
 import { articles } from '@/mock/mock';
 
+import { storeToRefs } from 'pinia';
+import { useGroupingStore } from '@/stores/LocalFilesStores';
+const { selectTagId } = storeToRefs(useGroupingStore());
+
 import type { ArticleResponseType, ArticleItemType } from '@/type/index';
 
 import Topic from '@/components/Topic.vue';

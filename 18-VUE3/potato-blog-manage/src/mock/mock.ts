@@ -176,12 +176,13 @@ export const articles = Mock.mock({
 				title: '@ctitle(4,10)', // 文章标题
 				createTime: '@datetime(yyyy-MM-dd)',
 				label: '@ctitle(2)/@ctitle(2)/@ctitle(2)', // 文章标签
-				region: '@ctitle(2)', // 文章地区
 				introduce: '@cparagraph(1, 4)', // 文章介绍
+				region: '@ctitle(2)', // 文章地区
 				viewCount: '@integer(0, 1000)', // 文章阅读量
 				praiseCount: '@integer(0, 1000)', // 文章点赞数
 				commentCount: '@integer(0, 1000)', // 文章评论数
 				'state|0-1': 0, // 文章状态 0未发布 1已发布
+				subsetId: '@id', // 文章分组
 			},
 		],
 	},

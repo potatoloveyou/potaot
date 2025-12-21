@@ -15,4 +15,5 @@ export interface ArticleItemType {
 	praiseCount: number | string;
 	region: string;
 	state: number;
+	subsetId: number | string;
 }

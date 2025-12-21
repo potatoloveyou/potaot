@@ -55,7 +55,6 @@
 		<el-popover
 			width="220"
 			title="请选择分组"
-			content="Bottom Right prompts info"
 			placement="bottom-end"
 			ref="popoverRef"
 			:virtual-ref="switchRef"

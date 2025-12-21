@@ -34,9 +34,18 @@
 						<el-tooltip content="编辑" placement="top">
 							<span class="iconfont icon-xiugai"></span>
 						</el-tooltip>
-						<el-tooltip content="删除" placement="top">
-							<el-icon><Delete /></el-icon>
-						</el-tooltip>
+						<el-popover :visible="currentId === item.id" trigger="click" title="确定删除" placement="top-end">
+							<template #reference>
+								<el-icon @click="currentId = item.id"><Delete /></el-icon>
+							</template>
+							<template #default>
+								<el-text>删除后不可恢复</el-text>
+								<div class="mt-4 flex justify-end">
+									<el-button type="info" plain size="small" @click="currentId = null">取消</el-button>
+									<el-button type="primary" size="small" @click="removeArticle(item.id)">确定</el-button>
+								</div>
+							</template>
+						</el-popover>
 					</div>
 				</div>
 			</div>
@@ -51,6 +60,7 @@ import type { Component } from 'vue';
 import type { ArticleItemType } from '@/type/index';
 
 import { View, Pointer, ChatLineSquare, Delete } from '@element-plus/icons-vue';
+import { ElMessage } from 'element-plus'
 
 import WhiteContainer from '@/components/WhiteContainer.vue';
 
@@ -83,6 +93,17 @@ const iconItems: IconItem[] = [
 		value: 'commentCount',
 	},
 ];
+
+const currentId = ref<number | string | null>(null);
+// 确定删除
+const removeArticle = (id: number | string) => {
+	console.log(id);
+	currentId.value = null;
+	ElMessage({
+		message: '删除成功',
+		type: 'success',
+	})
+};
 
 onMounted(() => {
 	// console.log(sliceData);

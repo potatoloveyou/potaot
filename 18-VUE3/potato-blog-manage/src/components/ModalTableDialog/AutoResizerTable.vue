@@ -18,9 +18,4 @@ interface AutoResizerTableProps {
 const { height, columns = [], data = [] } = defineProps<AutoResizerTableProps>();
 </script>
 
-<style lang="scss" scoped>
-::v-deep .table-header-bg {
-	background-color: #f5f7fa;
-	font-weight: bold;
-}
-</style>
+<style lang="scss" scoped></style>

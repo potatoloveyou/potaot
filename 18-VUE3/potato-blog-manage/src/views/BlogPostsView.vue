@@ -2,7 +2,7 @@
 	<!-- 博客文章 -->
 	<el-scrollbar noresize class="min-height">
 		<Topic name="博客文章" @search="changeSearch" :isSearch="true" />
-		<Grouping />
+		<Grouping :stateData :groupingData @update:selectTagId="changeTag" />
 		<div class="grid grid-cols-[3fr_1fr] gap-x-4 min-h-dvh">
 			<div>
 				<ArticleItem :sliceData />
@@ -15,7 +15,7 @@
 					@change="changePag"
 					class="justify-center pt-4" />
 			</div>
-			<Label class="bg-blue-500" />
+			<Label />
 		</div>
 	</el-scrollbar>
 </template>
@@ -26,8 +26,10 @@ import { ref } from 'vue';
 import { articles } from '@/mock/mock';
 
 import { storeToRefs } from 'pinia';
-import { useGroupingStore } from '@/stores/LocalFilesStores';
-const { selectTagId } = storeToRefs(useGroupingStore());
+import { useBlogPostsStore } from '@/stores/blogPostsStore';
+const blogPostsStore = useBlogPostsStore();
+const { stateData, groupingData } = storeToRefs(blogPostsStore);
+const { getGroupingList } = blogPostsStore;
 
 import type { ArticleResponseType, ArticleItemType } from '@/type/index';
 
@@ -39,6 +41,10 @@ import Label from '@/components/BlogPostsView/Label.vue';
 // 搜索回调
 const changeSearch = (value: string) => {
 	console.log('我是父组件', value);
+};
+// 切换标签id
+const changeTag = (id: number | string) => {
+	console.log('changeTag:', id);
 };
 
 const articleData = ref<ArticleResponseType<ArticleItemType>>({
@@ -56,6 +62,7 @@ const getArticleList = async () => {
 	// console.log(sliceData.value);
 };
 
+// 分页回调
 const changePag = (value: number) => {
 	offset.value = (value - 1) * limit.value;
 	getArticleList();
@@ -63,6 +70,7 @@ const changePag = (value: number) => {
 
 onMounted(() => {
 	getArticleList();
+	getGroupingList();
 });
 </script>
 

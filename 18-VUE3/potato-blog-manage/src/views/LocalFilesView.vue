@@ -9,7 +9,7 @@
 				</div>
 			</template>
 		</Topic>
-		<Grouping :groupingData />
+		<Grouping :groupingData @update:selectTagId="changeTag" />
 		<Files :groupingData />
 	</el-scrollbar>
 </template>
@@ -20,7 +20,7 @@ import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { uselocalFilesStore } from '@/stores/localFilesStore';
 const localFilesStore = uselocalFilesStore();
-const { groupingData, selectTagId } = storeToRefs(localFilesStore);
+const { groupingData } = storeToRefs(localFilesStore);
 const { getGroupingList } = localFilesStore;
 
 import Topic from '@/components/Topic.vue';
@@ -28,15 +28,14 @@ import Upload from '@/components/LocalFilesView/Upload.vue';
 import Grouping from '@/components/Grouping.vue';
 import Files from '@/components/LocalFilesView/Files.vue';
 
+// 切换标签id
+const changeTag = (id: number | string) => {
+	console.log('changeTag:', id);
+};
+
 onMounted(() => {
 	getGroupingList();
 });
-watch(
-	() => selectTagId.value,
-	(newVal) => {
-		console.log('newVal:', newVal);
-	},
-);
 </script>
 
 <style lang="scss" scoped></style>

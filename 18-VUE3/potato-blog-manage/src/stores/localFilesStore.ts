@@ -14,8 +14,6 @@ export const uselocalFilesStore = defineStore('localFiles', () => {
 	const getGroupingList = async () => {
 		groupingData.value = await localFilesArticleGrouping.data;
 	};
-	// 选中的分组id
-	const selectTagId = ref<number | string>(0);
 
-	return { groupingData, getGroupingList, selectTagId };
+	return { groupingData, getGroupingList };
 });

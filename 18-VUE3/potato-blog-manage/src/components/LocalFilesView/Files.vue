@@ -69,7 +69,7 @@
 							round
 							size="default"
 							@click="handleGroupingClick(item.id)"
-							v-for="item in groupingData?.list"
+							v-for="item in groupingData.list"
 							class="w-full ml-0 mb-2 justify-start hover:bg-[#409eff] hover:border-[#409eff]">
 							{{ item.name }} {{ item.value }}
 						</el-button>
@@ -95,15 +95,17 @@
 <script setup lang="ts">
 import { ref, useTemplateRef } from 'vue';
 
-import type { FileType } from '@/type/index';
+import type { GroupingType, FileType } from '@/type/index';
 import { files } from '@/mock/mock';
 
-import { storeToRefs } from 'pinia';
-import { useGroupingStore } from '@/stores/LocalFilesStores';
-const { groupingData } = storeToRefs(useGroupingStore());
+interface GroupingProps {
+	groupingData: GroupingType;
+}
+
+const { groupingData } = defineProps<GroupingProps>();
 
 import { Delete, Switch, ZoomIn } from '@element-plus/icons-vue';
-import type { ImageInstance, PopoverInstance } from 'element-plus';
+import type { PopoverInstance } from 'element-plus';
 import { ClickOutside as vClickOutside } from 'element-plus';
 
 import WhiteContainer from '@/components/WhiteContainer.vue';

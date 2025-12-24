@@ -1,7 +1,7 @@
 <template>
 	<!-- 分组组件 -->
 	<WhiteContainer class="grid grid-cols-[1fr_auto] mb-4 pb-0">
-		<GroupingTag />
+		<GroupingTag :stateData :groupingData />
 		<div class="flex items-center pb-4">
 			<el-popover width="220" title="请输入分组名称" content="Bottom Right prompts info" placement="bottom-end">
 				<template #reference>
@@ -20,7 +20,6 @@
 					</div>
 				</template>
 			</el-popover>
-
 			<div class="flex items-center ml-6 cursor-pointer text-[#2B5AED]" @click="changeManage">
 				<el-icon class="mr-1" color="#2B5AED"><Tools /></el-icon>
 				管理分组
@@ -40,11 +39,7 @@
 <script setup lang="ts">
 import { ref, h } from 'vue';
 
-import type { StateRow } from '@/type/index';
-
-import { storeToRefs } from 'pinia';
-import { useGroupingStore } from '@/stores/LocalFilesStores';
-const { groupingData, exclude } = storeToRefs(useGroupingStore());
+import type { StateRow, StateType, GroupingType } from '@/type/index';
 
 import { CirclePlus, Tools } from '@element-plus/icons-vue';
 import type { Column } from 'element-plus';
@@ -53,6 +48,13 @@ import { ElInput, ElButton } from 'element-plus';
 import WhiteContainer from '@/components/WhiteContainer.vue';
 import GroupingTag from '@/components/Grouping/GroupingTag.vue';
 import ModalTableDialog from '@/components/ModalTableDialog.vue';
+
+interface GroupingProps {
+	stateData?: StateType[];
+	groupingData: GroupingType;
+}
+
+const { stateData, groupingData } = defineProps<GroupingProps>();
 
 const newGroupingName = ref('');
 // 取消插入
@@ -66,21 +68,7 @@ const changeInput = () => {
 };
 
 const rows = computed<StateRow[]>(() => {
-	const excludeRow: StateRow = {
-		id: 'exclude',
-		name: '未分组',
-		value: exclude.value.value,
-		createTime: '-',
-		isExclude: true,
-	};
-
-	return [
-		excludeRow,
-		...groupingData.value.list.map((item) => ({
-			...item,
-			isExclude: false,
-		})),
-	];
+	return groupingData.list;
 });
 
 const visible = ref(false);
@@ -203,12 +191,19 @@ const removeRow = (id: string) => {
 // **可编辑副本**
 const editableRows = ref<StateRow[]>([]);
 const originalNameMap = new Map<string | number, string>();
-onMounted(() => {
-	editableRows.value = rows.value.map((row) => {
-		originalNameMap.set(row.id, row.name);
-		return { ...row, _dirty: false }; // 可以加上 _dirty 标记
-	});
-});
+watch(
+	rows,
+	(newRows) => {
+		editableRows.value = newRows.map((row) => {
+			// 先记录原始名字
+			originalNameMap.set(row.id, row.name);
+			// 判断是否为未分组
+			const isExclude = row.id === 'exclude'; // 根据你的逻辑判断“未分组”的条件
+			return { ...row, _dirty: false, isExclude };
+		});
+	},
+	{ immediate: true },
+);
 </script>
 
 <style lang="scss" scoped>

@@ -6,7 +6,6 @@ export interface LabelType {
 }
 
 export interface LabelRow extends LabelType {
-	isExclude: boolean;
 	originalName?: string;
 	_dirty?: boolean;
 	createTime: string;

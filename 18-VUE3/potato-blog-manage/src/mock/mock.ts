@@ -99,29 +99,44 @@ export const comment = Mock.mock({
 	},
 });
 
-// 文章状态
-export const state = Mock.mock({
-	code: 200,
-	data: [
-		{
-			id: '@id',
-			name: '已发布',
-			value: '@integer(0, 100)',
-		},
-		{
-			id: '@id',
-			name: '未发布',
-			value: '@integer(0, 100)',
-		},
-	],
-});
-
-// 分组
-export const grouping = Mock.mock({
+// 本地文件-文章分组
+export const localFilesArticleGrouping = Mock.mock({
 	code: 200,
 	data: {
 		count: '@integer(300, 1000)',
-		'list|4': [
+		// 'list|4': [
+		// 	{
+		// 		id: '@id',
+		// 		name: '@ctitle(2,4)',
+		// 		value: '@integer(0, 100)',
+		// 		createTime: '@datetime(yyyy-MM-dd HH:mm:ss)',
+		// 	},
+		// ],
+		list: [
+			{
+				id: 'exclude',
+				name: '未分组',
+				value: '@integer(0, 100)',
+				createTime: '-',
+			},
+			{
+				id: '@id',
+				name: '@ctitle(2,4)',
+				value: '@integer(0, 100)',
+				createTime: '@datetime(yyyy-MM-dd HH:mm:ss)',
+			},
+			{
+				id: '@id',
+				name: '@ctitle(2,4)',
+				value: '@integer(0, 100)',
+				createTime: '@datetime(yyyy-MM-dd HH:mm:ss)',
+			},
+			{
+				id: '@id',
+				name: '@ctitle(2,4)',
+				value: '@integer(0, 100)',
+				createTime: '@datetime(yyyy-MM-dd HH:mm:ss)',
+			},
 			{
 				id: '@id',
 				name: '@ctitle(2,4)',

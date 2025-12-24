@@ -10,7 +10,7 @@
 				size="small"
 				@click="changeTag(0)"
 				class="mr-2 ml-0 hover:bg-[#6b8cf2]">
-				全部
+				全部 {{ groupingData?.count }}
 			</el-button>
 
 			<el-button
@@ -23,17 +23,6 @@
 				v-for="item in stateData"
 				class="mr-2 ml-0 hover:bg-[#6b8cf2]">
 				{{ item.name }} {{ item.value }}
-			</el-button>
-
-			<el-button
-				:type="isSelected(exclude.id) ? 'primary' : 'info'"
-				:plain="!isSelected(exclude.id)"
-				round
-				:color="isSelected(exclude.id) ? '#2b5aed' : ''"
-				size="small"
-				@click="changeTag(exclude.id)"
-				class="mr-2 ml-0 hover:bg-[#6b8cf2]">
-				{{ exclude.name }} {{ exclude.value }}
 			</el-button>
 
 			<el-button
@@ -55,9 +44,20 @@
 import { ref } from 'vue';
 
 import { storeToRefs } from 'pinia';
-import { useGroupingStore } from '@/stores/LocalFilesStores';
-const { stateData, groupingData, exclude, selectTagId } = storeToRefs(useGroupingStore());
+import { uselocalFilesStore } from '@/stores/localFilesStore';
+const localFilesStore = uselocalFilesStore();
+const { selectTagId } = storeToRefs(localFilesStore);
 
+import type { StateType, GroupingType } from '@/type/grouping.type';
+
+interface GroupingTagProps {
+	stateData?: StateType[];
+	groupingData: GroupingType;
+}
+
+const { stateData = [], groupingData } = defineProps<GroupingTagProps>();
+
+// 切换标签id
 const changeTag = (id: number | string) => {
 	selectTagId.value = id;
 };

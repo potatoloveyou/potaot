@@ -6,7 +6,6 @@ export interface StateType {
 }
 
 export interface StateRow extends StateType {
-	isExclude: boolean;
 	originalName?: string;
 	_dirty?: boolean;
 	createTime: string;

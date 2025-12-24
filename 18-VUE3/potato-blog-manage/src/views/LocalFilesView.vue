@@ -1,7 +1,7 @@
 <template>
 	<!-- 本地文件 -->
 	<el-scrollbar noresize class="min-height">
-		<Topic name="本地文件" @search="changeSearch" :isSearch="false">
+		<Topic name="本地文件" :isSearch="false">
 			<template #custom>
 				<div class="grid grid-cols-[1fr_auto] items-center">
 					<el-text class="mr-4">图片、视频、音频不超过20M</el-text>
@@ -9,32 +9,34 @@
 				</div>
 			</template>
 		</Topic>
-		<Grouping />
-		<Files />
+		<Grouping :groupingData />
+		<Files :groupingData />
 	</el-scrollbar>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
 
+import { storeToRefs } from 'pinia';
+import { uselocalFilesStore } from '@/stores/localFilesStore';
+const localFilesStore = uselocalFilesStore();
+const { groupingData, selectTagId } = storeToRefs(localFilesStore);
+const { getGroupingList } = localFilesStore;
+
 import Topic from '@/components/Topic.vue';
 import Upload from '@/components/LocalFilesView/Upload.vue';
 import Grouping from '@/components/Grouping.vue';
 import Files from '@/components/LocalFilesView/Files.vue';
 
-// 搜索回调
-const changeSearch = (value: string) => {
-	console.log('我是父组件', value);
-};
-
-const getGroupingList = async () => {
-	// stateData.value = state.data;
-	// groupingData.value = grouping.data;
-};
-
 onMounted(() => {
 	getGroupingList();
 });
+watch(
+	() => selectTagId.value,
+	(newVal) => {
+		console.log('newVal:', newVal);
+	},
+);
 </script>
 
 <style lang="scss" scoped></style>

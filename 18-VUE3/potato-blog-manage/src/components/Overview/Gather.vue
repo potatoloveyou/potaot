@@ -33,7 +33,7 @@ const overLink = reactive([
 		bgColor: 'linear-gradient(180deg, #ff600829 0%, #ff60083d 100%)',
 	},
 	{
-		path: '/PhotographyGallery',
+		path: '/PhotoGallery',
 		name: '摄影图库',
 		totle: '0',
 		bgColor: 'linear-gradient(180deg, #25df0629 0%, #25df063d 100%)',

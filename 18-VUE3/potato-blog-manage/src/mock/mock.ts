@@ -259,3 +259,43 @@ export const articles = Mock.mock({
 		],
 	},
 });
+
+// 摄影图库-文章分组
+export const photoGalleryGrouping = Mock.mock({
+	code: 200,
+	data: {
+		count: '@integer(300, 1000)',
+		list: [
+			{
+				id: 'exclude',
+				name: '未分组',
+				value: '@integer(0, 100)',
+				createTime: '-',
+			},
+			{
+				id: '@id',
+				name: '@ctitle(2,4)',
+				value: '@integer(0, 100)',
+				createTime: '@datetime(yyyy-MM-dd HH:mm:ss)',
+			},
+			{
+				id: '@id',
+				name: '@ctitle(2,4)',
+				value: '@integer(0, 100)',
+				createTime: '@datetime(yyyy-MM-dd HH:mm:ss)',
+			},
+			{
+				id: '@id',
+				name: '@ctitle(2,4)',
+				value: '@integer(0, 100)',
+				createTime: '@datetime(yyyy-MM-dd HH:mm:ss)',
+			},
+			{
+				id: '@id',
+				name: '@ctitle(2,4)',
+				value: '@integer(0, 100)',
+				createTime: '@datetime(yyyy-MM-dd HH:mm:ss)',
+			},
+		],
+	},
+});

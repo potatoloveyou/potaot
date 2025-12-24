@@ -51,7 +51,7 @@ const menuItems: MenuItem[] = [
 		index: '4',
 		icon: Camera,
 		text: '摄影图库',
-		path: 'PhotographyGallery',
+		path: 'PhotoGallery',
 	},
 	{
 		index: '5',

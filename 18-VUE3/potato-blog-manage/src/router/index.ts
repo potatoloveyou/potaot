@@ -29,9 +29,9 @@ const router = createRouter({
 					component: () => import('@/views/BlogPostsView.vue'),
 				},
 				{
-					path: '/PhotographyGallery',
-					name: 'PhotographyGallery',
-					component: () => import('@/views/PhotographyGalleryView.vue'),
+					path: '/PhotoGallery',
+					name: 'PhotoGallery',
+					component: () => import('@/views/PhotoGalleryView.vue'),
 				},
 				{
 					path: '/HandwrittenNotes',

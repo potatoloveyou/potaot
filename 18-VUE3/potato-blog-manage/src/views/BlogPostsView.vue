@@ -8,7 +8,6 @@
 				<ArticleItem :sliceData />
 				<el-pagination
 					background
-					size="small"
 					layout="prev, pager, next"
 					:total="articleData.count"
 					:page-size="limit"
@@ -59,7 +58,6 @@ const getArticleList = async () => {
 	const res = await articles.data;
 	articleData.value = res;
 	sliceData.value = articleData.value.list.slice(offset.value, limit.value + offset.value);
-	// console.log(sliceData.value);
 };
 
 // 分页回调

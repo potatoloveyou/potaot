@@ -95,7 +95,9 @@
 <script setup lang="ts">
 import { ref, useTemplateRef } from 'vue';
 
-import type { GroupingType, FileType } from '@/type/index';
+import type { GroupingType } from '@/type/grouping.type';
+import type { FileType } from '@/type/files.type';
+
 import { files } from '@/mock/mock';
 
 interface GroupingProps {

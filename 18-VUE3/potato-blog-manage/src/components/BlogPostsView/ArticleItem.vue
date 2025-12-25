@@ -57,7 +57,7 @@
 import { ref } from 'vue';
 import type { Component } from 'vue';
 
-import type { ArticleItemType } from '@/type/index';
+import type { ArticleItemType } from '@/type/article.type';
 
 import { View, Pointer, ChatLineSquare, Delete } from '@element-plus/icons-vue';
 import { ElMessage } from 'element-plus'

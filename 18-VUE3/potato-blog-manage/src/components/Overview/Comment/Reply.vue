@@ -22,7 +22,7 @@
 import { ref, markRaw } from 'vue';
 import { Delete } from '@element-plus/icons-vue';
 
-import type { CommentItemType } from '@/type/index';
+import type { CommentItemType } from '@/type/comment.type';
 
 interface ReplyProps {
 	data: CommentItemType;

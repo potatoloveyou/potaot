@@ -39,7 +39,7 @@
 <script setup lang="ts">
 import { ref, h } from 'vue';
 
-import type { StateRow, StateType, GroupingType } from '@/type/index';
+import type { StateRow, StateType, GroupingType } from '@/type/grouping.type';
 
 import { CirclePlus, Tools } from '@element-plus/icons-vue';
 import type { Column } from 'element-plus';

@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { CommentItemType } from '@/type/index';
+import type { CommentItemType } from '@/type/comment.type';
 
 import { DynamicScroller, DynamicScrollerItem } from 'vue-virtual-scroller';
 import 'vue-virtual-scroller/dist/vue-virtual-scroller.css';

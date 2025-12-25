@@ -20,7 +20,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { comment } from '@/mock/mock';
-import type { CommentResponseType, CommentItemType } from '@/type/index';
+import type { CommentResponseType, CommentItemType } from '@/type/comment.type';
 
 import WhiteContainer from '@/components/WhiteContainer.vue';
 import Reply from '@/components/Overview/Comment/Reply.vue';

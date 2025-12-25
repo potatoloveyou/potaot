@@ -28,11 +28,11 @@
 					<div
 						class="flex items-center [&>*]:mr-5 [&>*]:cursor-pointer [&>*]:text-[#909399] [&>*:hover]:text-[#2B5AED] text-xl">
 						<el-tooltip :content="item.state ? '发布' : '撤回'" placement="top">
-							<span v-if="item.state" class="iconfont icon-fabu"></span>
-							<span v-else class="iconfont icon-chehui"></span>
+							<span v-if="item.state" class="iconfont icon-fabu" @click="handlePublishClick(item.id)"></span>
+							<span v-else class="iconfont icon-chehui" @click="handleRevokeClick(item.id)"></span>
 						</el-tooltip>
 						<el-tooltip content="编辑" placement="top">
-							<span class="iconfont icon-xiugai"></span>
+							<span class="iconfont icon-xiugai" @click="handleEditClick(item.id)"></span>
 						</el-tooltip>
 						<el-popover :visible="currentId === item.id" trigger="click" title="确定删除" placement="top-end">
 							<template #reference>
@@ -60,7 +60,7 @@ import type { Component } from 'vue';
 import type { ArticleItemType } from '@/type/article.type';
 
 import { View, Pointer, ChatLineSquare, Delete } from '@element-plus/icons-vue';
-import { ElMessage } from 'element-plus'
+import { ElMessage } from 'element-plus';
 
 import WhiteContainer from '@/components/WhiteContainer.vue';
 
@@ -94,15 +94,30 @@ const iconItems: IconItem[] = [
 	},
 ];
 
+// 发布点击事件
+const handlePublishClick = (id: number | string) => {
+	console.log('发布点击事件:', id);
+};
+
+// 撤回点击事件
+const handleRevokeClick = (id: number | string) => {
+	console.log('撤回点击事件:', id);
+};
+
+// 编辑点击事件
+const handleEditClick = (id: number | string) => {
+	console.log('编辑点击事件:', id);
+};
+
 const currentId = ref<number | string | null>(null);
 // 确定删除
 const removeArticle = (id: number | string) => {
-	console.log(id);
+	console.log('删除点击事件:', id);
 	currentId.value = null;
 	ElMessage({
 		message: '删除成功',
 		type: 'success',
-	})
+	});
 };
 
 onMounted(() => {

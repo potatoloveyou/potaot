@@ -47,6 +47,7 @@ declare module 'vue' {
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
     ElUpload: typeof import('element-plus/es')['ElUpload']
     Files: typeof import('./components/LocalFilesView/Files.vue')['default']
+    Gallery: typeof import('./components/PhotoGalleryView/Gallery.vue')['default']
     Gather: typeof import('./components/Overview/Gather.vue')['default']
     Grouping: typeof import('./components/Grouping.vue')['default']
     GroupingTag: typeof import('./components/Grouping/GroupingTag.vue')['default']

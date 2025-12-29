@@ -2,7 +2,7 @@
 	<!-- 博客文章 -->
 	<el-scrollbar noresize class="min-height">
 		<Topic name="博客文章" @search="changeSearch" :isSearch="true" />
-		<Grouping :stateData :groupingData @update:selectTagId="changeTag" />
+		<Grouping :stateData :groupingData v-model:selectTagId="selectTagId" />
 		<div class="grid grid-cols-[3fr_1fr] gap-x-4 min-h-dvh">
 			<div>
 				<ArticleItem :sliceData />
@@ -41,10 +41,9 @@ import Label from '@/components/BlogPostsView/Label.vue';
 const changeSearch = (value: string) => {
 	console.log('我是父组件', value);
 };
-// 切换标签id
-const changeTag = (id: number | string) => {
-	console.log('changeTag:', id);
-};
+
+// 选中标签ID
+const selectTagId = ref<number | string>(0);
 
 const articleData = ref<ArticleResponseType<ArticleItemType>>({
 	count: 0,

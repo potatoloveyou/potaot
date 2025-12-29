@@ -1,7 +1,7 @@
 <template>
 	<!-- 分组组件 -->
 	<WhiteContainer class="grid grid-cols-[1fr_auto] mb-4 pb-0">
-		<GroupingTag :stateData :groupingData @update:selectTagId="changeTag" />
+		<GroupingTag :stateData :groupingData v-model:selectTagId="selectTagId" />
 		<div class="flex items-center pb-4">
 			<el-popover width="220" title="请输入分组名称" content="Bottom Right prompts info" placement="bottom-end">
 				<template #reference>
@@ -49,20 +49,13 @@ import WhiteContainer from '@/components/WhiteContainer.vue';
 import GroupingTag from '@/components/Grouping/GroupingTag.vue';
 import ModalTableDialog from '@/components/ModalTableDialog.vue';
 
+const selectTagId = defineModel<number | string>('selectTagId');
+
 interface GroupingProps {
 	stateData?: StateType[];
 	groupingData: GroupingType;
 }
 const { stateData, groupingData } = defineProps<GroupingProps>();
-
-const emit = defineEmits<{
-	'update:selectTagId': [id: number | string];
-}>();
-
-// 切换标签id
-const changeTag = (id: number | string) => {
-	emit('update:selectTagId', id);
-};
 
 const newGroupingName = ref('');
 // 取消插入

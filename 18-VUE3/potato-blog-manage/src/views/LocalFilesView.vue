@@ -8,7 +8,7 @@
 				</div>
 			</template>
 		</Topic>
-		<Grouping :groupingData @update:selectTagId="changeTag" />
+		<Grouping :groupingData v-model:selectTagId="selectTagId" />
 		<Files :groupingData :filesData v-model:page="page" />
 	</el-scrollbar>
 </template>
@@ -30,11 +30,8 @@ import Upload from '@/components/LocalFilesView/Upload.vue';
 import Grouping from '@/components/Grouping.vue';
 import Files from '@/components/LocalFilesView/Files.vue';
 
+// 选中标签ID
 const selectTagId = ref<number | string>(0);
-// 切换标签id
-const changeTag = (id: number | string) => {
-	selectTagId.value = id;
-};
 
 // 分页大小
 const limit = ref(10);
@@ -43,11 +40,11 @@ const page = ref(1);
 const offset = computed(() => (page.value - 1) * limit.value);
 
 // 查询参数
-const queryParams = ref({
+const queryParams = computed(() => ({
 	selectTagId: selectTagId.value,
 	limit: limit.value,
 	offset: offset.value,
-});
+}));
 
 const urls = [
 	'https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg',

@@ -45,27 +45,21 @@ import { ref } from 'vue';
 
 import type { StateType, GroupingType } from '@/type/grouping.type';
 
+const selectTagId = defineModel<number | string>('selectTagId');
+
 interface GroupingTagProps {
 	stateData?: StateType[];
 	groupingData: GroupingType;
 }
 const { stateData = [], groupingData } = defineProps<GroupingTagProps>();
 
-const emit = defineEmits<{
-	'update:selectTagId': [id: number | string];
-}>();
-
-const selectTagId = ref<number | string>(0);
 // 切换标签id
 const changeTag = (id: number | string) => {
 	selectTagId.value = id;
-	emit('update:selectTagId', id);
 };
 
 // 判断是否选中（返回 boolean）
 const isSelected = (id: number | string) => selectTagId.value === id;
-
-onMounted(() => {});
 </script>
 
 <style lang="scss" scoped>

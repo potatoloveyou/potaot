@@ -2,7 +2,7 @@
 	<!-- 摄影图库 -->
 	<el-scrollbar noresize class="min-height">
 		<Topic name="摄影图库" @search="changeSearch" :isSearch="true" />
-		<Grouping :groupingData="groupingData" @update:selectTagId="changeTag" />
+		<Grouping :groupingData v-model:selectTagId="selectTagId" />
 		<div class="flex flex-col flex-1">
 			<Gallery :galleryData="sliceData" />
 			<el-pagination
@@ -38,10 +38,8 @@ const changeSearch = (value: string) => {
 	console.log('我是父组件', value);
 };
 
-// 切换标签id
-const changeTag = (id: number | string) => {
-	console.log('changeTag:', id);
-};
+// 选中标签ID
+const selectTagId = ref<number | string>(0);
 
 const photoGalleryData = ref<PhotoGallery<PhotoGalleryItem>>({
 	count: 100,

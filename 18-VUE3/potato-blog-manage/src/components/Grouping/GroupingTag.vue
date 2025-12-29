@@ -58,6 +58,7 @@ const emit = defineEmits<{
 const selectTagId = ref<number | string>(0);
 // 切换标签id
 const changeTag = (id: number | string) => {
+	selectTagId.value = id;
 	emit('update:selectTagId', id);
 };
 

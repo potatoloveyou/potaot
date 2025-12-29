@@ -16,7 +16,6 @@
 					:disabled="checkedCities.length === 0"
 					@click="handleDeleteClick"
 					class="p-2 ml-0 text-xl" />
-
 				<el-button
 					:icon="Switch"
 					text
@@ -26,32 +25,27 @@
 					class="p-2 ml-0 text-xl" />
 			</div>
 		</div>
-
 		<el-checkbox-group
 			v-model="checkedCities"
 			@change="handleCheckedCitiesChange"
 			class="grid grid-cols-5 gap-4 place-items-center">
-			<div v-for="(item, index) in filesData" :key="item.id" class="grid w-68 h-68 group relative">
+			<div v-for="item in filesData.list" :key="item.id" class="grid w-68 h-68 group relative">
 				<el-checkbox :value="item.id" :border="checkedCities.includes(item.id)" class="img-box p-0 h-58 rounded-md">
 					<el-image fit="scale-down" :src="item.url" class="h-full" />
 				</el-checkbox>
-
 				<el-button
 					:icon="ZoomIn"
 					circle
 					color="#2b5aed"
 					@click.stop="handlePreviewClick(item.url)"
 					class="absolute top-2 right-2 p-5 m-0 opacity-0 group-hover:opacity-100 text-2xl transition-all duration-300" />
-
 				<div class="w-68 flex justify-center items-center">
 					<el-text truncated line-clamp="1" class="text-base text-center">{{ item.fileName }}</el-text>
 					<el-text class="text-base text-center">.{{ item.format }}</el-text>
 				</div>
 			</div>
 		</el-checkbox-group>
-
 		<el-image-viewer v-if="showPreview" :url-list="previewList" @close="showPreview = false" />
-
 		<el-popover
 			width="220"
 			title="请选择分组"
@@ -81,13 +75,12 @@
 				</div>
 			</template></el-popover
 		>
-
 		<el-pagination
 			background
 			layout="prev, pager, next"
-			:total="filesCount"
+			:total="filesData.count"
 			:page-size="limit"
-			@change="changePag"
+			v-model:current-page="page"
 			class="justify-end pt-4" />
 	</WhiteContainer>
 </template>
@@ -96,21 +89,23 @@
 import { ref, useTemplateRef } from 'vue';
 
 import type { GroupingType } from '@/type/grouping.type';
-import type { FileType } from '@/type/files.type';
-
-import { files } from '@/mock/mock';
+import type { FileType, FileItemType } from '@/type/files.type';
 
 interface GroupingProps {
 	groupingData: GroupingType;
+	filesData: FileType<FileItemType>;
+	limit?: number;
 }
 
-const { groupingData } = defineProps<GroupingProps>();
+const { groupingData, filesData, limit = 10 } = defineProps<GroupingProps>();
 
 import { Delete, Switch, ZoomIn } from '@element-plus/icons-vue';
 import type { PopoverInstance } from 'element-plus';
 import { ClickOutside as vClickOutside } from 'element-plus';
 
 import WhiteContainer from '@/components/WhiteContainer.vue';
+
+const page = defineModel<number>('page', { default: 1 });
 
 // 全选
 const checkAll = ref(false);
@@ -120,24 +115,11 @@ const isIndeterminate = ref(false);
 // 选中的文件 id 列表
 const checkedCities = ref([]);
 
-const urls = [
-	'https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg',
-	'https://fuss10.elemecdn.com/1/34/19aa98b1fcb2781c4fba33d850549jpeg.jpeg',
-	'https://fuss10.elemecdn.com/0/6f/e35ff375812e6b0020b6b4e8f9583jpeg.jpeg',
-	'https://pic1.arkoo.com/56D0B40F99F841DF8A2425762AE2565D/picture/o_1i4qop009177v1tgf14db15he1iaj1is.jpg',
-	'https://fuss10.elemecdn.com/9/bb/e27858e973f5d7d3904835f46abbdjpeg.jpeg',
-	'https://fuss10.elemecdn.com/d/e6/c4d93a3805b3ce3f323f7974e6f78jpeg.jpeg',
-	'https://fuss10.elemecdn.com/3/28/bbf893f792f03a54408b3b7a7ebf0jpeg.jpeg',
-	'https://fuss10.elemecdn.com/2/11/6535bcfb26e4c79b48ddde44f4b6fjpeg.jpeg',
-	'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
-	'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
-];
-
-//  全选
+// 全选
 const handleCheckAllChange = (value: boolean) => {
-	checkedCities.value = value ? filesData.value.map((item) => item.id) : [];
+	checkedCities.value = value ? filesData.list.map((item) => item.id) : [];
 	isIndeterminate.value = false;
-	console.log(checkedCities.value);
+	// console.log(checkedCities.value);
 };
 
 //  取消全选按钮
@@ -152,9 +134,9 @@ const handleCheckedCitiesChange = (value: number[]) => {
 	// 选中数
 	const checkedCount = value.length;
 	// 选中数是否等于文件总数
-	checkAll.value = checkedCount === filesCount.value;
+	checkAll.value = checkedCount === filesData.count;
 	// 选中数是否大于0 且 小于文件总数
-	isIndeterminate.value = checkedCount > 0 && checkedCount < filesCount.value;
+	isIndeterminate.value = checkedCount > 0 && checkedCount < filesData.count;
 };
 
 const showPreview = ref(false);
@@ -165,29 +147,12 @@ const handlePreviewClick = (url: string) => {
 	previewList.value = [url];
 };
 
-const limit = ref(10);
-const offset = ref(0);
-
-// 文件总数
-const filesCount = ref(0);
-const filesData = ref<FileType[]>([]);
-// 获取文件列表
-const getFiles = async () => {
-	let res = await files.data;
-	filesData.value = res.list.map((item: FileType, index: number) => ({ ...item, url: urls[index] }));
-	filesCount.value = res.count;
-};
-
-// 分页
-const changePag = (value: number) => {
-	offset.value = (value - 1) * limit.value;
-};
-
 // 删除
 const handleDeleteClick = () => {
 	console.log(checkedCities.value);
 };
 
+// 
 const switchRef = useTemplateRef('switchRef');
 const popoverRef = useTemplateRef<PopoverInstance>('popoverRef');
 const onClickOutside = () => {
@@ -210,9 +175,7 @@ const changeInput = () => {
 	console.log('确定插入');
 };
 
-onMounted(() => {
-	getFiles();
-});
+onMounted(() => {});
 </script>
 
 <style lang="scss" scoped>

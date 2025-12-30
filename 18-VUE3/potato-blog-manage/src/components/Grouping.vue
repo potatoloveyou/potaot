@@ -26,7 +26,7 @@
 			</div>
 			<!-- v-model:visible="visible" 具名v-model -->
 			<ModalTableDialog
-				v-model="visible"
+				v-model:visible="visible"
 				title="文章分类管理"
 				tableHeight="24rem"
 				:rows="editableRows"

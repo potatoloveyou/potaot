@@ -8,7 +8,7 @@
 				管理标签
 			</div>
 			<ModalTableDialog
-				v-model="visible"
+				v-model:visible="visible"
 				title="标签管理"
 				tableHeight="24rem"
 				:rows="editableRows"
@@ -44,6 +44,7 @@ import type { Column } from 'element-plus';
 import { ElInput, ElButton } from 'element-plus';
 
 import WhiteContainer from '@/components/WhiteContainer.vue';
+import ModalTableDialog from '@/components/ModalTableDialog.vue';
 
 // 标签选中id
 const selectTagId = ref<number | string>(0);

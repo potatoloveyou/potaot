@@ -23,7 +23,7 @@
 		</el-col>
 	</el-row>
 	<PrivateMessage
-		v-model="drawer"
+		v-model:drawer="drawer"
 		:data="sliceData"
 		v-if="privateMessageData.list.length"
 		:privateMessageDataTotal="privateMessageData.total" />

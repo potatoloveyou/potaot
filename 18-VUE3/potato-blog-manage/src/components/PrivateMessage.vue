@@ -31,7 +31,7 @@ interface PrivateMessageProps {
 
 const { data = [], privateMessageDataTotal = 0 } = defineProps<PrivateMessageProps>();
 
-const [drawer] = defineModel<boolean>();
+const drawer = defineModel<boolean>('drawer');
 
 // 关闭抽屉
 const close = (): void => {};

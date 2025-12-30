@@ -27,9 +27,9 @@ import type { Column } from 'element-plus';
 import AutoResizerTable from '@/components/ModalTableDialog/AutoResizerTable.vue';
 
 // 若使用具名v-model，则需在defineModel定义时指定名称
-// const visible = defineModel<boolean>('visible');
+const visible = defineModel<boolean>('visible');
 // 若未使用具名v-model，则可解构defineModel获取v-model值(此数据响应式)
-const [visible] = defineModel<boolean>();
+// const [visible] = defineModel<boolean>();
 
 const emit = defineEmits<{
 	saveRow: [changedRows: StateRow[]];

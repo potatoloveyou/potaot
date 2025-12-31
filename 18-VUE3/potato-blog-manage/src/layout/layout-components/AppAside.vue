@@ -1,6 +1,6 @@
 <template>
 	<el-menu :default-active="routePath" router class="h-full aside-theme">
-		<el-menu-item v-for="item in menuItems" :index="item.path" class="w-40 h-10 mb-3 aside-theme">
+		<el-menu-item v-for="item in menuItems" :key="item.text" :index="item.path" class="w-40 h-10 mb-3 aside-theme">
 			<el-icon>
 				<component :is="item.icon" />
 			</el-icon>

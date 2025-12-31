@@ -1,11 +1,11 @@
 <template>
 	<WhiteContainer class="">
 		<div class="w-full h-full grid grid-cols-4 gap-y-12 place-items-center">
-			<div v-for="item in sliceData" class="h-86 group relative">
+			<div v-for="item in sliceData" :key="item.id"class="h-86 group relative">
 				<div class="overflow-hidden rounded-xl mb-2">
 					<el-image :src="item.cover" fit="cover" class="w-full h-46" />
 					<div class="w-full grid grid-cols-3 gap-1">
-						<el-image v-for="value in item.content" :src="value" fit="cover" class="w-23 h-23" />
+						<el-image v-for="value in item.content" :key="value" :src="value" fit="cover" class="w-23 h-23" />
 						<div v-if="item.content.length < 3" class="bg-[#1e202529]"></div>
 					</div>
 				</div>

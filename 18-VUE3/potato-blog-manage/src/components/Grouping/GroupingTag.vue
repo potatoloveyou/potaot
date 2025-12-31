@@ -21,6 +21,7 @@
 				size="small"
 				@click="changeTag(item.id)"
 				v-for="item in stateData"
+				:key="item.id"
 				class="mr-2 ml-0 hover:bg-[#6b8cf2]">
 				{{ item.name }} {{ item.value }}
 			</el-button>
@@ -33,6 +34,7 @@
 				size="small"
 				@click="changeTag(item.id)"
 				v-for="item in groupingData?.list"
+				:key="item.id"
 				class="mr-2 ml-0 hover:bg-[#6b8cf2]"
 				>{{ item.name }} {{ item.value }}
 			</el-button>

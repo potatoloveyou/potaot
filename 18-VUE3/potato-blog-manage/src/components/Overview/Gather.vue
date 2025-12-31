@@ -23,7 +23,7 @@ const overLink = reactive([
 	{
 		path: '/LocalFiles',
 		name: '本地文件',
-		totle: '0M',
+		totle: '0',
 		bgColor: 'linear-gradient(180deg, #2b5aedcc 0%, #2B5AED 100%)',
 	},
 	{

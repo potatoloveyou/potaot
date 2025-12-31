@@ -25,6 +25,7 @@
 					size="small"
 					@click="changeTag(item.id)"
 					v-for="item in labelData"
+					:key="item.id"
 					class="m-0 hover:bg-[#6b8cf2]">
 					{{ item.name }} {{ item.value }}
 				</el-button>

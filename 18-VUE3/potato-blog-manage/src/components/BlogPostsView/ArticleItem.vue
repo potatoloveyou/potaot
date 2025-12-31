@@ -17,7 +17,7 @@
 							<el-text size="small" class="text-[#1e2025b8]">{{ item.label }} {{ item.region }}</el-text>
 							<el-text size="small" type="info" class="mx-4">{{ item.createTime }}</el-text>
 
-							<div v-for="icon in iconItems" class="flex items-center mr-3 [&>*]:text-[#909399]">
+							<div v-for="icon in iconItems" :key="icon.value" class="flex items-center mr-3 [&>*]:text-[#909399]">
 								<el-icon class="mr-1 text-sm" v-if="icon.icon.name != 'Pointer'">
 									<component :is="icon.icon" />
 								</el-icon>

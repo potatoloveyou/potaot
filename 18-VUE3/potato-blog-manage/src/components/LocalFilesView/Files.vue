@@ -64,6 +64,7 @@
 							size="default"
 							@click="handleGroupingClick(item.id)"
 							v-for="item in groupingData.list"
+							:key="item.id"
 							class="w-full ml-0 mb-2 justify-start hover:bg-[#409eff] hover:border-[#409eff]">
 							{{ item.name }} {{ item.value }}
 						</el-button>

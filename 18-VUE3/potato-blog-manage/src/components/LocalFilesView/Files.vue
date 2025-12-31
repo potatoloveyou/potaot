@@ -29,7 +29,7 @@
 			v-model="checkedCities"
 			@change="handleCheckedCitiesChange"
 			class="grid grid-cols-5 gap-4 place-items-center">
-			<div v-for="item in filesData.list" :key="item.id" class="grid w-68 h-68 group relative">
+			<div v-for="item in data.list" :key="item.id" class="grid w-68 h-68 group relative">
 				<el-checkbox :value="item.id" :border="checkedCities.includes(item.id)" class="img-box p-0 h-58 rounded-md">
 					<el-image fit="scale-down" :src="item.url" class="h-full" />
 				</el-checkbox>
@@ -78,7 +78,7 @@
 		<el-pagination
 			background
 			layout="prev, pager, next"
-			:total="filesData.count"
+			:total="data.count"
 			v-model:page-size="limit"
 			v-model:current-page="page"
 			class="justify-end pt-4" />
@@ -97,12 +97,11 @@ import { ClickOutside as vClickOutside } from 'element-plus';
 
 import WhiteContainer from '@/components/WhiteContainer.vue';
 
-interface GroupingProps {
+interface FilesProps {
 	groupingData: GroupingType;
-	filesData: FileType<FileItemType>;
+	data: FileType<FileItemType>;
 }
-
-const { groupingData, filesData } = defineProps<GroupingProps>();
+const { groupingData, data } = defineProps<FilesProps>();
 
 const limit = defineModel<number>('limit', { default: 10 });
 const page = defineModel<number>('page', { default: 1 });
@@ -117,7 +116,7 @@ const checkedCities = ref([]);
 
 // 全选
 const handleCheckAllChange = (value: boolean) => {
-	checkedCities.value = value ? filesData.list.map((item) => item.id) : [];
+	checkedCities.value = value ? data.list.map((item) => item.id) : [];
 	isIndeterminate.value = false;
 	// console.log(checkedCities.value);
 };
@@ -134,9 +133,9 @@ const handleCheckedCitiesChange = (value: number[]) => {
 	// 选中数
 	const checkedCount = value.length;
 	// 选中数是否等于文件总数
-	checkAll.value = checkedCount === filesData.count;
+	checkAll.value = checkedCount === data.count;
 	// 选中数是否大于0 且 小于文件总数
-	isIndeterminate.value = checkedCount > 0 && checkedCount < filesData.count;
+	isIndeterminate.value = checkedCount > 0 && checkedCount < data.count;
 };
 
 const showPreview = ref(false);

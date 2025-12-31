@@ -9,7 +9,7 @@
 			</template>
 		</Topic>
 		<Grouping :groupingData v-model:selectTagId="selectTagId" />
-		<Files :groupingData :filesData v-model:limit="limit" v-model:page="page" />
+		<Files :groupingData :data="filesData" v-model:limit="limit" v-model:page="page" />
 	</el-scrollbar>
 </template>
 
@@ -74,15 +74,14 @@ const getFiles = async () => {
 };
 
 onMounted(() => {
-	getGroupingList();
-	getFiles();
+	Promise.all([getGroupingList(), getFiles()]);
 });
 
 watch(
 	() => queryParams.value,
 	(newValue, oldValue) => {
 		if (newValue.selectTagId !== oldValue.selectTagId) {
-			console.log("点击了标签");
+			console.log('点击了标签');
 			page.value = 1;
 		}
 		// getFiles();

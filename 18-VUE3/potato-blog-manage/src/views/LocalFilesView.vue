@@ -9,7 +9,7 @@
 			</template>
 		</Topic>
 		<Grouping :groupingData v-model:selectTagId="selectTagId" />
-		<Files :groupingData :filesData v-model:page="page" />
+		<Files :groupingData :filesData v-model:limit="limit" v-model:page="page" />
 	</el-scrollbar>
 </template>
 

@@ -79,7 +79,7 @@
 			background
 			layout="prev, pager, next"
 			:total="filesData.count"
-			:page-size="limit"
+			v-model:page-size="limit"
 			v-model:current-page="page"
 			class="justify-end pt-4" />
 	</WhiteContainer>
@@ -91,20 +91,20 @@ import { ref, useTemplateRef } from 'vue';
 import type { GroupingType } from '@/type/grouping.type';
 import type { FileType, FileItemType } from '@/type/files.type';
 
-interface GroupingProps {
-	groupingData: GroupingType;
-	filesData: FileType<FileItemType>;
-	limit?: number;
-}
-
-const { groupingData, filesData, limit = 10 } = defineProps<GroupingProps>();
-
 import { Delete, Switch, ZoomIn } from '@element-plus/icons-vue';
 import type { PopoverInstance } from 'element-plus';
 import { ClickOutside as vClickOutside } from 'element-plus';
 
 import WhiteContainer from '@/components/WhiteContainer.vue';
 
+interface GroupingProps {
+	groupingData: GroupingType;
+	filesData: FileType<FileItemType>;
+}
+
+const { groupingData, filesData } = defineProps<GroupingProps>();
+
+const limit = defineModel<number>('limit', { default: 10 });
 const page = defineModel<number>('page', { default: 1 });
 
 // 全选
@@ -152,7 +152,7 @@ const handleDeleteClick = () => {
 	console.log(checkedCities.value);
 };
 
-// 
+//
 const switchRef = useTemplateRef('switchRef');
 const popoverRef = useTemplateRef<PopoverInstance>('popoverRef');
 const onClickOutside = () => {

@@ -1,4 +1,4 @@
-export interface ArticleResponseType<T> {
+export interface ArticleType<T> {
 	count: number;
 	list: T[];
 }

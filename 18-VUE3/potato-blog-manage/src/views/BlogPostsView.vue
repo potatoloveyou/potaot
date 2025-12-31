@@ -4,16 +4,7 @@
 		<Topic name="博客文章" @search="changeSearch" :isSearch="true" />
 		<Grouping :stateData :groupingData v-model:selectTagId="selectTagId" />
 		<div class="grid grid-cols-[3fr_1fr] gap-x-4 min-h-dvh">
-			<div>
-				<ArticleItem :sliceData />
-				<el-pagination
-					background
-					layout="prev, pager, next"
-					:total="articleData.count"
-					:page-size="limit"
-					@change="changePag"
-					class="justify-center pt-4" />
-			</div>
+			<ArticleItem :data="articleData" :sliceData v-model:limit="limit" v-model:page="page" />
 			<Label />
 		</div>
 	</el-scrollbar>
@@ -30,7 +21,7 @@ const blogPostsStore = useBlogPostsStore();
 const { stateData, groupingData } = storeToRefs(blogPostsStore);
 const { getGroupingList } = blogPostsStore;
 
-import type { ArticleResponseType, ArticleItemType } from '@/type/index';
+import type { ArticleType, ArticleItemType } from '@/type/index';
 
 import Topic from '@/components/Topic.vue';
 import Grouping from '@/components/Grouping.vue';
@@ -45,30 +36,44 @@ const changeSearch = (value: string) => {
 // 选中标签ID
 const selectTagId = ref<number | string>(0);
 
-const articleData = ref<ArticleResponseType<ArticleItemType>>({
+const sliceData = ref<ArticleItemType[]>([]);
+// 分页大小
+const limit = ref(5);
+// 页码
+const page = ref(1);
+const offset = computed(() => (page.value - 1) * limit.value);
+
+// 查询参数
+const queryParams = computed(() => ({
+	selectTagId: selectTagId.value,
+	limit: limit.value,
+	offset: offset.value,
+}));
+
+const articleData = ref<ArticleType<ArticleItemType>>({
 	count: 0,
 	list: [],
 });
-const sliceData = ref<ArticleItemType[]>([]);
-const limit = ref(5);
-const offset = ref(0);
-
 const getArticleList = async () => {
 	const res = await articles.data;
 	articleData.value = res;
 	sliceData.value = articleData.value.list.slice(offset.value, limit.value + offset.value);
 };
-
-// 分页回调
-const changePag = (value: number) => {
-	offset.value = (value - 1) * limit.value;
-	getArticleList();
-};
-
 onMounted(() => {
-	getArticleList();
-	getGroupingList();
+	Promise.all([getGroupingList(), getArticleList()]);
 });
+
+watch(
+	() => queryParams.value,
+	(newValue, oldValue) => {
+		if (newValue.selectTagId !== oldValue.selectTagId) {
+			console.log('点击了标签');
+			page.value = 1;
+		}
+		console.log(123);
+	},
+	{ deep: true },
+);
 </script>
 
 <style lang="scss" scoped></style>

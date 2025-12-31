@@ -71,13 +71,24 @@ const getFiles = async () => {
 		count: res.count,
 		list: res.list.map((item: FileItemType, index: number) => ({ ...item, url: urls[index] })),
 	};
-	console.log('filesData:', filesData.value);
 };
 
 onMounted(() => {
 	getGroupingList();
 	getFiles();
 });
+
+watch(
+	() => queryParams.value,
+	(newValue, oldValue) => {
+		if (newValue.selectTagId !== oldValue.selectTagId) {
+			console.log("点击了标签");
+			page.value = 1;
+		}
+		// getFiles();
+	},
+	{ deep: true },
+);
 </script>
 
 <style lang="scss" scoped></style>

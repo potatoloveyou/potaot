@@ -3,16 +3,9 @@
 	<el-scrollbar noresize class="min-height">
 		<Topic name="摄影图库" @search="changeSearch" :isSearch="true" />
 		<Grouping :groupingData v-model:selectTagId="selectTagId" />
-		<div class="flex flex-col flex-1">
-			<Gallery :galleryData="sliceData" />
-			<el-pagination
-				background
-				layout="prev, pager, next"
-				:total="photoGalleryData.count"
-				:page-size="limit"
-				@change="changePag"
-				class="justify-center pt-4" />
-		</div>
+		<!-- <div class="flex flex-col flex-1">
+		</div> -->
+		<Gallery :data="photoGalleryData" :sliceData v-model:limit="limit" v-model:page="page" />
 	</el-scrollbar>
 </template>
 
@@ -27,7 +20,7 @@ const photoGalleryStore = usePhotoGalleryStore();
 const { groupingData } = storeToRefs(photoGalleryStore);
 const { getGroupingList } = photoGalleryStore;
 
-import type { PhotoGallery, PhotoGalleryItem } from '@/type/photoGallery.type';
+import type { PhotoGalleryType, PhotoGalleryItemType } from '@/type/photoGallery.type';
 
 import Topic from '@/components/Topic.vue';
 import Grouping from '@/components/Grouping.vue';
@@ -41,31 +34,46 @@ const changeSearch = (value: string) => {
 // 选中标签ID
 const selectTagId = ref<number | string>(0);
 
-const photoGalleryData = ref<PhotoGallery<PhotoGalleryItem>>({
-	count: 100,
+const sliceData = ref<PhotoGalleryItemType[]>([]);
+// 分页大小
+const limit = ref(5);
+// 页码
+const page = ref(1);
+const offset = computed(() => (page.value - 1) * limit.value);
+
+// 查询参数
+const queryParams = computed(() => ({
+	selectTagId: selectTagId.value,
+	limit: limit.value,
+	offset: offset.value,
+}));
+
+const photoGalleryData = ref<PhotoGalleryType<PhotoGalleryItemType>>({
+	count: 0,
 	list: [],
 });
-const sliceData = ref<PhotoGalleryItem[]>([]);
-const limit = ref(5);
-const offset = ref(0);
-
 const getPhotoGalleryList = async () => {
 	const res = await photoGallery.data;
 	photoGalleryData.value = res;
 	sliceData.value = photoGalleryData.value.list.slice(offset.value, limit.value + offset.value);
-	console.log(photoGalleryData.value);
-};
-
-// 分页回调
-const changePag = (value: number) => {
-	offset.value = (value - 1) * limit.value;
-	getPhotoGalleryList();
+	console.log(sliceData.value);
 };
 
 onMounted(() => {
-	getGroupingList();
-	getPhotoGalleryList();
+	Promise.all([getGroupingList(), getPhotoGalleryList()]);
 });
+
+watch(
+	() => queryParams.value,
+	(newValue, oldValue) => {
+		if (newValue.selectTagId !== oldValue.selectTagId) {
+			console.log('点击了标签');
+			page.value = 1;
+		}
+		// getPhotoGalleryList();
+	},
+	{ deep: true },
+);
 </script>
 
 <style lang="scss" scoped></style>

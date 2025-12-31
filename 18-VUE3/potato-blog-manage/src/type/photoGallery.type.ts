@@ -1,8 +1,8 @@
-export interface PhotoGallery<T> {
+export interface PhotoGalleryType<T> {
 	count: number;
 	list: T[];
 }
-export interface PhotoGalleryItem {
+export interface PhotoGalleryItemType {
 	id: number | string;
 	title: string;
 	subsetId: number;

@@ -10,7 +10,7 @@
 					</div>
 				</div>
 				<div class="flex flex-col justify-center [&>*]:mb-4 [&>*]:w-full">
-					<el-text class="text-2xl font-semibold text-[#1E2025]">{{ item.title }}</el-text>
+					<el-text class="text-xl font-semibold text-[#1E2025]">{{ item.title }}</el-text>
 					<el-text :line-clamp="lineClamp" class="h-12 text-base">{{ item.introduce }}</el-text>
 					<div class="flex items-center justify-between">
 						<div class="flex items-center">

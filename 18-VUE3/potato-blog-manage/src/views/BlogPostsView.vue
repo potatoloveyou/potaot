@@ -70,7 +70,8 @@ watch(
 			console.log('点击了标签');
 			page.value = 1;
 		}
-		console.log(123);
+		// console.log(123);
+		getArticleList();
 	},
 	{ deep: true },
 );

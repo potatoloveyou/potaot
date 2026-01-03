@@ -1,6 +1,6 @@
 import type { UserType } from './user.type';
 
-export interface CommentResponseType<T> {
+export interface CommentType<T> {
 	total: number;
 	list: T[];
 }

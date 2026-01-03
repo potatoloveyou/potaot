@@ -1,11 +1,15 @@
 <template>
 	<!-- 私信抽屉 -->
-	<el-drawer v-model="drawer" @close="close" header-class="pm-header" body-class="pm-body">
+	<el-drawer v-model="drawer" header-class="pm-header" body-class="pm-body">
 		<template #header class="mb-8">
-			<span class="text-xl">私信 {{ privateMessageDataTotal }}</span>
+			<span class="text-xl">私信 {{ privateMessageData.total }}</span>
 		</template>
-
-		<DynamicScroller :items="data" :min-item-size="100" :buffer="300" style="height: 100%" @scroll-end="loadMore">
+		<DynamicScroller
+			:items="privateMessageData.list"
+			key-field="id"
+			:min-item-size="100"
+			:buffer="300"
+			@scroll-end="loadMore">
 			<template #default="{ item }">
 				<DynamicScrollerItem :item active>
 					<Reply :data="item" :lineClamp="3" :isShow="false" @deleteReply="deleteReply"
@@ -17,52 +21,91 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { CommentItemType } from '@/type/comment.type';
+
+import { comment } from '@/mock/mock';
+import type { CommentType, CommentItemType } from '@/type/comment.type';
 
 import { DynamicScroller, DynamicScrollerItem } from 'vue-virtual-scroller';
 import 'vue-virtual-scroller/dist/vue-virtual-scroller.css';
 
 import Reply from '@/components/Overview/Comment/Reply.vue';
 
-interface PrivateMessageProps {
-	data: CommentItemType[];
-	privateMessageDataTotal: number;
-}
-
-const { data = [], privateMessageDataTotal = 0 } = defineProps<PrivateMessageProps>();
+// interface PrivateMessageProps {
+// 	data: CommentItemType[];
+// }
+// const { data = [] } = defineProps<PrivateMessageProps>();
 
 const drawer = defineModel<boolean>('drawer');
-
-// 关闭抽屉
-const close = (): void => {};
 
 // 删除评论
 const deleteReply = async (id: number | string) => {
 	console.log('我是Comment', id);
-
 	// getComment();
 };
 
+// 分页大小
+const limit = ref(20);
+// 页码
+const page = ref(1);
+const offset = computed(() => (page.value - 1) * limit.value);
+const loading = ref(false);
+const finished = ref(false);
+
+// 查询参数
+const queryParams = computed(() => ({
+	limit: limit.value,
+	offset: offset.value,
+}));
+
+const privateMessageData = ref<CommentType<CommentItemType>>({
+	total: 0,
+	list: [],
+});
+// 获取私信
+const getPrivateMessage = async () => {
+	const res = await comment.data;
+
+	const newList = res.list.slice(offset.value, limit.value + offset.value);
+	if (newList.length === 0) {
+		finished.value = true;
+		return;
+	}
+
+	privateMessageData.value = {
+		total: res.total,
+		list: [...privateMessageData.value.list, ...newList],
+	};
+
+	if (res.list.length < limit.value) {
+		finished.value = true; // 没有更多了
+	}
+};
+
 // 到底触发
-const loadMore = () => {
+const loadMore = async () => {
 	console.log('到底了');
+	if (loading.value || finished.value) return;
+	loading.value = true;
+	page.value++;
+	await getPrivateMessage();
+
+	// 给虚拟列表一点缓冲
+	await nextTick();
+	loading.value = false;
 };
 
 onMounted(() => {
-	// console.log(data);
+	getPrivateMessage();
 });
 </script>
 
 <style lang="scss">
 .pm-header {
 	margin-bottom: 0;
-	// padding-inline: 0;
 	padding-bottom: 1rem;
-	// margin-inline: 1rem;
 	border-bottom: 1px solid #00000030;
 }
 .pm-body {
-	// padding: 0 1rem;
 	padding: 0 0.5rem 0 1rem;
 	flex: 1;
 	display: flex;

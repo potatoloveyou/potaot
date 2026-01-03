@@ -72,7 +72,7 @@ export const comment = Mock.mock({
 	code: 200,
 	data: {
 		total: '@integer(0, 1000)',
-		'list|50': [
+		'list|100': [
 			{
 				user: {
 					'id|+1': '@id',

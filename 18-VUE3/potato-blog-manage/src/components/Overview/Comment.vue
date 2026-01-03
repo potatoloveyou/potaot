@@ -20,12 +20,12 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { comment } from '@/mock/mock';
-import type { CommentResponseType, CommentItemType } from '@/type/comment.type';
+import type { CommentType, CommentItemType } from '@/type/comment.type';
 
 import WhiteContainer from '@/components/WhiteContainer.vue';
 import Reply from '@/components/Overview/Comment/Reply.vue';
 
-const commentData = ref<CommentResponseType<CommentItemType>>({
+const commentData = ref<CommentType<CommentItemType>>({
 	total: 0,
 	list: [],
 });

@@ -2,9 +2,9 @@
 	<!-- 总览数据 -->
 	<div class="grid grid-cols-4 gap-x-4 mb-4">
 		<div v-for="(value, index) in overLink" :key="value.name">
-			<div :style="{ background: value.bgColor }" class="p-4 flex items-center justify-between rounded-lg">
+			<div :style="{ background: value.bgColor }" class="p-2 flex items-center justify-between rounded-lg">
 				<div class="flex flex-col">
-					<text class="pb-4">{{ value.name }}</text>
+					<text class="pb-2">{{ value.name }}</text>
 					<text class="text-3xl">{{ value.totle }}</text>
 				</div>
 				<el-button :icon="Plus" color="#1e202514" v-if="index > 0" class="w-12 h-12"></el-button>
@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, toRef } from 'vue';
+import { ref, reactive } from 'vue';
 import { Plus } from '@element-plus/icons-vue';
 import { overView } from '@/mock/mock';
 

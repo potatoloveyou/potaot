@@ -1,7 +1,9 @@
 <template>
 	<div class="default-layout h-dvh">
 		<el-container class="h-full">
-			<el-header height="4rem" class="w-full px-4 fixed top-0 left-0 z-10 bg-white grid items-center default-layout-header-theme">
+			<el-header
+				height="4rem"
+				class="w-full px-4 fixed top-0 left-0 z-10 bg-white grid items-center default-layout-header-theme">
 				<AppHeader />
 			</el-header>
 
@@ -9,7 +11,7 @@
 				<el-aside class="py-6 pl-6 pr-4" width="auto">
 					<AppAside />
 				</el-aside>
-				<el-main class="pr-4 pl-4 py-3">
+				<el-main class="px-4 py-2">
 					<RouterView />
 				</el-main>
 			</el-container>

@@ -1,60 +1,66 @@
 <template>
 	<!-- 总览右侧评论 -->
-	<WhiteContainer>
-		<span class="text-[1.3rem]">评论{{ commentData.total }}</span>
-		<div v-if="commentData.list.length" class="h-full">
-			<Reply v-for="item in sliceData" :data="item" :key="item.id" @deleteReply="deleteReply" />
-			<el-pagination
-				background
-				size="small"
-				layout="prev, pager, next"
-				:total="commentData.total"
-				:page-size="limit"
-				@change="changePag"
-				class="justify-center pt-4" />
-		</div>
+	<WhiteContainer class="min-h-0 flex flex-col">
+		<span class="text-[1.3rem]">评论{{ data.total }}</span>
+		<DynamicScroller
+			:items="data.list"
+			key-field="id"
+			:min-item-size="100"
+			:buffer="300"
+			@scroll-end="emit('loadMore')"
+			v-if="data.list.length">
+			<template #default="{ item }">
+				<DynamicScrollerItem :item active>
+					<Reply :data="item" :lineClamp="3" :isShow="false" @deleteReply="deleteReply"
+				/></DynamicScrollerItem>
+			</template>
+		</DynamicScroller>
 		<div v-else>暂无评论</div>
 	</WhiteContainer>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { comment } from '@/mock/mock';
+
 import type { CommentType, CommentItemType } from '@/type/comment.type';
+
+import { DynamicScroller, DynamicScrollerItem } from 'vue-virtual-scroller';
+import 'vue-virtual-scroller/dist/vue-virtual-scroller.css';
 
 import WhiteContainer from '@/components/WhiteContainer.vue';
 import Reply from '@/components/Overview/Comment/Reply.vue';
 
-const commentData = ref<CommentType<CommentItemType>>({
-	total: 0,
-	list: [],
-});
-const sliceData = ref<CommentItemType[]>();
-const limit = ref(5);
-const offset = ref(0);
+const emit = defineEmits<{
+	loadMore: [];
+}>();
 
-// 获取评论
-const getComment = async () => {
-	let res = await comment.data;
-	commentData.value = res;
-	sliceData.value = commentData.value.list.slice(offset.value, limit.value + offset.value);
-};
+interface CommentProps {
+	data: CommentType<CommentItemType>;
+}
+const { data } = defineProps<CommentProps>();
 
 // 删除评论
 const deleteReply = async (id: number | string) => {
 	console.log('我是Comment', id);
-
-	// getComment();
 };
-
-const changePag = (value: number) => {
-	offset.value = (value - 1) * limit.value;
-	getComment();
-};
-
-onMounted(() => {
-	getComment();
-});
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.vue-recycle-scroller {
+	&::-webkit-scrollbar {
+		width: 0.5rem; /* 滚动条厚度 */
+	}
+	&::-webkit-scrollbar-thumb {
+		background-color: rgba(0, 0, 0, 0.4); /* 滑块颜色 */
+		border-radius: 0.2rem;
+	}
+
+	&::-webkit-scrollbar-thumb:hover {
+		background-color: rgba(0, 0, 0, 0.6);
+	}
+
+	&::-webkit-scrollbar-track {
+		background-color: transparent; /* 滚动条轨道 */
+	}
+}
+</style>

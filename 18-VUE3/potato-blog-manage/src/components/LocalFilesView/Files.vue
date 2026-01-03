@@ -1,7 +1,7 @@
 <template>
-	<WhiteContainer>
+	<WhiteContainer class="px-2 py-2">
 		<!-- 文件列表组件 -->
-		<div class="bg-[#f4f4f4] py-2 px-4 mb-4 grid grid-cols-[1fr_auto] items-center">
+		<div class="bg-[#f4f4f4] py-1 px-4 mb-2 grid grid-cols-[1fr_auto] items-center">
 			<div class="[&>*]:mr-4 flex items-center">
 				<el-checkbox v-model="checkAll" :indeterminate="isIndeterminate" @change="handleCheckAllChange">
 					全选
@@ -28,9 +28,9 @@
 		<el-checkbox-group
 			v-model="checkedCities"
 			@change="handleCheckedCitiesChange"
-			class="grid grid-cols-5 gap-4 place-items-center">
-			<div v-for="item in data.list" :key="item.id" class="grid w-68 h-68 group relative">
-				<el-checkbox :value="item.id" :border="checkedCities.includes(item.id)" class="img-box p-0 h-58 rounded-md">
+			class="grid grid-cols-5 gap-x-0 place-items-center">
+			<div v-for="item in sliceData" :key="item.id" class="grid w-70 h-66 group relative">
+				<el-checkbox :value="item.id" :border="checkedCities.includes(item.id)" class="img-box p-0 h-60 rounded-md">
 					<el-image fit="scale-down" :src="item.url" class="h-full" />
 				</el-checkbox>
 				<el-button
@@ -39,7 +39,7 @@
 					color="#2b5aed"
 					@click.stop="handlePreviewClick(item.url)"
 					class="absolute top-2 right-2 p-5 m-0 opacity-0 group-hover:opacity-100 text-2xl transition-all duration-300" />
-				<div class="w-68 flex justify-center items-center">
+				<div class="w-70 flex justify-center items-center">
 					<el-text truncated line-clamp="1" class="text-base text-center">{{ item.fileName }}</el-text>
 					<el-text class="text-base text-center">.{{ item.format }}</el-text>
 				</div>
@@ -101,8 +101,9 @@ import WhiteContainer from '@/components/WhiteContainer.vue';
 interface FilesProps {
 	groupingData: GroupingType;
 	data: FileType<FileItemType>;
+	sliceData: FileItemType[];
 }
-const { groupingData, data } = defineProps<FilesProps>();
+const { groupingData, data, sliceData } = defineProps<FilesProps>();
 
 const limit = defineModel<number>('limit', { default: 10 });
 const page = defineModel<number>('page', { default: 1 });

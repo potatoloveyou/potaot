@@ -22,17 +22,11 @@
 			<el-button type="primary" color="#2b5aed">退出</el-button>
 		</el-col>
 	</el-row>
-	<PrivateMessage
-		v-model:drawer="drawer"
-		:data="sliceData"
-		v-if="privateMessageData.list.length"
-		:privateMessageDataTotal="privateMessageData.total" />
+	<PrivateMessage v-model:drawer="drawer" />
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { comment } from '@/mock/mock';
-import type { CommentResponseType, CommentItemType } from '@/type/comment.type';
 
 import { useRouter } from 'vue-router';
 const router = useRouter();
@@ -44,32 +38,16 @@ import { Message, Sunny, Moon } from '@element-plus/icons-vue';
 
 import PrivateMessage from '@/components/PrivateMessage.vue';
 
+// 回到主页
 const goOverview = () => {
 	router.push('/');
 };
 
 const drawer = ref(false);
+// 打开私信抽屉
 const openDrawer = () => {
 	drawer.value = true;
 };
-
-const privateMessageData = ref<CommentResponseType<CommentItemType>>({
-	total: 0,
-	list: [],
-});
-const sliceData = ref<CommentItemType[]>();
-const limit = ref(20);
-const offset = ref(0);
-// 获取私信
-const getPrivateMessage = async () => {
-	let res = await comment.data;
-	privateMessageData.value = res;
-	sliceData.value = privateMessageData.value.list.slice(offset.value, limit.value + offset.value);
-};
-
-onMounted(() => {
-	getPrivateMessage();
-});
 </script>
 
 <style lang="scss" scoped>

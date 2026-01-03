@@ -1,6 +1,6 @@
 <template>
 	<!-- 分组标签 -->
-	<el-scrollbar class="pb-4 pr-10">
+	<el-scrollbar class="pr-10">
 		<div class="h-full flex items-center tag-container">
 			<el-button
 				:type="isSelected(0) ? 'primary' : 'info'"
@@ -43,8 +43,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-
 import type { StateType, GroupingType } from '@/type/grouping.type';
 
 const selectTagId = defineModel<number | string>('selectTagId');

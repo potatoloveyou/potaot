@@ -11,7 +11,7 @@
 				<el-aside class="py-6 pl-6 pr-4" width="auto">
 					<AppAside />
 				</el-aside>
-				<el-main class="pl-4 pr-2 py-2">
+				<el-main class="pl-4 pr-2 py-4">
 					<RouterView />
 				</el-main>
 			</el-container>

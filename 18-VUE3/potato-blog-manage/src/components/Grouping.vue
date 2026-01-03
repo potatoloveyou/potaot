@@ -1,8 +1,8 @@
 <template>
 	<!-- 分组组件 -->
-	<WhiteContainer class="grid grid-cols-[1fr_auto] mb-4 pb-0">
+	<WhiteContainer class="grid grid-cols-[1fr_auto] mb-4">
 		<GroupingTag :stateData :groupingData v-model:selectTagId="selectTagId" />
-		<div class="flex items-center pb-4">
+		<div class="flex items-center">
 			<el-popover width="220" title="请输入分组名称" content="Bottom Right prompts info" placement="bottom-end">
 				<template #reference>
 					<div class="flex items-center cursor-pointer text-[#2B5AED]">
@@ -24,7 +24,6 @@
 				<el-icon class="mr-1" color="#2B5AED"><Tools /></el-icon>
 				管理分组
 			</div>
-			<!-- v-model:visible="visible" 具名v-model -->
 			<ModalTableDialog
 				v-model:visible="visible"
 				title="文章分类管理"

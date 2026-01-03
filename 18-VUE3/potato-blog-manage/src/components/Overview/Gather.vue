@@ -2,7 +2,7 @@
 	<!-- 总览数据 -->
 	<div class="grid grid-cols-4 gap-x-4 mb-4">
 		<div v-for="(value, index) in overLink" :key="value.name">
-			<div :style="{ background: value.bgColor }" class="p-2 flex items-center justify-between rounded-lg">
+			<div :style="{ background: value.bgColor }" class="p-4 flex items-center justify-between rounded-lg">
 				<div class="flex flex-col">
 					<text class="pb-2">{{ value.name }}</text>
 					<text class="text-3xl">{{ value.totle }}</text>

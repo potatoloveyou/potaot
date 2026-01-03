@@ -1,6 +1,6 @@
 <template>
 	<!-- 博客文章 -->
-	<el-scrollbar noresize class="min-height">
+	<el-scrollbar noresize class="min-height pr-5">
 		<Topic name="博客文章" @search="changeSearch" :isSearch="true" />
 		<Grouping :stateData :groupingData v-model:selectTagId="selectTagId" />
 		<div class="grid grid-cols-[3fr_1fr] gap-x-4 min-h-dvh">

@@ -1,9 +1,9 @@
 <template>
 	<!-- 总览 -->
-	<el-scrollbar noresize class="min-height flex flex-col">
+	<el-scrollbar noresize class="min-height flex flex-col pr-5">
 		<Topic @search="changeSearch" :isSearch="false" />
 		<Gather />
-		<div class="flex-1 grid grid-cols-[2fr_1.5fr] gap-x-4 h-dvh">
+		<div class="grid grid-cols-[2fr_1.5fr] gap-x-4 min-h-dvh">
 			<Chart />
 			<Comment :data="commentData" @loadMore="loadMore" />
 		</div>

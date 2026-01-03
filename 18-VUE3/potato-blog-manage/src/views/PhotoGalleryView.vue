@@ -1,6 +1,6 @@
 <template>
 	<!-- 摄影图库 -->
-	<el-scrollbar noresize class="min-height">
+	<el-scrollbar noresize class="min-height pr-5">
 		<Topic name="摄影图库" @search="changeSearch" :isSearch="true" />
 		<Grouping :groupingData v-model:selectTagId="selectTagId" />
 		<!-- <div class="flex flex-col flex-1">

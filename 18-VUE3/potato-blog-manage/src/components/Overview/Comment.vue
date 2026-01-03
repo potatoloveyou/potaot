@@ -1,6 +1,6 @@
 <template>
 	<!-- 总览右侧评论 -->
-	<WhiteContainer class="min-h-0 flex flex-col">
+	<WhiteContainer class="min-h-0 flex flex-col pr-2">
 		<span class="text-[1.3rem]">评论{{ data.total }}</span>
 		<DynamicScroller
 			:items="data.list"
@@ -47,16 +47,17 @@ const deleteReply = async (id: number | string) => {
 
 <style lang="scss" scoped>
 .vue-recycle-scroller {
+	padding-right: 0.5rem;
 	&::-webkit-scrollbar {
 		width: 0.5rem; /* 滚动条厚度 */
 	}
 	&::-webkit-scrollbar-thumb {
-		background-color: rgba(0, 0, 0, 0.4); /* 滑块颜色 */
+		background-color: rgba(0, 0, 0, 0.1); /* 滑块颜色 */
 		border-radius: 0.2rem;
 	}
 
 	&::-webkit-scrollbar-thumb:hover {
-		background-color: rgba(0, 0, 0, 0.6);
+		background-color: rgba(0, 0, 0, 0.2);
 	}
 
 	&::-webkit-scrollbar-track {

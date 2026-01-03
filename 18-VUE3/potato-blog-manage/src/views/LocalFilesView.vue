@@ -1,6 +1,6 @@
 <template>
 	<!-- 本地文件 -->
-	<el-scrollbar noresize class="min-height">
+	<el-scrollbar noresize class="min-height pr-5">
 		<Topic name="本地文件" :isSearch="false">
 			<template #custom>
 				<div class="grid grid-cols-[1fr_auto] items-center">

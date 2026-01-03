@@ -111,8 +111,8 @@ onMounted(() => {
 	display: flex;
 	flex-direction: column;
 	height: 100%;
-
 	.vue-recycle-scroller {
+		padding-right: 0.5rem;
 		&::-webkit-scrollbar {
 			width: 0.5rem; /* 滚动条厚度 */
 		}

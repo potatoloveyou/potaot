@@ -3,7 +3,7 @@
 	<div class="h-full flex flex-col">
 		<Topic name="随手笔记" @search="changeSearch" :isSearch="true" />
 		<div class="flex-1 grid grid-cols-[3fr_1.6fr] gap-x-4">
-			<NoteList :data="diaryData" :sliceData v-model:limit="limit" v-model:page="page" />
+			<NoteList :data="diaryData" @loadMore="loadMore" />
 			<NoteEditor />
 		</div>
 	</div>
@@ -24,12 +24,13 @@ const changeSearch = (value: string) => {
 	console.log('我是父组件', value);
 };
 
-const sliceData = ref<DiaryItemType[]>([]);
 // 分页大小
-const limit = ref(4);
+const limit = ref(10);
 // 页码
 const page = ref(1);
 const offset = computed(() => (page.value - 1) * limit.value);
+const loading = ref(false);
+const finished = ref(false);
 
 // 查询参数
 const queryParams = computed(() => ({
@@ -43,21 +44,46 @@ const diaryData = ref<DiaryType<DiaryItemType>>({
 });
 const getDiaryList = async () => {
 	const res = await diary.data;
-	diaryData.value = res;
-	sliceData.value = diaryData.value.list.slice(offset.value, limit.value + offset.value);
+
+	const newList = res.list.slice(offset.value, limit.value + offset.value);
+	if (newList.length === 0) {
+		finished.value = true;
+		return;
+	}
+	diaryData.value = {
+		count: res.count,
+		list: [...diaryData.value.list, ...newList],
+	};
+
+	if (res.list.length < limit.value) {
+		finished.value = true; // 没有更多了
+	}
+};
+
+// 到底触发
+const loadMore = async () => {
+	console.log('到底了');
+	if (loading.value || finished.value) return;
+	loading.value = true;
+	page.value++;
+	await getDiaryList();
+
+	// 给虚拟列表一点缓冲
+	await nextTick();
+	loading.value = false;
 };
 
 onMounted(() => {
 	Promise.all([getDiaryList()]);
 });
 
-watch(
-	() => queryParams.value,
-	() => {
-		getDiaryList();
-	},
-	{ deep: true },
-);
+// watch(
+// 	() => queryParams.value,
+// 	() => {
+// 		getDiaryList();
+// 	},
+// 	{ deep: true },
+// );
 </script>
 
 <style lang="scss" scoped></style>

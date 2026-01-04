@@ -1,65 +1,64 @@
 <template>
 	<!-- 文章列表 -->
-	<div>
-		<WhiteContainer class="w-full h-48 mb-4" v-for="item in sliceData">
-			<div class="h-full grid grid-cols-[auto_1fr]">
-				<div class="w-58 mr-4 rounded-xl overflow-hidden relative">
-					<el-image :src="item.cover" lazy fit="scale-down" class="h-full" />
-					<div v-if="item.state" class="absolute bottom-0 w-full bg-[#2b5aedcc] text-white flex justify-center py-3">
-						未发布
-					</div>
-				</div>
-				<div class="flex flex-col justify-center [&>*]:mb-4 [&>*]:w-full">
-					<el-text class="text-xl font-semibold text-[#1E2025]">{{ item.title }}</el-text>
-					<el-text :line-clamp="lineClamp" class="h-12 text-base">{{ item.introduce }}</el-text>
-					<div class="flex items-center justify-between">
-						<div class="flex items-center">
-							<el-text size="small" class="text-[#1e2025b8]">{{ item.label }} {{ item.region }}</el-text>
-							<el-text size="small" type="info" class="mx-4">{{ item.createTime }}</el-text>
-
-							<div v-for="icon in iconItems" :key="icon.value" class="flex items-center mr-3 [&>*]:text-[#909399]">
-								<el-icon class="mr-1 text-sm" v-if="icon.icon.name != 'Pointer'">
-									<component :is="icon.icon" />
-								</el-icon>
-								<span v-else class="iconfont icon-dianzan"></span>
-								<el-text size="small">{{ item[icon.value] }}</el-text>
+	<DynamicScroller :items="data.list" key-field="id" :min-item-size="160" :buffer="300" @scroll-end="emit('loadMore')" class="h-full">
+		<template #default="{ item }">
+			<DynamicScrollerItem :item active>
+				<WhiteContainer class="w-full mb-3">
+					<div class="h-full grid grid-cols-[auto_1fr]">
+						<div class="w-46 mr-4 rounded-xl overflow-hidden relative">
+							<el-image :src="item.cover" lazy fit="scale-down" class="h-full" />
+							<div
+								v-if="item.state"
+								class="absolute bottom-0 w-full bg-[#2b5aedcc] text-white flex justify-center py-3">
+								未发布
 							</div>
 						</div>
+						<div class="flex flex-col [&>*]:w-full">
+							<el-text class="text-xl font-semibold text-[#1E2025] mb-2">{{ item.title }}</el-text>
+							<el-text :line-clamp="lineClamp" class="text-base">{{ item.introduce }}</el-text>
+							<div class="flex items-center justify-between mt-auto">
+								<div class="flex items-center">
+									<el-text size="small" class="text-[#1e2025b8]">{{ item.label }} {{ item.region }}</el-text>
+									<el-text size="small" type="info" class="mx-4">{{ item.createTime }}</el-text>
 
-						<div
-							class="flex items-center [&>*]:mr-5 [&>*]:cursor-pointer [&>*]:text-[#909399] [&>*:hover]:text-[#2B5AED] text-xl">
-							<el-tooltip :content="item.state ? '发布' : '撤回'" placement="top">
-								<span v-if="item.state" class="iconfont icon-fabu" @click="handlePublishClick(item.id)"></span>
-								<span v-else class="iconfont icon-chehui" @click="handleRevokeClick(item.id)"></span>
-							</el-tooltip>
-							<el-tooltip content="编辑" placement="top">
-								<span class="iconfont icon-xiugai" @click="handleEditClick(item.id)"></span>
-							</el-tooltip>
-							<el-popover :visible="currentId === item.id" trigger="click" title="确定删除" placement="top-end">
-								<template #reference>
-									<el-icon @click="currentId = item.id"><Delete /></el-icon>
-								</template>
-								<template #default>
-									<el-text>删除后不可恢复</el-text>
-									<div class="mt-4 flex justify-end">
-										<el-button type="info" plain size="small" @click="currentId = null">取消</el-button>
-										<el-button type="primary" size="small" @click="removeArticle(item.id)">确定</el-button>
+									<div v-for="icon in iconItems" :key="icon.value" class="flex items-center mr-3 [&>*]:text-[#909399]">
+										<el-icon class="mr-1 text-sm" v-if="icon.icon.name != 'Pointer'">
+											<component :is="icon.icon" />
+										</el-icon>
+										<span v-else class="iconfont icon-dianzan"></span>
+										<el-text size="small">{{ item[icon.value] }}</el-text>
 									</div>
-								</template>
-							</el-popover>
+								</div>
+
+								<div
+									class="flex items-center [&>*]:ml-5 [&>*]:cursor-pointer [&>*]:text-[#909399] [&>*:hover]:text-[#2B5AED] text-xl">
+									<el-tooltip :content="item.state ? '发布' : '撤回'" placement="top">
+										<span v-if="item.state" class="iconfont icon-fabu" @click="handlePublishClick(item.id)"></span>
+										<span v-else class="iconfont icon-chehui" @click="handleRevokeClick(item.id)"></span>
+									</el-tooltip>
+									<el-tooltip content="编辑" placement="top">
+										<span class="iconfont icon-xiugai" @click="handleEditClick(item.id)"></span>
+									</el-tooltip>
+									<el-popover :visible="currentId === item.id" trigger="click" title="确定删除" placement="top-end">
+										<template #reference>
+											<el-icon @click="currentId = item.id"><Delete /></el-icon>
+										</template>
+										<template #default>
+											<el-text>删除后不可恢复</el-text>
+											<div class="mt-4 flex justify-end">
+												<el-button type="info" plain size="small" @click="currentId = null">取消</el-button>
+												<el-button type="primary" size="small" @click="removeArticle(item.id)">确定</el-button>
+											</div>
+										</template>
+									</el-popover>
+								</div>
+							</div>
 						</div>
 					</div>
-				</div>
-			</div>
-		</WhiteContainer>
-		<el-pagination
-			background
-			layout="prev, pager, next"
-			:total="data.count"
-			v-model:page-size="limit"
-			v-model:current-page="page"
-			class="justify-center pt-4" />
-	</div>
+				</WhiteContainer>
+			</DynamicScrollerItem>
+		</template>
+	</DynamicScroller>
 </template>
 
 <script setup lang="ts">
@@ -71,17 +70,21 @@ import type { ArticleType, ArticleItemType } from '@/type/article.type';
 import { View, Pointer, ChatLineSquare, Delete } from '@element-plus/icons-vue';
 import { ElMessage } from 'element-plus';
 
+import { DynamicScroller, DynamicScrollerItem } from 'vue-virtual-scroller';
+import 'vue-virtual-scroller/dist/vue-virtual-scroller.css';
+
 import WhiteContainer from '@/components/WhiteContainer.vue';
+
+const emit = defineEmits<{
+	loadMore: [];
+}>();
 
 interface ArticleItemProps {
 	data: ArticleType<ArticleItemType>;
-	sliceData: ArticleItemType[];
+
 	lineClamp?: number | string;
 }
-const { data, sliceData, lineClamp = 2 } = defineProps<ArticleItemProps>();
-
-const limit = defineModel<number>('limit', { default: 5 });
-const page = defineModel<number>('page', { default: 1 });
+const { data, lineClamp = 2 } = defineProps<ArticleItemProps>();
 
 interface IconItem {
 	icon: Component;
@@ -131,18 +134,25 @@ const removeArticle = (id: number | string) => {
 		type: 'success',
 	});
 };
-
-onMounted(() => {
-	// console.log(sliceData);
-});
 </script>
 
 <style lang="scss" scoped>
-:deep(.el-popover__title) {
-	margin: 0;
-	background-color: red;
-}
-:deep(.el-popper) {
-	background-color: red;
+.vue-recycle-scroller {
+	padding-right: 0.5rem;
+	&::-webkit-scrollbar {
+		width: 0.5rem; /* 滚动条厚度 */
+	}
+	&::-webkit-scrollbar-thumb {
+		background-color: rgba(0, 0, 0, 0.1); /* 滑块颜色 */
+		border-radius: 0.2rem;
+	}
+
+	&::-webkit-scrollbar-thumb:hover {
+		background-color: rgba(0, 0, 0, 0.2);
+	}
+
+	&::-webkit-scrollbar-track {
+		background-color: transparent; /* 滚动条轨道 */
+	}
 }
 </style>

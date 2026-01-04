@@ -259,7 +259,7 @@ export const articles = Mock.mock({
 				title: '@ctitle(4,10)', // 文章标题
 				createTime: '@datetime(yyyy-MM-dd)',
 				label: '@ctitle(2)/@ctitle(2)/@ctitle(2)', // 文章标签
-				introduce: '@cparagraph(1, 4)', // 文章介绍
+				introduce: '@cparagraph(2, 10)', // 文章介绍
 				region: '@ctitle(2)', // 文章地区
 				viewCount: '@integer(0, 1000)', // 文章阅读量
 				praiseCount: '@integer(0, 1000)', // 文章点赞数

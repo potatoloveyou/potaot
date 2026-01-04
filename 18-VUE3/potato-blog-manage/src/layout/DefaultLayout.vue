@@ -7,11 +7,11 @@
 				<AppHeader />
 			</el-header>
 
-			<el-container class="header-height">
+			<el-container class="header-height h-full">
 				<el-aside class="py-6 pl-6 pr-4" width="auto">
 					<AppAside />
 				</el-aside>
-				<el-main class="pl-4 pr-2 py-4">
+				<el-main class="pl-4 pr-2 py-4 h-full">
 					<RouterView />
 				</el-main>
 			</el-container>

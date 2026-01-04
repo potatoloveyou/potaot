@@ -1,13 +1,13 @@
 <template>
 	<!-- 博客文章 -->
-	<el-scrollbar noresize class="min-height pr-5">
+	<div class="w-full h-full flex flex-col">
 		<Topic name="博客文章" @search="changeSearch" :isSearch="true" />
 		<Grouping :stateData :groupingData v-model:selectTagId="selectTagId" />
-		<div class="grid grid-cols-[3fr_1fr] gap-x-4 min-h-dvh">
-			<ArticleItem :data="articleData" :sliceData v-model:limit="limit" v-model:page="page" />
+		<div class="grid grid-cols-[3fr_1fr] gap-x-4 h-139">
+			<ArticleItem :data="articleData" @loadMore="loadMore" />
 			<Label />
 		</div>
-	</el-scrollbar>
+	</div>
 </template>
 
 <script setup lang="ts">
@@ -36,12 +36,13 @@ const changeSearch = (value: string) => {
 // 选中标签ID
 const selectTagId = ref<number | string>(0);
 
-const sliceData = ref<ArticleItemType[]>([]);
 // 分页大小
-const limit = ref(5);
+const limit = ref(10);
 // 页码
 const page = ref(1);
 const offset = computed(() => (page.value - 1) * limit.value);
+const loading = ref(false);
+const finished = ref(false);
 
 // 查询参数
 const queryParams = computed(() => ({
@@ -56,25 +57,52 @@ const articleData = ref<ArticleType<ArticleItemType>>({
 });
 const getArticleList = async () => {
 	const res = await articles.data;
-	articleData.value = res;
-	sliceData.value = articleData.value.list.slice(offset.value, limit.value + offset.value);
+
+	const newList = res.list.slice(offset.value, limit.value + offset.value);
+	if (newList.length === 0) {
+		finished.value = true;
+		return;
+	}
+
+	articleData.value = {
+		count: res.count,
+		list: [...articleData.value.list, ...newList],
+	};
+
+	if (res.list.length < limit.value) {
+		finished.value = true; // 没有更多了
+	}
 };
+
+// 到底触发
+const loadMore = async () => {
+	console.log('到底了');
+	if (loading.value || finished.value) return;
+	loading.value = true;
+	page.value++;
+	await getArticleList();
+
+	// 给虚拟列表一点缓冲
+	await nextTick();
+	loading.value = false;
+};
+
 onMounted(() => {
 	Promise.all([getGroupingList(), getArticleList()]);
 });
 
-watch(
-	() => queryParams.value,
-	(newValue, oldValue) => {
-		if (newValue.selectTagId !== oldValue.selectTagId) {
-			console.log('点击了标签');
-			page.value = 1;
-		}
-		// console.log(123);
-		getArticleList();
-	},
-	{ deep: true },
-);
+// watch(
+// 	() => queryParams.value,
+// 	(newValue, oldValue) => {
+// 		if (newValue.selectTagId !== oldValue.selectTagId) {
+// 			console.log('点击了标签');
+// 			page.value = 1;
+// 		}
+// 		// console.log(123);
+// 		getArticleList();
+// 	},
+// 	{ deep: true },
+// );
 </script>
 
 <style lang="scss" scoped></style>

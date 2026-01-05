@@ -11,7 +11,7 @@
 			v-if="data.list.length">
 			<template #default="{ item }">
 				<DynamicScrollerItem :item active>
-					<Reply :data="item" :lineClamp="3" :isShow="false" @deleteReply="deleteReply"
+					<Reply :data="item" :lineClamp="3" isShow @deleteReply="deleteReply"
 				/></DynamicScrollerItem>
 			</template>
 		</DynamicScroller>

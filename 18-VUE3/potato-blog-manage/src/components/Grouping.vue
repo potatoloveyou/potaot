@@ -25,6 +25,7 @@
 				管理分组
 			</div>
 			<ModalTableDialog
+				v-if="visible"
 				v-model:visible="visible"
 				title="文章分类管理"
 				tableHeight="24rem"
@@ -36,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, h } from 'vue';
+import { ref, h, defineAsyncComponent } from 'vue';
 
 import type { StateRow, StateType, GroupingType } from '@/type/grouping.type';
 
@@ -46,7 +47,7 @@ import { ElInput, ElButton } from 'element-plus';
 
 import WhiteContainer from '@/components/WhiteContainer.vue';
 import GroupingTag from '@/components/Grouping/GroupingTag.vue';
-import ModalTableDialog from '@/components/ModalTableDialog.vue';
+const ModalTableDialog = defineAsyncComponent(() => import('@/components/ModalTableDialog.vue'));
 
 const selectTagId = defineModel<number | string>('selectTagId');
 

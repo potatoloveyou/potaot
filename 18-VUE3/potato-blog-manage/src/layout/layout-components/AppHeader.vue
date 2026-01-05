@@ -22,11 +22,11 @@
 			<el-button type="primary" color="#2b5aed">退出</el-button>
 		</el-col>
 	</el-row>
-	<PrivateMessage v-model:drawer="drawer" />
+	<PrivateMessage v-if="drawer" v-model:drawer="drawer" />
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, defineAsyncComponent } from 'vue';
 
 import { useRouter } from 'vue-router';
 const router = useRouter();
@@ -36,7 +36,7 @@ const themeStore = useThemeStore();
 
 import { Message, Sunny, Moon } from '@element-plus/icons-vue';
 
-import PrivateMessage from '@/components/PrivateMessage.vue';
+const PrivateMessage = defineAsyncComponent(() => import('@/components/PrivateMessage.vue'));
 
 // 回到主页
 const goOverview = () => {

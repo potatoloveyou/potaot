@@ -1,61 +1,72 @@
 <template>
 	<!-- 文章列表 -->
-	<DynamicScroller :items="data.list" key-field="id" :min-item-size="160" :buffer="300" @scroll-end="emit('loadMore')" class="h-full">
+	<DynamicScroller
+		:items="data.list"
+		key-field="id"
+		:min-item-size="180"
+		:buffer="300"
+		@scroll-end="emit('loadMore')"
+		class="h-full">
 		<template #default="{ item }">
 			<DynamicScrollerItem :item active>
-				<WhiteContainer class="w-full mb-3">
-					<div class="h-full grid grid-cols-[auto_1fr]">
-						<div class="w-46 mr-4 rounded-xl overflow-hidden relative">
-							<el-image :src="item.cover" lazy fit="scale-down" class="h-full" />
-							<div
-								v-if="item.state"
-								class="absolute bottom-0 w-full bg-[#2b5aedcc] text-white flex justify-center py-3">
-								未发布
+				<div class="pb-3">
+					<WhiteContainer class="w-full">
+						<div class="h-full grid grid-cols-[auto_1fr]">
+							<div class="w-46 mr-4 rounded-xl overflow-hidden relative">
+								<el-image :src="item.cover" lazy fit="scale-down" class="h-full" />
+								<div
+									v-if="item.state"
+									class="absolute bottom-0 w-full bg-[#2b5aedcc] text-white flex justify-center py-3">
+									未发布
+								</div>
 							</div>
-						</div>
-						<div class="flex flex-col [&>*]:w-full">
-							<el-text class="text-xl font-semibold text-[#1E2025] mb-2">{{ item.title }}</el-text>
-							<el-text :line-clamp="lineClamp" class="text-base">{{ item.introduce }}</el-text>
-							<div class="flex items-center justify-between mt-auto">
-								<div class="flex items-center">
-									<el-text size="small" class="text-[#1e2025b8]">{{ item.label }} {{ item.region }}</el-text>
-									<el-text size="small" type="info" class="mx-4">{{ item.createTime }}</el-text>
+							<div class="flex flex-col [&>*]:w-full">
+								<el-text class="text-xl font-semibold text-[#1E2025] mb-2">{{ item.title }}</el-text>
+								<el-text :line-clamp="lineClamp" class="text-base">{{ item.introduce }}</el-text>
+								<div class="flex items-center justify-between mt-auto">
+									<div class="flex items-center">
+										<el-text size="small" class="text-[#1e2025b8]">{{ item.label }} {{ item.region }}</el-text>
+										<el-text size="small" type="info" class="mx-4">{{ item.createTime }}</el-text>
 
-									<div v-for="icon in iconItems" :key="icon.value" class="flex items-center mr-3 [&>*]:text-[#909399]">
-										<el-icon class="mr-1 text-sm" v-if="icon.icon.name != 'Pointer'">
-											<component :is="icon.icon" />
-										</el-icon>
-										<span v-else class="iconfont icon-dianzan"></span>
-										<el-text size="small">{{ item[icon.value] }}</el-text>
+										<div
+											v-for="icon in iconItems"
+											:key="icon.value"
+											class="flex items-center mr-3 [&>*]:text-[#909399]">
+											<el-icon class="mr-1 text-sm" v-if="icon.icon.name != 'Pointer'">
+												<component :is="icon.icon" />
+											</el-icon>
+											<span v-else class="iconfont icon-dianzan"></span>
+											<el-text size="small">{{ item[icon.value] }}</el-text>
+										</div>
+									</div>
+
+									<div
+										class="flex items-center [&>*]:ml-5 [&>*]:cursor-pointer [&>*]:text-[#909399] [&>*:hover]:text-[#2B5AED] text-xl">
+										<el-tooltip :content="item.state ? '发布' : '撤回'" placement="top">
+											<span v-if="item.state" class="iconfont icon-fabu" @click="handlePublishClick(item.id)"></span>
+											<span v-else class="iconfont icon-chehui" @click="handleRevokeClick(item.id)"></span>
+										</el-tooltip>
+										<el-tooltip content="编辑" placement="top">
+											<span class="iconfont icon-xiugai" @click="handleEditClick(item.id)"></span>
+										</el-tooltip>
+										<el-popover :visible="currentId === item.id" trigger="click" title="确定删除" placement="top-end">
+											<template #reference>
+												<el-icon @click="currentId = item.id"><Delete /></el-icon>
+											</template>
+											<template #default>
+												<el-text>删除后不可恢复</el-text>
+												<div class="mt-4 flex justify-end">
+													<el-button type="info" plain size="small" @click="currentId = null">取消</el-button>
+													<el-button type="primary" size="small" @click="removeArticle(item.id)">确定</el-button>
+												</div>
+											</template>
+										</el-popover>
 									</div>
 								</div>
-
-								<div
-									class="flex items-center [&>*]:ml-5 [&>*]:cursor-pointer [&>*]:text-[#909399] [&>*:hover]:text-[#2B5AED] text-xl">
-									<el-tooltip :content="item.state ? '发布' : '撤回'" placement="top">
-										<span v-if="item.state" class="iconfont icon-fabu" @click="handlePublishClick(item.id)"></span>
-										<span v-else class="iconfont icon-chehui" @click="handleRevokeClick(item.id)"></span>
-									</el-tooltip>
-									<el-tooltip content="编辑" placement="top">
-										<span class="iconfont icon-xiugai" @click="handleEditClick(item.id)"></span>
-									</el-tooltip>
-									<el-popover :visible="currentId === item.id" trigger="click" title="确定删除" placement="top-end">
-										<template #reference>
-											<el-icon @click="currentId = item.id"><Delete /></el-icon>
-										</template>
-										<template #default>
-											<el-text>删除后不可恢复</el-text>
-											<div class="mt-4 flex justify-end">
-												<el-button type="info" plain size="small" @click="currentId = null">取消</el-button>
-												<el-button type="primary" size="small" @click="removeArticle(item.id)">确定</el-button>
-											</div>
-										</template>
-									</el-popover>
-								</div>
 							</div>
 						</div>
-					</div>
-				</WhiteContainer>
+					</WhiteContainer>
+				</div>
 			</DynamicScrollerItem>
 		</template>
 	</DynamicScroller>
@@ -139,6 +150,10 @@ const removeArticle = (id: number | string) => {
 <style lang="scss" scoped>
 .vue-recycle-scroller {
 	padding-right: 0.5rem;
+	// :deep(.vue-recycle-scroller__item-view) {
+	// 	margin-bottom: 1rem !important;
+	// 	background-color: red;
+	// }
 	&::-webkit-scrollbar {
 		width: 0.5rem; /* 滚动条厚度 */
 	}

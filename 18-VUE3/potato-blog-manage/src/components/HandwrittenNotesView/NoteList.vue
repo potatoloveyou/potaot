@@ -8,13 +8,18 @@
 		class="h-[calc(100dvh-4rem-2.5rem-2rem-1rem)]">
 		<template #default="{ item }">
 			<DynamicScrollerItem :item active>
-				<WhiteContainer class="mb-4">
-					<div class="w-full flex flex-col justify-center [&>*]:w-full">
-						<el-text class="text-xl font-semibold text-[#1E2025] mb-2">{{ item.title }}</el-text>
-						<el-text size="small" type="info" class="mx-4 mb-4">{{ item.createTime }}</el-text>
-						<el-text class="text-base">{{ item.introduce }}</el-text>
-					</div>
-				</WhiteContainer>
+				<div class="pb-4">
+					<WhiteContainer>
+						<div class="w-full flex flex-col justify-center [&>*]:w-full">
+							<el-text class="text-xl font-semibold text-[#1E2025] mb-2">{{ item.title }}</el-text>
+							<el-text size="small" type="info" class="mx-4 mb-4">{{ item.createTime }}</el-text>
+							<el-text class="text-base">{{ item.introduce }}</el-text>
+						</div>
+						<div class="mt-4">
+							<el-image v-for="value in item.picture" :src="value" lazy fit="scale-down" class="w-22 h-22 mr-4" />
+						</div>
+					</WhiteContainer>
+				</div>
 			</DynamicScrollerItem>
 		</template>
 	</DynamicScroller>

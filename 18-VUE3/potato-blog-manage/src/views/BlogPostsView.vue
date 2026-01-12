@@ -90,19 +90,6 @@ const loadMore = async () => {
 onMounted(() => {
 	Promise.all([getGroupingList(), getArticleList()]);
 });
-
-// watch(
-// 	() => queryParams.value,
-// 	(newValue, oldValue) => {
-// 		if (newValue.selectTagId !== oldValue.selectTagId) {
-// 			console.log('点击了标签');
-// 			page.value = 1;
-// 		}
-// 		// console.log(123);
-// 		getArticleList();
-// 	},
-// 	{ deep: true },
-// );
 </script>
 
 <style lang="scss" scoped></style>

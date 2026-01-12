@@ -76,14 +76,6 @@ const loadMore = async () => {
 onMounted(() => {
 	Promise.all([getDiaryList()]);
 });
-
-// watch(
-// 	() => queryParams.value,
-// 	() => {
-// 		getDiaryList();
-// 	},
-// 	{ deep: true },
-// );
 </script>
 
 <style lang="scss" scoped></style>

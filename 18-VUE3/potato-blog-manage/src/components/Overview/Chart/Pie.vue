@@ -17,12 +17,6 @@ interface Props {
 	data?: PieDataItem[];
 	title: string;
 }
-
-// const props = withDefaults(defineProps<Props>(), {
-// 	data: () => [],
-// 	title: '',
-// });
-
 const { data, title } = defineProps<Props>();
 
 const total = computed<number>(() => data.reduce((sum, item) => sum + item.value, 0));

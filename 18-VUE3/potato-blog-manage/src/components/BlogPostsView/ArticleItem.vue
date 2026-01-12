@@ -160,6 +160,7 @@ const removeArticle = (id: number | string) => {
 	&::-webkit-scrollbar-thumb {
 		background-color: rgba(0, 0, 0, 0.1); /* 滑块颜色 */
 		border-radius: 0.2rem;
+		cursor: pointer;
 	}
 
 	&::-webkit-scrollbar-thumb:hover {

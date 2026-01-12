@@ -119,6 +119,7 @@ onMounted(() => {
 		&::-webkit-scrollbar-thumb {
 			background-color: rgba(0, 0, 0, 0.4); /* 滑块颜色 */
 			border-radius: 0.2rem;
+			cursor: pointer;
 		}
 
 		&::-webkit-scrollbar-thumb:hover {

@@ -1,5 +1,5 @@
 <template>
-	<WhiteContainer class="px-3 py-3">
+	<WhiteContainer class="px-3 py-3 min-w-0 overflow-hidden">
 		<el-input v-model.trim="rubric" placeholder="请输入标题" class="text-2xl h-8 group mb-2">
 			<template #suffix>
 				<el-icon
@@ -10,13 +10,12 @@
 				/></el-icon>
 			</template>
 		</el-input>
-		<MdEditor v-model="content" :preview="false" :toolbars="[]" placeholder="请输入内容" />
+		<MdEditor v-model="content" :preview="false" :toolbars="[]" placeholder="请输入内容" class="h-104" />
 
-		<el-upload action="#" multiple list-type="picture-card" :auto-upload="false" class="my-2">
-			<el-icon><Plus /></el-icon>
+		<el-upload action="#" multiple list-type="picture-card" :auto-upload="false" class="flex-1">
 			<template #file="{ file }">
 				<div class="w-24 h-24">
-					<el-image fit="scale-down" :src="file.url" />
+					<el-image fit="scale-down" lazy :src="file.url" />
 					<span class="el-upload-list__item-actions justify-evenly [&>i]:cursor-pointer">
 						<el-icon @click="handlePreviewClick(file)"><zoom-in /></el-icon>
 						<el-icon @click="handleDownload(file)"><Download /></el-icon>
@@ -24,6 +23,7 @@
 					</span>
 				</div>
 			</template>
+			<el-icon><Plus /></el-icon>
 		</el-upload>
 
 		<el-image-viewer v-if="showPreview" :url-list="previewList" @close="showPreview = false" />
@@ -62,8 +62,6 @@ const reset = () => {
 	content.value = '';
 };
 
-const disabled = ref(false);
-
 const handleRemove = (file: UploadFile) => {
 	console.log(file);
 };
@@ -72,7 +70,6 @@ const showPreview = ref(false);
 const previewList = ref<string[]>([]);
 // 点击预览
 const handlePreviewClick = (file: UploadFile) => {
-	console.log(file);
 	previewList.value = [file.url!];
 	showPreview.value = true;
 };
@@ -101,13 +98,12 @@ const createNote = () => {
 	}
 }
 :deep(.md-editor) {
-	height: 26rem;
 	border: 0;
 	.cm-content {
 		padding: 0;
 		margin: 0 !important;
 		.cm-line {
-			padding: 0;
+			padding: 0 0 0 1px;
 		}
 	}
 	.md-editor-footer {
@@ -115,8 +111,27 @@ const createNote = () => {
 	}
 }
 :deep(.el-upload-list--picture-card) {
+	display: flex;
 	flex-wrap: nowrap;
+	overflow-x: auto;
+	padding-bottom: 0.3rem;
+
+	&::-webkit-scrollbar {
+		height: 0.5rem; /* 滚动条厚度 */
+	}
+	&::-webkit-scrollbar-thumb {
+		background-color: rgba(0, 0, 0, 0.1); /* 滑块颜色 */
+		border-radius: 0.2rem;
+	}
+	&::-webkit-scrollbar-thumb:hover {
+		background-color: rgba(0, 0, 0, 0.2);
+	}
+	&::-webkit-scrollbar-track {
+		background-color: transparent; /* 滚动条轨道 */
+	}
+
 	.el-upload-list__item {
+		flex-shrink: 0;
 		width: 6rem;
 		height: 6rem;
 		margin: 0;
@@ -125,6 +140,7 @@ const createNote = () => {
 
 	// 图片选择卡
 	.el-upload--picture-card {
+		flex-shrink: 0;
 		width: 6rem;
 		height: 6rem;
 	}

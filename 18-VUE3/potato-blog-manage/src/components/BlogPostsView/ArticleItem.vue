@@ -79,7 +79,6 @@ import type { Component } from 'vue';
 import type { ArticleType, ArticleItemType } from '@/type/article.type';
 
 import { View, Pointer, ChatLineSquare, Delete } from '@element-plus/icons-vue';
-import { ElMessage } from 'element-plus';
 
 import { DynamicScroller, DynamicScrollerItem } from 'vue-virtual-scroller';
 import 'vue-virtual-scroller/dist/vue-virtual-scroller.css';

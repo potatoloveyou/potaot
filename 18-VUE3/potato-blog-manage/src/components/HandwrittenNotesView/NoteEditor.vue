@@ -90,44 +90,44 @@ const createNote = () => {
 };
 
 // 路由离开前确认保存
-onBeforeRouteLeave((to, from, next) => {
+onBeforeRouteLeave(async (to, from) => {
 	// 已保存过，直接放行
-
 	if (isSaved.value) {
-		next();
+		console.log('已保存过，直接放行', isSaved.value);
+		return true;
 	}
-
 	// 没有任何内容，直接放行
 	if (!noteTitle.value && !noteContent.value) {
-		next();
+		console.log('没有任何内容，直接放行', isSaved.value);
+		return true;
 	}
-
 	// 有内容，未保存，弹窗确认
-	if ((noteTitle.value || noteContent.value) && !isSaved.value) {
-		// 有内容，弹窗确认
-		ElMessageBox.confirm('笔记尚未提交，是否保存？', '即将离开', {
+	try {
+		await ElMessageBox.confirm('笔记尚未提交，是否保存？', '即将离开', {
 			confirmButtonText: '确定保存',
 			cancelButtonText: '不保存',
 			type: 'warning',
 			closeOnClickModal: false,
 			closeOnPressEscape: false,
 			distinguishCancelAndClose: true,
-		})
-			.then(() => {
-				isSaved.value = true;
-				ElMessage.success('笔记已保存');
-				// 确认保存
-				next();
-			})
-			.catch((action: Action) => {
-				// cancel:取消按钮		close:关闭按钮
-				if (action === 'cancel') {
-					reset();
-					next();
-				} else if (action === 'close') {
-					next(false);
-				}
-			});
+		});
+
+		// 点击「确定保存」
+		isSaved.value = true;
+		ElMessage.success('笔记已保存');
+		console.log('保存成功', isSaved.value);
+		return true;
+	} catch (action) {
+		// 点击「不保存」
+		// cancel:取消按钮		close:关闭按钮
+		if (action === 'cancel') {
+			reset();
+			console.log('点击「不保存」', isSaved.value);
+			return true;
+		}
+
+		// 关闭弹窗（× / esc）
+		return false;
 	}
 });
 </script>

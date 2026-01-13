@@ -1,16 +1,16 @@
 <template>
 	<WhiteContainer class="px-3 py-3 min-w-0 overflow-hidden">
-		<el-input v-model.trim="rubric" placeholder="请输入标题" class="text-2xl h-8 group mb-2">
+		<el-input v-model.trim="noteTitle" placeholder="请输入标题" class="text-2xl h-8 group mb-2">
 			<template #suffix>
 				<el-icon
-					@click="resetRubric"
+					@click="resetNoteTitle"
 					class="text-xl cursor-pointer opacity-0"
-					:class="{ 'group-hover:opacity-100': rubric.length > 0 }"
+					:class="{ 'group-hover:opacity-100': noteTitle.length > 0 }"
 					><CircleClose
 				/></el-icon>
 			</template>
 		</el-input>
-		<MdEditor v-model="content" :preview="false" :toolbars="[]" placeholder="请输入内容" class="h-104" />
+		<MdEditor v-model="noteContent" :preview="false" :toolbars="[]" placeholder="请输入内容" class="h-104" />
 
 		<el-upload action="#" multiple list-type="picture-card" :auto-upload="false" class="flex-1">
 			<template #file="{ file }">
@@ -42,24 +42,20 @@ import { MdEditor } from 'md-editor-v3';
 import 'md-editor-v3/lib/style.css';
 
 import { CircleClose, Delete, Download, Plus, ZoomIn } from '@element-plus/icons-vue';
-import type { UploadFile } from 'element-plus';
+import type { UploadFile, Action } from 'element-plus';
 
 import WhiteContainer from '@/components/WhiteContainer.vue';
 
-// 标题
-const rubric = ref<string>('');
-// 内容
-const content = ref<string>('');
+import { onBeforeRouteLeave } from 'vue-router';
+
+import { storeToRefs } from 'pinia';
+import { useHandwrittenNotesStore } from '@/stores/handwrittenNotesStore';
+const handwrittenNotesStore = useHandwrittenNotesStore();
+const { noteTitle, noteContent, isSaved } = storeToRefs(handwrittenNotesStore);
 
 // 重置标题
-const resetRubric = () => {
-	rubric.value = '';
-};
-
-// 取消
-const reset = () => {
-	rubric.value = '';
-	content.value = '';
+const resetNoteTitle = () => {
+	noteTitle.value = '';
 };
 
 const handleRemove = (file: UploadFile) => {
@@ -78,13 +74,62 @@ const handleDownload = (file: UploadFile) => {
 	console.log(file);
 };
 
+// 取消
+const reset = () => {
+	noteTitle.value = '';
+	noteContent.value = '';
+	isSaved.value = false;
+};
+
 // 新建笔记
 const createNote = () => {
-	if (!rubric.value && !content.value) {
+	if (!noteTitle.value || !noteContent.value) {
 		ElMessage.warning('请输入标题或内容');
 		return;
 	}
 };
+
+// 路由离开前确认保存
+onBeforeRouteLeave((to, from, next) => {
+	// 已保存过，直接放行
+
+	if (isSaved.value) {
+		next();
+	}
+
+	// 没有任何内容，直接放行
+	if (!noteTitle.value && !noteContent.value) {
+		next();
+	}
+
+	// 有内容，未保存，弹窗确认
+	if ((noteTitle.value || noteContent.value) && !isSaved.value) {
+		// 有内容，弹窗确认
+		ElMessageBox.confirm('笔记尚未提交，是否保存？', '即将离开', {
+			confirmButtonText: '确定保存',
+			cancelButtonText: '不保存',
+			type: 'warning',
+			closeOnClickModal: false,
+			closeOnPressEscape: false,
+			distinguishCancelAndClose: true,
+		})
+			.then(() => {
+				isSaved.value = true;
+				ElMessage.success('笔记已保存');
+				// 确认保存
+				next();
+			})
+			.catch((action: Action) => {
+				// cancel:取消按钮		close:关闭按钮
+				if (action === 'cancel') {
+					reset();
+					next();
+				} else if (action === 'close') {
+					next(false);
+				}
+			});
+	}
+});
 </script>
 
 <style lang="scss" scoped>

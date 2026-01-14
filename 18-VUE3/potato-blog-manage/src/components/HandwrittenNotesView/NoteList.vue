@@ -11,7 +11,10 @@
 				<div class="pb-4">
 					<WhiteContainer class="group">
 						<div class="w-full flex flex-col justify-center [&>*]:w-full">
-							<el-text class="text-xl font-semibold text-[#1E2025] mb-2">{{ item.title }}</el-text>
+							<div class="mb-2 flex items-center">
+								<el-text class="text-xl font-semibold text-[#1E2025] mr-2">{{ item.title }}</el-text>
+								<span class="iconfont text-2xl" :class="weatherIcon[item.weather]"></span>
+							</div>
 							<el-text size="small" type="info" class="mx-4 mb-4">{{ item.createTime }}</el-text>
 							<el-text class="text-base">{{ item.introduce }}</el-text>
 						</div>
@@ -57,6 +60,18 @@ interface NoteListProps {
 	data: DiaryType<DiaryItemType>;
 }
 const { data } = defineProps<NoteListProps>();
+
+// 天气图标
+const weatherIcon = {
+	0: 'icon-hangzhoubei-tianqi-tianqing',
+	1: 'icon-duoyun',
+	2: 'icon-yintian',
+	3: 'icon-wumai',
+	4: 'icon-xiayu-yewan',
+	5: 'icon-tianqi-leidiantianqi',
+	6: 'icon-xiaxue',
+	7: 'icon-youfeng',
+};
 
 const changeDel = (id: number | string) => {
 	ElMessageBox.confirm('确定删除该评论吗？', '提示', {

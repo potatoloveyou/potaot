@@ -13,6 +13,7 @@ import '@/assets/styles/main.css';
 
 // 映入iconfont图标
 import '@/assets/iconfont/iconfont.css';
+import '@/assets/iconfont/weatherIcon.css';
 
 const app = createApp(App);
 

@@ -324,11 +324,14 @@ export const photoGallery = Mock.mock({
 				createTime: '@datetime(yyyy-MM-dd)',
 				introduce: '@cparagraph(1, 4)', // 文章介绍
 				cover: 'https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg', // 文章封面
-				content: [
-					'https://fuss10.elemecdn.com/d/e6/c4d93a3805b3ce3f323f7974e6f78jpeg.jpeg',
-					'https://fuss10.elemecdn.com/3/28/bbf893f792f03a54408b3b7a7ebf0jpeg.jpeg',
-					// 'https://fuss10.elemecdn.com/2/11/6535bcfb26e4c79b48ddde44f4b6fjpeg.jpeg',
-				],
+				content() {
+					const images = [
+						'https://fuss10.elemecdn.com/d/e6/c4d93a3805b3ce3f323f7974e6f78jpeg.jpeg',
+						'https://fuss10.elemecdn.com/3/28/bbf893f792f03a54408b3b7a7ebf0jpeg.jpeg',
+						'https://fuss10.elemecdn.com/2/11/6535bcfb26e4c79b48ddde44f4b6fjpeg.jpeg',
+					];
+					return Mock.Random.shuffle(images).slice(0, Mock.Random.integer(1, 3));
+				},
 				viewCount: '@integer(0, 1000)', // 文章阅读量
 				commentCount: '@integer(0, 1000)', // 文章评论数
 				praiseCount: '@integer(0, 1000)', // 文章点赞数
@@ -347,12 +350,16 @@ export const diary = Mock.mock({
 				id: '@id',
 				title: '@ctitle(4,10)', // 文章标题
 				createTime: '@datetime(yyyy-MM-dd)',
+				'weather|0-7': 0,
 				introduce: '@cparagraph(5, 8)', // 文章介绍
-				picture: [
-					'https://fuss10.elemecdn.com/d/e6/c4d93a3805b3ce3f323f7974e6f78jpeg.jpeg',
-					'https://fuss10.elemecdn.com/3/28/bbf893f792f03a54408b3b7a7ebf0jpeg.jpeg',
-					'https://pic1.arkoo.com/56D0B40F99F841DF8A2425762AE2565D/picture/o_1i4qop009177v1tgf14db15he1iaj1is.jpg',
-				],
+				picture() {
+					const images = [
+						'https://fuss10.elemecdn.com/d/e6/c4d93a3805b3ce3f323f7974e6f78jpeg.jpeg',
+						'https://fuss10.elemecdn.com/3/28/bbf893f792f03a54408b3b7a7ebf0jpeg.jpeg',
+						'https://pic1.arkoo.com/56D0B40F99F841DF8A2425762AE2565D/picture/o_1i4qop009177v1tgf14db15he1iaj1is.jpg',
+					];
+					return Mock.Random.shuffle(images).slice(0, Mock.Random.integer(1, 3));
+				},
 			},
 		],
 	},

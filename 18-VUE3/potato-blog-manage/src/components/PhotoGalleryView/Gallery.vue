@@ -6,7 +6,7 @@
 					<el-image :src="item.cover" fit="cover" class="w-full h-46" />
 					<div class="w-full grid grid-cols-3 gap-1">
 						<el-image v-for="value in item.content" :key="value" :src="value" fit="cover" lazy class="w-23 h-23" />
-						<div v-if="item.content.length < 3" class="bg-[#1e202529]"></div>
+						<div v-for="n in 3 - item.content.length" :key="'placeholder-' + n" class="bg-[#1e202529]"></div>
 					</div>
 				</div>
 				<el-text class="text-xl font-semibold text-[#1E2025]">{{ item.title }}</el-text>

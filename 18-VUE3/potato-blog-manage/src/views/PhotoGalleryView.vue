@@ -3,8 +3,6 @@
 	<el-scrollbar noresize class="min-height pr-5">
 		<Topic name="摄影图库" @search="changeSearch" :isSearch="true" />
 		<Grouping :groupingData v-model:selectTagId="selectTagId" />
-		<!-- <div class="flex flex-col flex-1">
-		</div> -->
 		<Gallery :data="photoGalleryData" :sliceData v-model:limit="limit" v-model:page="page" />
 	</el-scrollbar>
 </template>

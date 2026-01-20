@@ -52,6 +52,11 @@ import 'vue-virtual-scroller/dist/vue-virtual-scroller.css';
 
 import WhiteContainer from '@/components/WhiteContainer.vue';
 
+import { storeToRefs } from 'pinia';
+import { useHandwrittenNotesStore } from '@/stores/handwrittenNotesStore';
+const handwrittenNotesStore = useHandwrittenNotesStore();
+const { weatherIcon } = storeToRefs(handwrittenNotesStore);
+
 const emit = defineEmits<{
 	loadMore: [];
 }>();
@@ -60,18 +65,6 @@ interface NoteListProps {
 	data: DiaryType<DiaryItemType>;
 }
 const { data } = defineProps<NoteListProps>();
-
-// 天气图标
-const weatherIcon = {
-	0: 'icon-hangzhoubei-tianqi-tianqing',
-	1: 'icon-duoyun',
-	2: 'icon-yintian',
-	3: 'icon-wumai',
-	4: 'icon-xiayu-yewan',
-	5: 'icon-tianqi-leidiantianqi',
-	6: 'icon-xiaxue',
-	7: 'icon-youfeng',
-};
 
 const changeDel = (id: number | string) => {
 	ElMessageBox.confirm('确定删除该评论吗？', '提示', {

@@ -1,15 +1,42 @@
 <template>
 	<WhiteContainer class="px-3 py-3 min-w-0 overflow-hidden">
-		<el-input v-model.trim="noteTitle" placeholder="请输入标题" class="text-2xl h-8 group mb-2">
-			<template #suffix>
-				<el-icon
-					@click="resetNoteTitle"
-					class="text-xl cursor-pointer opacity-0"
-					:class="{ 'group-hover:opacity-100': noteTitle.length > 0 }"
-					><CircleClose
-				/></el-icon>
-			</template>
-		</el-input>
+		<div class="flex items-center mb-2">
+			<el-input v-model.trim="noteTitle" placeholder="请输入标题" class="text-2xl h-8 group">
+				<template #suffix>
+					<el-icon
+						@click="resetNoteTitle"
+						class="text-xl cursor-pointer opacity-0"
+						:class="{ 'group-hover:opacity-100': noteTitle.length > 0 }"
+						><CircleClose
+					/></el-icon>
+				</template>
+			</el-input>
+			<el-button
+				text
+				ref="weatherIconRef"
+				v-click-outside="onClickOutside"
+				class="iconfont text-2xl px-2 py-0"
+				:class="weather" />
+			<el-popover
+				width="220"
+				title="天气选择"
+				placement="bottom-end"
+				ref="popoverRef"
+				:virtual-ref="weatherIconRef"
+				trigger="click"
+				virtual-triggering>
+				<template #default>
+					<el-button
+						text
+						v-for="icon in weatherIcon"
+						:key="icon"
+						@click="setWeatherIcon(icon)"
+						class="iconfont text-2xl px-2 m-0"
+						:class="icon" />
+				</template>
+			</el-popover>
+		</div>
+
 		<MdEditor v-model="noteContent" :preview="false" :toolbars="[]" placeholder="请输入内容" class="h-104" />
 
 		<el-upload action="#" multiple list-type="picture-card" :auto-upload="false" class="flex-1">
@@ -36,13 +63,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, useTemplateRef } from 'vue';
 
 import { MdEditor } from 'md-editor-v3';
 import 'md-editor-v3/lib/style.css';
 
 import { CircleClose, Delete, Download, Plus, ZoomIn } from '@element-plus/icons-vue';
-import type { UploadFile, Action } from 'element-plus';
+import type { UploadFile, PopoverInstance } from 'element-plus';
+import { ClickOutside as vClickOutside } from 'element-plus';
 
 import WhiteContainer from '@/components/WhiteContainer.vue';
 
@@ -51,7 +79,18 @@ import { onBeforeRouteLeave } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useHandwrittenNotesStore } from '@/stores/handwrittenNotesStore';
 const handwrittenNotesStore = useHandwrittenNotesStore();
-const { noteTitle, noteContent, isSaved } = storeToRefs(handwrittenNotesStore);
+const { noteTitle, noteContent, isSaved, weather, weatherIcon } = storeToRefs(handwrittenNotesStore);
+
+const weatherIconRef = useTemplateRef('weatherIconRef');
+const popoverRef = useTemplateRef<PopoverInstance>('popoverRef');
+const onClickOutside = () => {
+	popoverRef.value?.hide();
+};
+
+// 设置天气图标
+const setWeatherIcon = (icon: string) => {
+	weather.value = icon;
+};
 
 // 重置标题
 const resetNoteTitle = () => {
@@ -81,6 +120,10 @@ const reset = () => {
 	isSaved.value = false;
 };
 
+const queryParams = computed(() => ({
+	title: noteTitle.value,
+	content: noteContent.value,
+}));
 // 新建笔记
 const createNote = () => {
 	if (!noteTitle.value || !noteContent.value) {

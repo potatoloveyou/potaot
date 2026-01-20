@@ -7,6 +7,7 @@ export interface DiaryItemType {
 	id: number | string;
 	title: string;
 	createTime: string;
+	weather: number;
 	introduce: string;
 	picture: string[];
 }

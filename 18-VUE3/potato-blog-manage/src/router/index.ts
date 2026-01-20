@@ -38,15 +38,32 @@ const router = createRouter({
 					name: 'HandwrittenNotes',
 					component: () => import('@/views/HandwrittenNotesView.vue'),
 				},
+				// {
+				// 	path: '/ResourceSharing',
+				// 	name: 'ResourceSharing',
+				// 	component: () => import('@/views/ResourceSharingView.vue'),
+				// },
+				// {
+				// 	path: '/SystemSettings',
+				// 	name: 'SystemSettings',
+				// 	component: () => import('@/views/SystemSettingsView.vue'),
+				// },
+			],
+		},
+		{
+			path: '/HeadLayout',
+			name: 'HeadLayout',
+			component: () => import('@/layout/HeadLayout.vue'),
+			children: [
 				{
-					path: '/ResourceSharing',
-					name: 'ResourceSharing',
-					component: () => import('@/views/ResourceSharingView.vue'),
+					path: '/NewBlogPosts',
+					name: 'NewBlogPosts',
+					component: () => import('@/views/NewBlogPostsView.vue'),
 				},
 				{
-					path: '/SystemSettings',
-					name: 'SystemSettings',
-					component: () => import('@/views/SystemSettingsView.vue'),
+					path: '/NewPhotoGallery',
+					name: 'NewPhotoGallery',
+					component: () => import('@/views/NewPhotoGalleryView.vue'),
 				},
 			],
 		},

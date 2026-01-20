@@ -41,13 +41,13 @@ const overLink = reactive<OverLinkItem[]>([
 		bgColor: 'linear-gradient(180deg, #2b5aedcc 0%, #2B5AED 100%)',
 	},
 	{
-		path: 'BlogPosts',
+		path: 'NewBlogPosts',
 		name: '博客文章',
 		totle: '0',
 		bgColor: 'linear-gradient(180deg, #ff600829 0%, #ff60083d 100%)',
 	},
 	{
-		path: 'PhotoGallery',
+		path: 'NewPhotoGallery',
 		name: '摄影图库',
 		totle: '0',
 		bgColor: 'linear-gradient(180deg, #25df0629 0%, #25df063d 100%)',

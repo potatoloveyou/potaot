@@ -17,7 +17,6 @@ import { useRoute } from 'vue-router';
 const route = useRoute();
 
 interface MenuItem {
-	index: string;
 	icon: Component;
 	text: string;
 	path: string;
@@ -25,47 +24,40 @@ interface MenuItem {
 
 const menuItems: MenuItem[] = [
 	{
-		index: '1',
 		icon: House,
 		text: '总览',
 		path: 'Overview',
 	},
 	{
-		index: '2',
 		icon: Folder,
 		text: '本地文件',
 		path: 'LocalFiles',
 	},
 	{
-		index: '3',
 		icon: Document,
 		text: '博客文章',
 		path: 'BlogPosts',
 	},
 	{
-		index: '4',
 		icon: Camera,
 		text: '摄影图库',
 		path: 'PhotoGallery',
 	},
 	{
-		index: '5',
 		icon: EditPen,
 		text: '随手笔记',
 		path: 'HandwrittenNotes',
 	},
-	{
-		index: '6',
-		icon: Menu,
-		text: '资源分享',
-		path: 'ResourceSharing',
-	},
-	{
-		index: '7',
-		icon: Setting,
-		text: '系统设置',
-		path: 'SystemSettings',
-	},
+	// {
+	// 	icon: Menu,
+	// 	text: '资源分享',
+	// 	path: 'ResourceSharing',
+	// },
+	// {
+	// 	icon: Setting,
+	// 	text: '系统设置',
+	// 	path: 'SystemSettings',
+	// },
 ];
 
 onMounted(() => {});

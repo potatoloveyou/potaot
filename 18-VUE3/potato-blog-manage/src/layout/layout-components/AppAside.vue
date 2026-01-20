@@ -1,5 +1,5 @@
 <template>
-	<el-menu :default-active="routePath" router class="h-full aside-theme">
+	<el-menu :default-active="route.name as string" router class="h-full aside-theme">
 		<el-menu-item v-for="item in menuItems" :key="item.text" :index="item.path" class="w-40 h-10 mb-3 aside-theme">
 			<el-icon>
 				<component :is="item.icon" />
@@ -10,16 +10,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
 import type { Component } from 'vue';
 import { House, Folder, Document, Camera, EditPen, Menu, Setting } from '@element-plus/icons-vue';
 
-import { useRoute, useRouter } from 'vue-router';
-// import type { RouteRecordNameGeneric } from 'vue-router';
+import { useRoute } from 'vue-router';
 const route = useRoute();
-const router = useRouter();
-
-const routePath = ref<string>(route.name as string);
 
 interface MenuItem {
 	index: string;
@@ -79,7 +74,9 @@ onMounted(() => {});
 <style lang="scss" scoped>
 @use '@/assets/styles/theme/handle.scss' as *;
 .aside-theme {
-	transition: color, background-color 0.3s ease-in-out;
+	transition:
+		color,
+		background-color 0.3s ease-in-out;
 	@include useTheme {
 		color: getVar('textColor');
 		background-color: getVar('bgColor');

@@ -38,7 +38,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, useTemplateRef } from 'vue';
 
 import { UploadFilled, Delete, StarFilled } from '@element-plus/icons-vue';
 import type { UploadFile, UploadFiles, UploadUserFile } from 'element-plus';
@@ -58,9 +58,9 @@ const handleChange = (uploadFile: UploadFile, uploadFiles: UploadFiles) => {
 	nextTick(layout);
 };
 
-const containerRef = ref<HTMLElement | null>(null);
-const itemRefs = ref<HTMLElement[]>([]);
-const columnCount = 3;
+const containerRef = useTemplateRef('containerRef');
+const itemRefs = useTemplateRef<HTMLElement[]>('itemRefs');
+const columnCount = 4;
 const gap = 12;
 const layout = () => {
 	const container = containerRef.value;

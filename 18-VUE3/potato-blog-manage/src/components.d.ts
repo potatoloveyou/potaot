@@ -55,6 +55,7 @@ declare module 'vue' {
     Label: typeof import('./components/BlogPostsView/Label.vue')['default']
     Line: typeof import('./components/Overview/Chart/Line.vue')['default']
     ModalTableDialog: typeof import('./components/ModalTableDialog.vue')['default']
+    NewEditor: typeof import('./components/NewEditor.vue')['default']
     NoteEditor: typeof import('./components/HandwrittenNotesView/NoteEditor.vue')['default']
     NoteList: typeof import('./components/HandwrittenNotesView/NoteList.vue')['default']
     Pie: typeof import('./components/Overview/Chart/Pie.vue')['default']

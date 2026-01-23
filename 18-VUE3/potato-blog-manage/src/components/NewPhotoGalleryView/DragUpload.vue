@@ -1,6 +1,5 @@
 <template>
-	<WhiteContainer class="h-full">
-		<!-- 上传区 -->
+	<WhiteContainer>
 		<el-upload
 			v-model:file-list="fileList"
 			action="#"
@@ -14,7 +13,6 @@
 			<div class="text-gray-500">单击或拖动文件到此区域进行上传</div>
 		</el-upload>
 		<el-scrollbar noresize class="h-98">
-			<!-- Masonry 容器 -->
 			<div ref="containerRef" class="relative w-full">
 				<div
 					v-for="(file, index) in fileList"

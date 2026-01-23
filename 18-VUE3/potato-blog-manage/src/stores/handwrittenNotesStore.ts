@@ -1,4 +1,4 @@
-import { ref, reactive } from 'vue';
+import { ref, reactive, watch } from 'vue';
 import { defineStore } from 'pinia';
 
 // 随手笔记存储
@@ -9,6 +9,13 @@ export const useHandwrittenNotesStore = defineStore('handwrittenNotes', () => {
 	const noteContent = ref<string>('');
 	// 是否保存过笔记
 	const isSaved = ref<boolean>(false);
+
+	// 当标题或内容变化时，自动把 isSaved 重置为 false
+	watch([noteTitle, noteContent], ([newTitle, newContent], [oldTitle, oldContent]) => {
+		if (newTitle !== oldTitle || newContent !== oldContent) {
+			isSaved.value = false;
+		}
+	});
 
 	// 天气图标
 	const weatherIcon = reactive({

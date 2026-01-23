@@ -8,7 +8,7 @@
 			</el-header>
 
 			<el-container class="header-height h-full">
-				<el-main class="pl-4 pr-2 py-4 h-full">
+				<el-main class="p-4 h-full flex justify-center">
 					<RouterView />
 				</el-main>
 			</el-container>

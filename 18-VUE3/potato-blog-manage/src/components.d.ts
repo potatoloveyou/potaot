@@ -16,6 +16,7 @@ declare module 'vue' {
     AutoResizerTable: typeof import('./components/ModalTableDialog/AutoResizerTable.vue')['default']
     Chart: typeof import('./components/Overview/Chart.vue')['default']
     Comment: typeof import('./components/Overview/Comment.vue')['default']
+    DragUpload: typeof import('./components/NewPhotoGalleryView/DragUpload.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElAutoResizer: typeof import('element-plus/es')['ElAutoResizer']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']

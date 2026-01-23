@@ -15,7 +15,7 @@
 						<el-input v-model="newGroupingName" placeholder="请输入" class="mb-3 bg-[#f4f4f4]"></el-input>
 						<div class="flex justify-end">
 							<el-button type="info" plain size="small" @click="resetInput">取消</el-button>
-							<el-button type="primary" size="small" @click="changeInput">确定</el-button>
+							<el-button type="primary" color="#2b5aed" size="small" @click="changeInput">确定</el-button>
 						</div>
 					</div>
 				</template>

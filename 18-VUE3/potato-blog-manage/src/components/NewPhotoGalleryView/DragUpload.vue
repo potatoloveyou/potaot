@@ -13,7 +13,7 @@
 			<div class="text-gray-500">单击或拖动文件到此区域进行上传</div>
 		</el-upload>
 		<el-scrollbar noresize class="h-98">
-			<div ref="containerRef" class="relative w-full">
+			<div ref="containerRef" v-if="fileList.length" class="relative w-full">
 				<div
 					v-for="(file, index) in fileList"
 					:key="file.uid"

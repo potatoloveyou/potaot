@@ -232,7 +232,7 @@ export const blogPostsArticleGrouping = Mock.mock({
 	},
 });
 
-// 分组
+// 博客文章-分组
 export const label = Mock.mock({
 	code: 200,
 	data: {
@@ -247,7 +247,7 @@ export const label = Mock.mock({
 	},
 });
 
-// 文章数据
+// 博客文章-文章数据
 export const articles = Mock.mock({
 	code: 200,
 	data: {

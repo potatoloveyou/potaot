@@ -13,7 +13,7 @@ import { ref } from 'vue';
 import { photoGallery } from '@/mock/mock';
 
 import { storeToRefs } from 'pinia';
-import { usePhotoGalleryStore } from '@/stores/photoGallery';
+import { usePhotoGalleryStore } from '@/stores/photoGalleryStore';
 const photoGalleryStore = usePhotoGalleryStore();
 const { groupingData } = storeToRefs(photoGalleryStore);
 const { getGroupingList } = photoGalleryStore;

@@ -13,7 +13,7 @@
 		</WhiteContainer>
 		<div class="flex-1 grid grid-cols-[2fr_1fr] gap-x-4">
 			<DragUpload />
-			<NewEditor />
+			<NewEditor :groupingData />
 		</div>
 	</div>
 </template>
@@ -24,6 +24,28 @@ import { ref, computed } from 'vue';
 import Topic from '@/components/Topic.vue';
 import DragUpload from '@/components/NewPhotoGalleryView/DragUpload.vue';
 import NewEditor from '@/components/NewEditor.vue';
+
+import { storeToRefs } from 'pinia';
+import { useNewPhotoGalleryStore } from '@/stores/newPhotoGalleryStore';
+const newPhotoGalleryStore = useNewPhotoGalleryStore();
+const { articleTitle, articleContent } = storeToRefs(newPhotoGalleryStore);
+
+import { usePhotoGalleryStore } from '@/stores/photoGalleryStore';
+const photoGalleryStore = usePhotoGalleryStore();
+const { groupingData } = storeToRefs(photoGalleryStore);
+const { getGroupingList } = photoGalleryStore;
+
+const articleData = ref({
+	title: articleTitle.value,
+	content: articleContent.value,
+	subsetId: undefined,
+	labels: [], // 标签
+	cover: '', // 封面
+});
+
+onMounted(() => {
+	Promise.all([getGroupingList()]);
+});
 </script>
 
 <style lang="scss" scoped></style>

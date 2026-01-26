@@ -8,5 +8,5 @@ export interface LabelType {
 export interface LabelRow extends LabelType {
 	originalName?: string;
 	_dirty?: boolean;
-	createTime: string;
+	isSelected?: boolean;
 }

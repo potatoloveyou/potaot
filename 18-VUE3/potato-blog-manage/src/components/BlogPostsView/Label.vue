@@ -35,35 +35,116 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted, h } from 'vue';
 import { label } from '@/mock/mock';
-
 import type { LabelType, LabelRow } from '@/type/label.type';
 
 import { Tools } from '@element-plus/icons-vue';
+import { ElInput, ElButton, ElMessage } from 'element-plus';
 import type { Column } from 'element-plus';
-import { ElInput, ElButton } from 'element-plus';
 
 import WhiteContainer from '@/components/WhiteContainer.vue';
 import ModalTableDialog from '@/components/ModalTableDialog.vue';
 
-// 标签选中id
-const selectTagId = ref<number | string>(0);
+/* ---------------- 标签选择区 ---------------- */
+const selectedTagId = ref<number | string>(0);
+
 const changeTag = (id: number | string) => {
-	selectTagId.value = id;
+	if (selectedTagId.value === id) {
+		selectedTagId.value = 0;
+		return;
+	}
+	selectedTagId.value = id;
 };
 
-// 判断是否选中（返回 boolean）
-const isSelected = (id: number | string) => selectTagId.value === id;
+// 判断是否选中
+const isSelected = (id: number | string) => selectedTagId.value === id;
 
+/* ---------------- 弹窗控制 ---------------- */
+// 弹窗是否显示
 const visible = ref(false);
-// 打开分组弹窗
-const changeManage = () => {
-	visible.value = true;
+const changeManage = () => (visible.value = true);
+
+/* ---------------- 数据区 ---------------- */
+
+// 页面上展示的标签
+const labelData = ref<LabelType[]>([]);
+
+// 弹窗里“可编辑副本”
+interface EditableLabelRow extends LabelRow {
+	isExclude?: boolean;
+}
+const editableRows = ref<EditableLabelRow[]>([]);
+
+/* ---------------- 初始化数据 ---------------- */
+const getLabel = async () => {
+	const res = await label.data;
+	labelData.value = res.list;
+
+	// 生成“带编辑能力”的副本
+	editableRows.value = labelData.value.map((item) => ({
+		...item,
+		originalName: item.name,
+		_dirty: false,
+		isExclude: false,
+	}));
 };
 
-const rows = ref<LabelType[]>([]);
+onMounted(() => {
+	getLabel();
+});
 
+/* ---------------- 编辑状态管理 ---------------- */
+const markDirty = (row: EditableLabelRow) => {
+	row._dirty = row.name.trim() !== row.originalName?.trim();
+};
+
+/* ---------------- 名称校验 ---------------- */
+const nameSet = computed(() => new Set(editableRows.value.map((r) => r.name.trim())));
+
+const validateName = (row: EditableLabelRow) => {
+	const name = row.name.trim();
+
+	if (!name) {
+		ElMessage.error('名称不能为空');
+		return false;
+	}
+
+	if (name !== row.originalName && nameSet.value.has(name)) {
+		ElMessage.error('名称已存在，请输入其他名称');
+		return false;
+	}
+
+	return true;
+};
+
+/* ---------------- 保存逻辑 ---------------- */
+const saveRow = (payload: LabelRow | LabelRow[]) => {
+	const rowsToCheck = Array.isArray(payload) ? payload : [payload];
+
+	for (const row of rowsToCheck) {
+		if (!validateName(row as EditableLabelRow)) return;
+	}
+
+	const changedRows = editableRows.value.filter((r) => r._dirty).map((r) => ({ id: r.id, name: r.name }));
+
+	console.log('需要提交的数据：', changedRows);
+
+	// 模拟保存成功后，重置 originalName
+	editableRows.value.forEach((row) => {
+		if (row._dirty) {
+			row.originalName = row.name;
+			row._dirty = false;
+		}
+	});
+};
+
+/* ---------------- 删除 ---------------- */
+const removeRow = (id: string | number) => {
+	editableRows.value = editableRows.value.filter((r) => r.id !== id);
+};
+
+/* ---------------- 表格列定义 ---------------- */
 const columns = ref<Column[]>([
 	{
 		key: 'number',
@@ -81,15 +162,17 @@ const columns = ref<Column[]>([
 		align: 'left',
 		cellRenderer: ({ rowData }) => {
 			if (rowData.isExclude) return rowData.name;
+
 			return h(ElInput, {
 				modelValue: rowData.name,
-				'onUpdate:modelValue': (val: string) => ((rowData.name = val), onEditName(rowData)),
+				'onUpdate:modelValue': (val: string) => {
+					rowData.name = val;
+					markDirty(rowData);
+				},
 				size: 'default',
 				style: { width: '15rem' },
 				onKeydown: (e: KeyboardEvent) => {
-					if (e.key === 'Enter') {
-						saveRow(rowData);
-					}
+					if (e.key === 'Enter') saveRow(rowData);
 				},
 			});
 		},
@@ -108,7 +191,8 @@ const columns = ref<Column[]>([
 		width: 60,
 		align: 'left',
 		cellRenderer: ({ rowData }) => {
-			if (rowData.isExclude) return '-'; // 不允许删除
+			if (rowData.isExclude) return '-';
+
 			return h(
 				ElButton,
 				{
@@ -121,72 +205,6 @@ const columns = ref<Column[]>([
 		},
 	},
 ]);
-
-const nameSet = computed(() => new Set(rows.value.map((r) => r.name.trim())));
-// 校验名称
-const validateName = (rowData: LabelRow) => {
-	const name = rowData.name.trim();
-	if (!name) {
-		ElMessage.error('名称不能为空');
-		return false;
-	}
-
-	// 如果当前名字和原始名字不同且已经存在于 nameSet
-	const originalName = originalNameMap.get(rowData.id) ?? '';
-	if (name !== originalName && nameSet.value.has(name)) {
-		ElMessage.error('名称已存在，请输入其他名称');
-		return false;
-	}
-
-	return true;
-};
-
-// 模拟保存（未来换成接口）
-const saveRow = (payload: LabelRow | LabelRow[]) => {
-	const rowsToValidate = Array.isArray(payload) ? payload : [payload];
-
-	// 执行校验（任意一个不通过都 return）
-	for (const row of rowsToValidate) {
-		if (!validateName(row)) return;
-	}
-
-	// // 此处未来可替换为 axios 请求
-	// // ElMessage.success('保存成功');
-	const changedRows = editableRows.value.filter((r) => r._dirty).map((r) => ({ id: r.id, name: r.name }));
-	console.log('需要提交的数据：', changedRows);
-};
-
-// 输入修改
-const onEditName = (rowData: LabelRow) => {
-	const originalName = originalNameMap.get(rowData.id) ?? '';
-	rowData._dirty = rowData.name !== originalName;
-};
-
-// 删除
-const removeRow = (id: string) => {
-	console.log('我是被删除的id', id);
-};
-
-const labelData = ref<LabelType[]>([]);
-// **可编辑副本**
-const editableRows = ref([]);
-const originalNameMap = new Map<string | number, string>();
-const getLabel = async () => {
-	let res = await label.data;
-	labelData.value = res.list;
-	rows.value = labelData.value.map((item) => ({
-		...item,
-		isExclude: false,
-	}));
-	editableRows.value = rows.value.map((row) => {
-		originalNameMap.set(row.id, row.name);
-		return { ...row, _dirty: false }; // 可以加上 _dirty 标记
-	});
-};
-
-onMounted(() => {
-	getLabel();
-});
 </script>
 
 <style lang="scss" scoped></style>
